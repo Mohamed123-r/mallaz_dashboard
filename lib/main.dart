@@ -6,21 +6,20 @@ import 'core/database/cache/cache_helper.dart';
 import 'core/helper_functions/get_it.dart';
 import 'core/services/bloc_opesever.dart';
 import 'core/utils/app_colors.dart';
+import 'core/utils/app_text_styles.dart';
 
 Future<void> main() async {
-
-  await CacheHelper().init();
-
-  Bloc.observer = CustomBlocObserver();
- // setupGetIt();
-
-
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
+  // await CacheHelper().init();
+  //
+  // Bloc.observer = CustomBlocObserver();
+  // // setupGetIt();
+  //
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   const SystemUiOverlayStyle(
+  //     statusBarColor: Colors.transparent,
+  //     statusBarIconBrightness: Brightness.dark,
+  //   ),
+  // );
   runApp(const MyApp());
 }
 
@@ -31,17 +30,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: 'Cairo',
-        primaryColor: AppColors.primaryColor,
-        scaffoldBackgroundColor: AppColors.primaryColor,
-        appBarTheme:  AppBarTheme(
-          backgroundColor: AppColors.primaryColor,
-          surfaceTintColor: AppColors.primaryColor,
+        fontFamily: 'Montserrat',
+        primaryColor: AppColors.lightModeAccent,
+        scaffoldBackgroundColor: AppColors.lightModeBackground,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.lightModeBackground,
+          surfaceTintColor: AppColors.lightModeBackground,
           centerTitle: true,
           elevation: 0,
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
+      home: LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'drf',
+          style: AppTextStyles.subtitleTitle20pxRegular(context),
         ),
       ),
     );
   }
 }
-
