@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
 
 abstract class AppTextStyles {
+  static TextStyle subtitleTitle20pxRegular(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 20),
+      fontWeight: FontWeight.w400,
+    );
+  }
 
-  static TextStyle style16W400(BuildContext context) {
+  static TextStyle buttonLarge20pxRegular(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 20),
+      fontWeight: FontWeight.w400,
+    );
+  }
+
+  static TextStyle subtitle16pxRegular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 16),
       fontWeight: FontWeight.w400,
     );
   }
 
+  static TextStyle text12pxLight(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 12),
+      fontWeight: FontWeight.w300,
+    );
+  }
+
+  static TextStyle text10pxRegular(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 10),
+      fontWeight: FontWeight.w300,
+    );
+  }
 }
 
 double getResponsiveScaleFactor(
