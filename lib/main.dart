@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'Features/login/presentation/view/log_in_view.dart';
 import 'core/database/cache/cache_helper.dart';
 import 'core/helper_functions/get_it.dart';
+import 'core/helper_functions/on_generate_route.dart';
 import 'core/services/bloc_opesever.dart';
 import 'core/utils/app_colors.dart';
 import 'core/utils/app_text_styles.dart';
+import 'generated/l10n.dart';
 
 Future<void> main() async {
   // await CacheHelper().init();
@@ -42,7 +45,16 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: LogInView(),
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+     locale:  Locale("en") ,
+     onGenerateRoute: onGenerateRoute ,
+     initialRoute: LogInView.routeName,
     );
   }
 }
