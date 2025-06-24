@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 
@@ -46,7 +45,8 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           cursorColor: cursorColor,
           onChanged: onChanged,
-          validator: validator ??
+          validator:
+              validator ??
               (value) {
                 if (value == null || value.isEmpty) {
                   return "ه";
@@ -58,14 +58,16 @@ class CustomTextField extends StatelessWidget {
           readOnly: readOnly ?? false,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: AppTextStyles.text12pxLight(context)
-                .copyWith(color: hintTextColor),
-            suffixIcon: suffixIcon != null
-                ? IconTheme(
-                    data: IconThemeData(color: suffixIconColor),
-                    child: suffixIcon!,
-                  )
-                : null,
+            hintStyle: AppTextStyles.text12pxLight(
+              context,
+            ).copyWith(color: hintTextColor),
+            suffixIcon:
+                suffixIcon != null
+                    ? IconTheme(
+                      data: IconThemeData(color: suffixIconColor),
+                      child: suffixIcon!,
+                    )
+                    : null,
             border: _buildOutlineInputBorder(),
             enabledBorder: _buildOutlineInputBorder(),
             focusedBorder: _focusedOutlineInputBorder(),
@@ -79,7 +81,7 @@ class CustomTextField extends StatelessWidget {
   OutlineInputBorder _buildOutlineInputBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(width: 1,color: AppColors.graysGray4),
+      borderSide: BorderSide(width: 1, color: AppColors.graysGray4),
     );
   }
 

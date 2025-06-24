@@ -1,20 +1,24 @@
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/widgets/custom_password_itext_field.dart';
 import '../../../../generated/assets.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../core/services/theme_cubit.dart';
 
 class LogInView extends StatelessWidget {
+  const LogInView({super.key});
+
+  static const String routeName = 'LogInView';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
-          Expanded(
-            child: Image.asset(Assets.imagesLoginImage, fit: BoxFit.cover),
-          ),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -26,10 +30,13 @@ class LogInView extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 SizedBox(height: 24),
-                Text('App Name', style: AppTextStyles.style40pxW700(context)),
+                Text(
+                  S.of(context).appName,
+                  style: AppTextStyles.style40pxW700(context),
+                ),
                 SizedBox(height: 4),
                 Text(
-                  'تسجيل دخول',
+                  S.of(context).logIn,
                   style: AppTextStyles.subtitleTitle20pxRegular(context),
                 ),
                 SizedBox(height: 30),
@@ -40,13 +47,13 @@ class LogInView extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomTextField(
-                        title: 'البريد الالكتروني',
+                        title: S.of(context).email,
                         hintText: "none@gmail.com",
                         keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: 24),
                       CustomPasswordTextField(
-                        title: "كلمة المرور",
+                        title: S.of(context).password,
                         hintText: "**********",
                       ),
                     ],
@@ -57,19 +64,30 @@ class LogInView extends StatelessWidget {
                   height: 62,
                   minWidth: 380,
                   onPressed: () {},
-                  color: AppColors.lightModeButtonsPrimary,
+                  color:
+                      context.watch<ThemeCubit>().state == ThemeMode.dark
+                          ? AppColors.darkModeButtonsPrimary
+                          : AppColors.lightModeButtonsPrimary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    "تسجيل دخول",
+                    S.of(context).logIn,
                     style: AppTextStyles.buttonLarge20pxRegular(
                       context,
-                    ).copyWith(color: AppColors.lightModeText),
+                    ).copyWith(
+                      color:
+                          context.watch<ThemeCubit>().state == ThemeMode.dark
+                              ? AppColors.darkModeText
+                              : AppColors.lightModeText,
+                    ),
                   ),
                 ),
               ],
             ),
+          ),
+          Expanded(
+            child: Image.asset(Assets.imagesLoginImage, fit: BoxFit.cover),
           ),
         ],
       ),
