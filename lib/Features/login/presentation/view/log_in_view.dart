@@ -1,21 +1,24 @@
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/widgets/custom_password_itext_field.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../core/services/theme_cubit.dart';
 
 class LogInView extends StatelessWidget {
   const LogInView({super.key});
-static const String routeName = 'LogInView';
+
+  static const String routeName = 'LogInView';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
-
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -28,9 +31,9 @@ static const String routeName = 'LogInView';
                 ),
                 SizedBox(height: 24),
                 Text(
-                    S.of(context).appName
-
-                , style: AppTextStyles.style40pxW700(context)),
+                  S.of(context).appName,
+                  style: AppTextStyles.style40pxW700(context),
+                ),
                 SizedBox(height: 4),
                 Text(
                   S.of(context).logIn,
@@ -61,7 +64,10 @@ static const String routeName = 'LogInView';
                   height: 62,
                   minWidth: 380,
                   onPressed: () {},
-                  color: AppColors.lightModeButtonsPrimary,
+                  color:
+                      context.watch<ThemeCubit>().state == ThemeMode.dark
+                          ? AppColors.darkModeButtonsPrimary
+                          : AppColors.lightModeButtonsPrimary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -69,7 +75,12 @@ static const String routeName = 'LogInView';
                     S.of(context).logIn,
                     style: AppTextStyles.buttonLarge20pxRegular(
                       context,
-                    ).copyWith(color: AppColors.lightModeText),
+                    ).copyWith(
+                      color:
+                          context.watch<ThemeCubit>().state == ThemeMode.dark
+                              ? AppColors.darkModeText
+                              : AppColors.lightModeText,
+                    ),
                   ),
                 ),
               ],
