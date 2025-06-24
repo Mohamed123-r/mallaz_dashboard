@@ -6,7 +6,7 @@ abstract class AppColors {
   static const Color lightModeAccent = Color(0xFF27548B);
   static const Color lightModeButtonsPrimary = Color(0xFFDDA955);
   static const Color lightModeButtonsSecondary = Color(0xFFF4F4E1);
-  static const Color lightModeGrayText = Color(0xFFF5F5F5);
+  static const Color lightModeGrayText = Color(0xFF85959D);
   static const Color lightModeText = Color(0xFF183B4E);
   static const Color darkModeBackground = Color(0xFF1A1A1A);
   static const Color darkModeAccent = Color(0xFF74A1D8);
