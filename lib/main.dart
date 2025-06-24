@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'Features/login/presentation/view/log_in_view.dart';
 import 'core/database/cache/cache_helper.dart';
 import 'core/helper_functions/get_it.dart';
 import 'core/services/bloc_opesever.dart';
@@ -41,25 +42,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: LogInView(),
     );
   }
 }
 
-class LoginView extends StatelessWidget {
-  const LoginView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'drf',
-          style: AppTextStyles.subtitleTitle20pxRegular(context),
-        ),
-      ),
-    );
-  }
-}

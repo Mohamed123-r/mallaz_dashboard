@@ -1,38 +1,55 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 abstract class AppTextStyles {
+  static TextStyle style40pxW700(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 40),
+      fontWeight: FontWeight.w700,
+
+      color: AppColors.lightModeAccent,
+    );
+  }
+
   static TextStyle subtitleTitle20pxRegular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 20),
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
+
+      color: AppColors.lightModeText,
     );
   }
 
   static TextStyle buttonLarge20pxRegular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 20),
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
+      color: AppColors.lightModeText,
     );
   }
 
   static TextStyle subtitle16pxRegular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 16),
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
+      color: AppColors.lightModeText,
     );
   }
 
   static TextStyle text12pxLight(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 12),
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w400,
+      color: AppColors.lightModeText,
     );
   }
 
   static TextStyle text10pxRegular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 10),
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w500,
+      color: AppColors.lightModeText,
     );
   }
 }
@@ -58,6 +75,6 @@ double getScaleFactor(BuildContext context) {
   } else if (width <= 1200) {
     return width / 1000;
   } else {
-    return width / 1750;
+    return width / 1450;
   }
 }
