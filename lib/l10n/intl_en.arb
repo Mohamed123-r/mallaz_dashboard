@@ -16,5 +16,14 @@
   "provideSupport": "Provide Support",
   "sendNotification": "Send Notification",
   "settings": "Settings",
-  "logOut": "Log Out"
+  "logOut": "Log Out",
+  "today" : "Today",
+  "pending": "Pending Requests : ",
+  "unitNumber": "Unit Number",
+  "userName": "User Name",
+  "phoneNumber": "Phone Number",
+  "ownerName": "Owner Name",
+  "status": "Status",
+  "actions": "Actions"
+
 }

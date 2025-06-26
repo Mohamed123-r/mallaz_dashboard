@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
@@ -38,13 +39,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("Manage Sales Units"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("Manage Users"),
+        "ownerName": MessageLookupByLibrary.simpleMessage("Owner Name"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "pending": MessageLookupByLibrary.simpleMessage("Pending Requests : "),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "provideSupport":
             MessageLookupByLibrary.simpleMessage("Provide Support"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "User Name ,Status Real state ....."),
         "sendNotification":
             MessageLookupByLibrary.simpleMessage("Send Notification"),
-        "settings": MessageLookupByLibrary.simpleMessage("Settings")
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "unitNumber": MessageLookupByLibrary.simpleMessage("Unit Number"),
+        "userName": MessageLookupByLibrary.simpleMessage("User Name")
       };
 }
