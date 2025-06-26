@@ -27,10 +27,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "english": MessageLookupByLibrary.simpleMessage("إنجليزي"),
+        "homeScreen": MessageLookupByLibrary.simpleMessage("الشاشة الرئيسية"),
         "languages": MessageLookupByLibrary.simpleMessage("اللغات"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
+        "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "manageFullRentUnits":
+            MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار الكلي"),
+        "managePartialRentUnits":
+            MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار الجزئي"),
+        "manageSalesUnits":
+            MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
+        "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "provideSupport": MessageLookupByLibrary.simpleMessage("تقديم الدعم"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
-            "اسم المستخدم ,حالة العقار ....")
+            "اسم المستخدم ,حالة العقار ...."),
+        "sendNotification": MessageLookupByLibrary.simpleMessage("ارسال اشعار"),
+        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات")
       };
 }

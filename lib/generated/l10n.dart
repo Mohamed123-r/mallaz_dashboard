@@ -139,6 +139,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Home Screen`
+  String get homeScreen {
+    return Intl.message(
+      'Home Screen',
+      name: 'homeScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Sales Units`
+  String get manageSalesUnits {
+    return Intl.message(
+      'Manage Sales Units',
+      name: 'manageSalesUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Partial Rent Units`
+  String get managePartialRentUnits {
+    return Intl.message(
+      'Manage Partial Rent Units',
+      name: 'managePartialRentUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Full Rent Units`
+  String get manageFullRentUnits {
+    return Intl.message(
+      'Manage Full Rent Units',
+      name: 'manageFullRentUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Users`
+  String get manageUsers {
+    return Intl.message(
+      'Manage Users',
+      name: 'manageUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Provide Support`
+  String get provideSupport {
+    return Intl.message(
+      'Provide Support',
+      name: 'provideSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Notification`
+  String get sendNotification {
+    return Intl.message(
+      'Send Notification',
+      name: 'sendNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get logOut {
+    return Intl.message(
+      'Log Out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

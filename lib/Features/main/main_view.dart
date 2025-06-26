@@ -1,11 +1,15 @@
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dart';
+import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dart';
+import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart';
+import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../generated/assets.dart';
-import 'widgets/custom_drawer.dart';
+import '../../generated/l10n.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
+
   static const String routeName = 'MainView';
 
   @override
@@ -14,45 +18,47 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   num activeIndex = 0.0;
-  // final List<DrawerItemModel> drawerItems = [
-  //   DrawerItemModel(title: 'الصفحة الرئيسية', image: Assets.imagesHouse),
-  //   DrawerItemModel(title: 'إدارة سير العمل', image: Assets.imagesUser),
-  //   DrawerItemModel(title: 'الشكاوي', image: Assets.imagesHeadset),
-  //   DrawerItemModel(
-  //       title: 'التسويات المالية', image: Assets.imagesCurrencyDollar),
-  //   DrawerItemModel(title: 'الإعلانات', image: Assets.imagesPaintBrush),
-  //   DrawerItemModel(title: 'التقارير', image: Assets.imagesReports),
-  // ];
+
+
 
   @override
   Widget build(BuildContext context) {
+     List<DrawerItemModel> drawerItems = [
+      DrawerItemModel(title: S.of(context).homeScreen, image: Assets.imagesHomeIcon),
+      DrawerItemModel(title: S.of(context).manageSalesUnits, image: Assets.imagesWeuiHomeOutlined),
+      DrawerItemModel(title: S.of(context).managePartialRentUnits, image: Assets.imagesStreamlinePlumpHotelBed5),
+      DrawerItemModel(title: S.of(context).manageFullRentUnits, image: Assets.imagesMaterialSymbolsLight),
+      DrawerItemModel(title: S.of(context).manageUsers, image: Assets.imagesUsersIcon),
+      DrawerItemModel(title: S.of(context).provideSupport, image: Assets.imagesAskIcon),
+      DrawerItemModel(title: S.of(context).sendNotification, image: Assets.imagesNotificationIcon),
+      DrawerItemModel(title: S.of(context).settings, image: Assets.imagesSeationgIcon),
+      DrawerItemModel(title: S.of(context).logOut, image: Assets.imagesBasilLogoutOutline),
+    ];
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
-          // CustomDrawer(
-          //   drawerItems: drawerItems,
-          //   itemBuilder: (context, index) {
-          //     return GestureDetector(
-          //       onTap: () {
-          //         if (activeIndex != index) {
-          //           activeIndex = index;
-          //           setState(() {});
-          //         }
-          //       },
-          //       child: DrawerItem(
-          //         drawerItemModel: drawerItems[index],
-          //         isActive: activeIndex == index,
-          //       ),
-          //     );
-          //   },
-          // ),
+          CustomAppbar(),
           Expanded(
-            child: Column(
+            child: Row(
               children: [
-                CustomAppbar(title: '',
-
-                )
-                      // Expanded(
+                CustomDrawer(
+                  drawerItems: drawerItems,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (activeIndex != index) {
+                          activeIndex = index;
+                          setState(() {});
+                        }
+                      },
+                      child: DrawerItem(
+                        drawerItemModel: drawerItems[index],
+                        isActive: activeIndex == index,
+                      ),
+                    );
+                  },
+                ),
+                // Expanded(
                 //     child: activeIndex == 0
                 //         ? HomeView()
                 //         : activeIndex == 1
@@ -251,7 +257,7 @@ class _MainViewState extends State<MainView> {
                 //                                                                                         : Container()),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
