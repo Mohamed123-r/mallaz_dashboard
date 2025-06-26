@@ -16,6 +16,15 @@
   "provideSupport": "تقديم الدعم",
   "sendNotification": "ارسال اشعار",
   "settings": "الاعدادات",
-  "logOut": "تسجيل خروج"
+  "logOut": "تسجيل خروج",
+ "today" : "اليوم",
+  "pending": "طلبات المعاينة (50)",
+  "unitNumber": "رقم الوحدة",
+  "userName": "اسم المستخدم",
+  "phoneNumber": "رقم الهاتف",
+  "ownerName": "اسم المالك",
+  "status": "الحالة",
+  "actions": "الإجراءات"
+
 
 }

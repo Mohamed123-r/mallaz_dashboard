@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
@@ -38,11 +39,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
+        "ownerName": MessageLookupByLibrary.simpleMessage("اسم المالك"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "provideSupport": MessageLookupByLibrary.simpleMessage("تقديم الدعم"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "اسم المستخدم ,حالة العقار ...."),
         "sendNotification": MessageLookupByLibrary.simpleMessage("ارسال اشعار"),
-        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات")
+        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
+        "status": MessageLookupByLibrary.simpleMessage("الحالة"),
+        "today": MessageLookupByLibrary.simpleMessage("اليوم"),
+        "unitNumber": MessageLookupByLibrary.simpleMessage("رقم الوحدة"),
+        "userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم")
       };
 }

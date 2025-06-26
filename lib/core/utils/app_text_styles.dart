@@ -10,7 +10,22 @@ abstract class AppTextStyles {
       fontSize: getResponsiveScaleFactor(context, fontSize: 40),
       fontWeight: FontWeight.w700,
 
-      color: context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeAccent :  AppColors.lightModeAccent,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeAccent
+              : AppColors.lightModeAccent,
+    );
+  }
+
+  static TextStyle style32pxW400(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 32),
+      fontWeight: FontWeight.w500,
+
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeAccent
+              : AppColors.lightModeAccent,
     );
   }
 
@@ -19,7 +34,10 @@ abstract class AppTextStyles {
       fontSize: getResponsiveScaleFactor(context, fontSize: 20),
       fontWeight: FontWeight.w500,
 
-      color: context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText :AppColors.lightModeText,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeText
+              : AppColors.lightModeText,
     );
   }
 
@@ -27,7 +45,10 @@ abstract class AppTextStyles {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 20),
       fontWeight: FontWeight.w500,
-      color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeText
+              : AppColors.lightModeText,
     );
   }
 
@@ -35,21 +56,32 @@ abstract class AppTextStyles {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 16),
       fontWeight: FontWeight.w500,
-      color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeText
+              : AppColors.lightModeText,
     );
   }
+
   static TextStyle text14pxRegular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 14),
       fontWeight: FontWeight.w500,
-      color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeText
+              : AppColors.lightModeText,
     );
   }
+
   static TextStyle text12pxLight(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 12),
       fontWeight: FontWeight.w400,
-      color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeText
+              : AppColors.lightModeText,
     );
   }
 
@@ -57,7 +89,10 @@ abstract class AppTextStyles {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 10),
       fontWeight: FontWeight.w500,
-      color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
+      color:
+          context.watch<ThemeCubit>().state == ThemeMode.dark
+              ? AppColors.darkModeText
+              : AppColors.lightModeText,
     );
   }
 }
