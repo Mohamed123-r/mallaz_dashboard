@@ -2,6 +2,10 @@
   "appName" : "App Name",
   "logIn": "تسجيل دخول",
   "email": "البريد الالكتروني",
-  "password": "كلمة المرور"
-
+  "password": "كلمة المرور",
+  "languages": "اللغات",
+  "arabic": "عربي",
+  "english": "إنجليزي",
+  "searchHint" : "اسم المستخدم ,حالة العقار ....",
+  "adminName" :  "اسم الادمن"
 }

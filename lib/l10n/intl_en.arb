@@ -2,5 +2,10 @@
   "appName" : "App Name",
   "logIn": "Log In",
   "email": "Email",
-  "password": "Password"
+  "password": "Password",
+  "languages": "Languages",
+  "arabic": "Arabic",
+  "english": "English",
+  "searchHint" : "User Name ,Status Real state .....",
+  "adminName" : "Admin Name"
 }

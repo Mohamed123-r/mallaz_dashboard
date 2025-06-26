@@ -42,11 +42,14 @@ dependencies:
   image_picker: ^0.8.8
   awesome_dialog : ^3.1.0
   get_it: ^8.0.3
+  flutter_svg: ^2.2.0
 
 
   flutter_localizations:
     sdk: flutter
   intl: ^0.19.0
+
+  day_night_themed_switch: ^1.0.0
 
 
 

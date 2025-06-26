@@ -38,7 +38,13 @@ abstract class AppTextStyles {
       color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
     );
   }
-
+  static TextStyle text14pxRegular(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 14),
+      fontWeight: FontWeight.w500,
+      color:context.watch<ThemeCubit>().state == ThemeMode.dark ?AppColors.darkModeText : AppColors.lightModeText,
+    );
+  }
   static TextStyle text12pxLight(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 12),

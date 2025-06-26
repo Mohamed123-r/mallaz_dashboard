@@ -1,3 +1,4 @@
+import 'package:book_apartment_dashboard/Features/main/main_view.dart';
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -59,11 +60,14 @@ class LogInView extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 SizedBox(height: 24),
                 MaterialButton(
                   height: 62,
                   minWidth: 380,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(MainView.routeName);
+                  },
                   color:
                       context.watch<ThemeCubit>().state == ThemeMode.dark
                           ? AppColors.darkModeButtonsPrimary
