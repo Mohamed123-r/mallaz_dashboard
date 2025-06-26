@@ -10,10 +10,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../generated/l10n.dart';
 
 class CustomAppbar extends StatefulWidget {
-  const CustomAppbar({super.key, this.widget, required this.title});
+  const CustomAppbar({super.key});
 
-  final Widget? widget;
-  final String title;
+
 
   @override
   State<CustomAppbar> createState() => _CustomAppbarState();
@@ -36,7 +35,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
             child: Row(
               children: [
                 SvgPicture.asset(Assets.imagesMenuIcon),
@@ -166,52 +165,64 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                               ),
                                             ),
                                             const Divider(),
-                                            Padding(
-                                              padding: const EdgeInsets.all(
-                                                16.0,
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  context
-                                                      .read<LocaleCubit>()
-                                                      .setLocale('ar');
-                                                  _removeOverlay();
-                                                },
-                                                child: Text(
-                                                  S.of(context).arabic,
-                                                  style: AppTextStyles.subtitle16pxRegular(
-                                                    context,
-                                                  ).copyWith(
-                                                    color:
-                                                        currentLanguage == 'ar'
-                                                            ? AppColors
-                                                                .lightModeAccent
-                                                            : null,
+                                            GestureDetector(
+                                              onTap: () {
+                                                context
+                                                    .read<LocaleCubit>()
+                                                    .setLocale('ar');
+                                                _removeOverlay();
+                                              },
+                                              child: Container(
+                                                width: double.infinity,
+                                                color: Colors.transparent,
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(
+                                                      16.0,
+                                                    ),
+                                                    child: Text(
+                                                      S.of(context).arabic,
+                                                      style: AppTextStyles.subtitle16pxRegular(
+                                                        context,
+                                                      ).copyWith(
+                                                        color:
+                                                            currentLanguage == 'ar'
+                                                                ? AppColors
+                                                                    .lightModeAccent
+                                                                : null,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(
-                                                16.0,
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  context
-                                                      .read<LocaleCubit>()
-                                                      .setLocale('en');
-                                                  _removeOverlay();
-                                                },
-                                                child: Text(
-                                                  S.of(context).english,
-                                                  style: AppTextStyles.subtitle16pxRegular(
-                                                    context,
-                                                  ).copyWith(
-                                                    color:
-                                                        currentLanguage == 'en'
-                                                            ? AppColors
-                                                                .lightModeAccent
-                                                            : null,
+                                            GestureDetector(
+                                              onTap: () {
+                                                context
+                                                    .read<LocaleCubit>()
+                                                    .setLocale('en');
+                                                _removeOverlay();
+                                              },
+                                              child: Container(
+                                                width: double.infinity,
+                                                color: Colors.transparent,
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(
+                                                      16.0,
+                                                    ),
+                                                    child: Text(
+                                                      S.of(context).english,
+                                                      style: AppTextStyles.subtitle16pxRegular(
+                                                        context,
+                                                      ).copyWith(
+                                                        color:
+                                                            currentLanguage == 'en'
+                                                                ? AppColors
+                                                                    .lightModeAccent
+                                                                : null,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -265,7 +276,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
               ],
             ),
           ),
-          const Divider(),
+          const Divider(
+            height: 0,
+          ),
         ],
       ),
     );

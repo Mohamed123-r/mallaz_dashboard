@@ -27,10 +27,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "homeScreen": MessageLookupByLibrary.simpleMessage("Home Screen"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "manageFullRentUnits":
+            MessageLookupByLibrary.simpleMessage("Manage Full Rent Units"),
+        "managePartialRentUnits":
+            MessageLookupByLibrary.simpleMessage("Manage Partial Rent Units"),
+        "manageSalesUnits":
+            MessageLookupByLibrary.simpleMessage("Manage Sales Units"),
+        "manageUsers": MessageLookupByLibrary.simpleMessage("Manage Users"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "provideSupport":
+            MessageLookupByLibrary.simpleMessage("Provide Support"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
-            "User Name ,Status Real state .....")
+            "User Name ,Status Real state ....."),
+        "sendNotification":
+            MessageLookupByLibrary.simpleMessage("Send Notification"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings")
       };
 }

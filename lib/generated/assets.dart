@@ -10,9 +10,19 @@ class Assets {
   static const String fontsMontserratMedium = 'assets/fonts/Montserrat-Medium.ttf';
   static const String fontsMontserratRegular = 'assets/fonts/Montserrat-Regular.ttf';
   static const String fontsMontserratSemiBold = 'assets/fonts/Montserrat-SemiBold.ttf';
+  static const String imagesAskIcon = 'assets/images/askIcon.svg';
+  static const String imagesBasilLogoutOutline = 'assets/images/basil_logout-outline.svg';
+  static const String imagesHomeIcon = 'assets/images/home_icon.svg';
   static const String imagesLoginImage = 'assets/images/login_image.png';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesMaterialSymbolsLight = 'assets/images/material-symbols-light.svg';
   static const String imagesMenuIcon = 'assets/images/menuIcon.svg';
+  static const String imagesNotificationIcon = 'assets/images/NotificationIcon.svg';
+  static const String imagesRecustCon = 'assets/images/recust_con.svg';
   static const String imagesSearchIcon = 'assets/images/searchIcon.svg';
+  static const String imagesSeationgIcon = 'assets/images/SeationgIcon.svg';
+  static const String imagesStreamlinePlumpHotelBed5 = 'assets/images/streamline-plump_hotel-bed-5.svg';
+  static const String imagesUsersIcon = 'assets/images/usersIcon.svg';
+  static const String imagesWeuiHomeOutlined = 'assets/images/weui_home-outlined.svg';
 
 }

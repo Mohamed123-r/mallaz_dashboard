@@ -7,5 +7,14 @@
   "arabic": "Arabic",
   "english": "English",
   "searchHint" : "User Name ,Status Real state .....",
-  "adminName" : "Admin Name"
+  "adminName" : "Admin Name",
+  "homeScreen": "Home Screen",
+  "manageSalesUnits": "Manage Sales Units",
+  "managePartialRentUnits": "Manage Partial Rent Units",
+  "manageFullRentUnits": "Manage Full Rent Units",
+  "manageUsers": "Manage Users",
+  "provideSupport": "Provide Support",
+  "sendNotification": "Send Notification",
+  "settings": "Settings",
+  "logOut": "Log Out"
 }
