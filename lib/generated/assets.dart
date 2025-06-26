@@ -12,5 +12,7 @@ class Assets {
   static const String fontsMontserratSemiBold = 'assets/fonts/Montserrat-SemiBold.ttf';
   static const String imagesLoginImage = 'assets/images/login_image.png';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesMenuIcon = 'assets/images/menuIcon.svg';
+  static const String imagesSearchIcon = 'assets/images/searchIcon.svg';
 
 }
