@@ -173,42 +173,15 @@ class PreviewRequestsDetailsView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _iconTextRow(context, isDark, Assets.imagesWif, S.of(context).freeWifi),
+        IconTextRow(context: context, isDark: isDark, asset: Assets.imagesWif, text: S.of(context).freeWifi),
         const SizedBox(height: 4),
-        _iconTextRow(
-          context,
-          isDark,
-          Assets.imagesParker,
-          S.of(context).privateGarage,
-        ),
+        IconTextRow(context: context, isDark: isDark, asset: Assets.imagesParker, text: S.of(context).privateGarage),
         const SizedBox(height: 4),
-        _iconTextRow(
-          context,
-          isDark,
-          Assets.imagesSecurity,
-          S.of(context).security247,
-        ),
+        IconTextRow(context: context, isDark: isDark, asset: Assets.imagesSecurity, text: S.of(context).security247),
       ],
     );
   }
 
-  Widget _iconTextRow(
-    BuildContext context,
-    bool isDark,
-    String asset,
-    String text,
-  ) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          asset,
-          color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
-        ),
-        const SizedBox(width: 8),
-        Text(text, style: AppTextStyles.text14pxRegular(context)),
-      ],
-    );
-  }
 
   Widget _unitStatusColumn(BuildContext context) {
     return Column(
@@ -370,6 +343,35 @@ class PreviewRequestsDetailsView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class IconTextRow extends StatelessWidget {
+  const IconTextRow({
+    super.key,
+    required this.context,
+    required this.isDark,
+    required this.asset,
+    required this.text,
+  });
+
+  final BuildContext context;
+  final bool isDark;
+  final String asset;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SvgPicture.asset(
+          asset,
+          color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+        ),
+        const SizedBox(width: 8),
+        Text(text, style: AppTextStyles.text14pxRegular(context)),
+      ],
     );
   }
 }

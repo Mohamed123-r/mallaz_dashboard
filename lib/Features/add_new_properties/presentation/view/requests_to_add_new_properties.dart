@@ -8,8 +8,8 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../generated/l10n.dart'; // Update with your localization import
 
 class RequestsToAddNewProperties extends StatefulWidget {
-  const RequestsToAddNewProperties({super.key});
-
+  const RequestsToAddNewProperties({super.key, required this.onTapSeeDetails});
+  final  VoidCallback onTapSeeDetails ;
   @override
   State<RequestsToAddNewProperties> createState() =>
       _RequestsToAddNewPropertiesState();
@@ -52,7 +52,9 @@ class _RequestsToAddNewPropertiesState
             isDark: isDark,
           ),
           const SizedBox(height: 16),
-          const _RequestsTable(),
+           _RequestsTable(onTapSeeDetails:  widget.onTapSeeDetails ,
+
+          ),
         ],
       ),
     );
@@ -125,8 +127,8 @@ class _Tabs extends StatelessWidget {
 }
 
 class _RequestsTable extends StatelessWidget {
-  const _RequestsTable();
-
+  const _RequestsTable({required this.onTapSeeDetails});
+  final  VoidCallback onTapSeeDetails ;
   @override
   Widget build(BuildContext context) {
     return Table(
@@ -169,7 +171,7 @@ class _RequestsTable extends StatelessWidget {
                     child: MaterialButton(
                       height: 40,
                       minWidth: 100,
-                      onPressed: () {},
+                      onPressed: onTapSeeDetails,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

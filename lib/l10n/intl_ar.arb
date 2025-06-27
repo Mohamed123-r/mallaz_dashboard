@@ -56,7 +56,12 @@
   "addedDate": "تاريخ الإضافة",
   "apartmentOrRoom": "شقة/غرفة",
   "alexandria": "الإسكندرية",
-  "showMore": "عرض المزيد"
+  "showMore": "عرض المزيد",
+  "accept": "قبول",
+  "reject": "رفض",
+  "gallery": "المعرض",
+  "propertyDetails": "بيانات العقار",
+  "mainFacilities": "المرافق الرئيسية"
 
 
 }

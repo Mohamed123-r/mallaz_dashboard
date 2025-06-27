@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
+import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
 
@@ -104,7 +105,16 @@ class _MainViewState extends State<MainView> {
                               },
                             )
                             : activeIndex == 1
-                            ? RequestsToAddNewProperties()
+                            ? RequestsToAddNewProperties(onTapSeeDetails: () {
+                          activeIndex = 1.1;
+                          setState(() {});
+                        },)   : activeIndex == 1.1
+                            ? RequestsToAddNewPropertiesDetails(
+                          onTapBack: () {
+                            activeIndex = 1;
+                            setState(() {});
+                          },
+                        )
                             : Container(color: Colors.red),
                   ),
                 ),

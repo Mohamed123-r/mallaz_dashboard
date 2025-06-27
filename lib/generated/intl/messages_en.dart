@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "addNoteHere":
             MessageLookupByLibrary.simpleMessage("Add your note here"),
@@ -53,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullAddress": MessageLookupByLibrary.simpleMessage(
             "Cairo - Fifth Settlement - First Floor - First Room"),
         "fullyFinished": MessageLookupByLibrary.simpleMessage("Fully Finished"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "governorate": MessageLookupByLibrary.simpleMessage("Governorate"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("Home Screen"),
         "immediateHousing":
@@ -62,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "mainFacilities":
+            MessageLookupByLibrary.simpleMessage("Main Facilities"),
         "manageFullRentUnits":
             MessageLookupByLibrary.simpleMessage("Manage Full Rent Units"),
         "managePartialRentUnits":
@@ -76,11 +80,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending": MessageLookupByLibrary.simpleMessage("Pending Requests : "),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("Private Garage"),
+        "propertyDetails":
+            MessageLookupByLibrary.simpleMessage("Property Details"),
         "propertyType": MessageLookupByLibrary.simpleMessage("Property Type"),
         "provideSupport":
             MessageLookupByLibrary.simpleMessage("Provide Support"),
         "readyForDelivery":
             MessageLookupByLibrary.simpleMessage("Ready for Delivery"),
+        "reject": MessageLookupByLibrary.simpleMessage("Reject"),
         "rent": MessageLookupByLibrary.simpleMessage("Rent"),
         "requestsCount": MessageLookupByLibrary.simpleMessage("Requests Count"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 Rooms"),

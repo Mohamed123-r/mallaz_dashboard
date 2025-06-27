@@ -629,6 +629,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Accept`
+  String get accept {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reject`
+  String get reject {
+    return Intl.message(
+      'Reject',
+      name: 'reject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Property Details`
+  String get propertyDetails {
+    return Intl.message(
+      'Property Details',
+      name: 'propertyDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Main Facilities`
+  String get mainFacilities {
+    return Intl.message(
+      'Main Facilities',
+      name: 'mainFacilities',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

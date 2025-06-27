@@ -38,6 +38,7 @@ class Assets {
   static const String imagesStraighten = 'assets/images/straighten.svg';
   static const String imagesStreamlinePlumpHotelBed5 = 'assets/images/streamline-plump_hotel-bed-5.svg';
   static const String imagesTest1 = 'assets/images/test1.png';
+  static const String imagesTrue = 'assets/images/true.svg';
   static const String imagesUsersIcon = 'assets/images/usersIcon.svg';
   static const String imagesWeuiHomeOutlined = 'assets/images/weui_home-outlined.svg';
   static const String imagesWif = 'assets/images/wif.svg';

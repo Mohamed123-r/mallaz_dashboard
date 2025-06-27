@@ -56,6 +56,11 @@
   "addedDate": "Added Date",
   "apartmentOrRoom": "Apartment/Room",
   "alexandria": "Alexandria",
-  "showMore": "Show More"
+  "showMore": "Show More",
+  "accept": "Accept",
+  "reject": "Reject",
+  "gallery": "Gallery",
+  "propertyDetails": "Property Details",
+  "mainFacilities": "Main Facilities"
 
 }

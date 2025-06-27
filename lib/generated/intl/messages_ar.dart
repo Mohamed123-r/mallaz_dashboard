@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept": MessageLookupByLibrary.simpleMessage("قبول"),
         "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
         "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
@@ -51,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullAddress": MessageLookupByLibrary.simpleMessage(
             "القاهرة - التجمع الخامس - الدور الأول - الغرفة الأولى"),
         "fullyFinished": MessageLookupByLibrary.simpleMessage("مشطبة بالكامل"),
+        "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
         "governorate": MessageLookupByLibrary.simpleMessage("المحافظة"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("الشاشة الرئيسية"),
         "immediateHousing": MessageLookupByLibrary.simpleMessage("سكن فوري"),
@@ -59,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languages": MessageLookupByLibrary.simpleMessage("اللغات"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "mainFacilities":
+            MessageLookupByLibrary.simpleMessage("المرافق الرئيسية"),
         "manageFullRentUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار الكلي"),
         "managePartialRentUnits":
@@ -73,10 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
+        "propertyDetails":
+            MessageLookupByLibrary.simpleMessage("بيانات العقار"),
         "propertyType": MessageLookupByLibrary.simpleMessage("نوع العقار"),
         "provideSupport": MessageLookupByLibrary.simpleMessage("تقديم الدعم"),
         "readyForDelivery":
             MessageLookupByLibrary.simpleMessage("الوحدة جاهزة للتسليم"),
+        "reject": MessageLookupByLibrary.simpleMessage("رفض"),
         "rent": MessageLookupByLibrary.simpleMessage("ايجار"),
         "requestsCount": MessageLookupByLibrary.simpleMessage("عدد الطلبات"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),
