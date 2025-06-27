@@ -13,8 +13,8 @@ import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
+  const HomeView({super.key, required this.onTapSeeDetails});
+  final  VoidCallback onTapSeeDetails ;
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
                             : AppColors.lightModeGrayText,
                   ),
                 ),
-                TableSection(isDark: isDark),
+                TableSection(isDark: isDark, onTapSeeDetails: onTapSeeDetails ),
               ],
             ),
           ),

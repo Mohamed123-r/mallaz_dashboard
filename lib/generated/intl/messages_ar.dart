@@ -20,18 +20,49 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(amount) => "المقدم ${amount} جنيه";
+
+  static String m1(price) => "ثمن الوحدة : ${price}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept": MessageLookupByLibrary.simpleMessage("قبول"),
         "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
+        "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
+        "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
+        "ahmed": MessageLookupByLibrary.simpleMessage("احمد"),
+        "alexandria": MessageLookupByLibrary.simpleMessage("الإسكندرية"),
+        "apartmentOrRoom": MessageLookupByLibrary.simpleMessage("شقة/غرفة"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
+        "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
+        "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
+        "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
+        "detailedAddress":
+            MessageLookupByLibrary.simpleMessage("العنوان بالتفصيل"),
+        "districtTagamoa":
+            MessageLookupByLibrary.simpleMessage("التجمع الخامس"),
+        "downPayment": m0,
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "english": MessageLookupByLibrary.simpleMessage("إنجليزي"),
+        "firstFloor": MessageLookupByLibrary.simpleMessage("الدور الأول"),
+        "forSale": MessageLookupByLibrary.simpleMessage("للبيع"),
+        "freeWifi": MessageLookupByLibrary.simpleMessage("واي فاي مجاني"),
+        "fullAddress": MessageLookupByLibrary.simpleMessage(
+            "القاهرة - التجمع الخامس - الدور الأول - الغرفة الأولى"),
+        "fullyFinished": MessageLookupByLibrary.simpleMessage("مشطبة بالكامل"),
+        "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
+        "governorate": MessageLookupByLibrary.simpleMessage("المحافظة"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("الشاشة الرئيسية"),
+        "immediateHousing": MessageLookupByLibrary.simpleMessage("سكن فوري"),
+        "installmentsAvailable":
+            MessageLookupByLibrary.simpleMessage("متاح التقسيط علي 3 سنوات"),
         "languages": MessageLookupByLibrary.simpleMessage("اللغات"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "mainFacilities":
+            MessageLookupByLibrary.simpleMessage("المرافق الرئيسية"),
         "manageFullRentUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار الكلي"),
         "managePartialRentUnits":
@@ -39,18 +70,35 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
+        "mohamed": MessageLookupByLibrary.simpleMessage("محمد"),
         "ownerName": MessageLookupByLibrary.simpleMessage("اسم المالك"),
+        "partialRent": MessageLookupByLibrary.simpleMessage("ايجار جزئي"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
+        "propertyDetails":
+            MessageLookupByLibrary.simpleMessage("بيانات العقار"),
+        "propertyType": MessageLookupByLibrary.simpleMessage("نوع العقار"),
         "provideSupport": MessageLookupByLibrary.simpleMessage("تقديم الدعم"),
+        "readyForDelivery":
+            MessageLookupByLibrary.simpleMessage("الوحدة جاهزة للتسليم"),
+        "reject": MessageLookupByLibrary.simpleMessage("رفض"),
+        "rent": MessageLookupByLibrary.simpleMessage("ايجار"),
+        "requestsCount": MessageLookupByLibrary.simpleMessage("عدد الطلبات"),
+        "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "اسم المستخدم ,حالة العقار ...."),
+        "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
         "sendNotification": MessageLookupByLibrary.simpleMessage("ارسال اشعار"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
+        "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
+        "unitData": MessageLookupByLibrary.simpleMessage("بيانات الوحدة"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("رقم الوحدة"),
+        "unitPrice": m1,
         "userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم")
       };
 }
