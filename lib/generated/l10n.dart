@@ -309,6 +309,226 @@ class S {
       args: [],
     );
   }
+
+  /// `Unit Data`
+  String get unitData {
+    return Intl.message(
+      'Unit Data',
+      name: 'unitData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Data`
+  String get contactData {
+    return Intl.message(
+      'Contact Data',
+      name: 'contactData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cairo`
+  String get cityCairo {
+    return Intl.message(
+      'Cairo',
+      name: 'cityCairo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fifth Settlement`
+  String get districtTagamoa {
+    return Intl.message(
+      'Fifth Settlement',
+      name: 'districtTagamoa',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First Floor`
+  String get firstFloor {
+    return Intl.message(
+      'First Floor',
+      name: 'firstFloor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3 Rooms`
+  String get rooms3 {
+    return Intl.message(
+      '3 Rooms',
+      name: 'rooms3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detailed Address`
+  String get detailedAddress {
+    return Intl.message(
+      'Detailed Address',
+      name: 'detailedAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cairo - Fifth Settlement - First Floor - First Room`
+  String get fullAddress {
+    return Intl.message(
+      'Cairo - Fifth Settlement - First Floor - First Room',
+      name: 'fullAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unit Price: {price}`
+  String unitPrice(Object price) {
+    return Intl.message(
+      'Unit Price: $price',
+      name: 'unitPrice',
+      desc: '',
+      args: [price],
+    );
+  }
+
+  /// `Free Wi-Fi`
+  String get freeWifi {
+    return Intl.message(
+      'Free Wi-Fi',
+      name: 'freeWifi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Private Garage`
+  String get privateGarage {
+    return Intl.message(
+      'Private Garage',
+      name: 'privateGarage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `24/7 Security`
+  String get security247 {
+    return Intl.message(
+      '24/7 Security',
+      name: 'security247',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Immediate Housing`
+  String get immediateHousing {
+    return Intl.message(
+      'Immediate Housing',
+      name: 'immediateHousing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fully Finished`
+  String get fullyFinished {
+    return Intl.message(
+      'Fully Finished',
+      name: 'fullyFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready for Delivery`
+  String get readyForDelivery {
+    return Intl.message(
+      'Ready for Delivery',
+      name: 'readyForDelivery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installments Available for 3 Years`
+  String get installmentsAvailable {
+    return Intl.message(
+      'Installments Available for 3 Years',
+      name: 'installmentsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Down Payment {amount} EGP`
+  String downPayment(Object amount) {
+    return Intl.message(
+      'Down Payment $amount EGP',
+      name: 'downPayment',
+      desc: '',
+      args: [amount],
+    );
+  }
+
+  /// `Client Name`
+  String get clientName {
+    return Intl.message(
+      'Client Name',
+      name: 'clientName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mohamed`
+  String get mohamed {
+    return Intl.message(
+      'Mohamed',
+      name: 'mohamed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ahmed`
+  String get ahmed {
+    return Intl.message(
+      'Ahmed',
+      name: 'ahmed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add your note here`
+  String get addNoteHere {
+    return Intl.message(
+      'Add your note here',
+      name: 'addNoteHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

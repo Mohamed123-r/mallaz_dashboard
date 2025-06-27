@@ -20,15 +20,37 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(amount) => "المقدم ${amount} جنيه";
+
+  static String m1(price) => "ثمن الوحدة : ${price}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
+        "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
+        "ahmed": MessageLookupByLibrary.simpleMessage("احمد"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
+        "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
+        "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
+        "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
+        "detailedAddress":
+            MessageLookupByLibrary.simpleMessage("العنوان بالتفصيل"),
+        "districtTagamoa":
+            MessageLookupByLibrary.simpleMessage("التجمع الخامس"),
+        "downPayment": m0,
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "english": MessageLookupByLibrary.simpleMessage("إنجليزي"),
+        "firstFloor": MessageLookupByLibrary.simpleMessage("الدور الأول"),
+        "freeWifi": MessageLookupByLibrary.simpleMessage("واي فاي مجاني"),
+        "fullAddress": MessageLookupByLibrary.simpleMessage(
+            "القاهرة - التجمع الخامس - الدور الأول - الغرفة الأولى"),
+        "fullyFinished": MessageLookupByLibrary.simpleMessage("مشطبة بالكامل"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("الشاشة الرئيسية"),
+        "immediateHousing": MessageLookupByLibrary.simpleMessage("سكن فوري"),
+        "installmentsAvailable":
+            MessageLookupByLibrary.simpleMessage("متاح التقسيط علي 3 سنوات"),
         "languages": MessageLookupByLibrary.simpleMessage("اللغات"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
@@ -39,18 +61,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
+        "mohamed": MessageLookupByLibrary.simpleMessage("محمد"),
         "ownerName": MessageLookupByLibrary.simpleMessage("اسم المالك"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
         "provideSupport": MessageLookupByLibrary.simpleMessage("تقديم الدعم"),
+        "readyForDelivery":
+            MessageLookupByLibrary.simpleMessage("الوحدة جاهزة للتسليم"),
+        "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "اسم المستخدم ,حالة العقار ...."),
+        "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
         "sendNotification": MessageLookupByLibrary.simpleMessage("ارسال اشعار"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
+        "unitData": MessageLookupByLibrary.simpleMessage("بيانات الوحدة"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("رقم الوحدة"),
+        "unitPrice": m1,
         "userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم")
       };
 }

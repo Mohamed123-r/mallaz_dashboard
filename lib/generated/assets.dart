@@ -13,6 +13,7 @@ class Assets {
   static const String imagesAskIcon = 'assets/images/askIcon.svg';
   static const String imagesBasilEditOutline = 'assets/images/basil_edit-outline.svg';
   static const String imagesBasilLogoutOutline = 'assets/images/basil_logout-outline.svg';
+  static const String imagesDoor = 'assets/images/door.svg';
   static const String imagesHome1 = 'assets/images/home1.png';
   static const String imagesHome2 = 'assets/images/home2.png';
   static const String imagesHome3 = 'assets/images/home3.png';
@@ -28,11 +29,17 @@ class Assets {
   static const String imagesMaterialSymbolsLight = 'assets/images/material-symbols-light.svg';
   static const String imagesMenuIcon = 'assets/images/menuIcon.svg';
   static const String imagesNotificationIcon = 'assets/images/NotificationIcon.svg';
+  static const String imagesParker = 'assets/images/parker.svg';
   static const String imagesRecustCon = 'assets/images/recust_con.svg';
   static const String imagesSearchIcon = 'assets/images/searchIcon.svg';
   static const String imagesSeationgIcon = 'assets/images/SeationgIcon.svg';
+  static const String imagesSecurity = 'assets/images/security.svg';
+  static const String imagesStairs = 'assets/images/stairs.svg';
+  static const String imagesStraighten = 'assets/images/straighten.svg';
   static const String imagesStreamlinePlumpHotelBed5 = 'assets/images/streamline-plump_hotel-bed-5.svg';
+  static const String imagesTest1 = 'assets/images/test1.png';
   static const String imagesUsersIcon = 'assets/images/usersIcon.svg';
   static const String imagesWeuiHomeOutlined = 'assets/images/weui_home-outlined.svg';
+  static const String imagesWif = 'assets/images/wif.svg';
 
 }

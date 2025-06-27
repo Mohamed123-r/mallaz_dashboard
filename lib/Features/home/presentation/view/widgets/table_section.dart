@@ -10,10 +10,11 @@ import '../../../../../generated/l10n.dart';
 class TableSection extends StatelessWidget {
   const TableSection({
     super.key,
-    required this.isDark,
+    required this.isDark, required this.onTapSeeDetails,
   });
 
   final bool isDark;
+  final  VoidCallback onTapSeeDetails ;
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +70,15 @@ class TableSection extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SvgPicture.asset(
-                        Assets.imagesHugeiconsView,
-                        color: isDark
-                            ? AppColors.darkModeAccent
-                            : AppColors.lightModeAccent,
+                      InkWell(
+                        onTap: onTapSeeDetails,
+                        borderRadius: BorderRadius.circular(8) ,
+                        child: SvgPicture.asset(
+                          Assets.imagesHugeiconsView,
+                          color: isDark
+                              ? AppColors.darkModeAccent
+                              : AppColors.lightModeAccent,
+                        ),
                       ),
                       SvgPicture.asset(
                         Assets.imagesBasilEditOutline,
