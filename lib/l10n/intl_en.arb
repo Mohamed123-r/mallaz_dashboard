@@ -42,11 +42,20 @@
   "readyForDelivery": "Ready for Delivery",
   "installmentsAvailable": "Installments Available for 3 Years",
   "downPayment": "Down Payment {amount} EGP",
-  "ownerName": "Owner Name",
   "clientName": "Client Name",
   "mohamed": "Mohamed",
   "ahmed": "Ahmed",
   "addNoteHere": "Add your note here",
-  "save": "Save"
+  "save": "Save",
+  "forSale": "For Sale",
+  "partialRent": "Partial Rent",
+  "rent": "Rent",
+  "requestsCount": "Requests Count",
+  "propertyType": "Property Type",
+  "governorate": "Governorate",
+  "addedDate": "Added Date",
+  "apartmentOrRoom": "Apartment/Room",
+  "alexandria": "Alexandria",
+  "showMore": "Show More"
 
 }

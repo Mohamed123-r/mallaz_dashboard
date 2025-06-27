@@ -29,8 +29,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "addNoteHere":
             MessageLookupByLibrary.simpleMessage("Add your note here"),
+        "addedDate": MessageLookupByLibrary.simpleMessage("Added Date"),
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "ahmed": MessageLookupByLibrary.simpleMessage("Ahmed"),
+        "alexandria": MessageLookupByLibrary.simpleMessage("Alexandria"),
+        "apartmentOrRoom":
+            MessageLookupByLibrary.simpleMessage("Apartment/Room"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
@@ -44,10 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("First Floor"),
+        "forSale": MessageLookupByLibrary.simpleMessage("For Sale"),
         "freeWifi": MessageLookupByLibrary.simpleMessage("Free Wi-Fi"),
         "fullAddress": MessageLookupByLibrary.simpleMessage(
             "Cairo - Fifth Settlement - First Floor - First Room"),
         "fullyFinished": MessageLookupByLibrary.simpleMessage("Fully Finished"),
+        "governorate": MessageLookupByLibrary.simpleMessage("Governorate"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("Home Screen"),
         "immediateHousing":
             MessageLookupByLibrary.simpleMessage("Immediate Housing"),
@@ -65,14 +71,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageUsers": MessageLookupByLibrary.simpleMessage("Manage Users"),
         "mohamed": MessageLookupByLibrary.simpleMessage("Mohamed"),
         "ownerName": MessageLookupByLibrary.simpleMessage("Owner Name"),
+        "partialRent": MessageLookupByLibrary.simpleMessage("Partial Rent"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending Requests : "),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("Private Garage"),
+        "propertyType": MessageLookupByLibrary.simpleMessage("Property Type"),
         "provideSupport":
             MessageLookupByLibrary.simpleMessage("Provide Support"),
         "readyForDelivery":
             MessageLookupByLibrary.simpleMessage("Ready for Delivery"),
+        "rent": MessageLookupByLibrary.simpleMessage("Rent"),
+        "requestsCount": MessageLookupByLibrary.simpleMessage("Requests Count"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 Rooms"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
@@ -81,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendNotification":
             MessageLookupByLibrary.simpleMessage("Send Notification"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "unitData": MessageLookupByLibrary.simpleMessage("Unit Data"),

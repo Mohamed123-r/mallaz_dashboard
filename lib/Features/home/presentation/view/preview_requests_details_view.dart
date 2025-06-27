@@ -363,7 +363,7 @@ class PreviewRequestsDetailsView extends StatelessWidget {
                 S.of(context).save,
                 style: AppTextStyles.buttonLarge20pxRegular(
                   context,
-                ).copyWith(color: AppColors.white),
+                ).copyWith(color: AppColors.black),
               ),
               color: AppColors.graysGray3,
             ),

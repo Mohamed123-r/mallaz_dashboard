@@ -529,6 +529,106 @@ class S {
       args: [],
     );
   }
+
+  /// `For Sale`
+  String get forSale {
+    return Intl.message(
+      'For Sale',
+      name: 'forSale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Partial Rent`
+  String get partialRent {
+    return Intl.message(
+      'Partial Rent',
+      name: 'partialRent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rent`
+  String get rent {
+    return Intl.message(
+      'Rent',
+      name: 'rent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requests Count`
+  String get requestsCount {
+    return Intl.message(
+      'Requests Count',
+      name: 'requestsCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Property Type`
+  String get propertyType {
+    return Intl.message(
+      'Property Type',
+      name: 'propertyType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Governorate`
+  String get governorate {
+    return Intl.message(
+      'Governorate',
+      name: 'governorate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added Date`
+  String get addedDate {
+    return Intl.message(
+      'Added Date',
+      name: 'addedDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apartment/Room`
+  String get apartmentOrRoom {
+    return Intl.message(
+      'Apartment/Room',
+      name: 'apartmentOrRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alexandria`
+  String get alexandria {
+    return Intl.message(
+      'Alexandria',
+      name: 'alexandria',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show More`
+  String get showMore {
+    return Intl.message(
+      'Show More',
+      name: 'showMore',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

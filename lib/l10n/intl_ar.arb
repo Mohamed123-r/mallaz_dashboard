@@ -42,12 +42,21 @@
   "readyForDelivery": "الوحدة جاهزة للتسليم",
   "installmentsAvailable": "متاح التقسيط علي 3 سنوات",
   "downPayment": "المقدم {amount} جنيه",
-  "ownerName": "اسم المالك",
   "clientName": "اسم العميل",
   "mohamed": "محمد",
   "ahmed": "احمد",
   "addNoteHere": "أضف ملحوظتك هنا",
-  "save": "حفظ"
+  "save": "حفظ",
+  "forSale": "للبيع",
+  "partialRent": "ايجار جزئي",
+  "rent": "ايجار",
+  "requestsCount": "عدد الطلبات",
+  "propertyType": "نوع العقار",
+  "governorate": "المحافظة",
+  "addedDate": "تاريخ الإضافة",
+  "apartmentOrRoom": "شقة/غرفة",
+  "alexandria": "الإسكندرية",
+  "showMore": "عرض المزيد"
 
 
 }
