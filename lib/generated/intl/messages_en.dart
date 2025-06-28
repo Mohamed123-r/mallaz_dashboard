@@ -27,7 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accept": MessageLookupByLibrary.simpleMessage("Accept"),
+        "accountStatus": MessageLookupByLibrary.simpleMessage("Account Status"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
+        "active": MessageLookupByLibrary.simpleMessage("Active"),
         "addNoteHere":
             MessageLookupByLibrary.simpleMessage("Add your note here"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),
@@ -39,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Apartment/Room"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "blockUser": MessageLookupByLibrary.simpleMessage("Block User"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
         "contactData": MessageLookupByLibrary.simpleMessage("Contact Data"),
@@ -60,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeScreen": MessageLookupByLibrary.simpleMessage("Home Screen"),
         "immediateHousing":
             MessageLookupByLibrary.simpleMessage("Immediate Housing"),
+        "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "installmentsAvailable": MessageLookupByLibrary.simpleMessage(
             "Installments Available for 3 Years"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
@@ -74,7 +78,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("Manage Sales Units"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("Manage Users"),
+        "mobileNumber": MessageLookupByLibrary.simpleMessage("Mobile Number"),
         "mohamed": MessageLookupByLibrary.simpleMessage("Mohamed"),
+        "newUsersCount":
+            MessageLookupByLibrary.simpleMessage("New Users Count"),
         "ownerName": MessageLookupByLibrary.simpleMessage("Owner Name"),
         "partialRent": MessageLookupByLibrary.simpleMessage("Partial Rent"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -102,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "unblock": MessageLookupByLibrary.simpleMessage("Unblock"),
         "unitData": MessageLookupByLibrary.simpleMessage("Unit Data"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("Unit Number"),
         "unitPrice": m1,

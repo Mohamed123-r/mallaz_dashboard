@@ -148,22 +148,22 @@ class _RequestsTable extends StatelessWidget {
         TableRow(
           decoration: BoxDecoration(color: Colors.transparent),
           children: [
-            _headerCell(text: S.of(context).propertyType, context: context),
-            _headerCell(text: S.of(context).governorate, context: context),
-            _headerCell(text: S.of(context).addedDate, context: context),
-            _headerCell(text: S.of(context).ownerName, context: context),
-            _headerCell(text: S.of(context).actions, context: context),
+            HeaderCall(text: S.of(context).propertyType, context: context),
+            HeaderCall(text: S.of(context).governorate, context: context),
+            HeaderCall(text: S.of(context).addedDate, context: context),
+            HeaderCall(text: S.of(context).ownerName, context: context),
+            HeaderCall(text: S.of(context).actions, context: context),
           ],
         ),
         ...List.generate(
           5,
           (index) => TableRow(
             children: [
-              _dataCell(text: S.of(context).apartmentOrRoom, context: context),
+              DataCell(text: S.of(context).apartmentOrRoom, context: context),
 
-              _dataCell(text: S.of(context).alexandria, context: context),
-              _dataCell(text: "29-6-2025", context: context),
-              _dataCell(text: S.of(context).ownerName, context: context),
+              DataCell(text: S.of(context).alexandria, context: context),
+              DataCell(text: "29-6-2025", context: context),
+              DataCell(text: S.of(context).ownerName, context: context),
               TableCell(
                 child: Center(
                   child: Padding(
@@ -193,7 +193,20 @@ class _RequestsTable extends StatelessWidget {
     );
   }
 
-  TableCell _headerCell({required String text, context}) => TableCell(
+}
+
+class HeaderCall extends StatelessWidget {
+  const HeaderCall({
+    super.key,
+    required this.text,
+    required this.context,
+  });
+
+  final String text;
+  final dynamic context;
+
+  @override
+  Widget build(BuildContext context) => TableCell(
     child: Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -201,8 +214,20 @@ class _RequestsTable extends StatelessWidget {
       ),
     ),
   );
+}
 
-  TableCell _dataCell({required String text, context}) => TableCell(
+class DataCell extends StatelessWidget {
+  const DataCell({
+    super.key,
+    required this.text,
+    required this.context,
+  });
+
+  final String text;
+  final dynamic context;
+
+  @override
+  Widget build(BuildContext context) => TableCell(
     child: Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14),

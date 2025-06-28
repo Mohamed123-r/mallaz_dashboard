@@ -27,7 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accept": MessageLookupByLibrary.simpleMessage("قبول"),
-        "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
+        "accountStatus": MessageLookupByLibrary.simpleMessage("حالة الحساب"),
+        "actions": MessageLookupByLibrary.simpleMessage("الاجراءات"),
+        "active": MessageLookupByLibrary.simpleMessage("مفعل"),
         "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
@@ -37,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartmentOrRoom": MessageLookupByLibrary.simpleMessage("شقة/غرفة"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
+        "blockUser": MessageLookupByLibrary.simpleMessage("حظر المستخدم"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
         "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
@@ -57,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "governorate": MessageLookupByLibrary.simpleMessage("المحافظة"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("الشاشة الرئيسية"),
         "immediateHousing": MessageLookupByLibrary.simpleMessage("سكن فوري"),
+        "inactive": MessageLookupByLibrary.simpleMessage("غير مفعل"),
         "installmentsAvailable":
             MessageLookupByLibrary.simpleMessage("متاح التقسيط علي 3 سنوات"),
         "languages": MessageLookupByLibrary.simpleMessage("اللغات"),
@@ -71,7 +75,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
+        "mobileNumber": MessageLookupByLibrary.simpleMessage("رقم الموبايل"),
         "mohamed": MessageLookupByLibrary.simpleMessage("محمد"),
+        "newUsersCount":
+            MessageLookupByLibrary.simpleMessage("عدد المستخدمين الجدد"),
         "ownerName": MessageLookupByLibrary.simpleMessage("اسم المالك"),
         "partialRent": MessageLookupByLibrary.simpleMessage("ايجار جزئي"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
@@ -97,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
+        "unblock": MessageLookupByLibrary.simpleMessage("ألغاء الحظر"),
         "unitData": MessageLookupByLibrary.simpleMessage("بيانات الوحدة"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("رقم الوحدة"),
         "unitPrice": m1,

@@ -62,6 +62,17 @@
   "gallery": "Gallery",
   "addRecuist": "Add Requests",
   "propertyDetails": "Property Details",
-  "mainFacilities": "Main Facilities"
+  "mainFacilities": "Main Facilities",
+
+  "newUsersCount": "New Users Count",
+  "userName": "User Name",
+  "mobileNumber": "Mobile Number",
+  "email": "Email",
+  "accountStatus": "Account Status",
+  "actions": "Actions",
+  "active": "Active",
+  "inactive": "Inactive",
+  "unblock": "Unblock",
+  "blockUser": "Block User"
 
 }

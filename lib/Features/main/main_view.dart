@@ -2,6 +2,7 @@ import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dar
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item_model.dart';
+import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
 import 'package:flutter/material.dart';
 
 import '../../generated/assets.dart';
@@ -118,7 +119,10 @@ class _MainViewState extends State<MainView> {
                             activeIndex = 1;
                             setState(() {});
                           },
-                        )
+                        ):
+                        activeIndex == 5
+                            ? UserManagementView()
+
                             : Container(color: Colors.red),
                   ),
                 ),

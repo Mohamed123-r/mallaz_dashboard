@@ -62,7 +62,19 @@
   "reject": "رفض",
   "gallery": "المعرض",
   "propertyDetails": "بيانات العقار",
-  "mainFacilities": "المرافق الرئيسية"
+  "mainFacilities": "المرافق الرئيسية",
+
+  "newUsersCount": "عدد المستخدمين الجدد",
+  "userName": "اسم المستخدم",
+  "mobileNumber": "رقم الموبايل",
+  "email": "البريد الالكتروني",
+  "accountStatus": "حالة الحساب",
+  "actions": "الاجراءات",
+  "active": "مفعل",
+  "inactive": "غير مفعل",
+  "unblock": "ألغاء الحظر",
+  "blockUser": "حظر المستخدم"
+
 
 
 }
