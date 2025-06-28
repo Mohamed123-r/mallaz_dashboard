@@ -45,7 +45,7 @@ class _RequestsToAddNewPropertiesState
             ],
           ),
           const SizedBox(height: 16),
-          _Tabs(
+          Tabs(
             tabs: tabs,
             selectedIndex: selectedTabIndex,
             onTabSelected: (i) => setState(() => selectedTabIndex = i),
@@ -61,13 +61,14 @@ class _RequestsToAddNewPropertiesState
   }
 }
 
-class _Tabs extends StatelessWidget {
+
+class Tabs extends StatelessWidget {
   final List<String> tabs;
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
   final bool isDark;
 
-  const _Tabs({
+  const Tabs({
     required this.tabs,
     required this.selectedIndex,
     required this.onTabSelected,
@@ -85,39 +86,47 @@ class _Tabs extends StatelessWidget {
       child: Row(
         children: List.generate(
           tabs.length,
-          (index) => Expanded(
-            child: InkWell(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(index == 0 ? 8 : 0),
-                bottomLeft: Radius.circular(index == 0 ? 8 : 0),
-                topRight: Radius.circular(index == tabs.length - 1 ? 8 : 0),
-                bottomRight: Radius.circular(index == tabs.length - 1 ? 8 : 0),
-              ),
-              onTap: () => onTabSelected(index),
-              child: Container(
-                height: 48,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color:
-                      selectedIndex == index
-                          ? isDark
-                              ? AppColors.darkModeButtonsPrimary
-                              : AppColors.lightModeButtonsPrimary
-                          : Colors.transparent,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(index == tabs.length - 1 ? 8 : 0),
-                    bottomLeft: Radius.circular(
-                      index == tabs.length - 1 ? 8 : 0,
+              (index) => Expanded(
+            child: Row(
+              children: [
+                if (index > 0) // Add vertical divider except for the first item
+                  VerticalDivider(
+                    width: 1,
+                    thickness: 1,
+                    color: const Color(0xffC8CDD6),
+                  ),
+                Expanded(
+                  child: InkWell(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(index == 0 ? 8 : 0),
+                      bottomLeft: Radius.circular(index == 0 ? 8 : 0),
+                      topRight: Radius.circular(index == tabs.length - 1 ? 8 : 0),
+                      bottomRight: Radius.circular(index == tabs.length - 1 ? 8 : 0),
                     ),
-                    topRight: Radius.circular(index == 0 ? 8 : 0),
-                    bottomRight: Radius.circular(index == 0 ? 8 : 0),
+                    onTap: () => onTabSelected(index),
+                    child: Container(
+                      height: 48,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: selectedIndex == index
+                            ? isDark
+                            ? AppColors.darkModeButtonsPrimary
+                            : AppColors.lightModeButtonsPrimary
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(index == tabs.length - 1? 8 : 0),
+                          bottomLeft: Radius.circular(index ==  tabs.length - 1 ? 8 : 0),
+                          topRight: Radius.circular(index ==0 ? 8 : 0),
+                          bottomRight: Radius.circular(index == 0 ? 8 : 0),  ),
+                      ),
+                      child: Text(
+                        tabs[index],
+                        style: AppTextStyles.buttonLarge20pxRegular(context),
+                      ),
+                    ),
                   ),
                 ),
-                child: Text(
-                  tabs[index],
-                  style: AppTextStyles.buttonLarge20pxRegular(context),
-                ),
-              ),
+              ],
             ),
           ),
         ),
@@ -125,7 +134,6 @@ class _Tabs extends StatelessWidget {
     );
   }
 }
-
 class _RequestsTable extends StatelessWidget {
   const _RequestsTable({required this.onTapSeeDetails});
   final  VoidCallback onTapSeeDetails ;

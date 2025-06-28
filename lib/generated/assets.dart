@@ -14,6 +14,7 @@ class Assets {
   static const String imagesBasilEditOutline = 'assets/images/basil_edit-outline.svg';
   static const String imagesBasilLogoutOutline = 'assets/images/basil_logout-outline.svg';
   static const String imagesDoor = 'assets/images/door.svg';
+  static const String imagesFluentDelete32Regular = 'assets/images/fluent_delete-32-regular.svg';
   static const String imagesHome1 = 'assets/images/home1.png';
   static const String imagesHome2 = 'assets/images/home2.png';
   static const String imagesHome3 = 'assets/images/home3.png';

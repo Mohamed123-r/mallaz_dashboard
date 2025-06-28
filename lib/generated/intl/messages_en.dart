@@ -20,9 +20,19 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(amount) => "Down Payment ${amount} EGP";
+  static String m0(count) => "All (${count})";
 
-  static String m1(price) => "Unit Price: ${price}";
+  static String m1(count) => "Available (${count})";
+
+  static String m2(amount) => "Down Payment ${amount} EGP";
+
+  static String m3(count) => "Pending (${count})";
+
+  static String m4(count) => "Sold (${count})";
+
+  static String m5(count) => "Under Inspection (${count})";
+
+  static String m6(price) => "Unit Price: ${price}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -37,10 +47,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "ahmed": MessageLookupByLibrary.simpleMessage("Ahmed"),
         "alexandria": MessageLookupByLibrary.simpleMessage("Alexandria"),
+        "allUnits": m0,
         "apartmentOrRoom":
             MessageLookupByLibrary.simpleMessage("Apartment/Room"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "available": m1,
+        "availableShort": MessageLookupByLibrary.simpleMessage("Available"),
         "blockUser": MessageLookupByLibrary.simpleMessage("Block User"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
@@ -49,7 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Detailed Address"),
         "districtTagamoa":
             MessageLookupByLibrary.simpleMessage("Fifth Settlement"),
-        "downPayment": m0,
+        "downPayment": m2,
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("First Floor"),
@@ -86,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "partialRent": MessageLookupByLibrary.simpleMessage("Partial Rent"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending Requests : "),
+        "pending1": m3,
+        "pendingShort": MessageLookupByLibrary.simpleMessage("Pending"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("Private Garage"),
         "propertyDetails":
@@ -107,12 +122,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send Notification"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
+        "sold": m4,
+        "soldShort": MessageLookupByLibrary.simpleMessage("Sold"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "unblock": MessageLookupByLibrary.simpleMessage("Unblock"),
+        "underInspection": m5,
+        "underInspectionShort":
+            MessageLookupByLibrary.simpleMessage("Under Inspection"),
         "unitData": MessageLookupByLibrary.simpleMessage("Unit Data"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("Unit Number"),
-        "unitPrice": m1,
-        "userName": MessageLookupByLibrary.simpleMessage("User Name")
+        "unitPrice": m6,
+        "unitType": MessageLookupByLibrary.simpleMessage("Unit Type"),
+        "userName": MessageLookupByLibrary.simpleMessage("User Name"),
+        "villa": MessageLookupByLibrary.simpleMessage("Villa")
       };
 }

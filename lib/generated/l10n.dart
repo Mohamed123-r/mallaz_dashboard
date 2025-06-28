@@ -759,6 +759,116 @@ class S {
       args: [],
     );
   }
+
+  /// `All ({count})`
+  String allUnits(Object count) {
+    return Intl.message(
+      'All ($count)',
+      name: 'allUnits',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Available ({count})`
+  String available(Object count) {
+    return Intl.message(
+      'Available ($count)',
+      name: 'available',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Pending ({count})`
+  String pending1(Object count) {
+    return Intl.message(
+      'Pending ($count)',
+      name: 'pending1',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Under Inspection ({count})`
+  String underInspection(Object count) {
+    return Intl.message(
+      'Under Inspection ($count)',
+      name: 'underInspection',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Sold ({count})`
+  String sold(Object count) {
+    return Intl.message(
+      'Sold ($count)',
+      name: 'sold',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Unit Type`
+  String get unitType {
+    return Intl.message(
+      'Unit Type',
+      name: 'unitType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Villa`
+  String get villa {
+    return Intl.message(
+      'Villa',
+      name: 'villa',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get availableShort {
+    return Intl.message(
+      'Available',
+      name: 'availableShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pendingShort {
+    return Intl.message(
+      'Pending',
+      name: 'pendingShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Under Inspection`
+  String get underInspectionShort {
+    return Intl.message(
+      'Under Inspection',
+      name: 'underInspectionShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sold`
+  String get soldShort {
+    return Intl.message(
+      'Sold',
+      name: 'soldShort',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

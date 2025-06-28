@@ -11,6 +11,7 @@ import '../add_new_properties/presentation/view/requests_to_add_new_properties.d
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
+import '../unit_management/presentation/view/sales_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -120,6 +121,9 @@ class _MainViewState extends State<MainView> {
                             setState(() {});
                           },
                         ):
+                        activeIndex == 2
+                            ? SalesView()
+                            :
                         activeIndex == 5
                             ? UserManagementView()
 

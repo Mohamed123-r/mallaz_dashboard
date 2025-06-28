@@ -65,14 +65,23 @@
   "mainFacilities": "Main Facilities",
 
   "newUsersCount": "New Users Count",
-  "userName": "User Name",
   "mobileNumber": "Mobile Number",
-  "email": "Email",
   "accountStatus": "Account Status",
-  "actions": "Actions",
   "active": "Active",
   "inactive": "Inactive",
   "unblock": "Unblock",
-  "blockUser": "Block User"
+  "blockUser": "Block User",
+  "allUnits": "All ({count})",
+  "available": "Available ({count})",
+  "pending1": "Pending ({count})",
+  "underInspection": "Under Inspection ({count})",
+  "sold": "Sold ({count})",
+  "unitType": "Unit Type",
+  "villa": "Villa",
+
+  "availableShort": "Available",
+  "pendingShort": "Pending",
+  "underInspectionShort": "Under Inspection",
+  "soldShort": "Sold"
 
 }
