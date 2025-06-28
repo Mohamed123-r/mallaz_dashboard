@@ -660,6 +660,16 @@ class S {
     );
   }
 
+  /// `Add Requests`
+  String get addRecuist {
+    return Intl.message(
+      'Add Requests',
+      name: 'addRecuist',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Property Details`
   String get propertyDetails {
     return Intl.message(

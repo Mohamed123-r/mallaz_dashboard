@@ -82,6 +82,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
   }
 }
 
+
 class PropertyGallery extends StatelessWidget {
   const PropertyGallery({super.key, required this.isDark});
 

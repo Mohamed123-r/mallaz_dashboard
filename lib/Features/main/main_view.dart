@@ -31,6 +31,10 @@ class _MainViewState extends State<MainView> {
         image: Assets.imagesHomeIcon,
       ),
       DrawerItemModel(
+        title: S.of(context).addRecuist,
+        image: Assets.imagesMask,
+      ),
+      DrawerItemModel(
         title: S.of(context).manageSalesUnits,
         image: Assets.imagesWeuiHomeOutlined,
       ),

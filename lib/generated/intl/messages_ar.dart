@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accept": MessageLookupByLibrary.simpleMessage("قبول"),
         "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
         "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
+        "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
         "ahmed": MessageLookupByLibrary.simpleMessage("احمد"),

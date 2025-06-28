@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "addNoteHere":
             MessageLookupByLibrary.simpleMessage("Add your note here"),
+        "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),
         "addedDate": MessageLookupByLibrary.simpleMessage("Added Date"),
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "ahmed": MessageLookupByLibrary.simpleMessage("Ahmed"),
