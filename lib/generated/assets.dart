@@ -14,6 +14,7 @@ class Assets {
   static const String imagesBasilEditOutline = 'assets/images/basil_edit-outline.svg';
   static const String imagesBasilLogoutOutline = 'assets/images/basil_logout-outline.svg';
   static const String imagesDoor = 'assets/images/door.svg';
+  static const String imagesFluentDelete32Regular = 'assets/images/fluent_delete-32-regular.svg';
   static const String imagesHome1 = 'assets/images/home1.png';
   static const String imagesHome2 = 'assets/images/home2.png';
   static const String imagesHome3 = 'assets/images/home3.png';
@@ -26,6 +27,7 @@ class Assets {
   static const String imagesHugeiconsView = 'assets/images/hugeicons_view.svg';
   static const String imagesLoginImage = 'assets/images/login_image.png';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesMask = 'assets/images/Mask.svg';
   static const String imagesMaterialSymbolsLight = 'assets/images/material-symbols-light.svg';
   static const String imagesMenuIcon = 'assets/images/menuIcon.svg';
   static const String imagesNotificationIcon = 'assets/images/NotificationIcon.svg';

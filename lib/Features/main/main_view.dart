@@ -2,6 +2,7 @@ import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dar
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item_model.dart';
+import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
 import 'package:flutter/material.dart';
 
 import '../../generated/assets.dart';
@@ -10,6 +11,7 @@ import '../add_new_properties/presentation/view/requests_to_add_new_properties.d
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
+import '../unit_management/presentation/view/sales_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -29,6 +31,10 @@ class _MainViewState extends State<MainView> {
       DrawerItemModel(
         title: S.of(context).homeScreen,
         image: Assets.imagesHomeIcon,
+      ),
+      DrawerItemModel(
+        title: S.of(context).addRecuist,
+        image: Assets.imagesMask,
       ),
       DrawerItemModel(
         title: S.of(context).manageSalesUnits,
@@ -114,7 +120,13 @@ class _MainViewState extends State<MainView> {
                             activeIndex = 1;
                             setState(() {});
                           },
-                        )
+                        ):
+                        activeIndex == 2
+                            ? SalesView()
+                            :
+                        activeIndex == 5
+                            ? UserManagementView()
+
                             : Container(color: Colors.red),
                   ),
                 ),

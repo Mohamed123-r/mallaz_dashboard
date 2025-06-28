@@ -58,10 +58,36 @@
   "alexandria": "الإسكندرية",
   "showMore": "عرض المزيد",
   "accept": "قبول",
+  "addRecuist": "طلبات الإضافة",
   "reject": "رفض",
   "gallery": "المعرض",
   "propertyDetails": "بيانات العقار",
-  "mainFacilities": "المرافق الرئيسية"
+  "mainFacilities": "المرافق الرئيسية",
+
+  "newUsersCount": "عدد المستخدمين الجدد",
+
+  "mobileNumber": "رقم الموبايل",
+
+  "accountStatus": "حالة الحساب",
+
+  "active": "مفعل",
+  "inactive": "غير مفعل",
+  "unblock": "ألغاء الحظر",
+  "blockUser": "حظر المستخدم",
+  "allUnits": "الكل ({count})",
+  "available": "متاح ({count})",
+  "pending1": "بانتظار الرد ({count})",
+  "underInspection": "جاري المعاينة ({count})",
+  "sold": "تم البيع ({count})",
+  "unitType": "نوع الوحدة",
+
+  "villa": "فيلا",
+
+  "availableShort": "متاح",
+  "pendingShort": "بانتظار الرد",
+  "underInspectionShort": "جاري المعاينة",
+  "soldShort": "تم البيع"
+
 
 
 }

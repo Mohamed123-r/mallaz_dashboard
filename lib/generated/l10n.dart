@@ -660,6 +660,16 @@ class S {
     );
   }
 
+  /// `Add Requests`
+  String get addRecuist {
+    return Intl.message(
+      'Add Requests',
+      name: 'addRecuist',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Property Details`
   String get propertyDetails {
     return Intl.message(
@@ -675,6 +685,186 @@ class S {
     return Intl.message(
       'Main Facilities',
       name: 'mainFacilities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Users Count`
+  String get newUsersCount {
+    return Intl.message(
+      'New Users Count',
+      name: 'newUsersCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mobile Number`
+  String get mobileNumber {
+    return Intl.message(
+      'Mobile Number',
+      name: 'mobileNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Status`
+  String get accountStatus {
+    return Intl.message(
+      'Account Status',
+      name: 'accountStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive`
+  String get inactive {
+    return Intl.message(
+      'Inactive',
+      name: 'inactive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unblock`
+  String get unblock {
+    return Intl.message(
+      'Unblock',
+      name: 'unblock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Block User`
+  String get blockUser {
+    return Intl.message(
+      'Block User',
+      name: 'blockUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All ({count})`
+  String allUnits(Object count) {
+    return Intl.message(
+      'All ($count)',
+      name: 'allUnits',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Available ({count})`
+  String available(Object count) {
+    return Intl.message(
+      'Available ($count)',
+      name: 'available',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Pending ({count})`
+  String pending1(Object count) {
+    return Intl.message(
+      'Pending ($count)',
+      name: 'pending1',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Under Inspection ({count})`
+  String underInspection(Object count) {
+    return Intl.message(
+      'Under Inspection ($count)',
+      name: 'underInspection',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Sold ({count})`
+  String sold(Object count) {
+    return Intl.message(
+      'Sold ($count)',
+      name: 'sold',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Unit Type`
+  String get unitType {
+    return Intl.message(
+      'Unit Type',
+      name: 'unitType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Villa`
+  String get villa {
+    return Intl.message(
+      'Villa',
+      name: 'villa',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get availableShort {
+    return Intl.message(
+      'Available',
+      name: 'availableShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pendingShort {
+    return Intl.message(
+      'Pending',
+      name: 'pendingShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Under Inspection`
+  String get underInspectionShort {
+    return Intl.message(
+      'Under Inspection',
+      name: 'underInspectionShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sold`
+  String get soldShort {
+    return Intl.message(
+      'Sold',
+      name: 'soldShort',
       desc: '',
       args: [],
     );

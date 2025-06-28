@@ -60,7 +60,28 @@
   "accept": "Accept",
   "reject": "Reject",
   "gallery": "Gallery",
+  "addRecuist": "Add Requests",
   "propertyDetails": "Property Details",
-  "mainFacilities": "Main Facilities"
+  "mainFacilities": "Main Facilities",
+
+  "newUsersCount": "New Users Count",
+  "mobileNumber": "Mobile Number",
+  "accountStatus": "Account Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "unblock": "Unblock",
+  "blockUser": "Block User",
+  "allUnits": "All ({count})",
+  "available": "Available ({count})",
+  "pending1": "Pending ({count})",
+  "underInspection": "Under Inspection ({count})",
+  "sold": "Sold ({count})",
+  "unitType": "Unit Type",
+  "villa": "Villa",
+
+  "availableShort": "Available",
+  "pendingShort": "Pending",
+  "underInspectionShort": "Under Inspection",
+  "soldShort": "Sold"
 
 }
