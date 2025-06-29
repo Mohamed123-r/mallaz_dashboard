@@ -869,6 +869,446 @@ class S {
       args: [],
     );
   }
+
+  /// `All Rooms ({count})`
+  String allRooms(Object count) {
+    return Intl.message(
+      'All Rooms ($count)',
+      name: 'allRooms',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Single Rooms Only ({count})`
+  String singleRoomsOnly(Object count) {
+    return Intl.message(
+      'Single Rooms Only ($count)',
+      name: 'singleRoomsOnly',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `With Empty Beds ({count})`
+  String withEmptyBeds(Object count) {
+    return Intl.message(
+      'With Empty Beds ($count)',
+      name: 'withEmptyBeds',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Full ({count})`
+  String fullRooms(Object count) {
+    return Intl.message(
+      'Full ($count)',
+      name: 'fullRooms',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Room Number`
+  String get roomNumber {
+    return Intl.message(
+      'Room Number',
+      name: 'roomNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Room Type`
+  String get roomType {
+    return Intl.message(
+      'Room Type',
+      name: 'roomType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented Beds`
+  String get rentedBeds {
+    return Intl.message(
+      'Rented Beds',
+      name: 'rentedBeds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty Beds`
+  String get emptyBeds {
+    return Intl.message(
+      'Empty Beds',
+      name: 'emptyBeds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shared`
+  String get shared {
+    return Intl.message(
+      'Shared',
+      name: 'shared',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty`
+  String get empty {
+    return Intl.message(
+      'Empty',
+      name: 'empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented`
+  String get rented {
+    return Intl.message(
+      'Rented',
+      name: 'rented',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Partially Rented`
+  String get partialRented {
+    return Intl.message(
+      'Partially Rented',
+      name: 'partialRented',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full`
+  String get full {
+    return Intl.message(
+      'Full',
+      name: 'full',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contract Expiring ({count})`
+  String contractExpiring(Object count) {
+    return Intl.message(
+      'Contract Expiring ($count)',
+      name: 'contractExpiring',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Rented ({count})`
+  String rentedUnits(Object count) {
+    return Intl.message(
+      'Rented ($count)',
+      name: 'rentedUnits',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Contract Expiring`
+  String get contractExpiringShort {
+    return Intl.message(
+      'Contract Expiring',
+      name: 'contractExpiringShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented`
+  String get rentedShort {
+    return Intl.message(
+      'Rented',
+      name: 'rentedShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contract Duration`
+  String get contractDuration {
+    return Intl.message(
+      'Contract Duration',
+      name: 'contractDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message(
+      'End Date',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get role {
+    return Intl.message(
+      'Role',
+      name: 'role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Login`
+  String get lastLogin {
+    return Intl.message(
+      'Last Login',
+      name: 'lastLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin`
+  String get admin {
+    return Intl.message(
+      'Admin',
+      name: 'admin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Notification Form`
+  String get newNotificationForm {
+    return Intl.message(
+      'New Notification Form',
+      name: 'newNotificationForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Title`
+  String get notificationTitle {
+    return Intl.message(
+      'Notification Title',
+      name: 'notificationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter notification title`
+  String get enterNotificationTitle {
+    return Intl.message(
+      'Enter notification title',
+      name: 'enterNotificationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Text`
+  String get notificationText {
+    return Intl.message(
+      'Notification Text',
+      name: 'notificationText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter notification text`
+  String get enterNotificationText {
+    return Intl.message(
+      'Enter notification text',
+      name: 'enterNotificationText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Target Group`
+  String get selectTargetGroup {
+    return Intl.message(
+      'Select Target Group',
+      name: 'selectTargetGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Students`
+  String get students {
+    return Intl.message(
+      'Students',
+      name: 'students',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Families`
+  String get families {
+    return Intl.message(
+      'Families',
+      name: 'families',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tenants`
+  String get tenants {
+    return Intl.message(
+      'Tenants',
+      name: 'tenants',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Time`
+  String get sendTime {
+    return Intl.message(
+      'Send Time',
+      name: 'sendTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Now`
+  String get sendNow {
+    return Intl.message(
+      'Send Now',
+      name: 'sendNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule Notification`
+  String get scheduleNotification {
+    return Intl.message(
+      'Schedule Notification',
+      name: 'scheduleNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Archive`
+  String get archive {
+    return Intl.message(
+      'Archive',
+      name: 'archive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous Notifications`
+  String get previousNotifications {
+    return Intl.message(
+      'Previous Notifications',
+      name: 'previousNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get title {
+    return Intl.message(
+      'Title',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get message {
+    return Intl.message(
+      'Message',
+      name: 'message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Date`
+  String get sendDate {
+    return Intl.message(
+      'Send Date',
+      name: 'sendDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group`
+  String get group {
+    return Intl.message(
+      'Group',
+      name: 'group',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sent`
+  String get sent {
+    return Intl.message(
+      'Sent',
+      name: 'sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target Group`
+  String get targetGroup {
+    return Intl.message(
+      'Target Group',
+      name: 'targetGroup',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

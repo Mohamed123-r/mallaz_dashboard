@@ -2,6 +2,8 @@ import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dar
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item_model.dart';
+import 'package:book_apartment_dashboard/Features/notification/presentation/view/widgets/notification_view.dart';
+import 'package:book_apartment_dashboard/Features/seating/presentation/view/seating_view.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,8 @@ import '../add_new_properties/presentation/view/requests_to_add_new_properties.d
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
+import '../unit_management/presentation/view/partial_rental_view.dart';
+import '../unit_management/presentation/view/rent_to_lease_view.dart';
 import '../unit_management/presentation/view/sales_view.dart';
 
 class MainView extends StatefulWidget {
@@ -111,22 +115,31 @@ class _MainViewState extends State<MainView> {
                               },
                             )
                             : activeIndex == 1
-                            ? RequestsToAddNewProperties(onTapSeeDetails: () {
-                          activeIndex = 1.1;
-                          setState(() {});
-                        },)   : activeIndex == 1.1
+                            ? RequestsToAddNewProperties(
+                              onTapSeeDetails: () {
+                                activeIndex = 1.1;
+                                setState(() {});
+                              },
+                            )
+                            : activeIndex == 1.1
                             ? RequestsToAddNewPropertiesDetails(
-                          onTapBack: () {
-                            activeIndex = 1;
-                            setState(() {});
-                          },
-                        ):
-                        activeIndex == 2
+                              onTapBack: () {
+                                activeIndex = 1;
+                                setState(() {});
+                              },
+                            )
+                            : activeIndex == 2
                             ? SalesView()
-                            :
-                        activeIndex == 5
+                            : activeIndex == 3
+                            ? PartialRentalView()
+                            : activeIndex == 4
+                            ? RentToLeaseView()
+                            : activeIndex == 5
                             ? UserManagementView()
-
+                            : activeIndex == 7
+                            ? NotificationView()
+                            : activeIndex == 8
+                            ? SeatingView()
                             : Container(color: Colors.red),
                   ),
                 ),
