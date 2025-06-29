@@ -59,11 +59,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
         "ahmed": MessageLookupByLibrary.simpleMessage("احمد"),
         "alexandria": MessageLookupByLibrary.simpleMessage("الإسكندرية"),
+        "all": MessageLookupByLibrary.simpleMessage("الكل"),
         "allRooms": m0,
         "allUnits": m1,
         "apartmentOrRoom": MessageLookupByLibrary.simpleMessage("شقة/غرفة"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
+        "archive": MessageLookupByLibrary.simpleMessage("ارشفه"),
         "available": m2,
         "availableShort": MessageLookupByLibrary.simpleMessage("متاح"),
         "blockUser": MessageLookupByLibrary.simpleMessage("حظر المستخدم"),
@@ -84,6 +86,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "emptyBeds": MessageLookupByLibrary.simpleMessage("الأسرة الفارغة"),
         "endDate": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
         "english": MessageLookupByLibrary.simpleMessage("إنجليزي"),
+        "enterNotificationText":
+            MessageLookupByLibrary.simpleMessage("ادخل نص الاشعار"),
+        "enterNotificationTitle":
+            MessageLookupByLibrary.simpleMessage("ادخل عنوان الاشعار"),
+        "families": MessageLookupByLibrary.simpleMessage("العائلات"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("الدور الأول"),
         "forSale": MessageLookupByLibrary.simpleMessage("للبيع"),
         "freeWifi": MessageLookupByLibrary.simpleMessage("واي فاي مجاني"),
@@ -94,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullyFinished": MessageLookupByLibrary.simpleMessage("مشطبة بالكامل"),
         "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
         "governorate": MessageLookupByLibrary.simpleMessage("المحافظة"),
+        "group": MessageLookupByLibrary.simpleMessage("الفئه"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("الشاشة الرئيسية"),
         "immediateHousing": MessageLookupByLibrary.simpleMessage("سكن فوري"),
         "inactive": MessageLookupByLibrary.simpleMessage("غير مفعل"),
@@ -112,10 +120,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
+        "message": MessageLookupByLibrary.simpleMessage("الرساله"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("رقم الموبايل"),
         "mohamed": MessageLookupByLibrary.simpleMessage("محمد"),
+        "newNotificationForm":
+            MessageLookupByLibrary.simpleMessage("نموذج ارسال اشعار جديد"),
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("عدد المستخدمين الجدد"),
+        "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
+        "notificationTitle":
+            MessageLookupByLibrary.simpleMessage("عنوان الاشعار"),
         "ownerName": MessageLookupByLibrary.simpleMessage("اسم المالك"),
         "partialRent": MessageLookupByLibrary.simpleMessage("ايجار جزئي"),
         "partialRented": MessageLookupByLibrary.simpleMessage("مؤجرة جزئيا"),
@@ -124,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending1": m6,
         "pendingShort": MessageLookupByLibrary.simpleMessage("بانتظار الرد"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "previousNotifications":
+            MessageLookupByLibrary.simpleMessage("اشعارات سابقه"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
         "propertyDetails":
             MessageLookupByLibrary.simpleMessage("بيانات العقار"),
@@ -143,10 +159,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "roomType": MessageLookupByLibrary.simpleMessage("نوع الغرفة"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "scheduleNotification":
+            MessageLookupByLibrary.simpleMessage("جدوله الاشعار"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "اسم المستخدم ,حالة العقار ...."),
         "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
+        "selectTargetGroup":
+            MessageLookupByLibrary.simpleMessage("اختيار الفئه المستهدفه"),
+        "send": MessageLookupByLibrary.simpleMessage("ارسال"),
+        "sendDate": MessageLookupByLibrary.simpleMessage("تاريخ الارسال"),
         "sendNotification": MessageLookupByLibrary.simpleMessage("ارسال اشعار"),
+        "sendNow": MessageLookupByLibrary.simpleMessage("الارسال الان"),
+        "sendTime": MessageLookupByLibrary.simpleMessage("توقيت الارسال"),
+        "sent": MessageLookupByLibrary.simpleMessage("مرسله"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "shared": MessageLookupByLibrary.simpleMessage("مشتركة"),
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
@@ -154,6 +179,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sold": m9,
         "soldShort": MessageLookupByLibrary.simpleMessage("تم البيع"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
+        "students": MessageLookupByLibrary.simpleMessage("الطلاب"),
+        "targetGroup": MessageLookupByLibrary.simpleMessage("الفئه المستهدفه"),
+        "tenants": MessageLookupByLibrary.simpleMessage("المستأجرين"),
+        "title": MessageLookupByLibrary.simpleMessage("العنوان"),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
         "unblock": MessageLookupByLibrary.simpleMessage("ألغاء الحظر"),
         "underInspection": m10,

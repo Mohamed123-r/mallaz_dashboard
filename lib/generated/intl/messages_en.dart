@@ -60,12 +60,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "ahmed": MessageLookupByLibrary.simpleMessage("Ahmed"),
         "alexandria": MessageLookupByLibrary.simpleMessage("Alexandria"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "allRooms": m0,
         "allUnits": m1,
         "apartmentOrRoom":
             MessageLookupByLibrary.simpleMessage("Apartment/Room"),
         "appName": MessageLookupByLibrary.simpleMessage("App Name"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "archive": MessageLookupByLibrary.simpleMessage("Archive"),
         "available": m2,
         "availableShort": MessageLookupByLibrary.simpleMessage("Available"),
         "blockUser": MessageLookupByLibrary.simpleMessage("Block User"),
@@ -87,6 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "emptyBeds": MessageLookupByLibrary.simpleMessage("Empty Beds"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "enterNotificationText":
+            MessageLookupByLibrary.simpleMessage("Enter notification text"),
+        "enterNotificationTitle":
+            MessageLookupByLibrary.simpleMessage("Enter notification title"),
+        "families": MessageLookupByLibrary.simpleMessage("Families"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("First Floor"),
         "forSale": MessageLookupByLibrary.simpleMessage("For Sale"),
         "freeWifi": MessageLookupByLibrary.simpleMessage("Free Wi-Fi"),
@@ -97,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullyFinished": MessageLookupByLibrary.simpleMessage("Fully Finished"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "governorate": MessageLookupByLibrary.simpleMessage("Governorate"),
+        "group": MessageLookupByLibrary.simpleMessage("Group"),
         "homeScreen": MessageLookupByLibrary.simpleMessage("Home Screen"),
         "immediateHousing":
             MessageLookupByLibrary.simpleMessage("Immediate Housing"),
@@ -116,10 +124,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("Manage Sales Units"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("Manage Users"),
+        "message": MessageLookupByLibrary.simpleMessage("Message"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("Mobile Number"),
         "mohamed": MessageLookupByLibrary.simpleMessage("Mohamed"),
+        "newNotificationForm":
+            MessageLookupByLibrary.simpleMessage("New Notification Form"),
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("New Users Count"),
+        "notificationText":
+            MessageLookupByLibrary.simpleMessage("Notification Text"),
+        "notificationTitle":
+            MessageLookupByLibrary.simpleMessage("Notification Title"),
         "ownerName": MessageLookupByLibrary.simpleMessage("Owner Name"),
         "partialRent": MessageLookupByLibrary.simpleMessage("Partial Rent"),
         "partialRented":
@@ -129,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending1": m6,
         "pendingShort": MessageLookupByLibrary.simpleMessage("Pending"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "previousNotifications":
+            MessageLookupByLibrary.simpleMessage("Previous Notifications"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("Private Garage"),
         "propertyDetails":
             MessageLookupByLibrary.simpleMessage("Property Details"),
@@ -149,11 +166,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "roomType": MessageLookupByLibrary.simpleMessage("Room Type"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 Rooms"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "scheduleNotification":
+            MessageLookupByLibrary.simpleMessage("Schedule Notification"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "User Name ,Status Real state ....."),
         "security247": MessageLookupByLibrary.simpleMessage("24/7 Security"),
+        "selectTargetGroup":
+            MessageLookupByLibrary.simpleMessage("Select Target Group"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "sendDate": MessageLookupByLibrary.simpleMessage("Send Date"),
         "sendNotification":
             MessageLookupByLibrary.simpleMessage("Send Notification"),
+        "sendNow": MessageLookupByLibrary.simpleMessage("Send Now"),
+        "sendTime": MessageLookupByLibrary.simpleMessage("Send Time"),
+        "sent": MessageLookupByLibrary.simpleMessage("Sent"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shared": MessageLookupByLibrary.simpleMessage("Shared"),
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
@@ -161,6 +187,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sold": m9,
         "soldShort": MessageLookupByLibrary.simpleMessage("Sold"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "students": MessageLookupByLibrary.simpleMessage("Students"),
+        "targetGroup": MessageLookupByLibrary.simpleMessage("Target Group"),
+        "tenants": MessageLookupByLibrary.simpleMessage("Tenants"),
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "unblock": MessageLookupByLibrary.simpleMessage("Unblock"),
         "underInspection": m10,

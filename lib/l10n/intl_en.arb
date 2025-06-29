@@ -105,5 +105,27 @@
   "role": "Role",
   "lastLogin": "Last Login",
   "admin": "Admin",
-  "active": "Active"
+  "newNotificationForm": "New Notification Form",
+  "notificationTitle": "Notification Title",
+  "enterNotificationTitle": "Enter notification title",
+  "notificationText": "Notification Text",
+  "enterNotificationText": "Enter notification text",
+  "selectTargetGroup": "Select Target Group",
+  "all": "All",
+  "students": "Students",
+  "families": "Families",
+  "tenants": "Tenants",
+  "sendTime": "Send Time",
+  "sendNow": "Send Now",
+  "scheduleNotification": "Schedule Notification",
+  "send": "Send",
+  "archive": "Archive",
+  "previousNotifications": "Previous Notifications",
+  "title": "Title",
+  "message": "Message",
+  "sendDate": "Send Date",
+  "group": "Group",
+
+  "sent": "Sent",
+  "targetGroup": "Target Group"
 }
