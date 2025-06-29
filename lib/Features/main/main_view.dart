@@ -11,6 +11,7 @@ import '../add_new_properties/presentation/view/requests_to_add_new_properties.d
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
+import '../unit_management/presentation/view/partial_rental_view.dart';
 import '../unit_management/presentation/view/sales_view.dart';
 
 class MainView extends StatefulWidget {
@@ -111,22 +112,25 @@ class _MainViewState extends State<MainView> {
                               },
                             )
                             : activeIndex == 1
-                            ? RequestsToAddNewProperties(onTapSeeDetails: () {
-                          activeIndex = 1.1;
-                          setState(() {});
-                        },)   : activeIndex == 1.1
+                            ? RequestsToAddNewProperties(
+                              onTapSeeDetails: () {
+                                activeIndex = 1.1;
+                                setState(() {});
+                              },
+                            )
+                            : activeIndex == 1.1
                             ? RequestsToAddNewPropertiesDetails(
-                          onTapBack: () {
-                            activeIndex = 1;
-                            setState(() {});
-                          },
-                        ):
-                        activeIndex == 2
+                              onTapBack: () {
+                                activeIndex = 1;
+                                setState(() {});
+                              },
+                            )
+                            : activeIndex == 2
                             ? SalesView()
-                            :
-                        activeIndex == 5
+                            : activeIndex == 3
+                            ? PartialRentalView()
+                            : activeIndex == 5
                             ? UserManagementView()
-
                             : Container(color: Colors.red),
                   ),
                 ),

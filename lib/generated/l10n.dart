@@ -869,6 +869,136 @@ class S {
       args: [],
     );
   }
+
+  /// `All Rooms ({count})`
+  String allRooms(Object count) {
+    return Intl.message(
+      'All Rooms ($count)',
+      name: 'allRooms',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Single Rooms Only ({count})`
+  String singleRoomsOnly(Object count) {
+    return Intl.message(
+      'Single Rooms Only ($count)',
+      name: 'singleRoomsOnly',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `With Empty Beds ({count})`
+  String withEmptyBeds(Object count) {
+    return Intl.message(
+      'With Empty Beds ($count)',
+      name: 'withEmptyBeds',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Full ({count})`
+  String fullRooms(Object count) {
+    return Intl.message(
+      'Full ($count)',
+      name: 'fullRooms',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Room Number`
+  String get roomNumber {
+    return Intl.message(
+      'Room Number',
+      name: 'roomNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Room Type`
+  String get roomType {
+    return Intl.message(
+      'Room Type',
+      name: 'roomType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented Beds`
+  String get rentedBeds {
+    return Intl.message(
+      'Rented Beds',
+      name: 'rentedBeds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty Beds`
+  String get emptyBeds {
+    return Intl.message(
+      'Empty Beds',
+      name: 'emptyBeds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shared`
+  String get shared {
+    return Intl.message(
+      'Shared',
+      name: 'shared',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty`
+  String get empty {
+    return Intl.message(
+      'Empty',
+      name: 'empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented`
+  String get rented {
+    return Intl.message(
+      'Rented',
+      name: 'rented',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Partially Rented`
+  String get partialRented {
+    return Intl.message(
+      'Partially Rented',
+      name: 'partialRented',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full`
+  String get full {
+    return Intl.message(
+      'Full',
+      name: 'full',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -86,8 +86,21 @@
   "availableShort": "متاح",
   "pendingShort": "بانتظار الرد",
   "underInspectionShort": "جاري المعاينة",
-  "soldShort": "تم البيع"
+  "soldShort": "تم البيع",
 
+  "allRooms": "كل الغرف ({count})",
+  "singleRoomsOnly": "غرف فردية فقط ({count})",
+  "withEmptyBeds": "بها آسرة فارغة ({count})",
+  "fullRooms": "الممتلئة ({count})",
+  "roomNumber": "رقم الغرفة",
+  "roomType": "نوع الغرفة",
+  "rentedBeds": "الأسرة المؤجرة",
+  "emptyBeds": "الأسرة الفارغة",
+  "shared": "مشتركة",
+  "empty": "فارغة",
+  "rented": "مؤجرة",
+  "partialRented": "مؤجرة جزئيا",
+  "full": "ممتلئة"
 
 
 }

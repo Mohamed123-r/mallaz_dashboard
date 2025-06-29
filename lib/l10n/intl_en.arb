@@ -82,6 +82,18 @@
   "availableShort": "Available",
   "pendingShort": "Pending",
   "underInspectionShort": "Under Inspection",
-  "soldShort": "Sold"
-
+  "soldShort": "Sold",
+  "allRooms": "All Rooms ({count})",
+  "singleRoomsOnly": "Single Rooms Only ({count})",
+  "withEmptyBeds": "With Empty Beds ({count})",
+  "fullRooms": "Full ({count})",
+  "roomNumber": "Room Number",
+  "roomType": "Room Type",
+  "rentedBeds": "Rented Beds",
+  "emptyBeds": "Empty Beds",
+  "shared": "Shared",
+  "empty": "Empty",
+  "rented": "Rented",
+  "partialRented": "Partially Rented",
+  "full": "Full"
 }
