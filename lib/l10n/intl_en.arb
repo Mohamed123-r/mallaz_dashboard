@@ -101,5 +101,9 @@
   "contractExpiringShort": "Contract Expiring",
   "rentedShort": "Rented",
   "contractDuration": "Contract Duration",
-  "endDate": "End Date"
+  "endDate": "End Date",
+  "role": "Role",
+  "lastLogin": "Last Login",
+  "admin": "Admin",
+  "active": "Active"
 }

@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
+        "admin": MessageLookupByLibrary.simpleMessage("مشرف"),
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
         "ahmed": MessageLookupByLibrary.simpleMessage("احمد"),
         "alexandria": MessageLookupByLibrary.simpleMessage("الإسكندرية"),
@@ -99,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "installmentsAvailable":
             MessageLookupByLibrary.simpleMessage("متاح التقسيط علي 3 سنوات"),
         "languages": MessageLookupByLibrary.simpleMessage("اللغات"),
+        "lastLogin": MessageLookupByLibrary.simpleMessage("آخر دخول"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "mainFacilities":
@@ -136,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rentedShort": MessageLookupByLibrary.simpleMessage("مؤجرة"),
         "rentedUnits": m7,
         "requestsCount": MessageLookupByLibrary.simpleMessage("عدد الطلبات"),
+        "role": MessageLookupByLibrary.simpleMessage("الدور"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("رقم الغرفة"),
         "roomType": MessageLookupByLibrary.simpleMessage("نوع الغرفة"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),

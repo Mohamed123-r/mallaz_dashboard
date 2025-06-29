@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add your note here"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),
         "addedDate": MessageLookupByLibrary.simpleMessage("Added Date"),
+        "admin": MessageLookupByLibrary.simpleMessage("Admin"),
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "ahmed": MessageLookupByLibrary.simpleMessage("Ahmed"),
         "alexandria": MessageLookupByLibrary.simpleMessage("Alexandria"),
@@ -103,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "installmentsAvailable": MessageLookupByLibrary.simpleMessage(
             "Installments Available for 3 Years"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
+        "lastLogin": MessageLookupByLibrary.simpleMessage("Last Login"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "mainFacilities":
@@ -142,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rentedShort": MessageLookupByLibrary.simpleMessage("Rented"),
         "rentedUnits": m7,
         "requestsCount": MessageLookupByLibrary.simpleMessage("Requests Count"),
+        "role": MessageLookupByLibrary.simpleMessage("Role"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("Room Number"),
         "roomType": MessageLookupByLibrary.simpleMessage("Room Type"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 Rooms"),

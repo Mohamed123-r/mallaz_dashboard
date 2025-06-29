@@ -99,5 +99,9 @@
   "contractExpiringShort": "قارب انتهاء العقد",
   "rentedShort": "مؤجرة",
   "contractDuration": "مدة العقد",
-  "endDate": "تاريخ الانتهاء"
+  "endDate": "تاريخ الانتهاء",
+  "role": "الدور",
+  "lastLogin": "آخر دخول",
+  "admin": "مشرف",
+  "active": "مفعل"
 }
