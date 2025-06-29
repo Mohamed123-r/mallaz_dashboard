@@ -1,13 +1,13 @@
 {
-  "appName" : "App Name",
+  "appName": "App Name",
   "logIn": "تسجيل دخول",
   "email": "البريد الالكتروني",
   "password": "كلمة المرور",
   "languages": "اللغات",
   "arabic": "عربي",
   "english": "إنجليزي",
-  "searchHint" : "اسم المستخدم ,حالة العقار ....",
-  "adminName" :  "اسم الادمن",
+  "searchHint": "اسم المستخدم ,حالة العقار ....",
+  "adminName": "اسم الادمن",
   "homeScreen": "الشاشة الرئيسية",
   "manageSalesUnits": "إدارة وحدات البيع",
   "managePartialRentUnits": "إدارة وحدات الايجار الجزئي",
@@ -17,7 +17,7 @@
   "sendNotification": "ارسال اشعار",
   "settings": "الاعدادات",
   "logOut": "تسجيل خروج",
- "today" : "اليوم",
+  "today": "اليوم",
   "pending": "طلبات المعاينة (50)",
   "unitNumber": "رقم الوحدة",
   "userName": "اسم المستخدم",
@@ -63,13 +63,9 @@
   "gallery": "المعرض",
   "propertyDetails": "بيانات العقار",
   "mainFacilities": "المرافق الرئيسية",
-
   "newUsersCount": "عدد المستخدمين الجدد",
-
   "mobileNumber": "رقم الموبايل",
-
   "accountStatus": "حالة الحساب",
-
   "active": "مفعل",
   "inactive": "غير مفعل",
   "unblock": "ألغاء الحظر",
@@ -80,14 +76,11 @@
   "underInspection": "جاري المعاينة ({count})",
   "sold": "تم البيع ({count})",
   "unitType": "نوع الوحدة",
-
   "villa": "فيلا",
-
   "availableShort": "متاح",
   "pendingShort": "بانتظار الرد",
   "underInspectionShort": "جاري المعاينة",
   "soldShort": "تم البيع",
-
   "allRooms": "كل الغرف ({count})",
   "singleRoomsOnly": "غرف فردية فقط ({count})",
   "withEmptyBeds": "بها آسرة فارغة ({count})",
@@ -100,7 +93,11 @@
   "empty": "فارغة",
   "rented": "مؤجرة",
   "partialRented": "مؤجرة جزئيا",
-  "full": "ممتلئة"
-
-
+  "full": "ممتلئة",
+  "contractExpiring": "قارب انتهاء العقد ({count})",
+  "rentedUnits": "مؤجرة ({count})",
+  "contractExpiringShort": "قارب انتهاء العقد",
+  "rentedShort": "مؤجرة",
+  "contractDuration": "مدة العقد",
+  "endDate": "تاريخ الانتهاء"
 }

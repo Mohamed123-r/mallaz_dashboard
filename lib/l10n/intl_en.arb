@@ -95,5 +95,11 @@
   "empty": "Empty",
   "rented": "Rented",
   "partialRented": "Partially Rented",
-  "full": "Full"
+  "full": "Full",
+  "contractExpiring": "Contract Expiring ({count})",
+  "rentedUnits": "Rented ({count})",
+  "contractExpiringShort": "Contract Expiring",
+  "rentedShort": "Rented",
+  "contractDuration": "Contract Duration",
+  "endDate": "End Date"
 }

@@ -26,21 +26,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "Available (${count})";
 
-  static String m3(amount) => "Down Payment ${amount} EGP";
+  static String m3(count) => "Contract Expiring (${count})";
 
-  static String m4(count) => "Full (${count})";
+  static String m4(amount) => "Down Payment ${amount} EGP";
 
-  static String m5(count) => "Pending (${count})";
+  static String m5(count) => "Full (${count})";
 
-  static String m6(count) => "Single Rooms Only (${count})";
+  static String m6(count) => "Pending (${count})";
 
-  static String m7(count) => "Sold (${count})";
+  static String m7(count) => "Rented (${count})";
 
-  static String m8(count) => "Under Inspection (${count})";
+  static String m8(count) => "Single Rooms Only (${count})";
 
-  static String m9(price) => "Unit Price: ${price}";
+  static String m9(count) => "Sold (${count})";
 
-  static String m10(count) => "With Empty Beds (${count})";
+  static String m10(count) => "Under Inspection (${count})";
+
+  static String m11(price) => "Unit Price: ${price}";
+
+  static String m12(count) => "With Empty Beds (${count})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -67,14 +71,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
         "contactData": MessageLookupByLibrary.simpleMessage("Contact Data"),
+        "contractDuration":
+            MessageLookupByLibrary.simpleMessage("Contract Duration"),
+        "contractExpiring": m3,
+        "contractExpiringShort":
+            MessageLookupByLibrary.simpleMessage("Contract Expiring"),
         "detailedAddress":
             MessageLookupByLibrary.simpleMessage("Detailed Address"),
         "districtTagamoa":
             MessageLookupByLibrary.simpleMessage("Fifth Settlement"),
-        "downPayment": m3,
+        "downPayment": m4,
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "empty": MessageLookupByLibrary.simpleMessage("Empty"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("Empty Beds"),
+        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("First Floor"),
         "forSale": MessageLookupByLibrary.simpleMessage("For Sale"),
@@ -82,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "full": MessageLookupByLibrary.simpleMessage("Full"),
         "fullAddress": MessageLookupByLibrary.simpleMessage(
             "Cairo - Fifth Settlement - First Floor - First Room"),
-        "fullRooms": m4,
+        "fullRooms": m5,
         "fullyFinished": MessageLookupByLibrary.simpleMessage("Fully Finished"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "governorate": MessageLookupByLibrary.simpleMessage("Governorate"),
@@ -114,7 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Partially Rented"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending Requests : "),
-        "pending1": m5,
+        "pending1": m6,
         "pendingShort": MessageLookupByLibrary.simpleMessage("Pending"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("Private Garage"),
@@ -129,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rent": MessageLookupByLibrary.simpleMessage("Rent"),
         "rented": MessageLookupByLibrary.simpleMessage("Rented"),
         "rentedBeds": MessageLookupByLibrary.simpleMessage("Rented Beds"),
+        "rentedShort": MessageLookupByLibrary.simpleMessage("Rented"),
+        "rentedUnits": m7,
         "requestsCount": MessageLookupByLibrary.simpleMessage("Requests Count"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("Room Number"),
         "roomType": MessageLookupByLibrary.simpleMessage("Room Type"),
@@ -142,21 +154,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shared": MessageLookupByLibrary.simpleMessage("Shared"),
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
-        "singleRoomsOnly": m6,
-        "sold": m7,
+        "singleRoomsOnly": m8,
+        "sold": m9,
         "soldShort": MessageLookupByLibrary.simpleMessage("Sold"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "unblock": MessageLookupByLibrary.simpleMessage("Unblock"),
-        "underInspection": m8,
+        "underInspection": m10,
         "underInspectionShort":
             MessageLookupByLibrary.simpleMessage("Under Inspection"),
         "unitData": MessageLookupByLibrary.simpleMessage("Unit Data"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("Unit Number"),
-        "unitPrice": m9,
+        "unitPrice": m11,
         "unitType": MessageLookupByLibrary.simpleMessage("Unit Type"),
         "userName": MessageLookupByLibrary.simpleMessage("User Name"),
         "villa": MessageLookupByLibrary.simpleMessage("Villa"),
-        "withEmptyBeds": m10
+        "withEmptyBeds": m12
       };
 }

@@ -12,6 +12,7 @@ import '../add_new_properties/presentation/view/requests_to_add_new_properties_d
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
 import '../unit_management/presentation/view/partial_rental_view.dart';
+import '../unit_management/presentation/view/rent_to_lease_view.dart';
 import '../unit_management/presentation/view/sales_view.dart';
 
 class MainView extends StatefulWidget {
@@ -129,6 +130,8 @@ class _MainViewState extends State<MainView> {
                             ? SalesView()
                             : activeIndex == 3
                             ? PartialRentalView()
+                            : activeIndex == 4
+                            ? RentToLeaseView()
                             : activeIndex == 5
                             ? UserManagementView()
                             : Container(color: Colors.red),

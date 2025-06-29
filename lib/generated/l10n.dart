@@ -999,6 +999,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Contract Expiring ({count})`
+  String contractExpiring(Object count) {
+    return Intl.message(
+      'Contract Expiring ($count)',
+      name: 'contractExpiring',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Rented ({count})`
+  String rentedUnits(Object count) {
+    return Intl.message(
+      'Rented ($count)',
+      name: 'rentedUnits',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Contract Expiring`
+  String get contractExpiringShort {
+    return Intl.message(
+      'Contract Expiring',
+      name: 'contractExpiringShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented`
+  String get rentedShort {
+    return Intl.message(
+      'Rented',
+      name: 'rentedShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contract Duration`
+  String get contractDuration {
+    return Intl.message(
+      'Contract Duration',
+      name: 'contractDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message(
+      'End Date',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
