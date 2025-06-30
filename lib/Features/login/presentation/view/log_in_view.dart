@@ -24,18 +24,8 @@ class LogInView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  Assets.imagesLogo,
-                  height: 160,
-                  width: 125,
-                  fit: BoxFit.cover,
-                ),
-                SizedBox(height: 24),
-                Text(
-                  S.of(context).appName,
-                  style: AppTextStyles.style40pxW700(context),
-                ),
-                SizedBox(height: 4),
+                Image.asset(Assets.imagesLogo, width: 360, fit: BoxFit.cover),
+
                 Text(
                   S.of(context).logIn,
                   style: AppTextStyles.subtitleTitle20pxRegular(context),

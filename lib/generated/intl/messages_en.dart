@@ -65,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "allUnits": m1,
         "apartmentOrRoom":
             MessageLookupByLibrary.simpleMessage("Apartment/Room"),
-        "appName": MessageLookupByLibrary.simpleMessage("App Name"),
+        "appName": MessageLookupByLibrary.simpleMessage("ملاذ"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "archive": MessageLookupByLibrary.simpleMessage("Archive"),
         "available": m2,

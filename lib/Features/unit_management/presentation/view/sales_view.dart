@@ -81,7 +81,7 @@ class _SalesViewState extends State<SalesView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 8.0,
-                        horizontal: 16,
+                        horizontal: 12,
                       ),
                       child: DropdownButton(
                         icon: const Icon(Icons.arrow_drop_down),
@@ -90,19 +90,21 @@ class _SalesViewState extends State<SalesView> {
                         items: [
                           DropdownMenuItem(
                             value: S.of(context).availableShort,
-                            child: Text(S.of(context).availableShort),
+                            child: Text(S.of(context).availableShort,
+                            style: AppTextStyles.text14pxRegular(context),
+                            ),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).pendingShort,
-                            child: Text(S.of(context).pendingShort),
+                            child: Text(S.of(context).pendingShort ,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).underInspectionShort,
-                            child: Text(S.of(context).underInspectionShort),
+                            child: Text(S.of(context).underInspectionShort,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).soldShort,
-                            child: Text(S.of(context).soldShort),
+                            child: Text(S.of(context).soldShort,style: AppTextStyles.text14pxRegular(context),),
                           ),
                         ],
                         onChanged: (value) {},
