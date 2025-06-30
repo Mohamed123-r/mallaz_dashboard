@@ -7,7 +7,7 @@ import 'core/utils/app_colors.dart';
 import 'generated/l10n.dart';
 import 'core/services/theme_cubit.dart';
 import 'core/services/locale_cubit.dart';
-
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 Future<void> main() async {
   // await CacheHelper().init();
   // Bloc.observer = CustomBlocObserver();
@@ -18,6 +18,11 @@ Future<void> main() async {
   //     statusBarIconBrightness: Brightness.dark,
   //   ),
   // );
+  doWhenWindowReady(() {
+    appWindow.minSize = Size(1200, 800);
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
   runApp(const MyApp());
 }
 

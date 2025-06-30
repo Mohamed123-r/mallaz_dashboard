@@ -11,6 +11,7 @@ import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
+import '../chat/presentation/view/chat_view.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
 import '../unit_management/presentation/view/partial_rental_view.dart';
@@ -136,6 +137,8 @@ class _MainViewState extends State<MainView> {
                             ? RentToLeaseView()
                             : activeIndex == 5
                             ? UserManagementView()
+                            : activeIndex == 6
+                            ? ChatView()
                             : activeIndex == 7
                             ? NotificationView()
                             : activeIndex == 8
