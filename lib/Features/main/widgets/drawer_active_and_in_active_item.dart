@@ -21,6 +21,8 @@ class InActiveDrawerItem extends StatelessWidget {
 
       leading: SvgPicture.asset(
         drawerItemModel.image,
+        width: 40,
+        height: 40,
         color:
             isDark
                 ? AppColors.darkModeText
@@ -78,6 +80,8 @@ class ActiveDrawerItem extends StatelessWidget {
 
         minLeadingWidth: 30,
         leading: SvgPicture.asset(drawerItemModel.image,
+          width: 40,
+          height: 40,
           color:
           isDark
               ? AppColors.darkModeBackground
