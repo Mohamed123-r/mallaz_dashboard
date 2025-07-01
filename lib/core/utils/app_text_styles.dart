@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../services/locale_cubit.dart';
 import '../services/theme_cubit.dart';
 import 'app_colors.dart';
 
 abstract class AppTextStyles {
+
   static TextStyle style40pxW700(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 40),
+      fontSize: getResponsiveScaleFactor(context, fontSize:currentLanguage == "en" ? 34: 40),
       fontWeight: FontWeight.w700,
 
       color:
@@ -18,8 +21,9 @@ abstract class AppTextStyles {
   }
 
   static TextStyle style32pxW400(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 32),
+      fontSize: getResponsiveScaleFactor(context, fontSize: currentLanguage == "en" ? 28:32),
       fontWeight: FontWeight.w500,
 
       color:
@@ -30,8 +34,9 @@ abstract class AppTextStyles {
   }
 
   static TextStyle subtitleTitle20pxRegular(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 20),
+      fontSize: getResponsiveScaleFactor(context, fontSize:currentLanguage == "en" ? 18: 20),
       fontWeight: FontWeight.w500,
 
       color:
@@ -42,8 +47,9 @@ abstract class AppTextStyles {
   }
 
   static TextStyle buttonLarge20pxRegular(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 20),
+      fontSize: getResponsiveScaleFactor(context, fontSize:currentLanguage == "en" ? 16: 20),
       fontWeight: FontWeight.w500,
       color:
           context.watch<ThemeCubit>().state == ThemeMode.dark
@@ -53,8 +59,10 @@ abstract class AppTextStyles {
   }
 
   static TextStyle subtitle16pxRegular(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
+
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 16),
+      fontSize: getResponsiveScaleFactor(context, fontSize:currentLanguage == "en" ? 14: 16),
       fontWeight: FontWeight.w500,
       color:
           context.watch<ThemeCubit>().state == ThemeMode.dark
@@ -64,8 +72,9 @@ abstract class AppTextStyles {
   }
 
   static TextStyle text14pxRegular(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 14),
+      fontSize: getResponsiveScaleFactor(context, fontSize:currentLanguage == "en" ? 12: 14),
       fontWeight: FontWeight.w500,
       color:
           context.watch<ThemeCubit>().state == ThemeMode.dark
@@ -75,8 +84,9 @@ abstract class AppTextStyles {
   }
 
   static TextStyle text12pxLight(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 12),
+      fontSize: getResponsiveScaleFactor(context, fontSize: currentLanguage == "en" ? 10:12),
       fontWeight: FontWeight.w400,
       color:
           context.watch<ThemeCubit>().state == ThemeMode.dark
@@ -86,8 +96,9 @@ abstract class AppTextStyles {
   }
 
   static TextStyle text10pxRegular(BuildContext context) {
+    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 10),
+      fontSize: getResponsiveScaleFactor(context, fontSize: currentLanguage == "en" ? 8:10),
       fontWeight: FontWeight.w500,
       color:
           context.watch<ThemeCubit>().state == ThemeMode.dark

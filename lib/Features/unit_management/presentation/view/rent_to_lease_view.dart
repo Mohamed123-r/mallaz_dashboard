@@ -121,19 +121,19 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
                         items: [
                           DropdownMenuItem(
                             value: S.of(context).availableShort,
-                            child: Text(S.of(context).availableShort),
+                            child: Text(S.of(context).availableShort,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).contractExpiringShort ,
-                            child: Text(S.of(context).contractExpiringShort),
+                            child: Text(S.of(context).contractExpiringShort,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).underInspectionShort,
-                            child: Text(S.of(context).underInspectionShort),
+                            child: Text(S.of(context).underInspectionShort,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).rentedShort ,
-                            child: Text(S.of(context).rentedShort ),
+                            child: Text(S.of(context).rentedShort ,style: AppTextStyles.text14pxRegular(context),),
                           ),
                         ],
                         onChanged: (value) {},

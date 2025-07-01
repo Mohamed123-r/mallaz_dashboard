@@ -12,8 +12,6 @@ import '../../../generated/l10n.dart';
 class CustomAppbar extends StatefulWidget {
   const CustomAppbar({super.key});
 
-
-
   @override
   State<CustomAppbar> createState() => _CustomAppbarState();
 }
@@ -41,11 +39,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 SvgPicture.asset(Assets.imagesMenuIcon),
                 const SizedBox(width: 32),
                 Image.asset(Assets.imagesLogo, height: 54),
-                const SizedBox(width: 16),
-                Text(
-                  S.of(context).appName,
-                  style: AppTextStyles.subtitle16pxRegular(context),
-                ),
+
                 const Spacer(),
                 SizedBox(
                   width: 380,
@@ -56,7 +50,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
 
                         fit: BoxFit.scaleDown,
                       ),
-                      hintText: S.of(context).searchHint ,
+                      hintText: S.of(context).searchHint,
                       hintStyle: AppTextStyles.subtitle16pxRegular(
                         context,
                       ).copyWith(color: AppColors.lightModeGrayText),
@@ -89,7 +83,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 CircleAvatar(radius: 28),
                 const SizedBox(width: 12),
                 Text(
-                  S.of(context).adminName ,
+                  S.of(context).adminName,
                   style: AppTextStyles.text14pxRegular(context),
                 ),
                 const SizedBox(width: 24),
@@ -177,16 +171,18 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                                 color: Colors.transparent,
                                                 child: Center(
                                                   child: Padding(
-                                                    padding: const EdgeInsets.all(
-                                                      16.0,
-                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                          16.0,
+                                                        ),
                                                     child: Text(
                                                       S.of(context).arabic,
                                                       style: AppTextStyles.subtitle16pxRegular(
                                                         context,
                                                       ).copyWith(
                                                         color:
-                                                            currentLanguage == 'ar'
+                                                            currentLanguage ==
+                                                                    'ar'
                                                                 ? AppColors
                                                                     .lightModeAccent
                                                                 : null,
@@ -208,16 +204,18 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                                 color: Colors.transparent,
                                                 child: Center(
                                                   child: Padding(
-                                                    padding: const EdgeInsets.all(
-                                                      16.0,
-                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                          16.0,
+                                                        ),
                                                     child: Text(
                                                       S.of(context).english,
                                                       style: AppTextStyles.subtitle16pxRegular(
                                                         context,
                                                       ).copyWith(
                                                         color:
-                                                            currentLanguage == 'en'
+                                                            currentLanguage ==
+                                                                    'en'
                                                                 ? AppColors
                                                                     .lightModeAccent
                                                                 : null,
@@ -276,9 +274,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
               ],
             ),
           ),
-          const Divider(
-            height: 0,
-          ),
+          const Divider(height: 0),
         ],
       ),
     );

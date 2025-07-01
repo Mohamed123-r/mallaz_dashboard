@@ -120,19 +120,19 @@ class _PartialRentalViewState extends State<PartialRentalView> {
                         items: [
                           DropdownMenuItem(
                             value: S.of(context).empty,
-                            child: Text(S.of(context).empty),
+                            child: Text(S.of(context).empty,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).rented,
-                            child: Text(S.of(context).rented),
+                            child: Text(S.of(context).rented,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).partialRented,
-                            child: Text(S.of(context).partialRented),
+                            child: Text(S.of(context).partialRented,style: AppTextStyles.text14pxRegular(context),),
                           ),
                           DropdownMenuItem(
                             value: S.of(context).full,
-                            child: Text(S.of(context).full),
+                            child: Text(S.of(context).full,style: AppTextStyles.text14pxRegular(context),),
                           ),
                         ],
                         onChanged: (value) {},

@@ -9,20 +9,12 @@ import 'core/services/theme_cubit.dart';
 import 'core/services/locale_cubit.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 Future<void> main() async {
-  // await CacheHelper().init();
-  // Bloc.observer = CustomBlocObserver();
-  // setupGetIt();
-  // SystemChrome.setSystemUIOverlayStyle(
-  //   const SystemUiOverlayStyle(
-  //     statusBarColor: Colors.transparent,
-  //     statusBarIconBrightness: Brightness.dark,
-  //   ),
-  // );
-  doWhenWindowReady(() {
-    appWindow.minSize = Size(1200, 800);
-    appWindow.alignment = Alignment.center;
-    appWindow.show();
-  });
+  // WidgetsFlutterBinding.ensureInitialized();
+  // doWhenWindowReady(() {
+  //   appWindow.minSize = Size(1300, 900);
+  //   appWindow.alignment = Alignment.center;
+  //   appWindow.show();
+  // });
   runApp(const MyApp());
 }
 

@@ -27,7 +27,7 @@ class Assets {
   static const String imagesHugeiconsView = 'assets/images/hugeicons_view.svg';
   static const String imagesLoginImage = 'assets/images/login_image.png';
   static const String imagesLogo = 'assets/images/logo.png';
-  static const String imagesMask = 'assets/images/Mask.svg';
+  static const String imagesMask = 'assets/images/mask.svg';
   static const String imagesMaterialSymbolsLight = 'assets/images/material-symbols-light.svg';
   static const String imagesMenuIcon = 'assets/images/menuIcon.svg';
   static const String imagesNotificationIcon = 'assets/images/NotificationIcon.svg';
