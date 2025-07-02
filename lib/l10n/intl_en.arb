@@ -125,7 +125,7 @@
   "message": "Message",
   "sendDate": "Send Date",
   "group": "Group",
-
+  "addNewAdmin": "Add New Admin",
   "sent": "Sent",
   "targetGroup": "Target Group",
   "noUsersFound": "No users found"

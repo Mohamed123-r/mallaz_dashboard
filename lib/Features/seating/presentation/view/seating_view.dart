@@ -1,15 +1,120 @@
-import 'package:book_apartment_dashboard/Features/unit_management/presentation/view/sales_view.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_data_cell.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
+import '../../../../core/widgets/custom_header_call.dart';
+import '../../../../core/widgets/custom_loading.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
-import '../../../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
+import '../cubit/admin_cubit.dart';
+import '../cubit/admin_state.dart';
 
+//
+// // === MODEL ===
+// class AdminModel {
+//   final String id;
+//   final String userName;
+//   final String email;
+//   final String phoneNumber;
+//   final bool isBlocked;
+//
+//   AdminModel({
+//     required this.id,
+//     required this.userName,
+//     required this.email,
+//     required this.phoneNumber,
+//     required this.isBlocked,
+//   });
+//
+//   factory AdminModel.fromJson(Map<String, dynamic> json) {
+//     return AdminModel(
+//       id: json['id'] ?? '',
+//       userName: json['userName'] ?? '',
+//       email: json['email'] ?? '',
+//       phoneNumber: json['phoneNumber'] ?? '',
+//       isBlocked: json['isBlocked'] ?? false,
+//     );
+//   }
+// }
+//
+// class GetAllAdminsResponse {
+//   final bool success;
+//   final String message;
+//   final List<AdminModel> data;
+//
+//   GetAllAdminsResponse({
+//     required this.success,
+//     required this.message,
+//     required this.data,
+//   });
+//
+//   factory GetAllAdminsResponse.fromJson(Map<String, dynamic> json) {
+//     return GetAllAdminsResponse(
+//       success: json['success'] ?? false,
+//       message: json['message'] ?? '',
+//       data: (json['data'] as List<dynamic>? ?? [])
+//           .map((e) => AdminModel.fromJson(e))
+//           .toList(),
+//     );
+//   }
+// }
+//
+// // === REPO ===
+// abstract class AdminRepo {
+//   Future<GetAllAdminsResponse> getAllAdmins();
+// }
+//
+// class AdminRepoImpl implements AdminRepo {
+//   final Dio dio;
+//   AdminRepoImpl(this.dio);
+//
+//   @override
+//   Future<GetAllAdminsResponse> getAllAdmins() async {
+//     final response = await dio.get('http://realestateunits.runasp.net/api/User/GetAllAdmins');
+//     return GetAllAdminsResponse.fromJson(response.data);
+//   }
+// }
+//
+// // === STATE ===
+// abstract class AdminState {}
+//
+// class AdminInitial extends AdminState {}
+//
+// class AdminLoading extends AdminState {}
+//
+// class AdminSuccess extends AdminState {
+//   final List<AdminModel> admins;
+//   AdminSuccess(this.admins);
+// }
+//
+// class AdminFailure extends AdminState {
+//   final String error;
+//   AdminFailure(this.error);
+// }
+//
+// // === CUBIT ===
+// class AdminCubit extends Cubit<AdminState> {
+//   final AdminRepo repo;
+//   AdminCubit(this.repo) : super(AdminInitial());
+//
+//   Future<void> fetchAllAdmins() async {
+//     emit(AdminLoading());
+//     try {
+//       final res = await repo.getAllAdmins();
+//       emit(AdminSuccess(res.data));
+//     } catch (e) {
+//       emit(AdminFailure(e.toString()));
+//     }
+//   }
+// }
+
+// === MAIN VIEW ===
 class SeatingView extends StatefulWidget {
   const SeatingView({super.key});
 
@@ -19,9 +124,19 @@ class SeatingView extends StatefulWidget {
 
 class _SeatingViewState extends State<SeatingView> {
   int currentPage = 1;
-  int totalPages = 5;
-  final List<bool> isActiveList = [false, false, true, true, false];
-  int selectedTabIndex = 0;
+  final int rowsPerPage = 7;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<AdminCubit>().fetchAllAdmins();
+  }
+
+  void _onPageChanged(int page) {
+    setState(() => currentPage = page);
+    // paging supported in backend? If yes: fetch with page param
+    context.read<AdminCubit>().fetchAllAdmins(); // update if needed with page
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +173,7 @@ class _SeatingViewState extends State<SeatingView> {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      S.of(context).logIn,
+                      S.of(context).addNewAdmin,
                       style: AppTextStyles.buttonLarge20pxRegular(
                         context,
                       ).copyWith(
@@ -74,73 +189,121 @@ class _SeatingViewState extends State<SeatingView> {
             ],
           ),
           const SizedBox(height: 32),
-          Table(
-            border: TableBorder.all(
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.graysGray2,
-            ),
-            columnWidths: const {
-              0: FlexColumnWidth(1.5),
-              1: FlexColumnWidth(1.8),
-              2: FlexColumnWidth(1.5),
-              3: FlexColumnWidth(1.5),
-              4: FlexColumnWidth(1.5),
-              5: FlexColumnWidth(1.8),
-            },
-            children: [
-              TableRow(
-                decoration: const BoxDecoration(color: Colors.transparent),
-                children: [
-                  HeaderCell(text: S.of(context).adminName, context: context),
-                  HeaderCell(text: S.of(context).email, context: context),
-                  HeaderCell(text: S.of(context).role, context: context),
-                  HeaderCell(text: S.of(context).lastLogin, context: context),
-                  HeaderCell(text: S.of(context).status, context: context),
-                  HeaderCell(text: S.of(context).actions, context: context),
-                ],
-              ),
-              ...List.generate(5, (index) {
-                return TableRow(
+          BlocBuilder<AdminCubit, AdminState>(
+            builder: (context, state) {
+              if (state is AdminLoading) {
+                return Expanded(child: const CustomLoading());
+              } else if (state is AdminFailure) {
+                return Center(child: Text(state.error));
+              } else if (state is AdminSuccess) {
+                final admins = state.admins;
+                final int totalCount = admins.length;
+                final int pageCount = ((totalCount / rowsPerPage).ceil()).clamp(
+                  1,
+                  1000,
+                );
+
+                // Pagination: cut admins for current page
+                final start = (currentPage - 1) * rowsPerPage;
+                final end = (start + rowsPerPage).clamp(0, totalCount);
+                final pagedAdmins = admins.sublist(start, end);
+
+                return Column(
                   children: [
-                    DataCell(text: S.of(context).adminName, context: context),
-                    DataCell(text: "admin@dashboard.com", context: context),
-                    DataCell(text: S.of(context).admin, context: context),
-                    DataCell(text: "17/6/2025", context: context),
-                    DataCell(text: S.of(context).active, context: context),
-                    ActionCell(
-                      index: index,
-                      isView: true,
-                      onDelete: () {},
-                      onView: () {},
-                      iDark: isDark,
+                    Table(
+                      border: TableBorder.all(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.graysGray2,
+                      ),
+                      columnWidths: const {
+                        0: FlexColumnWidth(1.5),
+                        1: FlexColumnWidth(1.8),
+                        2: FlexColumnWidth(1.5),
+                        3: FlexColumnWidth(1.5),
+                        4: FlexColumnWidth(1.5),
+                        5: FlexColumnWidth(1.8),
+                      },
+                      children: [
+                        TableRow(
+                          decoration: const BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          children: [
+                            CustomHeaderCall(
+                              text: S.of(context).adminName,
+                              context: context,
+                            ),
+                            CustomHeaderCall(
+                              text: S.of(context).email,
+                              context: context,
+                            ),
+                            CustomHeaderCall(
+                              text: S.of(context).role,
+                              context: context,
+                            ),
+                            CustomHeaderCall(
+                              text: S.of(context).phoneNumber,
+                              context: context,
+                            ),
+                            CustomHeaderCall(
+                              text: S.of(context).status,
+                              context: context,
+                            ),
+                            CustomHeaderCall(
+                              text: S.of(context).actions,
+                              context: context,
+                            ),
+                          ],
+                        ),
+                        ...pagedAdmins.map((admin) {
+                          return TableRow(
+                            children: [
+                              CustomDataCell(
+                                text: admin.userName,
+                                context: context,
+                              ),
+                              CustomDataCell(
+                                text: admin.email,
+                                context: context,
+                              ),
+                              CustomDataCell(
+                                text: S.of(context).admin,
+                                context: context,
+                              ),
+                              CustomDataCell(
+                                text: admin.phoneNumber,
+                                context: context,
+                              ),
+                              CustomDataCell(
+                                text:
+                                    admin.isBlocked
+                                        ? S.of(context).inactive
+                                        : S.of(context).active,
+                                context: context,
+                              ),
+                              ActionCell(
+                                index: 0,
+                                isView: true,
+                                onDelete: () {},
+                                onView: () {},
+                                iDark: isDark,
+                              ),
+                            ],
+                          );
+                        }),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    CustomPagination(
+                      currentPage: currentPage,
+                      onPageChanged: (val) => _onPageChanged(val),
+                      pageCount: pageCount,
                     ),
                   ],
                 );
-              }),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed:
-                    currentPage > 1
-                        ? () => setState(() => currentPage--)
-                        : null,
-              ),
-              const SizedBox(width: 8),
-              Text('$currentPage ... $totalPages'),
-              const SizedBox(width: 8),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward_ios),
-                onPressed:
-                    currentPage < totalPages
-                        ? () => setState(() => currentPage++)
-                        : null,
-              ),
-            ],
+              }
+              return SizedBox.shrink();
+            },
           ),
         ],
       ),
@@ -148,22 +311,6 @@ class _SeatingViewState extends State<SeatingView> {
   }
 }
 
-class DataCell extends StatelessWidget {
-  const DataCell({super.key, required this.text, required this.context});
-
-  final String text;
-  final BuildContext context;
-
-  @override
-  Widget build(BuildContext context) => TableCell(
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        child: Text(text, style: AppTextStyles.text14pxRegular(context)),
-      ),
-    ),
-  );
-}
 class ActionCell extends StatelessWidget {
   final int index;
   final bool isView;
@@ -189,22 +336,27 @@ class ActionCell extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: onView,
               borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 Assets.imagesHugeiconsView,
-                color: iDark
-                    ? AppColors.darkModeAccent
-                    : AppColors.lightModeAccent,
+                color:
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
               ),
             ),
-            SvgPicture.asset(
-              Assets.imagesBasilEditOutline,
-              color: iDark
-                  ? AppColors.darkModeAccent
-                  : AppColors.lightModeAccent,
+            InkWell(
+              onTap: onDelete,
+              borderRadius: BorderRadius.circular(8),
+              child: SvgPicture.asset(
+                Assets.imagesBasilEditOutline,
+                color:
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
+              ),
             ),
-
           ],
         ),
       ),
