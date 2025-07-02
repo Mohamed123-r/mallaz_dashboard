@@ -1,13 +1,14 @@
-// import 'package:dio/dio.dart';
-// import 'package:get_it/get_it.dart';
-// import '../api/dio_consumer.dart';
-//
-// final getIt = GetIt.instance;
-//
-// void setupGetIt() {
-//   getIt.registerSingleton<DioConsumer>(DioConsumer(dio: Dio()));
-//   // getIt.registerSingleton<LoginRepo>(
-//   //   LoginRepoImpl(dioConsumer: getIt<DioConsumer>()),
-//   // );
-//
-// }
+import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo.dart';
+import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo_impl.dart';
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import '../api/dio_consumer.dart';
+
+final getIt = GetIt.instance;
+
+void setupGetIt() {
+  getIt.registerSingleton<DioConsumer>(DioConsumer(dio: Dio()));
+  getIt.registerSingleton<UserRepo>(
+    UserRepoImpl(dioConsumer: getIt<DioConsumer>()),
+  );
+}

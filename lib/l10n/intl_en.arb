@@ -127,5 +127,6 @@
   "group": "Group",
 
   "sent": "Sent",
-  "targetGroup": "Target Group"
+  "targetGroup": "Target Group",
+  "noUsersFound": "No users found"
 }

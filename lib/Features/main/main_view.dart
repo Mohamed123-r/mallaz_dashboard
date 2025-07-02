@@ -4,9 +4,13 @@ import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart'
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item_model.dart';
 import 'package:book_apartment_dashboard/Features/notification/presentation/view/widgets/notification_view.dart';
 import 'package:book_apartment_dashboard/Features/seating/presentation/view/seating_view.dart';
+import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo.dart';
+import 'package:book_apartment_dashboard/Features/user_management/presentation/cubit/user_cubit.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/helper_functions/get_it.dart';
 import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
@@ -136,7 +140,11 @@ class _MainViewState extends State<MainView> {
                             : activeIndex == 4
                             ? RentToLeaseView()
                             : activeIndex == 5
-                            ? UserManagementView()
+                            ? BlocProvider(
+                              create:
+                                  (context) => UserCubit(getIt.get<UserRepo>()),
+                              child: UserManagementView(),
+                            )
                             : activeIndex == 6
                             ? ChatView()
                             : activeIndex == 7

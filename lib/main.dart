@@ -1,13 +1,18 @@
+import 'package:book_apartment_dashboard/core/helper_functions/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'Features/login/presentation/view/log_in_view.dart';
+import 'core/database/cache/cache_helper.dart';
 import 'core/helper_functions/on_generate_route.dart';
+import 'core/services/bloc_opesever.dart';
 import 'core/utils/app_colors.dart';
 import 'generated/l10n.dart';
 import 'core/services/theme_cubit.dart';
 import 'core/services/locale_cubit.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+
 Future<void> main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // doWhenWindowReady(() {
@@ -15,6 +20,11 @@ Future<void> main() async {
   //   appWindow.alignment = Alignment.center;
   //   appWindow.show();
   // });
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper().init();
+  Bloc.observer = CustomBlocObserver();
+  setupGetIt();
+
   runApp(const MyApp());
 }
 

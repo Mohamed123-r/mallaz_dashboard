@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نموذج ارسال اشعار جديد"),
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("عدد المستخدمين الجدد"),
+        "noUsersFound":
+            MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
         "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("عنوان الاشعار"),
