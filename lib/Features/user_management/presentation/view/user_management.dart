@@ -1,5 +1,7 @@
+import 'package:book_apartment_dashboard/Features/user_management/presentation/view/widgets/build_count_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/widgets/custom_data_cell.dart';
@@ -21,6 +23,10 @@ class _UserManagementViewState extends State<UserManagementView> {
   int currentPage = 1;
   final int rowsPerPage = 7;
 
+  // لحفظ آخر داتا ناجحة (لضمان الجدول لا يختفي أثناء عمليات البلوك/أنلوك)
+  List<dynamic> _lastUsers = [];
+  num _lastTotalCount = 0;
+
   @override
   void initState() {
     super.initState();
@@ -38,22 +44,52 @@ class _UserManagementViewState extends State<UserManagementView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(top: 24, start: 16, end: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          BuildCountHeader(),
-          const SizedBox(height: 16),
-          Expanded(child: _buildTableWithPagination()),
-        ],
+    return BlocListener<UserCubit, UserState>(
+      listener: (context, state) {
+        if (state is UserBlockOperationSuccess) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+          _fetchPage(currentPage); // تحديث الداتا بعد العملية
+        }
+        if (state is UserBlockOperationError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error)));
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsetsDirectional.only(top: 24, start: 16, end: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BuildCountHeader(),
+            const SizedBox(height: 16),
+            Expanded(child: buildTableWithPagination()),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildTableWithPagination() {
+  Widget buildTableWithPagination() {
     return BlocBuilder<UserCubit, UserState>(
+      buildWhen:
+          (previous, current) =>
+              current is UserSuccess ||
+              current is UserLoading ||
+              current is UserFailure ||
+              current is UserBlockOperationInProgress,
       builder: (context, state) {
+        String? blockingUserId;
+        bool? isBlocking;
+
+        if (state is UserBlockOperationInProgress) {
+          blockingUserId = state.userId;
+          isBlocking = state.isLock;
+          state = context.read<UserCubit>().state; // نحتفظ بآخر حالة داتا ناجحة
+        }
+
         if (state is UserLoading) return CustomLoading();
         if (state is UserFailure) {
           return Center(
@@ -65,15 +101,17 @@ class _UserManagementViewState extends State<UserManagementView> {
             ),
           );
         }
-        if (state is! UserSuccess) return const SizedBox.shrink();
-
-        final users = state.users.data ?? [];
-        final totalCount = state.users.totalCount ?? 0;
+        if (state is UserSuccess) {
+          _lastUsers = state.users.data ?? [];
+          _lastTotalCount = state.users.totalCount ?? 0;
+        }
+        final users = _lastUsers;
+        final totalCount = _lastTotalCount;
         final int pageCount = (totalCount / rowsPerPage).ceil();
 
         return Column(
           children: [
-            Expanded(child: _buildUserTable(users)),
+            Expanded(child: _buildUserTable(users, blockingUserId)),
             const SizedBox(height: 12),
             CustomPagination(
               currentPage: currentPage,
@@ -86,7 +124,7 @@ class _UserManagementViewState extends State<UserManagementView> {
     );
   }
 
-  Widget _buildUserTable(List users) {
+  Widget _buildUserTable(List users, String? blockingUserId) {
     return SingleChildScrollView(
       child: Table(
         border: TableBorder.all(
@@ -102,7 +140,7 @@ class _UserManagementViewState extends State<UserManagementView> {
         },
         children: [
           _buildHeaderRow(),
-          ...users.map<TableRow>((user) => _buildUserRow(user)),
+          ...users.map<TableRow>((user) => _buildUserRow(user, blockingUserId)),
         ],
       ),
     );
@@ -121,8 +159,11 @@ class _UserManagementViewState extends State<UserManagementView> {
     );
   }
 
-  TableRow _buildUserRow(dynamic user) {
+  TableRow _buildUserRow(dynamic user, String? blockingUserId) {
     final isActive = !(user.isBlocked ?? false);
+    final userId = user.id ?? '';
+    final showLoading = blockingUserId == userId;
+
     return TableRow(
       children: [
         CustomDataCell(text: user.userName ?? '', context: context),
@@ -139,53 +180,41 @@ class _UserManagementViewState extends State<UserManagementView> {
               child: MaterialButton(
                 height: 40,
                 minWidth: 180,
-                onPressed: () {
-                  // TODO: Add block/unblock action
-                },
+                onPressed:
+                    showLoading
+                        ? null
+                        : () {
+                          final userCubit = context.read<UserCubit>();
+                          if (isActive) {
+                            userCubit.lockUser(userId);
+                          } else {
+                            userCubit.unlockUser(userId);
+                          }
+                        },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
                 color: isActive ? AppColors.red : AppColors.green,
-                child: Text(
-                  isActive ? S.of(context).blockUser : S.of(context).unblock,
-                  style: AppTextStyles.buttonLarge20pxRegular(
-                    context,
-                  ).copyWith(color: AppColors.black),
-                ),
+                child:
+                    showLoading
+                        ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CustomLoading()
+                        )
+                        : Text(
+                          isActive
+                              ? S.of(context).blockUser
+                              : S.of(context).unblock,
+                          style: AppTextStyles.buttonLarge20pxRegular(
+                            context,
+                          ).copyWith(color: AppColors.black),
+                        ),
               ),
             ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class BuildCountHeader extends StatelessWidget {
-  const BuildCountHeader({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
-      builder: (context, state) {
-        final count =
-            (state is UserSuccess && state.users.data != null)
-                ? state.users.totalCount ?? 0
-                : 0;
-        return Row(
-          children: [
-            Text(
-              S.of(context).newUsersCount,
-              style: AppTextStyles.buttonLarge20pxRegular(context),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              "$count",
-              style: AppTextStyles.buttonLarge20pxRegular(context),
-            ),
-          ],
-        );
-      },
     );
   }
 }

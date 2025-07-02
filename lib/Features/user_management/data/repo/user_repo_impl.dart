@@ -1,3 +1,4 @@
+import 'package:book_apartment_dashboard/Features/user_management/data/models/lock_unlock_model.dart';
 import 'package:book_apartment_dashboard/core/api/dio_consumer.dart';
 import 'package:book_apartment_dashboard/core/api/end_point.dart';
 import '../models/User_model.dart';
@@ -16,7 +17,17 @@ class UserRepoImpl implements UserRepo {
     final response = await dioConsumer.get(
       "${EndPoint.getAllUser}pageNumber=$pageNumber&pageSize=$pageSize",
     );
-    // هنا تأكد أن response عبارة عن Map أو Json
     return UserModel.fromJson(response);
+  }
+  @override
+  Future<Map<String, dynamic>> lockUser(String userId) async {
+    final response = await dioConsumer.post('/api/User/Lock/$userId');
+    return  response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> unlockUser(String userId) async {
+    final response = await dioConsumer.post('/api/User/Unlock/$userId');
+    return response;
   }
 }
