@@ -3,6 +3,8 @@ import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dar
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item_model.dart';
 import 'package:book_apartment_dashboard/Features/notification/presentation/view/widgets/notification_view.dart';
+import 'package:book_apartment_dashboard/Features/seating/data/repo/admin_repo.dart';
+import 'package:book_apartment_dashboard/Features/seating/presentation/cubit/admin_cubit.dart';
 import 'package:book_apartment_dashboard/Features/seating/presentation/view/seating_view.dart';
 import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/cubit/user_cubit.dart';
@@ -150,7 +152,12 @@ class _MainViewState extends State<MainView> {
                             : activeIndex == 7
                             ? NotificationView()
                             : activeIndex == 8
-                            ? SeatingView()
+                            ? BlocProvider(
+                              create:
+                                  (context) =>
+                                      AdminCubit(getIt.get<AdminRepo>()),
+                              child: SeatingView(),
+                            )
                             : Container(color: Colors.red),
                   ),
                 ),
