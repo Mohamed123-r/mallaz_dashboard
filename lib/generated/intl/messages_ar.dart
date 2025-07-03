@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountStatus": MessageLookupByLibrary.simpleMessage("حالة الحساب"),
         "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
         "active": MessageLookupByLibrary.simpleMessage("مفعل"),
+        "addNewAdmin": MessageLookupByLibrary.simpleMessage("إضافة عضو جديد"),
         "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),

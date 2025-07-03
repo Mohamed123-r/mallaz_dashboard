@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountStatus": MessageLookupByLibrary.simpleMessage("Account Status"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "active": MessageLookupByLibrary.simpleMessage("Active"),
+        "addNewAdmin": MessageLookupByLibrary.simpleMessage("Add New Admin"),
         "addNoteHere":
             MessageLookupByLibrary.simpleMessage("Add your note here"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),

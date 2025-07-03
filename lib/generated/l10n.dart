@@ -1290,6 +1290,16 @@ class S {
     );
   }
 
+  /// `Add New Admin`
+  String get addNewAdmin {
+    return Intl.message(
+      'Add New Admin',
+      name: 'addNewAdmin',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sent`
   String get sent {
     return Intl.message(
