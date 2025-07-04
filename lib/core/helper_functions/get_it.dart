@@ -1,3 +1,5 @@
+import 'package:book_apartment_dashboard/Features/home/data/repo/status_home_repo.dart';
+import 'package:book_apartment_dashboard/Features/home/data/repo/status_home_repo_impl.dart';
 import 'package:book_apartment_dashboard/Features/seating/data/repo/admin_repo.dart';
 import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo.dart';
 import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo_impl.dart';
@@ -12,7 +14,10 @@ void setupGetIt() {
   getIt.registerSingleton<DioConsumer>(DioConsumer(dio: Dio()));
   getIt.registerSingleton<UserRepo>(
     UserRepoImpl(dioConsumer: getIt<DioConsumer>()),
-  );  getIt.registerSingleton<AdminRepo>(
+  );
+  getIt.registerSingleton<AdminRepo>(
     AdminRepoImpl(dioConsumer: getIt<DioConsumer>()),
+  );  getIt.registerSingleton<DashboardStatsRepo>(
+    DashboardStatsRepoImpl(dioConsumer: getIt<DioConsumer>()),
   );
 }

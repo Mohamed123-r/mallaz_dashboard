@@ -128,5 +128,12 @@
   "addNewAdmin": "Add New Admin",
   "sent": "Sent",
   "targetGroup": "Target Group",
-  "noUsersFound": "No users found"
+  "noUsersFound": "No users found",
+  "totalUnits": "Total Units",
+  "soldUnits": "Sold Units",
+  "rentedUnits1": "Rented Units",
+  "emptyUnits": "Empty Units",
+  "allUsers": "All Users",
+  "blockedUsers": "Blocked Users",
+  "errorOccurred": "An error occurred: {error}"
 }

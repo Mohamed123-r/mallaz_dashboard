@@ -1,3 +1,5 @@
+import 'package:book_apartment_dashboard/Features/home/data/repo/status_home_repo.dart';
+import 'package:book_apartment_dashboard/Features/home/presentation/cubit/status_home_cubit.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/drawer_item.dart';
@@ -108,11 +110,17 @@ class _MainViewState extends State<MainView> {
                   child: Container(
                     child:
                         activeIndex == 0
-                            ? HomeView(
-                              onTapSeeDetails: () {
-                                activeIndex = 0.1;
-                                setState(() {});
-                              },
+                            ? BlocProvider(
+                              create:
+                                  (context) => DashboardStatsCubit(
+                                    getIt.get<DashboardStatsRepo>(),
+                                  ),
+                              child: HomeView(
+                                onTapSeeDetails: () {
+                                  activeIndex = 0.1;
+                                  setState(() {});
+                                },
+                              ),
                             )
                             : activeIndex == 0.1
                             ? PreviewRequestsDetailsView(
