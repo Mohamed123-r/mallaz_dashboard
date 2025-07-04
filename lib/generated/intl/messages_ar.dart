@@ -30,21 +30,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(amount) => "المقدم ${amount} جنيه";
 
-  static String m5(count) => "الممتلئة (${count})";
+  static String m5(error) => "حدث خطأ: ${error}";
 
-  static String m6(count) => "بانتظار الرد (${count})";
+  static String m6(count) => "الممتلئة (${count})";
 
-  static String m7(count) => "مؤجرة (${count})";
+  static String m7(count) => "بانتظار الرد (${count})";
 
-  static String m8(count) => "غرف فردية فقط (${count})";
+  static String m8(count) => "مؤجرة (${count})";
 
-  static String m9(count) => "تم البيع (${count})";
+  static String m9(count) => "غرف فردية فقط (${count})";
 
-  static String m10(count) => "جاري المعاينة (${count})";
+  static String m10(count) => "تم البيع (${count})";
 
-  static String m11(price) => "ثمن الوحدة : ${price}";
+  static String m11(count) => "جاري المعاينة (${count})";
 
-  static String m12(count) => "بها آسرة فارغة (${count})";
+  static String m12(price) => "ثمن الوحدة : ${price}";
+
+  static String m13(count) => "بها آسرة فارغة (${count})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -63,13 +65,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "all": MessageLookupByLibrary.simpleMessage("الكل"),
         "allRooms": m0,
         "allUnits": m1,
+        "allUsers": MessageLookupByLibrary.simpleMessage("كل المستخدمين"),
         "apartmentOrRoom": MessageLookupByLibrary.simpleMessage("شقة/غرفة"),
         "appName": MessageLookupByLibrary.simpleMessage("ملاذ"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
         "archive": MessageLookupByLibrary.simpleMessage("ارشفه"),
         "available": m2,
         "availableShort": MessageLookupByLibrary.simpleMessage("متاح"),
+        "bathroom": MessageLookupByLibrary.simpleMessage("حمام"),
         "blockUser": MessageLookupByLibrary.simpleMessage("حظر المستخدم"),
+        "blockedUsers":
+            MessageLookupByLibrary.simpleMessage("المستخدمين المحظورين"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
         "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
@@ -85,21 +91,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "empty": MessageLookupByLibrary.simpleMessage("فارغة"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("الأسرة الفارغة"),
+        "emptyUnits": MessageLookupByLibrary.simpleMessage("الوحدات الفارغة"),
         "endDate": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
         "english": MessageLookupByLibrary.simpleMessage("إنجليزي"),
         "enterNotificationText":
             MessageLookupByLibrary.simpleMessage("ادخل نص الاشعار"),
         "enterNotificationTitle":
             MessageLookupByLibrary.simpleMessage("ادخل عنوان الاشعار"),
+        "errorOccurred": m5,
         "families": MessageLookupByLibrary.simpleMessage("العائلات"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("الدور الأول"),
         "forSale": MessageLookupByLibrary.simpleMessage("للبيع"),
+        "forSaleOrRent": MessageLookupByLibrary.simpleMessage("نوع العملية"),
         "freeWifi": MessageLookupByLibrary.simpleMessage("واي فاي مجاني"),
         "full": MessageLookupByLibrary.simpleMessage("ممتلئة"),
         "fullAddress": MessageLookupByLibrary.simpleMessage(
             "القاهرة - التجمع الخامس - الدور الأول - الغرفة الأولى"),
-        "fullRooms": m5,
+        "fullRooms": m6,
         "fullyFinished": MessageLookupByLibrary.simpleMessage("مشطبة بالكامل"),
+        "furnished": MessageLookupByLibrary.simpleMessage("مفروشة"),
         "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
         "governorate": MessageLookupByLibrary.simpleMessage("المحافظة"),
         "group": MessageLookupByLibrary.simpleMessage("الفئه"),
@@ -128,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نموذج ارسال اشعار جديد"),
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("عدد المستخدمين الجدد"),
+        "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "noUsersFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
         "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
@@ -138,9 +149,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "partialRented": MessageLookupByLibrary.simpleMessage("مؤجرة جزئيا"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
-        "pending1": m6,
+        "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("بانتظار الرد"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "previousNotifications":
             MessageLookupByLibrary.simpleMessage("اشعارات سابقه"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
@@ -152,10 +164,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الوحدة جاهزة للتسليم"),
         "reject": MessageLookupByLibrary.simpleMessage("رفض"),
         "rent": MessageLookupByLibrary.simpleMessage("ايجار"),
+        "rentType": MessageLookupByLibrary.simpleMessage("نوع الإيجار"),
         "rented": MessageLookupByLibrary.simpleMessage("مؤجرة"),
         "rentedBeds": MessageLookupByLibrary.simpleMessage("الأسرة المؤجرة"),
         "rentedShort": MessageLookupByLibrary.simpleMessage("مؤجرة"),
-        "rentedUnits": m7,
+        "rentedUnits": m8,
+        "rentedUnits1": MessageLookupByLibrary.simpleMessage("الوحدات المؤجرة"),
         "requestsCount": MessageLookupByLibrary.simpleMessage("عدد الطلبات"),
         "role": MessageLookupByLibrary.simpleMessage("الدور"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("رقم الغرفة"),
@@ -178,25 +192,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "shared": MessageLookupByLibrary.simpleMessage("مشتركة"),
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
-        "singleRoomsOnly": m8,
-        "sold": m9,
+        "singleRoomsOnly": m9,
+        "sold": m10,
         "soldShort": MessageLookupByLibrary.simpleMessage("تم البيع"),
+        "soldUnits": MessageLookupByLibrary.simpleMessage("الوحدات المباعة"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "students": MessageLookupByLibrary.simpleMessage("الطلاب"),
         "targetGroup": MessageLookupByLibrary.simpleMessage("الفئه المستهدفه"),
         "tenants": MessageLookupByLibrary.simpleMessage("المستأجرين"),
         "title": MessageLookupByLibrary.simpleMessage("العنوان"),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
+        "totalUnits": MessageLookupByLibrary.simpleMessage("اجمالي الوحدات"),
         "unblock": MessageLookupByLibrary.simpleMessage("ألغاء الحظر"),
-        "underInspection": m10,
+        "underInspection": m11,
         "underInspectionShort":
             MessageLookupByLibrary.simpleMessage("جاري المعاينة"),
         "unitData": MessageLookupByLibrary.simpleMessage("بيانات الوحدة"),
         "unitNumber": MessageLookupByLibrary.simpleMessage("رقم الوحدة"),
-        "unitPrice": m11,
+        "unitPrice": m12,
         "unitType": MessageLookupByLibrary.simpleMessage("نوع الوحدة"),
         "userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "villa": MessageLookupByLibrary.simpleMessage("فيلا"),
-        "withEmptyBeds": m12
+        "withEmptyBeds": m13
       };
 }

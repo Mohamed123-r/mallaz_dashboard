@@ -1,15 +1,29 @@
-import 'package:book_apartment_dashboard/core/utils/app_text_styles.dart';
+import 'package:book_apartment_dashboard/Features/add_new_properties/presentation/view/widgets/requests_table.dart';
+import 'package:book_apartment_dashboard/Features/add_new_properties/presentation/view/widgets/tabs.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
 
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/services/locale_cubit.dart';
 import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../../generated/l10n.dart'; // Update with your localization import
+import '../../../../core/widgets/custom_data_cell.dart';
+import '../../../../core/widgets/custom_header_call.dart';
+import '../../../../core/widgets/custom_pagination.dart';
+import '../../../../generated/l10n.dart';
+import '../../data/models/add_new_properties_model.dart';
+import '../../data/repo/add_new_properties_repo_impl.dart';
+import '../cubit/add_new_properties_cubit.dart';
+import '../cubit/add_new_properties_stats.dart';
 
 class RequestsToAddNewProperties extends StatefulWidget {
   const RequestsToAddNewProperties({super.key, required this.onTapSeeDetails});
-  final  VoidCallback onTapSeeDetails ;
+
+  /// Callback receives the id of the property item pressed
+  final void Function(int id) onTapSeeDetails;
+
   @override
   State<RequestsToAddNewProperties> createState() =>
       _RequestsToAddNewPropertiesState();
@@ -17,230 +31,108 @@ class RequestsToAddNewProperties extends StatefulWidget {
 
 class _RequestsToAddNewPropertiesState
     extends State<RequestsToAddNewProperties> {
-  int selectedTabIndex = 1;
+  int selectedTabIndex = 0;
+  final tabs = <String>[];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    tabs.clear();
+    tabs.addAll([S.of(context).forSale, S.of(context).rent]);
+  }
+
+  int get currentPage {
+    final state = context.watch<PropertyRequestCubit>().state;
+    if (state is PropertyRequestSuccess) {
+      return state.pageNumber;
+    }
+    return 1;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      context.read<PropertyRequestCubit>().fetchRequests(
+        propertyType: "Sale",
+        pageNumber: 1,
+        pageSize: 6,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final tabs = [
-      S.of(context).forSale,
-      S.of(context).partialRent,
-      S.of(context).rent,
-    ];
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
-    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
-
+    final locale = context.watch<LocaleCubit>().state == Locale('ar') ? 'ar' : 'en';
     return Padding(
       padding: const EdgeInsetsDirectional.only(top: 24, start: 16, end: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                S.of(context).requestsCount,
-                style: AppTextStyles.buttonLarge20pxRegular(context),
-              ),
-              const SizedBox(width: 8),
-              Text("555", style: AppTextStyles.buttonLarge20pxRegular(context)),
-            ],
+          BlocBuilder<PropertyRequestCubit, PropertyRequestState>(
+            builder: (context, state) {
+              int count = 0;
+              if (state is PropertyRequestSuccess) count = state.totalCount;
+              return Row(
+                children: [
+                  Text(
+                    S.of(context).requestsCount,
+                    style: AppTextStyles.buttonLarge20pxRegular(context),
+                  ),
+                  const SizedBox(width: 8),
+                  Text("$count", style: AppTextStyles.buttonLarge20pxRegular(context)),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 16),
           Tabs(
             tabs: tabs,
             selectedIndex: selectedTabIndex,
-            onTabSelected: (i) => setState(() => selectedTabIndex = i),
+            onTabSelected: (i) {
+              setState(() => selectedTabIndex = i);
+              final type = i == 0 ? 'sale' : 'rent';
+              context.read<PropertyRequestCubit>().fetchRequests(
+                propertyType: type,
+                pageNumber: 1,
+                pageSize: 6,
+              );
+            },
             isDark: isDark,
           ),
           const SizedBox(height: 16),
-           _RequestsTable(onTapSeeDetails:  widget.onTapSeeDetails ,
-
+          Expanded(
+            child: RequestsTable(
+              onTapSeeDetails: (int id) {
+                widget.onTapSeeDetails(id);
+              },
+            ),
+          ),
+          const SizedBox(height: 16),
+          BlocBuilder<PropertyRequestCubit, PropertyRequestState>(
+            builder: (context, state) {
+              int pageCount = 1;
+              if (state is PropertyRequestSuccess) {
+                pageCount = (state.totalCount / 6).ceil();
+                if (pageCount == 0) pageCount = 1;
+              }
+              return CustomPagination(
+                pageCount: pageCount,
+                currentPage: currentPage,
+                onPageChanged: (page) {
+                  context.read<PropertyRequestCubit>().fetchRequests(
+                    propertyType: selectedTabIndex == 0 ? 'sale' : 'rent',
+                    pageNumber: page,
+                    pageSize: 6,
+                  );
+                },
+              );
+            },
           ),
         ],
       ),
     );
   }
-}
-
-
-class Tabs extends StatelessWidget {
-  final List<String> tabs;
-  final int selectedIndex;
-  final ValueChanged<int> onTabSelected;
-  final bool isDark;
-
-  const Tabs({
-    required this.tabs,
-    required this.selectedIndex,
-    required this.onTabSelected,
-    required this.isDark,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 48,
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xffC8CDD6)),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: List.generate(
-          tabs.length,
-              (index) => Expanded(
-            child: Row(
-              children: [
-                if (index > 0) // Add vertical divider except for the first item
-                  VerticalDivider(
-                    width: 1,
-                    thickness: 1,
-                    color: const Color(0xffC8CDD6),
-                  ),
-                Expanded(
-                  child: InkWell(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(index == 0 ? 8 : 0),
-                      bottomLeft: Radius.circular(index == 0 ? 8 : 0),
-                      topRight: Radius.circular(index == tabs.length - 1 ? 8 : 0),
-                      bottomRight: Radius.circular(index == tabs.length - 1 ? 8 : 0),
-                    ),
-                    onTap: () => onTabSelected(index),
-                    child: Container(
-                      height: 48,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: selectedIndex == index
-                            ? isDark
-                            ? AppColors.darkModeButtonsPrimary
-                            : AppColors.lightModeButtonsPrimary
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(index == tabs.length - 1? 8 : 0),
-                          bottomLeft: Radius.circular(index ==  tabs.length - 1 ? 8 : 0),
-                          topRight: Radius.circular(index ==0 ? 8 : 0),
-                          bottomRight: Radius.circular(index == 0 ? 8 : 0),  ),
-                      ),
-                      child: Text(
-                        tabs[index],
-                        style: AppTextStyles.buttonLarge20pxRegular(context),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-class _RequestsTable extends StatelessWidget {
-  const _RequestsTable({required this.onTapSeeDetails});
-  final  VoidCallback onTapSeeDetails ;
-  @override
-  Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(
-        borderRadius: BorderRadius.circular(8),
-        color: AppColors.graysGray2,
-      ),
-      columnWidths: const {
-        0: FlexColumnWidth(2.1),
-        1: FlexColumnWidth(2.1),
-        2: FlexColumnWidth(2.1),
-        3: FlexColumnWidth(2.1),
-        4: FlexColumnWidth(1.7),
-      },
-
-      children: [
-        TableRow(
-          decoration: BoxDecoration(color: Colors.transparent),
-          children: [
-            HeaderCall(text: S.of(context).propertyType, context: context),
-            HeaderCall(text: S.of(context).governorate, context: context),
-            HeaderCall(text: S.of(context).addedDate, context: context),
-            HeaderCall(text: S.of(context).ownerName, context: context),
-            HeaderCall(text: S.of(context).actions, context: context),
-          ],
-        ),
-        ...List.generate(
-          5,
-          (index) => TableRow(
-            children: [
-              DataCell(text: S.of(context).apartmentOrRoom, context: context),
-
-              DataCell(text: S.of(context).alexandria, context: context),
-              DataCell(text: "29-6-2025", context: context),
-              DataCell(text: S.of(context).ownerName, context: context),
-              TableCell(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: MaterialButton(
-                      height: 40,
-                      minWidth: 100,
-                      onPressed: onTapSeeDetails,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        S.of(context).showMore,
-                        style: AppTextStyles.buttonLarge20pxRegular(
-                          context,
-                        ).copyWith(color: AppColors.black),
-                      ),
-                      color: AppColors.graysGray3,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-}
-
-class HeaderCall extends StatelessWidget {
-  const HeaderCall({
-    super.key,
-    required this.text,
-    required this.context,
-  });
-
-  final String text;
-  final dynamic context;
-
-  @override
-  Widget build(BuildContext context) => TableCell(
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Text(text, style: AppTextStyles.subtitle16pxRegular(context)),
-      ),
-    ),
-  );
-}
-
-class DataCell extends StatelessWidget {
-  const DataCell({
-    super.key,
-    required this.text,
-    required this.context,
-  });
-
-  final String text;
-  final dynamic context;
-
-  @override
-  Widget build(BuildContext context) => TableCell(
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        child: Text(text, style: AppTextStyles.text14pxRegular(context)),
-      ),
-    ),
-  );
 }

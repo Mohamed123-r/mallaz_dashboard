@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
+import '../../generated/l10n.dart';
 
 class CustomPagination extends StatelessWidget {
   final int currentPage;
@@ -17,19 +17,15 @@ class CustomPagination extends StatelessWidget {
 
   List<Widget> _pageButtons(BuildContext context) {
     List<Widget> widgets = [];
-    // Always show first page
     widgets.add(_numberButton(context, 1, isActive: currentPage == 1));
 
-    // Determine range for center numbers (excluding first and last)
     int start = currentPage - 1;
     int end = currentPage + 1;
 
-    // Adjust if near the start
     if (start <= 1) {
       start = 2;
       end = 4;
     }
-    // Adjust if near the end
     if (end >= pageCount) {
       start = pageCount - 3;
       end = pageCount - 1;
@@ -37,24 +33,20 @@ class CustomPagination extends StatelessWidget {
     start = start < 2 ? 2 : start;
     end = end >= pageCount ? pageCount - 1 : end;
 
-    // Add dots if needed after first
     if (start > 2) {
       widgets.add(_dots());
     }
 
-    // Middle numbers
     for (int i = start; i <= end; i++) {
       if (i > 1 && i < pageCount) {
         widgets.add(_numberButton(context, i, isActive: currentPage == i));
       }
     }
 
-    // Add dots if needed before last
     if (end < pageCount - 1) {
       widgets.add(_dots());
     }
 
-    // Always show last page if > 1
     if (pageCount > 1) {
       widgets.add(
         _numberButton(context, pageCount, isActive: currentPage == pageCount),
@@ -110,7 +102,7 @@ class CustomPagination extends StatelessWidget {
       child: Text(
         '...',
         style: TextStyle(
-          color: Color(0xFF33525C), // graysGray6
+          color: Color(0xFF33525C),
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -119,7 +111,6 @@ class CustomPagination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // هنا يمكنك تعديل الثيم كما يناسبك
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     if (pageCount <= 1) return const SizedBox.shrink();
     return Row(
@@ -140,7 +131,7 @@ class CustomPagination extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                'السابق',
+                S.of(context).previous,
                 style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
                   color:
                   currentPage == 1
@@ -162,7 +153,7 @@ class CustomPagination extends StatelessWidget {
           icon: Row(
             children: [
               Text(
-                'التالي',
+                S.of(context).next,
                 style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
                   color:
                   currentPage == pageCount

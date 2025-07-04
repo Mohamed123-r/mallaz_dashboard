@@ -126,5 +126,18 @@
   "sent": "مرسله",
   "addNewAdmin": "إضافة عضو جديد",
   "targetGroup": "الفئه المستهدفه",
-  "noUsersFound": "لم يتم العثور على مستخدمين"
+  "noUsersFound": "لم يتم العثور على مستخدمين",
+  "totalUnits": "اجمالي الوحدات",
+  "soldUnits": "الوحدات المباعة",
+  "rentedUnits1": "الوحدات المؤجرة",
+  "emptyUnits": "الوحدات الفارغة",
+  "allUsers": "كل المستخدمين",
+  "blockedUsers": "المستخدمين المحظورين",
+  "errorOccurred": "حدث خطأ: {error}",
+  "previous": "السابق",
+  "next": "التالي",
+  "furnished": "مفروشة",
+  "bathroom": "حمام",
+  "forSaleOrRent": "نوع العملية",
+  "rentType": "نوع الإيجار"
 }

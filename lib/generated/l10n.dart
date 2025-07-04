@@ -1329,6 +1329,136 @@ class S {
       args: [],
     );
   }
+
+  /// `Total Units`
+  String get totalUnits {
+    return Intl.message(
+      'Total Units',
+      name: 'totalUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sold Units`
+  String get soldUnits {
+    return Intl.message(
+      'Sold Units',
+      name: 'soldUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rented Units`
+  String get rentedUnits1 {
+    return Intl.message(
+      'Rented Units',
+      name: 'rentedUnits1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty Units`
+  String get emptyUnits {
+    return Intl.message(
+      'Empty Units',
+      name: 'emptyUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Users`
+  String get allUsers {
+    return Intl.message(
+      'All Users',
+      name: 'allUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blocked Users`
+  String get blockedUsers {
+    return Intl.message(
+      'Blocked Users',
+      name: 'blockedUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous`
+  String get previous {
+    return Intl.message(
+      'Previous',
+      name: 'previous',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furnished`
+  String get furnished {
+    return Intl.message(
+      'Furnished',
+      name: 'furnished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bathroom`
+  String get bathroom {
+    return Intl.message(
+      'Bathroom',
+      name: 'bathroom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For Sale or Rent`
+  String get forSaleOrRent {
+    return Intl.message(
+      'For Sale or Rent',
+      name: 'forSaleOrRent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rent Type`
+  String get rentType {
+    return Intl.message(
+      'Rent Type',
+      name: 'rentType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred: {error}`
+  String errorOccurred(Object error) {
+    return Intl.message(
+      'An error occurred: $error',
+      name: 'errorOccurred',
+      desc: '',
+      args: [error],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
