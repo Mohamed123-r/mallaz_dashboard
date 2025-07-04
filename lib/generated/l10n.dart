@@ -1390,6 +1390,26 @@ class S {
     );
   }
 
+  /// `Previous`
+  String get previous {
+    return Intl.message(
+      'Previous',
+      name: 'previous',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error occurred: {error}`
   String errorOccurred(Object error) {
     return Intl.message(

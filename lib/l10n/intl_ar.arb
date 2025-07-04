@@ -133,5 +133,7 @@
   "emptyUnits": "الوحدات الفارغة",
   "allUsers": "كل المستخدمين",
   "blockedUsers": "المستخدمين المحظورين",
-  "errorOccurred": "حدث خطأ: {error}"
+  "errorOccurred": "حدث خطأ: {error}",
+  "previous": "السابق",
+  "next": "التالي"
 }

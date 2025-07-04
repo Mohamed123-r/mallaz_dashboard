@@ -9,6 +9,7 @@ import '../../../../core/utils/app_text_styles.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
+import '../../../add_new_properties/presentation/view/widgets/tabs.dart';
 
 class RentToLeaseView extends StatefulWidget {
   const RentToLeaseView({super.key});

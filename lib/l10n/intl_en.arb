@@ -135,5 +135,7 @@
   "emptyUnits": "Empty Units",
   "allUsers": "All Users",
   "blockedUsers": "Blocked Users",
+  "previous": "Previous",
+  "next": "Next",
   "errorOccurred": "An error occurred: {error}"
 }

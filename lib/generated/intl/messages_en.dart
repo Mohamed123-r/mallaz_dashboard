@@ -138,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New Notification Form"),
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("New Users Count"),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noUsersFound": MessageLookupByLibrary.simpleMessage("No users found"),
         "notificationText":
             MessageLookupByLibrary.simpleMessage("Notification Text"),
@@ -152,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("Pending"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "previousNotifications":
             MessageLookupByLibrary.simpleMessage("Previous Notifications"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("Private Garage"),

@@ -135,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نموذج ارسال اشعار جديد"),
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("عدد المستخدمين الجدد"),
+        "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "noUsersFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
         "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
@@ -148,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("بانتظار الرد"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "previousNotifications":
             MessageLookupByLibrary.simpleMessage("اشعارات سابقه"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
