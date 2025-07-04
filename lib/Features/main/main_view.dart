@@ -1,4 +1,5 @@
 import 'package:book_apartment_dashboard/Features/add_new_properties/data/repo/add_new_properties_repo.dart';
+import 'package:book_apartment_dashboard/Features/add_new_properties/data/repo/property_details_repo.dart';
 import 'package:book_apartment_dashboard/Features/home/data/repo/status_home_repo.dart';
 import 'package:book_apartment_dashboard/Features/home/presentation/cubit/status_home_cubit.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dart';
@@ -12,6 +13,7 @@ import 'package:book_apartment_dashboard/Features/seating/presentation/view/seat
 import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/cubit/user_cubit.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +21,7 @@ import '../../core/helper_functions/get_it.dart';
 import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
 import '../add_new_properties/presentation/cubit/add_new_properties_cubit.dart';
+import '../add_new_properties/presentation/cubit/property_details_cubit.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../chat/presentation/view/chat_view.dart';
@@ -39,6 +42,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   num activeIndex = 0.0;
+  int propertyId = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -132,26 +136,32 @@ class _MainViewState extends State<MainView> {
                               },
                             )
                             : activeIndex == 1
-                            ?
-                        BlocProvider(
-                          create:
-                              (context) => PropertyRequestCubit(
-                            getIt.get<PropertyRequestRepo>(),
-                          ),
-                          child:  RequestsToAddNewProperties(
-                            onTapSeeDetails: () {
-                              activeIndex = 1.1;
-                              setState(() {});
-                            },
-                          ),
-                        )
-
+                            ? BlocProvider(
+                              create:
+                                  (context) => PropertyRequestCubit(
+                                    getIt.get<PropertyRequestRepo>(),
+                                  ),
+                              child: RequestsToAddNewProperties(
+                                onTapSeeDetails: (int id) {
+                                  propertyId = id;
+                                  activeIndex = 1.1;
+                                  setState(() {});
+                                },
+                              ),
+                            )
                             : activeIndex == 1.1
-                            ? RequestsToAddNewPropertiesDetails(
-                              onTapBack: () {
-                                activeIndex = 1;
-                                setState(() {});
-                              },
+                            ? BlocProvider(
+                              create:
+                                  (_) => PropertyDetailsCubit(
+                                    getIt.get<PropertyDetailsRepo>(),
+                                  )..fetchPropertyDetails(propertyId),
+                              child: RequestsToAddNewPropertiesDetails(
+                                onTapBack: () {
+                                  activeIndex = 1;
+                                  setState(() {});
+                                },
+                                propertyId: propertyId,
+                              ),
                             )
                             : activeIndex == 2
                             ? SalesView()

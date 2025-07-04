@@ -137,5 +137,9 @@
   "blockedUsers": "Blocked Users",
   "previous": "Previous",
   "next": "Next",
+  "furnished": "Furnished",
+  "bathroom": "Bathroom",
+  "forSaleOrRent": "For Sale or Rent",
+  "rentType": "Rent Type",
   "errorOccurred": "An error occurred: {error}"
 }

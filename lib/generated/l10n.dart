@@ -1410,6 +1410,46 @@ class S {
     );
   }
 
+  /// `Furnished`
+  String get furnished {
+    return Intl.message(
+      'Furnished',
+      name: 'furnished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bathroom`
+  String get bathroom {
+    return Intl.message(
+      'Bathroom',
+      name: 'bathroom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For Sale or Rent`
+  String get forSaleOrRent {
+    return Intl.message(
+      'For Sale or Rent',
+      name: 'forSaleOrRent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rent Type`
+  String get rentType {
+    return Intl.message(
+      'Rent Type',
+      name: 'rentType',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error occurred: {error}`
   String errorOccurred(Object error) {
     return Intl.message(

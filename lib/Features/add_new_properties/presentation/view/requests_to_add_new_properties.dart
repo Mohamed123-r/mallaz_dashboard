@@ -21,7 +21,8 @@ import '../cubit/add_new_properties_stats.dart';
 class RequestsToAddNewProperties extends StatefulWidget {
   const RequestsToAddNewProperties({super.key, required this.onTapSeeDetails});
 
-  final VoidCallback onTapSeeDetails;
+  /// Callback receives the id of the property item pressed
+  final void Function(int id) onTapSeeDetails;
 
   @override
   State<RequestsToAddNewProperties> createState() =>
@@ -47,15 +48,17 @@ class _RequestsToAddNewPropertiesState
     }
     return 1;
   }
+
   @override
   void initState() {
     super.initState();
 
     Future.microtask(() {
-       context.read<PropertyRequestCubit>().fetchRequests(propertyType: "Sale",
-       pageNumber: 1 ,
-        pageSize: 6
-       );
+      context.read<PropertyRequestCubit>().fetchRequests(
+        propertyType: "Sale",
+        pageNumber: 1,
+        pageSize: 6,
+      );
     });
   }
 
@@ -91,7 +94,8 @@ class _RequestsToAddNewPropertiesState
             onTabSelected: (i) {
               setState(() => selectedTabIndex = i);
               final type = i == 0 ? 'sale' : 'rent';
-              context.read<PropertyRequestCubit>().fetchRequests(propertyType: type,
+              context.read<PropertyRequestCubit>().fetchRequests(
+                propertyType: type,
                 pageNumber: 1,
                 pageSize: 6,
               );
@@ -99,26 +103,36 @@ class _RequestsToAddNewPropertiesState
             isDark: isDark,
           ),
           const SizedBox(height: 16),
-          Expanded(child: RequestsTable(onTapSeeDetails: widget.onTapSeeDetails)),
+          Expanded(
+            child: RequestsTable(
+              onTapSeeDetails: (int id) {
+                widget.onTapSeeDetails(id);
+              },
+            ),
+          ),
           const SizedBox(height: 16),
-          CustomPagination(
-            pageCount: (context.watch<PropertyRequestCubit>().state is PropertyRequestSuccess
-                ? (context.read<PropertyRequestCubit>().state as PropertyRequestSuccess).totalCount ~/ 6 + 1
-                : 1),
-            currentPage: currentPage ,
-            onPageChanged: (page) {
-              context.read<PropertyRequestCubit>().fetchRequests(
-                propertyType: selectedTabIndex == 0 ? 'sale' : 'rent',
-                pageNumber: page,
-                pageSize: 6,
+          BlocBuilder<PropertyRequestCubit, PropertyRequestState>(
+            builder: (context, state) {
+              int pageCount = 1;
+              if (state is PropertyRequestSuccess) {
+                pageCount = (state.totalCount / 6).ceil();
+                if (pageCount == 0) pageCount = 1;
+              }
+              return CustomPagination(
+                pageCount: pageCount,
+                currentPage: currentPage,
+                onPageChanged: (page) {
+                  context.read<PropertyRequestCubit>().fetchRequests(
+                    propertyType: selectedTabIndex == 0 ? 'sale' : 'rent',
+                    pageNumber: page,
+                    pageSize: 6,
+                  );
+                },
               );
-
             },
-
           ),
         ],
       ),
     );
   }
 }
-

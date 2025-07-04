@@ -135,5 +135,9 @@
   "blockedUsers": "المستخدمين المحظورين",
   "errorOccurred": "حدث خطأ: {error}",
   "previous": "السابق",
-  "next": "التالي"
+  "next": "التالي",
+  "furnished": "مفروشة",
+  "bathroom": "حمام",
+  "forSaleOrRent": "نوع العملية",
+  "rentType": "نوع الإيجار"
 }

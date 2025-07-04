@@ -14,7 +14,7 @@ import '../../cubit/add_new_properties_stats.dart';
 class RequestsTable extends StatelessWidget {
   const RequestsTable({required this.onTapSeeDetails});
 
-  final VoidCallback onTapSeeDetails;
+  final void Function(int id) onTapSeeDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +34,21 @@ class RequestsTable extends StatelessWidget {
             color: AppColors.graysGray2,
           ),
           columnWidths: const {
-            0: FlexColumnWidth(2.1),
+            0: FlexColumnWidth(1.2), // id column
             1: FlexColumnWidth(2.1),
             2: FlexColumnWidth(2.1),
             3: FlexColumnWidth(2.1),
-            4: FlexColumnWidth(1.7),
+            4: FlexColumnWidth(2.1),
+            5: FlexColumnWidth(1.7),
           },
           children: [
             TableRow(
               decoration: const BoxDecoration(color: Colors.transparent),
               children: [
+                CustomHeaderCall(
+                  text: "ID",
+                  context: context,
+                ),
                 CustomHeaderCall(
                   text: S.of(context).propertyType,
                   context: context,
@@ -61,6 +66,10 @@ class RequestsTable extends StatelessWidget {
             ...requests.map((item) => TableRow(
               children: [
                 CustomDataCell(
+                  text: item.id.toString(),
+                  context: context,
+                ),
+                CustomDataCell(
                   text: item.propertyType,
                   context: context,
                 ),
@@ -69,7 +78,8 @@ class RequestsTable extends StatelessWidget {
                   context: context,
                 ),
                 CustomDataCell(
-                  text: "${item.createdAt.day}-${item.createdAt.month}-${item.createdAt.year}",
+                  text:
+                  "${item.createdAt.day}-${item.createdAt.month}-${item.createdAt.year}",
                   context: context,
                 ),
                 CustomDataCell(
@@ -83,7 +93,7 @@ class RequestsTable extends StatelessWidget {
                       child: MaterialButton(
                         height: 40,
                         minWidth: 100,
-                        onPressed: onTapSeeDetails,
+                        onPressed: () => onTapSeeDetails(item.id),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -106,4 +116,3 @@ class RequestsTable extends StatelessWidget {
     );
   }
 }
-

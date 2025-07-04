@@ -1,6 +1,8 @@
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/services/locale_cubit.dart';
@@ -8,92 +10,138 @@ import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
-import '../../../home/presentation/view/preview_requests_details_view.dart';
+import '../../data/models/property_details_model.dart';
+import '../../data/repo/property_details_repo_impl.dart';
+import '../cubit/property_details_cubit.dart';
+import '../cubit/property_details_state.dart';
+
 
 class RequestsToAddNewPropertiesDetails extends StatelessWidget {
-  const RequestsToAddNewPropertiesDetails({super.key, required this.onTapBack});
-
   final VoidCallback onTapBack;
+  final int propertyId;
+
+  const RequestsToAddNewPropertiesDetails({
+    super.key,
+    required this.onTapBack,
+    required this.propertyId,
+  });
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
+    return BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
+      builder: (context, state) {
+        bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                onPressed: onTapBack,
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
-                ),
-              ),
-              Expanded(flex: 5, child: PropertyDetails(isDark: isDark)),
-              const SizedBox(width: 36),
-              Expanded(flex: 6, child: PropertyGallery(isDark: isDark)),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        if (state is PropertyDetailsLoading || state is PropertyDetailsInitial) {
+          return CustomLoading();
+        }
+        if (state is PropertyDetailsFailure) {
+          return Center(child: Text(state.error));
+        }
+        if (state is PropertyDetailsSuccess) {
+          final details = state.details;
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+            child: Column(
               children: [
-                // Accept
-                MaterialButton(
-                  height: 40,
-                  minWidth: 200,
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    S.of(context).accept,
-                    style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(color: AppColors.black),
-                  ),
-                  color: AppColors.green,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: onTapBack,
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: PropertyDetailsWidget(
+                        isDark: isDark,
+                        details: details,
+                      ),
+                    ),
+                    const SizedBox(width: 36),
+                    Expanded(
+                      flex: 6,
+                      child: PropertyGallery(
+                        isDark: isDark,
+                        mainImage: details.mainImage,
+                        images: details.images,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 20),
-                // Reject
-                MaterialButton(
-                  height: 40,
-                  minWidth: 200,
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Accept
+                      MaterialButton(
+                        height: 40,
+                        minWidth: 200,
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          S.of(context).accept,
+                          style: AppTextStyles.buttonLarge20pxRegular(context)
+                              .copyWith(color: AppColors.black),
+                        ),
+                        color: AppColors.green,
+                      ),
+                      const SizedBox(width: 20),
+                      // Reject
+                      MaterialButton(
+                        height: 40,
+                        minWidth: 200,
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          S.of(context).reject,
+                          style: AppTextStyles.buttonLarge20pxRegular(context)
+                              .copyWith(color: AppColors.black),
+                        ),
+                        color: AppColors.red,
+                      ),
+                    ],
                   ),
-                  child: Text(
-                    S.of(context).reject,
-                    style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(color: AppColors.black),
-                  ),
-                  color: AppColors.red,
                 ),
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }
 
-
 class PropertyGallery extends StatelessWidget {
-  const PropertyGallery({super.key, required this.isDark});
-
   final bool isDark;
+  final String mainImage;
+  final List<String> images;
+
+  const PropertyGallery({
+    super.key,
+    required this.isDark,
+    required this.mainImage,
+    required this.images,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final images = [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    // افضل ترتيب: mainImage, ثم أول صورتين من images
+    final displayImages = [
+      mainImage,
+      if (images.isNotEmpty) images[0] else mainImage,
+      if (images.length > 1) images[1] else mainImage,
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +166,7 @@ class PropertyGallery extends StatelessWidget {
               flex: 6,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(images[0], height: 286, fit: BoxFit.cover),
+                child: Image.network(displayImages[0], height: 286, fit: BoxFit.cover),
               ),
             ),
             const SizedBox(width: 16),
@@ -130,7 +178,7 @@ class PropertyGallery extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      images[1],
+                      displayImages[1],
                       height: 140,
                       fit: BoxFit.cover,
                     ),
@@ -139,7 +187,7 @@ class PropertyGallery extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      images[2],
+                      displayImages[2],
                       height: 140,
                       fit: BoxFit.cover,
                     ),
@@ -154,7 +202,7 @@ class PropertyGallery extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Image.network(
-            images[0],
+            displayImages[0],
             height: 170,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -164,11 +212,15 @@ class PropertyGallery extends StatelessWidget {
     );
   }
 }
-
-class PropertyDetails extends StatelessWidget {
-  PropertyDetails({super.key, required this.isDark});
-
+class PropertyDetailsWidget extends StatelessWidget {
   final bool isDark;
+  final PropertyDetailsModel details;
+
+  const PropertyDetailsWidget({
+    super.key,
+    required this.isDark,
+    required this.details,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -178,9 +230,9 @@ class PropertyDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Property details title
+            // العنوان
             Text(
-              S.of(context).propertyDetails,
+              details.title, // العنوان من الداتا
               style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
                 color: isDark
                     ? AppColors.darkModeButtonsPrimary
@@ -188,23 +240,25 @@ class PropertyDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            // Owner (avatar + name)
+            // المالك (id فقط لأن اسم المالك غير متوفر في الـAPI)
             Row(
               children: [
                 const CircleAvatar(radius: 28),
                 const SizedBox(width: 12),
                 Text(
-                  S.of(context).ownerName,
+                  "details.ownerId", // id المالك
                   style: AppTextStyles.buttonLarge20pxRegular(context),
                 ),
               ],
             ),
             const SizedBox(height: 8),
+            // المحافظة + المدينة
             Text(
-              S.of(context).cityCairo + " " + S.of(context).districtTagamoa,
+              "${details.governorate} ${details.city}",
               style: AppTextStyles.subtitleTitle20pxRegular(context),
             ),
             const SizedBox(height: 4),
+            // المساحة - الدور - عدد الغرف
             Row(
               children: [
                 SvgPicture.asset(
@@ -212,7 +266,7 @@ class PropertyDetails extends StatelessWidget {
                   color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
                 ),
                 const SizedBox(width: 8),
-                Text('120 م²', style: AppTextStyles.text14pxRegular(context)),
+                Text('${details.area} م²', style: AppTextStyles.text14pxRegular(context)),
                 const SizedBox(width: 24),
                 SvgPicture.asset(
                   Assets.imagesStairs,
@@ -220,7 +274,7 @@ class PropertyDetails extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  S.of(context).firstFloor,
+                  details.floor,
                   style: AppTextStyles.text14pxRegular(context),
                 ),
                 const SizedBox(width: 24),
@@ -230,12 +284,13 @@ class PropertyDetails extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  S.of(context).rooms3,
+                  "${details.rooms} غرف",
                   style: AppTextStyles.text14pxRegular(context),
                 ),
               ],
             ),
             const SizedBox(height: 16),
+            // السعر
             Container(
               padding: const EdgeInsets.symmetric(
                 vertical: 8.0,
@@ -246,11 +301,21 @@ class PropertyDetails extends StatelessWidget {
                 color: isDark ? AppColors.lightModeText : AppColors.darkModeText,
               ),
               child: Text(
-                S.of(context).unitPrice('2,300,000'),
+                S.of(context).unitPrice('${details.price}'),
                 style: AppTextStyles.buttonLarge20pxRegular(context),
               ),
             ),
             const SizedBox(height: 12),
+            // الوصف إذا متاح
+            if (details.description != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  details.description!,
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
+              ),
+            // تفاصيل رئيسية
             Text(
               S.of(context).mainFacilities,
               style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
@@ -264,58 +329,55 @@ class PropertyDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconTextRow(
-                    context: context,
-                    isDark: isDark,
-                    asset: Assets.imagesWif,
-                    text: S.of(context).freeWifi,
-                  ),
-                  const SizedBox(height: 4),
-                  IconTextRow(
-                    context: context,
-                    isDark: isDark,
-                    asset: Assets.imagesParker,
-                    text: S.of(context).privateGarage,
-                  ),
-                  const SizedBox(height: 4),
-                  IconTextRow(
-                    context: context,
-                    isDark: isDark,
-                    asset: Assets.imagesSecurity,
-                    text: S.of(context).security247,
-                  ),
+                  if (details.hasWifi == true)
+                    IconTextRow(
+                      context: context,
+                      isDark: isDark,
+                      asset: Assets.imagesWif,
+                      text: S.of(context).freeWifi,
+                    ),
+                  if (details.isFurnished == true)
+                    IconTextRow(
+                      context: context,
+                      isDark: isDark,
+                      asset: Assets.imagesTrue,
+                      text: S.of(context).furnished,
+                    ),
+                  if (details.bathrooms != "")
+                    IconTextRow(
+                      context: context,
+                      isDark: isDark,
+                      asset: Assets.imagesTrue,
+                      text: "${details.bathrooms} ${S.of(context).bathroom}",
+                    ),
                 ],
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconTextRow2(
-                  isDark: isDark,
-                  title: S.of(context).immediateHousing,
-                ),
-                const SizedBox(height: 4),
-                IconTextRow2(
-                  isDark: isDark,
-                  title: S.of(context).fullyFinished,
-                ),
-                const SizedBox(height: 4),
-                IconTextRow2(
-                  isDark: isDark,
-                  title: S.of(context).readyForDelivery,
-                ),
-                const SizedBox(height: 4),
-                IconTextRow2(
-                  isDark: isDark,
-                  title: S.of(context).installmentsAvailable,
-                ),
-                const SizedBox(height: 4),
-                IconTextRow2(
-                  isDark: isDark,
-                  title: S.of(context).downPayment('500,000'),
-                ),
-              ],
+            // نوع الوحدة (شقة/فيلا...الخ)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Text(
+                "${S.of(context).propertyType}: ${details.type}",
+                style: AppTextStyles.text14pxRegular(context),
+              ),
             ),
+            // نوع البيع/الإيجار
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Text(
+                "${S.of(context).forSaleOrRent}: ${details.propertyType}",
+                style: AppTextStyles.text14pxRegular(context),
+              ),
+            ),
+            // نوع الإيجار إذا كان متوفر
+            if (details.rentType != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Text(
+                  "${S.of(context).rentType}: ${details.rentType}",
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
+              ),
           ],
         ),
       ],
@@ -323,24 +385,32 @@ class PropertyDetails extends StatelessWidget {
   }
 }
 
-class IconTextRow2 extends StatelessWidget {
-  const IconTextRow2({super.key, required this.isDark, required this.title});
-
+class IconTextRow extends StatelessWidget {
+  final BuildContext context;
   final bool isDark;
-  final String title;
+  final String asset;
+  final String text;
+
+  const IconTextRow({
+    super.key,
+    required this.context,
+    required this.isDark,
+    required this.asset,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SvgPicture.asset(
-          Assets.imagesTrue,
+          asset,
           color: isDark
               ? AppColors.darkModeButtonsPrimary
               : AppColors.lightModeButtonsPrimary,
         ),
         const SizedBox(width: 4),
-        Text(title, style: AppTextStyles.subtitle16pxRegular(context)),
+        Text(text, style: AppTextStyles.subtitle16pxRegular(context)),
       ],
     );
   }
