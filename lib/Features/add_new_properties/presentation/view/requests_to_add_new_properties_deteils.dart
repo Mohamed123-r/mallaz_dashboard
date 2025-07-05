@@ -15,7 +15,6 @@ import '../../data/repo/property_details_repo_impl.dart';
 import '../cubit/property_details_cubit.dart';
 import '../cubit/property_details_state.dart';
 
-
 class RequestsToAddNewPropertiesDetails extends StatelessWidget {
   final VoidCallback onTapBack;
   final int propertyId;
@@ -32,7 +31,8 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
       builder: (context, state) {
         bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
-        if (state is PropertyDetailsLoading || state is PropertyDetailsInitial) {
+        if (state is PropertyDetailsLoading ||
+            state is PropertyDetailsInitial) {
           return CustomLoading();
         }
         if (state is PropertyDetailsFailure) {
@@ -52,7 +52,10 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                       onPressed: onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
-                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                        color:
+                            isDark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
                       ),
                     ),
                     Expanded(
@@ -89,8 +92,9 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                         ),
                         child: Text(
                           S.of(context).accept,
-                          style: AppTextStyles.buttonLarge20pxRegular(context)
-                              .copyWith(color: AppColors.black),
+                          style: AppTextStyles.buttonLarge20pxRegular(
+                            context,
+                          ).copyWith(color: AppColors.black),
                         ),
                         color: AppColors.green,
                       ),
@@ -105,8 +109,9 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                         ),
                         child: Text(
                           S.of(context).reject,
-                          style: AppTextStyles.buttonLarge20pxRegular(context)
-                              .copyWith(color: AppColors.black),
+                          style: AppTextStyles.buttonLarge20pxRegular(
+                            context,
+                          ).copyWith(color: AppColors.black),
                         ),
                         color: AppColors.red,
                       ),
@@ -152,9 +157,10 @@ class PropertyGallery extends StatelessWidget {
           child: Text(
             S.of(context).gallery,
             style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
-              color: isDark
-                  ? AppColors.darkModeButtonsPrimary
-                  : AppColors.lightModeButtonsPrimary,
+              color:
+                  isDark
+                      ? AppColors.darkModeButtonsPrimary
+                      : AppColors.lightModeButtonsPrimary,
             ),
           ),
         ),
@@ -166,7 +172,11 @@ class PropertyGallery extends StatelessWidget {
               flex: 6,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(displayImages[0], height: 286, fit: BoxFit.cover),
+                child: Image.network(
+                  displayImages[0],
+                  height: 286,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -212,6 +222,7 @@ class PropertyGallery extends StatelessWidget {
     );
   }
 }
+
 class PropertyDetailsWidget extends StatelessWidget {
   final bool isDark;
   final PropertyDetailsModel details;
@@ -232,21 +243,36 @@ class PropertyDetailsWidget extends StatelessWidget {
           children: [
             // العنوان
             Text(
-              details.title, // العنوان من الداتا
+              S.of(context).propertyDetails, // العنوان من الداتا
               style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
-                color: isDark
-                    ? AppColors.darkModeButtonsPrimary
-                    : AppColors.lightModeButtonsPrimary,
+                color:
+                    isDark
+                        ? AppColors.darkModeButtonsPrimary
+                        : AppColors.lightModeButtonsPrimary,
               ),
             ),
             const SizedBox(height: 8),
             // المالك (id فقط لأن اسم المالك غير متوفر في الـAPI)
             Row(
               children: [
-                const CircleAvatar(radius: 28),
+                CircleAvatar(
+                  radius: 28,
+                  backgroundColor: AppColors.graysGray4,
+                  child:
+                      details.ownerImage.isNotEmpty
+                          ? Image.network(details.ownerImage, fit: BoxFit.cover)
+                          : Icon(
+                            Icons.person,
+                            size: 32,
+                            color:
+                                isDark
+                                    ? AppColors.darkModeText
+                                    : AppColors.lightModeText,
+                          ),
+                ),
                 const SizedBox(width: 12),
                 Text(
-                  "details.ownerId", // id المالك
+                  details.ownerName,
                   style: AppTextStyles.buttonLarge20pxRegular(context),
                 ),
               ],
@@ -263,14 +289,19 @@ class PropertyDetailsWidget extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   Assets.imagesStraighten,
-                  color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                  color:
+                      isDark ? AppColors.darkModeText : AppColors.lightModeText,
                 ),
                 const SizedBox(width: 8),
-                Text('${details.area} م²', style: AppTextStyles.text14pxRegular(context)),
+                Text(
+                  '${details.area} م²',
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
                 const SizedBox(width: 24),
                 SvgPicture.asset(
                   Assets.imagesStairs,
-                  color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                  color:
+                      isDark ? AppColors.darkModeText : AppColors.lightModeText,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -280,7 +311,8 @@ class PropertyDetailsWidget extends StatelessWidget {
                 const SizedBox(width: 24),
                 SvgPicture.asset(
                   Assets.imagesDoor,
-                  color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                  color:
+                      isDark ? AppColors.darkModeText : AppColors.lightModeText,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -298,7 +330,8 @@ class PropertyDetailsWidget extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: isDark ? AppColors.lightModeText : AppColors.darkModeText,
+                color:
+                    isDark ? AppColors.lightModeText : AppColors.darkModeText,
               ),
               child: Text(
                 S.of(context).unitPrice('${details.price}'),
@@ -319,9 +352,10 @@ class PropertyDetailsWidget extends StatelessWidget {
             Text(
               S.of(context).mainFacilities,
               style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
-                color: isDark
-                    ? AppColors.darkModeButtonsPrimary
-                    : AppColors.lightModeButtonsPrimary,
+                color:
+                    isDark
+                        ? AppColors.darkModeButtonsPrimary
+                        : AppColors.lightModeButtonsPrimary,
               ),
             ),
             Padding(
@@ -405,11 +439,13 @@ class IconTextRow extends StatelessWidget {
       children: [
         SvgPicture.asset(
           asset,
-          color: isDark
-              ? AppColors.darkModeButtonsPrimary
-              : AppColors.lightModeButtonsPrimary,
+          width: 16,
+          color:
+              isDark
+                  ? AppColors.darkModeButtonsPrimary
+                  : AppColors.lightModeButtonsPrimary,
         ),
-        const SizedBox(width: 4),
+        const SizedBox(width: 8),
         Text(text, style: AppTextStyles.subtitle16pxRegular(context)),
       ],
     );

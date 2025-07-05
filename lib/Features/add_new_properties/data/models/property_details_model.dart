@@ -20,9 +20,13 @@ class PropertyDetailsModel {
   final bool isActive;
   final String mainImage;
   final String ownerId;
+  final String ownerName;
+  final String ownerImage;
   final List<String> images;
 
   PropertyDetailsModel({
+    required this.ownerName,
+    required this.ownerImage,
     required this.title,
     required this.description,
     required this.type,
@@ -70,7 +74,12 @@ class PropertyDetailsModel {
       isActive: json['isActive'] ?? false,
       mainImage: json['mainImage'] ?? "",
       ownerId: json['ownerId'] ?? "",
-      images: (json['images'] as List<dynamic>? ?? []).map((e) => e.toString()).toList(),
+      images:
+          (json['images'] as List<dynamic>? ?? [])
+              .map((e) => e.toString())
+              .toList(),
+      ownerName: json['ownerName'] ?? "",
+      ownerImage: json['ownerImage'] ?? "",
     );
   }
 }
