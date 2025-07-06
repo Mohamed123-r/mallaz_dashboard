@@ -60,6 +60,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),
         "addedDate": MessageLookupByLibrary.simpleMessage("Added Date"),
         "admin": MessageLookupByLibrary.simpleMessage("Admin"),
+        "adminDetails": MessageLookupByLibrary.simpleMessage("Admin Details"),
+        "adminManagement":
+            MessageLookupByLibrary.simpleMessage("Admin Management"),
         "adminName": MessageLookupByLibrary.simpleMessage("Admin Name"),
         "ahmed": MessageLookupByLibrary.simpleMessage("Ahmed"),
         "alexandria": MessageLookupByLibrary.simpleMessage("Alexandria"),
@@ -79,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedUsers": MessageLookupByLibrary.simpleMessage("Blocked Users"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contactData": MessageLookupByLibrary.simpleMessage("Contact Data"),
         "contractDuration":
             MessageLookupByLibrary.simpleMessage("Contract Duration"),
@@ -129,7 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainFacilities":
             MessageLookupByLibrary.simpleMessage("Main Facilities"),
         "manageFullRentUnits":
-            MessageLookupByLibrary.simpleMessage("Manage Full Rent Units"),
+            MessageLookupByLibrary.simpleMessage("Manage Rent Units"),
         "managePartialRentUnits":
             MessageLookupByLibrary.simpleMessage("Manage Partial Rent Units"),
         "manageSalesUnits":
@@ -196,7 +201,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendNow": MessageLookupByLibrary.simpleMessage("Send Now"),
         "sendTime": MessageLookupByLibrary.simpleMessage("Send Time"),
         "sent": MessageLookupByLibrary.simpleMessage("Sent"),
-        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shared": MessageLookupByLibrary.simpleMessage("Shared"),
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
         "singleRoomsOnly": m9,

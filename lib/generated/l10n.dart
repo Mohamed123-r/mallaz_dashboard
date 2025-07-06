@@ -170,10 +170,10 @@ class S {
     );
   }
 
-  /// `Manage Full Rent Units`
+  /// `Manage Rent Units`
   String get manageFullRentUnits {
     return Intl.message(
-      'Manage Full Rent Units',
+      'Manage Rent Units',
       name: 'manageFullRentUnits',
       desc: '',
       args: [],
@@ -210,11 +210,41 @@ class S {
     );
   }
 
-  /// `Settings`
-  String get settings {
+  /// `Admin Management`
+  String get adminManagement {
     return Intl.message(
-      'Settings',
-      name: 'settings',
+      'Admin Management',
+      name: 'adminManagement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin Details`
+  String get adminDetails {
+    return Intl.message(
+      'Admin Details',
+      name: 'adminDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
       desc: '',
       args: [],
     );
