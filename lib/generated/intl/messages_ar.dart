@@ -59,6 +59,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
         "admin": MessageLookupByLibrary.simpleMessage("مشرف"),
+        "adminDetails": MessageLookupByLibrary.simpleMessage("بيانات المشرف"),
+        "adminManagement":
+            MessageLookupByLibrary.simpleMessage("إدارة المشرفين"),
         "adminName": MessageLookupByLibrary.simpleMessage("اسم الادمن"),
         "ahmed": MessageLookupByLibrary.simpleMessage("احمد"),
         "alexandria": MessageLookupByLibrary.simpleMessage("الإسكندرية"),
@@ -78,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المستخدمين المحظورين"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
+        "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
+        "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
         "contractDuration": MessageLookupByLibrary.simpleMessage("مدة العقد"),
         "contractExpiring": m3,
@@ -125,7 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainFacilities":
             MessageLookupByLibrary.simpleMessage("المرافق الرئيسية"),
         "manageFullRentUnits":
-            MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار الكلي"),
+            MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار "),
         "managePartialRentUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات الايجار الجزئي"),
         "manageSalesUnits":
@@ -189,7 +194,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendNow": MessageLookupByLibrary.simpleMessage("الارسال الان"),
         "sendTime": MessageLookupByLibrary.simpleMessage("توقيت الارسال"),
         "sent": MessageLookupByLibrary.simpleMessage("مرسله"),
-        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "shared": MessageLookupByLibrary.simpleMessage("مشتركة"),
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
         "singleRoomsOnly": m9,

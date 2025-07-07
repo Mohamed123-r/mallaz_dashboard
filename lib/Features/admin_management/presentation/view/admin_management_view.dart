@@ -115,14 +115,14 @@ import '../cubit/admin_state.dart';
 // }
 
 // === MAIN VIEW ===
-class SeatingView extends StatefulWidget {
-  const SeatingView({super.key});
+class AdminManagementView extends StatefulWidget {
+  const AdminManagementView({super.key});
 
   @override
-  State<SeatingView> createState() => _SeatingViewState();
+  State<AdminManagementView> createState() => _AdminManagementViewState();
 }
 
-class _SeatingViewState extends State<SeatingView> {
+class _AdminManagementViewState extends State<AdminManagementView> {
   int currentPage = 1;
   final int rowsPerPage = 7;
 
@@ -283,9 +283,62 @@ class _SeatingViewState extends State<SeatingView> {
                               ),
                               ActionCell(
                                 index: 0,
-                                isView: true,
-                                onDelete: () {},
-                                onView: () {},
+
+                                onView: () {
+                                  showDialog(context: context, builder:
+                                      (context) {
+                                    return AlertDialog(
+                                      backgroundColor: isDark
+                                          ? AppColors.darkModeBackground
+                                          : AppColors.lightModeBackground,
+
+
+                                      title: Text(
+                                                 S.of(context).adminDetails,
+                                                 style: AppTextStyles
+                                                     .subtitleTitle20pxRegular(
+                                                   context,
+                                      ),
+                                               ),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "${S.of(context).adminName}: ${admin.userName}",
+                                          ),
+                                          Text(
+                                            "${S.of(context).email}: ${admin.email}",
+                                          ),
+                                          Text(
+                                            "${S.of(context).phoneNumber}: ${admin.phoneNumber}",
+                                          ),
+                                          Text(
+                                            "${S.of(context).status}: ${admin.isBlocked ? S.of(context).inactive : S.of(context).active}",
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context),
+                                          child: Text(
+                                            S.of(context).close,
+                                            style: AppTextStyles
+                                                .buttonLarge20pxRegular(
+                                              context,
+                                            ).copyWith(
+                                              color: isDark
+                                                  ? AppColors.darkModeAccent
+                                                  : AppColors.lightModeAccent,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                  );
+                                },
                                 iDark: isDark,
                               ),
                             ],
@@ -313,16 +366,13 @@ class _SeatingViewState extends State<SeatingView> {
 
 class ActionCell extends StatelessWidget {
   final int index;
-  final bool isView;
   final bool iDark;
-  final VoidCallback onDelete;
+
   final VoidCallback onView;
 
   const ActionCell({
     super.key,
     required this.index,
-    this.isView = false,
-    required this.onDelete,
     required this.onView,
     required this.iDark,
   });
@@ -333,7 +383,7 @@ class ActionCell extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
               onTap: onView,
@@ -346,17 +396,17 @@ class ActionCell extends StatelessWidget {
                         : AppColors.lightModeAccent,
               ),
             ),
-            InkWell(
-              onTap: onDelete,
-              borderRadius: BorderRadius.circular(8),
-              child: SvgPicture.asset(
-                Assets.imagesBasilEditOutline,
-                color:
-                    iDark
-                        ? AppColors.darkModeAccent
-                        : AppColors.lightModeAccent,
-              ),
-            ),
+            // InkWell(
+            //   onTap: onDelete,
+            //   borderRadius: BorderRadius.circular(8),
+            //   child: SvgPicture.asset(
+            //     Assets.imagesBasilEditOutline,
+            //     color:
+            //         iDark
+            //             ? AppColors.darkModeAccent
+            //             : AppColors.lightModeAccent,
+            //   ),
+            // ),
           ],
         ),
       ),
