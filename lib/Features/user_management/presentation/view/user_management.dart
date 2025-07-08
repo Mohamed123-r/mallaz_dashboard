@@ -76,10 +76,10 @@ class _UserManagementViewState extends State<UserManagementView> {
     return BlocBuilder<UserCubit, UserState>(
       buildWhen:
           (previous, current) =>
-              current is UserSuccess ||
-              current is UserLoading ||
-              current is UserFailure ||
-              current is UserBlockOperationInProgress,
+      current is UserSuccess ||
+          current is UserLoading ||
+          current is UserFailure ||
+          current is UserBlockOperationInProgress,
       builder: (context, state) {
         String? blockingUserId;
         bool? isBlocking;
@@ -181,35 +181,35 @@ class _UserManagementViewState extends State<UserManagementView> {
                 height: 40,
                 minWidth: 180,
                 onPressed:
-                    showLoading
-                        ? null
-                        : () {
-                          final userCubit = context.read<UserCubit>();
-                          if (isActive) {
-                            userCubit.lockUser(userId);
-                          } else {
-                            userCubit.unlockUser(userId);
-                          }
-                        },
+                showLoading
+                    ? null
+                    : () {
+                  final userCubit = context.read<UserCubit>();
+                  if (isActive) {
+                    userCubit.lockUser(userId);
+                  } else {
+                    userCubit.unlockUser(userId);
+                  }
+                },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
                 color: isActive ? AppColors.red : AppColors.green,
                 child:
-                    showLoading
-                        ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CustomLoading()
-                        )
-                        : Text(
-                          isActive
-                              ? S.of(context).blockUser
-                              : S.of(context).unblock,
-                          style: AppTextStyles.buttonLarge20pxRegular(
-                            context,
-                          ).copyWith(color: AppColors.black),
-                        ),
+                showLoading
+                    ? const SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CustomLoading()
+                )
+                    : Text(
+                  isActive
+                      ? S.of(context).blockUser
+                      : S.of(context).unblock,
+                  style: AppTextStyles.buttonLarge20pxRegular(
+                    context,
+                  ).copyWith(color: AppColors.black),
+                ),
               ),
             ),
           ),
