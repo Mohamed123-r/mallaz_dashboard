@@ -142,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "newNotificationForm":
             MessageLookupByLibrary.simpleMessage("نموذج ارسال اشعار جديد"),
         "newUsersCount":
-            MessageLookupByLibrary.simpleMessage("عدد المستخدمين الجدد"),
+            MessageLookupByLibrary.simpleMessage("عدد المستخدمين "),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "noUsersFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
@@ -183,8 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("جدوله الاشعار"),
-        "searchHint": MessageLookupByLibrary.simpleMessage(
-            "اسم المستخدم ,حالة العقار ...."),
+        "searchHint": MessageLookupByLibrary.simpleMessage("اسم المستخدم...."),
         "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("اختيار الفئه المستهدفه"),

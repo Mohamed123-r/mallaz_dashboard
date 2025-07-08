@@ -6,7 +6,7 @@
   "languages": "Languages",
   "arabic": "Arabic",
   "english": "English",
-  "searchHint" : "User Name ,Status Real state .....",
+  "searchHint" : "User Name.....",
   "adminName" : "Admin Name",
   "homeScreen": "Home Screen",
   "manageSalesUnits": "Manage Sales Units",
@@ -67,7 +67,7 @@
   "propertyDetails": "Property Details",
   "mainFacilities": "Main Facilities",
 
-  "newUsersCount": "New Users Count",
+  "newUsersCount": "Users Count",
   "mobileNumber": "Mobile Number",
   "accountStatus": "Account Status",
   "active": "Active",

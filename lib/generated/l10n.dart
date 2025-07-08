@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `User Name ,Status Real state .....`
+  /// `User Name.....`
   String get searchHint {
     return Intl.message(
-      'User Name ,Status Real state .....',
+      'User Name.....',
       name: 'searchHint',
       desc: '',
       args: [],
@@ -720,10 +720,10 @@ class S {
     );
   }
 
-  /// `New Users Count`
+  /// `Users Count`
   String get newUsersCount {
     return Intl.message(
-      'New Users Count',
+      'Users Count',
       name: 'newUsersCount',
       desc: '',
       args: [],

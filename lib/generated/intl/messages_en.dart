@@ -145,8 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mohamed": MessageLookupByLibrary.simpleMessage("Mohamed"),
         "newNotificationForm":
             MessageLookupByLibrary.simpleMessage("New Notification Form"),
-        "newUsersCount":
-            MessageLookupByLibrary.simpleMessage("New Users Count"),
+        "newUsersCount": MessageLookupByLibrary.simpleMessage("Users Count"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noUsersFound": MessageLookupByLibrary.simpleMessage("No users found"),
         "notificationText":
@@ -189,8 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("Schedule Notification"),
-        "searchHint": MessageLookupByLibrary.simpleMessage(
-            "User Name ,Status Real state ....."),
+        "searchHint": MessageLookupByLibrary.simpleMessage("User Name....."),
         "security247": MessageLookupByLibrary.simpleMessage("24/7 Security"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("Select Target Group"),

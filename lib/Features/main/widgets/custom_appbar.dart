@@ -40,35 +40,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 const SizedBox(width: 32),
                 Image.asset(Assets.imagesLogo, height: 54),
 
-                const Spacer(),
-                SizedBox(
-                  width: 380,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: SvgPicture.asset(
-                        Assets.imagesSearchIcon,
 
-                        fit: BoxFit.scaleDown,
-                      ),
-                      hintText: S.of(context).searchHint,
-                      hintStyle: AppTextStyles.subtitle16pxRegular(
-                        context,
-                      ).copyWith(color: AppColors.lightModeGrayText),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(800),
-                        borderSide: BorderSide(color: AppColors.graysGray3),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(800),
-                        borderSide: BorderSide(color: AppColors.graysGray3),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(800),
-                        borderSide: BorderSide(color: AppColors.graysGray3),
-                      ),
-                    ),
-                  ),
-                ),
                 const Spacer(),
                 SizedBox(
                   width: 100,
