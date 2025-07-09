@@ -1,14 +1,21 @@
 import 'package:book_apartment_dashboard/Features/main/main_view.dart';
+import 'package:book_apartment_dashboard/constant.dart';
+import 'package:book_apartment_dashboard/core/database/cache/cache_helper.dart';
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_text_field.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/api/dio_consumer.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/widgets/custom_password_itext_field.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../core/services/theme_cubit.dart';
+import '../../data/repo/log_in_repo_impl.dart';
+import '../cubit/log_in_cubit.dart';
+import '../cubit/log_in_state.dart';
 
 class LogInView extends StatelessWidget {
   const LogInView({super.key});
@@ -17,6 +24,24 @@ class LogInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create:
+          (context) => LoginCubit(
+            loginRepo: LoginRepoImpl(dioConsumer: DioConsumer(dio: Dio())),
+          ),
+      child: LogInBodyView(),
+    );
+  }
+}
+
+class LogInBodyView extends StatelessWidget {
+  const LogInBodyView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Row(
         children: [
@@ -25,7 +50,6 @@ class LogInView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(Assets.imagesLogo, width: 360, fit: BoxFit.cover),
-
                 Text(
                   S.of(context).logIn,
                   style: AppTextStyles.subtitleTitle20pxRegular(context),
@@ -41,41 +65,80 @@ class LogInView extends StatelessWidget {
                         title: S.of(context).email,
                         hintText: "none@gmail.com",
                         keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
                       ),
                       SizedBox(height: 24),
                       CustomPasswordTextField(
                         title: S.of(context).password,
                         hintText: "**********",
+                        controller: passwordController,
                       ),
                     ],
                   ),
                 ),
-
                 SizedBox(height: 24),
-                MaterialButton(
-                  height: 62,
-                  minWidth: 380,
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(MainView.routeName);
+                BlocConsumer<LoginCubit, LoginState>(
+                  listener: (context, state) {
+                    if (state is LoginSuccess) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(state.loginModel.message)),
+                      );
+                      CacheHelper().saveMap(
+                        key: userData,
+                        value: state.loginModel.data as Map<String, dynamic>,
+                      );
+                      CacheHelper.sharedPreferences.setBool(
+                        isSuccessLogin,
+                        true,
+                      );
+                      Navigator.of(context).pushNamed(MainView.routeName);
+                    } else if (state is LoginFailure) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(state.error)));
+                    }
                   },
-                  color:
-                      context.watch<ThemeCubit>().state == ThemeMode.dark
-                          ? AppColors.darkModeButtonsPrimary
-                          : AppColors.lightModeButtonsPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    S.of(context).logIn,
-                    style: AppTextStyles.buttonLarge20pxRegular(
-                      context,
-                    ).copyWith(
+                  builder: (context, state) {
+                    return MaterialButton(
+                      height: 62,
+                      minWidth: 380,
+                      onPressed: () {
+                        final email = emailController.text;
+                        final password = passwordController.text;
+                        if (email.isNotEmpty && password.isNotEmpty) {
+                          context.read<LoginCubit>().login(email, password);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Please fill all fields')),
+                          );
+                        }
+                      },
                       color:
                           context.watch<ThemeCubit>().state == ThemeMode.dark
-                              ? AppColors.darkModeText
-                              : AppColors.lightModeText,
-                    ),
-                  ),
+                              ? AppColors.darkModeButtonsPrimary
+                              : AppColors.lightModeButtonsPrimary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child:
+                          state is LoginLoading
+                              ? const CircularProgressIndicator(
+                                color: AppColors.white,
+                              )
+                              : Text(
+                                S.of(context).logIn,
+                                style: AppTextStyles.buttonLarge20pxRegular(
+                                  context,
+                                ).copyWith(
+                                  color:
+                                      context.watch<ThemeCubit>().state ==
+                                              ThemeMode.dark
+                                          ? AppColors.darkModeText
+                                          : AppColors.lightModeText,
+                                ),
+                              ),
+                    );
+                  },
                 ),
               ],
             ),
