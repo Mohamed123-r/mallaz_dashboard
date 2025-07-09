@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'Features/login/presentation/view/log_in_view.dart';
+import 'Features/main/main_view.dart';
+import 'constant.dart';
 import 'core/database/cache/cache_helper.dart';
 import 'core/helper_functions/on_generate_route.dart';
 import 'core/services/bloc_opesever.dart';
@@ -99,7 +101,11 @@ class MyApp extends StatelessWidget {
                 supportedLocales: S.delegate.supportedLocales,
                 locale: locale,
                 onGenerateRoute: onGenerateRoute,
-                initialRoute: LogInView.routeName,
+                initialRoute:
+                    CacheHelper.sharedPreferences.getBool(isSuccessLogin) ==
+                            true
+                        ? MainView.routeName
+                        : LogInView.routeName,
               );
             },
           );
