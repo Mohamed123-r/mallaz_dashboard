@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/repo/log_in_repo.dart';
@@ -17,12 +15,11 @@ class LoginCubit extends Cubit<LoginState> {
 
       if (loginModel.data!.role == "Admin") {
         emit(LoginSuccess(loginModel: loginModel));
-      }
-      else {
+      } else {
         emit(LoginFailure(error: "You are not an admin"));
       }
     } catch (e) {
-      emit(LoginFailure(error: e.toString()));
+      emit(LoginFailure(error: "Invalid phone number or password"));
     }
   }
 }

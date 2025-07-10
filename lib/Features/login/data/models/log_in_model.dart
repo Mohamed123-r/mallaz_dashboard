@@ -38,4 +38,14 @@ class LoginData {
       token: json['token'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'userId': userId,
+      'name': name,
+      'role': role,
+      'userImage': userImage,
+      'token': token,
+    };
+  }
 }
