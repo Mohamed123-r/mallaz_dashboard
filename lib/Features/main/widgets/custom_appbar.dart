@@ -1,6 +1,8 @@
 import 'package:book_apartment_dashboard/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../constant.dart';
+import '../../../core/database/cache/cache_helper.dart';
 import '../../../core/services/theme_cubit.dart';
 import '../../../core/services/locale_cubit.dart';
 import 'package:day_night_themed_switch/day_night_themed_switch.dart';
@@ -40,7 +42,6 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 const SizedBox(width: 32),
                 Image.asset(Assets.imagesLogo, height: 54),
 
-
                 const Spacer(),
                 SizedBox(
                   width: 100,
@@ -52,10 +53,31 @@ class _CustomAppbarState extends State<CustomAppbar> {
                   ),
                 ),
                 const SizedBox(width: 24),
-                CircleAvatar(radius: 28),
+                CircleAvatar(
+                  radius: 26,
+                  backgroundColor:
+                      isDark
+                          ? AppColors.darkModeButtonsPrimary
+                          : AppColors.lightModeButtonsPrimary,
+                  child:
+                      CacheHelper().getMap(key: userData)!['image'] != null
+                          ? Image.network(
+                            CacheHelper().getMap(key: userData)!['image']!,
+                            fit: BoxFit.cover,
+                          )
+                          : Icon(
+                            Icons.person,
+                            size: 32,
+                            color:
+                                context.watch<ThemeCubit>().state ==
+                                        ThemeMode.dark
+                                    ? AppColors.darkModeText
+                                    : AppColors.lightModeText,
+                          ),
+                ),
                 const SizedBox(width: 12),
                 Text(
-                  S.of(context).adminName,
+                  CacheHelper().getMap(key: userData)!['name'] ?? '',
                   style: AppTextStyles.text14pxRegular(context),
                 ),
                 const SizedBox(width: 24),

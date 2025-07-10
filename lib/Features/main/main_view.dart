@@ -167,18 +167,18 @@ class _MainViewState extends State<MainView> {
                               create:
                                   (context) => UserCubit(getIt.get<UserRepo>()),
                               child: UserManagementView(),
-                            ) : activeIndex == 5
+                            )
+                            : activeIndex == 5
                             ? BlocProvider(
-                          create:
-                              (context) =>
-                              AdminCubit(getIt.get<AdminRepo>()),
-                          child: AdminManagementView(),
-                        )
+                              create:
+                                  (context) =>
+                                      AdminCubit(getIt.get<AdminRepo>()),
+                              child: AdminManagementView(),
+                            )
                             : activeIndex == 6
                             ? ChatView()
                             : activeIndex == 7
                             ? NotificationView()
-
                             : Container(color: Colors.red),
                   ),
                 ),

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_colors.dart';
 import 'custom_text_field.dart';
-
 
 class CustomPasswordTextField extends StatefulWidget {
   const CustomPasswordTextField({
     super.key,
     required this.title,
     required this.hintText,
-    this.controller, // ✅ إضافة `controller`
+    this.controller,
     this.onSaved,
   });
 
   final String title;
   final String hintText;
-  final TextEditingController? controller; // ✅ دعم `TextEditingController`
+  final TextEditingController? controller;
   final void Function(String?)? onSaved;
 
   @override
@@ -37,14 +37,24 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
       onChanged: widget.onSaved,
       hintText: widget.hintText,
       title: widget.title,
-      // suffixIcon: IconButton(
-      //   onPressed: () {
-      //     setState(() {
-      //       _obscureText = !_obscureText;
-      //     });
-      //   },
-      //   icon: SvgPicture.asset(Assets.imagesInput),
-      // ),
+      suffixIcon: IconButton(
+        onPressed: () {
+          setState(() {
+            _obscureText = !_obscureText;
+          });
+        },
+        icon: IconButton(
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          icon: Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: AppColors.lightModeGrayText,
+          ),
+        ),
+      ),
     );
   }
 }
