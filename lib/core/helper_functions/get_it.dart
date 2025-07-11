@@ -10,6 +10,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../Features/admin_management/data/repo/admin_repo.dart';
 import '../../Features/admin_management/data/repo/admin_repo_impl.dart';
+import '../../Features/user_management/data/repo/user_search_repo.dart';
+import '../../Features/user_management/data/repo/user_search_repo_impl.dart';
 import '../api/dio_consumer.dart';
 
 final getIt = GetIt.instance;
@@ -27,7 +29,11 @@ void setupGetIt() {
   );
   getIt.registerSingleton<PropertyRequestRepo>(
     PropertyRequestRepoImpl(dioConsumer: getIt<DioConsumer>()),
-  );  getIt.registerSingleton<PropertyDetailsRepo>(
+  );
+  getIt.registerSingleton<PropertyDetailsRepo>(
     PropertyDetailsRepoImpl(dioConsumer: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<UserSearchRepo>(
+    UserSearchRepoImpl(dioConsumer: getIt<DioConsumer>()),
   );
 }

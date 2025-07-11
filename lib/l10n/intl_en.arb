@@ -6,7 +6,7 @@
   "languages": "Languages",
   "arabic": "Arabic",
   "english": "English",
-  "searchHint" : "User Name.....",
+  "searchHint": "Search by full username...",
   "adminName" : "Admin Name",
   "homeScreen": "Home Screen",
   "manageSalesUnits": "Manage Sales Units",

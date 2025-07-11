@@ -88,8 +88,8 @@ class LogInBodyView extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             CustomTextField(
-                              title: S.of(context).email,
-                              hintText: "none@gmail.com",
+                              title: S.of(context).phoneNumber,
+                              hintText: "01000000000",
                               keyboardType: TextInputType.emailAddress,
                               controller: emailController,
                             ),

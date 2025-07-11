@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `User Name.....`
+  /// `Search by full username...`
   String get searchHint {
     return Intl.message(
-      'User Name.....',
+      'Search by full username...',
       name: 'searchHint',
       desc: '',
       args: [],

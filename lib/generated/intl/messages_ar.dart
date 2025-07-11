@@ -183,7 +183,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("جدوله الاشعار"),
-        "searchHint": MessageLookupByLibrary.simpleMessage("اسم المستخدم...."),
+        "searchHint":
+            MessageLookupByLibrary.simpleMessage(" اكتب اسم المستخدم كامل...."),
         "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("اختيار الفئه المستهدفه"),
