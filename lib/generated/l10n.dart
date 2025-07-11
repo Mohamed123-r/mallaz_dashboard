@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `User Name.....`
+  /// `Search by full username...`
   String get searchHint {
     return Intl.message(
-      'User Name.....',
+      'Search by full username...',
       name: 'searchHint',
       desc: '',
       args: [],
@@ -135,6 +135,26 @@ class S {
     return Intl.message(
       'Admin Name',
       name: 'adminName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to log out of the app?`
+  String get logoutQua {
+    return Intl.message(
+      'Do you want to log out of the app?',
+      name: 'logoutQua',
       desc: '',
       args: [],
     );

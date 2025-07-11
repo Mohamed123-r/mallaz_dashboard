@@ -12,6 +12,7 @@ import 'package:book_apartment_dashboard/Features/user_management/presentation/c
 import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 import '../../core/helper_functions/get_it.dart';
 import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
@@ -27,6 +28,8 @@ import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
 import '../unit_management/presentation/view/rent_to_lease_view.dart';
 import '../unit_management/presentation/view/sales_view.dart';
+import '../user_management/data/repo/user_search_repo.dart';
+import '../user_management/presentation/cubit/user_search_cubit.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -76,11 +79,6 @@ class _MainViewState extends State<MainView> {
       DrawerItemModel(
         title: S.of(context).sendNotification,
         image: Assets.imagesNotificationIcon,
-      ),
-
-      DrawerItemModel(
-        title: S.of(context).logOut,
-        image: Assets.imagesBasilLogoutOutline,
       ),
     ];
     return Scaffold(
@@ -163,10 +161,34 @@ class _MainViewState extends State<MainView> {
                             : activeIndex == 3
                             ? RentToLeaseView()
                             : activeIndex == 4
-                            ? BlocProvider(
-                              create:
-                                  (context) => UserCubit(getIt.get<UserRepo>()),
-                              child: UserManagementView(),
+                            ? MultiBlocProvider(
+                              providers: [
+                                BlocProvider(
+                                  create:
+                                      (context) =>
+                                          UserCubit(getIt.get<UserRepo>()),
+                                ),
+                                BlocProvider(
+                                  create:
+                                      (context) => UserSearchCubit(
+                                        userSearchRepo:
+                                            getIt.get<UserSearchRepo>(),
+                                      ),
+                                ),
+                              ],
+                              child: UserManagementView(
+                                onPressedBack: () {
+                                  activeIndex = 0;
+                                  setState(() {});
+                                  DelayStreamTransformer(
+                                    const Duration(seconds: 1),
+                                  );
+
+                                  activeIndex = 4;
+
+                                  setState(() {});
+                                },
+                              ),
                             )
                             : activeIndex == 5
                             ? BlocProvider(
