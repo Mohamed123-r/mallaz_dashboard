@@ -79,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser": MessageLookupByLibrary.simpleMessage("حظر المستخدم"),
         "blockedUsers":
             MessageLookupByLibrary.simpleMessage("المستخدمين المحظورين"),
+        "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
@@ -127,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lastLogin": MessageLookupByLibrary.simpleMessage("آخر دخول"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "logoutQua": MessageLookupByLibrary.simpleMessage(
+            "هل تريد تسجيل الخروج من التطبيق؟"),
         "mainFacilities":
             MessageLookupByLibrary.simpleMessage("المرافق الرئيسية"),
         "manageFullRentUnits":

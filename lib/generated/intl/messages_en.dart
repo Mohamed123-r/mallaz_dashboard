@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bathroom": MessageLookupByLibrary.simpleMessage("Bathroom"),
         "blockUser": MessageLookupByLibrary.simpleMessage("Block User"),
         "blockedUsers": MessageLookupByLibrary.simpleMessage("Blocked Users"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
@@ -131,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lastLogin": MessageLookupByLibrary.simpleMessage("Last Login"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "logoutQua": MessageLookupByLibrary.simpleMessage(
+            "Do you want to log out of the app?"),
         "mainFacilities":
             MessageLookupByLibrary.simpleMessage("Main Facilities"),
         "manageFullRentUnits":

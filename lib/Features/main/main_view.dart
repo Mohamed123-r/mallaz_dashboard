@@ -80,11 +80,6 @@ class _MainViewState extends State<MainView> {
         title: S.of(context).sendNotification,
         image: Assets.imagesNotificationIcon,
       ),
-
-      DrawerItemModel(
-        title: S.of(context).logOut,
-        image: Assets.imagesBasilLogoutOutline,
-      ),
     ];
     return Scaffold(
       body: Column(
@@ -181,18 +176,19 @@ class _MainViewState extends State<MainView> {
                                       ),
                                 ),
                               ],
-                              child: UserManagementView(onPressedBack: () {
-                                activeIndex = 0;
-                                setState(() {});
-                                DelayStreamTransformer(
-                                  const Duration(seconds: 1),
-                                );
+                              child: UserManagementView(
+                                onPressedBack: () {
+                                  activeIndex = 0;
+                                  setState(() {});
+                                  DelayStreamTransformer(
+                                    const Duration(seconds: 1),
+                                  );
 
-                                activeIndex = 4;
+                                  activeIndex = 4;
 
-                                setState(() {});
-
-                              },),
+                                  setState(() {});
+                                },
+                              ),
                             )
                             : activeIndex == 5
                             ? BlocProvider(

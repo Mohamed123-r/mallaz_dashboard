@@ -8,6 +8,8 @@
   "english": "English",
   "searchHint": "Search by full username...",
   "adminName" : "Admin Name",
+  "cancel" : "Cancel",
+  "logoutQua":  "Do you want to log out of the app?",
   "homeScreen": "Home Screen",
   "manageSalesUnits": "Manage Sales Units",
   "managePartialRentUnits": "Manage Partial Rent Units",

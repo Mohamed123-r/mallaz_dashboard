@@ -140,6 +140,26 @@ class S {
     );
   }
 
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to log out of the app?`
+  String get logoutQua {
+    return Intl.message(
+      'Do you want to log out of the app?',
+      name: 'logoutQua',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home Screen`
   String get homeScreen {
     return Intl.message(
