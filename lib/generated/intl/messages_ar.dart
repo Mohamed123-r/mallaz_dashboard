@@ -188,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("جدوله الاشعار"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage(" اكتب اسم المستخدم كامل...."),
+        "searchId": MessageLookupByLibrary.simpleMessage("ابحث ب Id الوحدة..."),
         "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("اختيار الفئه المستهدفه"),

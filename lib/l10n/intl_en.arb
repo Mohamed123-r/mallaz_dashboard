@@ -9,6 +9,7 @@
   "searchHint": "Search by full username...",
   "adminName" : "Admin Name",
   "cancel" : "Cancel",
+  "searchId": "Search by unit ID...",
   "logoutQua":  "Do you want to log out of the app?",
   "homeScreen": "Home Screen",
   "manageSalesUnits": "Manage Sales Units",

@@ -150,6 +150,16 @@ class S {
     );
   }
 
+  /// `Search by unit ID...`
+  String get searchId {
+    return Intl.message(
+      'Search by unit ID...',
+      name: 'searchId',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Do you want to log out of the app?`
   String get logoutQua {
     return Intl.message(

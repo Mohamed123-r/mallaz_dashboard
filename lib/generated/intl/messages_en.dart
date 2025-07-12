@@ -193,6 +193,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Schedule Notification"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search by full username..."),
+        "searchId":
+            MessageLookupByLibrary.simpleMessage("Search by unit ID..."),
         "security247": MessageLookupByLibrary.simpleMessage("24/7 Security"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("Select Target Group"),

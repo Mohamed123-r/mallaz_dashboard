@@ -3,6 +3,7 @@ import 'package:book_apartment_dashboard/Features/add_new_properties/presentatio
 import 'package:book_apartment_dashboard/Features/add_new_properties/presentation/view/widgets/property_gallery.dart';
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
+import 'package:book_apartment_dashboard/generated/intl/messages_en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
@@ -37,7 +38,44 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
           return CustomLoading();
         }
         if (state is PropertyDetailsFailure) {
-          return Center(child: Text(state.error));
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 40, vertical: 16
+            ),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: onTapBack,
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color:
+                            isDark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
+                      ),
+                    ),
+
+                  ],
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      "هذه الوحدة غير موجودة",
+                      style: TextStyle(
+                        color:
+                        isDark
+                            ? AppColors.darkModeText
+                            : AppColors.lightModeText,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
         }
         if (state is PropertyDetailsSuccess) {
           final details = state.details;
