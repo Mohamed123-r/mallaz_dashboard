@@ -4,6 +4,8 @@ import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/services/locale_cubit.dart';
@@ -12,6 +14,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_data_cell.dart';
 import '../../../../core/widgets/custom_header_call.dart';
 import '../../../../core/widgets/custom_pagination.dart';
+import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../data/models/add_new_properties_model.dart';
 import '../../data/repo/add_new_properties_repo_impl.dart';
@@ -33,6 +36,11 @@ class _RequestsToAddNewPropertiesState
     extends State<RequestsToAddNewProperties> {
   int selectedTabIndex = 0;
   final tabs = <String>[];
+  final searchController = TextEditingController();
+  final _searchSubject = BehaviorSubject<String>();
+
+
+
 
   @override
   void didChangeDependencies() {
@@ -64,6 +72,17 @@ class _RequestsToAddNewPropertiesState
 
   @override
   Widget build(BuildContext context) {
+    _searchSubject.stream
+        .debounceTime(const Duration(milliseconds: 1000))
+        .distinct()
+        .listen((query) {
+      if (query.isNotEmpty) {
+        widget.onTapSeeDetails(
+          int.tryParse(query) ?? 0,
+        );
+      }
+    });
+
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
     final locale = context.watch<LocaleCubit>().state == Locale('ar') ? 'ar' : 'en';
     return Padding(
@@ -83,6 +102,51 @@ class _RequestsToAddNewPropertiesState
                   ),
                   const SizedBox(width: 8),
                   Text("$count", style: AppTextStyles.buttonLarge20pxRegular(context)),
+                  const Spacer(),
+                  SizedBox(
+                    width: 380,
+                    height: 48,
+                    child: TextFormField(
+
+                      keyboardType: TextInputType.number ,
+
+                      controller: searchController,
+
+                      onChanged: (value) {
+                        _searchSubject.add(value); // إضافة النص إلى الـ Subject
+                      },
+                      decoration: InputDecoration(
+
+                        prefixIcon: SvgPicture.asset(
+                          Assets.imagesSearchIcon,
+                          fit: BoxFit.scaleDown,
+                        ),
+
+                        hintText: S.of(context).searchId,
+
+
+                        hintStyle: AppTextStyles.subtitle16pxRegular(context)
+                            .copyWith(color: AppColors.lightModeGrayText),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(800),
+                          borderSide: BorderSide(color: AppColors.graysGray3),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(800),
+                          borderSide: BorderSide(color: AppColors.graysGray3),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(800),
+                          borderSide: BorderSide(color: AppColors.graysGray3),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(800),
+                          borderSide: BorderSide(color: AppColors.graysGray3),
+                        ),
+                      ),
+                    ),
+                  ),
+
                 ],
               );
             },

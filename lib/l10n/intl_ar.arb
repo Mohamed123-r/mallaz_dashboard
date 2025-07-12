@@ -7,6 +7,7 @@
   "arabic": "عربي",
   "english": "إنجليزي",
   "searchHint": " اكتب اسم المستخدم كامل....",
+  "searchId": "ابحث ب Id الوحدة...",
   "adminName": "اسم الادمن",
   "homeScreen": "الشاشة الرئيسية",
   "manageSalesUnits": "إدارة وحدات البيع",
