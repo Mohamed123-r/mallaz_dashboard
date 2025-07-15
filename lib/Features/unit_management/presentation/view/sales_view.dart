@@ -1,3 +1,7 @@
+import 'package:book_apartment_dashboard/core/widgets/custom_data_cell.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_header_call.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +13,9 @@ import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
 import '../../../add_new_properties/presentation/view/widgets/tabs.dart';
+import '../../data/models/property_model.dart';
+import '../../data/repo/property_repo_impl.dart';
+import '../cubit/property_cubit.dart';
 
 class SalesView extends StatefulWidget {
   const SalesView({super.key});
@@ -18,10 +25,48 @@ class SalesView extends StatefulWidget {
 }
 
 class _SalesViewState extends State<SalesView> {
+  final int rowsPerPage = 10;
+
   int currentPage = 1;
-  int totalPages = 5;
-  final List<bool> isActiveList = [false, false, true, true, false];
+  List<PropertyModel> _lastProperties = [];
+  num _lastTotalCount = 0;
+
   int selectedTabIndex = 0;
+  String? selectedStatus;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedStatus = '';
+    _fetchPage(currentPage);
+  }
+
+  void _onPageChanged(int page) {
+    if (!mounted) return;
+    setState(() => currentPage = page);
+    _fetchPage(page);
+  }
+
+  void _fetchPage(int page) {
+    if (!mounted) return;
+    context.read<PropertyCubit>().fetchProperties(
+      propertyType: 'Sale',
+      pageNumber: page,
+      pageSize: rowsPerPage,
+      propertySaleStatus: selectedStatus ?? '',
+      propertyRentStatus: '',
+    );
+  }
+
+  String _mapStatusToApi(String status) {
+    final mapping = {
+      S.of(context).availableShort: 'Available',
+      S.of(context).pendingShort: 'Waiting_for_reply',
+      S.of(context).underInspectionShort: 'UnderReview',
+      S.of(context).soldShort: 'Sold',
+    };
+    return mapping[status] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,146 +88,235 @@ class _SalesViewState extends State<SalesView> {
           Tabs(
             tabs: tabs,
             selectedIndex: selectedTabIndex,
-            onTabSelected: (i) => setState(() => selectedTabIndex = i),
+            onTabSelected: (i) {
+              setState(() {
+                selectedTabIndex = i;
+                currentPage = 1;
+                selectedStatus = i == 0
+                    ? ''
+                    : i == 1
+                    ? 'Available'
+                    : i == 2
+                    ? 'Waiting_for_reply'
+                    : i == 3
+                    ? 'UnderReview'
+                    : 'Sold';
+              });
+              context.read<PropertyCubit>().fetchProperties(
+                propertyType: 'Sale',
+                pageNumber: currentPage,
+                pageSize: rowsPerPage,
+                propertySaleStatus: selectedStatus!,
+                propertyRentStatus: '',
+              );
+            },
             isDark: isDark,
           ),
           const SizedBox(height: 16),
-          Table(
-            border: TableBorder.all(
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.graysGray2,
-            ),
-            columnWidths: const {
-              0: FlexColumnWidth(1.5),
-              1: FlexColumnWidth(1.5),
-              2: FlexColumnWidth(1.5),
-              3: FlexColumnWidth(1.5),
-              4: FlexColumnWidth(1.5),
-              5: FlexColumnWidth(1.8),
-            },
-            children: [
-              TableRow(
-                decoration: BoxDecoration(color: Colors.transparent),
-                children: [
-                  HeaderCell(text: S.of(context).unitType, context: context),
-                  HeaderCell(text: S.of(context).governorate, context: context),
-                  HeaderCell(text: S.of(context).addedDate, context: context),
-                  HeaderCell(text: S.of(context).ownerName, context: context),
-                  HeaderCell(text: S.of(context).status, context: context),
-                  HeaderCell(text: S.of(context).actions, context: context),
-                ],
-              ),
-              ...List.generate(5, (index) {
-                return TableRow(
-                  children: [
-                    DataCell(text: S.of(context).villa, context: context),
-                    DataCell(text: S.of(context).alexandria, context: context),
-                    DataCell(text: '29-6-2025', context: context),
-                    DataCell(text: '29-6-2025', context: context),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8.0,
-                        horizontal: 12,
-                      ),
-                      child: DropdownButton(
-                        icon: const Icon(Icons.arrow_drop_down),
-                        iconSize: 24,
-                        underline: Container(color: Colors.transparent),
-                        items: [
-                          DropdownMenuItem(
-                            value: S.of(context).availableShort,
-                            child: Text(S.of(context).availableShort,
-                            style: AppTextStyles.text14pxRegular(context),
+          Expanded(
+            child: BlocConsumer<PropertyCubit, PropertyState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, state) {
+                return BlocBuilder<PropertyCubit, PropertyState>(
+                  buildWhen: (previous, current) =>
+                  current is PropertyLoading ||
+                      current is PropertyError ||
+                      current is PropertyLoaded,
+                  builder: (context, state) {
+                    if (state is PropertyLoading) {
+                      return CustomLoading();
+                    }
+                    if (state is PropertyError) {
+                      return Center(child: Text(state.message));
+                    }
+                    if (state is PropertyLoaded) {
+                      _lastProperties = state.properties;
+                      _lastTotalCount = _lastProperties.isNotEmpty
+                          ? _lastProperties[0].totalCount
+                          : 0;
+                      final properties = _lastProperties;
+                      final totalCount = _lastTotalCount;
+                      final pageCount = (totalCount / rowsPerPage).ceil();
+
+                      // حساب نطاق العناصر للصفحة الحالية
+                      final startIndex = (currentPage - 1) * rowsPerPage;
+                      final endIndex = startIndex + rowsPerPage;
+                      final paginatedData = properties.isNotEmpty
+                          ? properties[0].data.sublist(
+                        startIndex,
+                        endIndex > properties[0].data.length
+                            ? properties[0].data.length
+                            : endIndex,
+                      )
+                          : [];
+
+                      return Column(
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Table(
+                                border: TableBorder.all(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.graysGray2,
+                                ),
+                                columnWidths: const {
+                                  0: FlexColumnWidth(1.5),
+                                  1: FlexColumnWidth(1.5),
+                                  2: FlexColumnWidth(1.5),
+                                  3: FlexColumnWidth(1.5),
+                                  4: FlexColumnWidth(1.5),
+                                  5: FlexColumnWidth(1.8),
+                                },
+                                children: [
+                                  TableRow(
+                                    decoration: BoxDecoration(color: Colors.transparent),
+                                    children: [
+                                      CustomHeaderCall(
+                                        text: S.of(context).unitType,
+                                        context: context,
+                                      ),
+                                      CustomHeaderCall(
+                                        text: S.of(context).governorate,
+                                        context: context,
+                                      ),
+                                      CustomHeaderCall(
+                                        text: S.of(context).addedDate,
+                                        context: context,
+                                      ),
+                                      CustomHeaderCall(
+                                        text: S.of(context).ownerName,
+                                        context: context,
+                                      ),
+                                      CustomHeaderCall(
+                                        text: S.of(context).status,
+                                        context: context,
+                                      ),
+                                      CustomHeaderCall(
+                                        text: S.of(context).actions,
+                                        context: context,
+                                      ),
+                                    ],
+                                  ),
+                                  if (properties.isNotEmpty)
+                                    ...List.generate(paginatedData.length, (index) {
+                                      final property = paginatedData[index];
+                                      return TableRow(
+                                        children: [
+                                          CustomDataCell(
+                                            text: property.id.toString(),
+                                            context: context,
+                                          ),
+                                          CustomDataCell(
+                                            text: property.governorate,
+                                            context: context,
+                                          ),
+                                          CustomDataCell(
+                                            text: property.createdAt,
+                                            context: context,
+                                          ),
+                                          CustomDataCell(
+                                            text: property.ownerName,
+                                            context: context,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0,
+                                              horizontal: 12,
+                                            ),
+                                            child: DropdownButton<String>(
+                                              icon: const Icon(Icons.arrow_drop_down),
+                                              iconSize: 24,
+                                              underline: Container(color: Colors.transparent),
+                                              items: [
+                                                DropdownMenuItem(
+                                                  value: 'Available',
+                                                  child: Text(
+                                                    S.of(context).availableShort,
+                                                    style: AppTextStyles.text14pxRegular(
+                                                      context,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: 'Waiting_for_reply',
+                                                  child: Text(
+                                                    S.of(context).pendingShort,
+                                                    style: AppTextStyles.text14pxRegular(
+                                                      context,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: 'UnderReview',
+                                                  child: Text(
+                                                    S.of(context).underInspectionShort,
+                                                    style: AppTextStyles.text14pxRegular(
+                                                      context,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: 'Sold',
+                                                  child: Text(
+                                                    S.of(context).soldShort,
+                                                    style: AppTextStyles.text14pxRegular(
+                                                      context,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                              onChanged: (value) {
+                                                if (value != null) {
+                                                  setState(() {
+                                                    selectedStatus = value;
+                                                  });
+                                                  context.read<PropertyCubit>().fetchProperties(
+                                                    propertyType: 'Sale',
+                                                    pageNumber: currentPage,
+                                                    pageSize: rowsPerPage,
+                                                    propertySaleStatus: value,
+                                                    propertyRentStatus: '',
+                                                  );
+                                                }
+                                              },
+                                              value: property.propertySaleStatus,
+                                            ),
+                                          ),
+                                          ActionCell(
+                                            index: startIndex + index,
+                                            isView: true,
+                                            onDelete: () {},
+                                            onView: () {},
+                                            iDark: isDark,
+                                          ),
+                                        ],
+                                      );
+                                    }),
+                                ],
+                              ),
                             ),
                           ),
-                          DropdownMenuItem(
-                            value: S.of(context).pendingShort,
-                            child: Text(S.of(context).pendingShort ,style: AppTextStyles.text14pxRegular(context),),
-                          ),
-                          DropdownMenuItem(
-                            value: S.of(context).underInspectionShort,
-                            child: Text(S.of(context).underInspectionShort,style: AppTextStyles.text14pxRegular(context),),
-                          ),
-                          DropdownMenuItem(
-                            value: S.of(context).soldShort,
-                            child: Text(S.of(context).soldShort,style: AppTextStyles.text14pxRegular(context),),
+                          const SizedBox(height: 12),
+                          CustomPagination(
+                            currentPage: currentPage,
+                            pageCount: pageCount,
+                            onPageChanged: _onPageChanged,
                           ),
                         ],
-                        onChanged: (value) {},
-                        value: S.of(context).availableShort,
-                      ),
-                    ),
-                    ActionCell(
-                      index: index,
-                      isView: true,
-                      onDelete: () {},
-                      onView: () {},
-                      iDark: isDark,
-                    ),
-                  ],
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
                 );
-              }),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: currentPage > 1
-                    ? () => setState(() => currentPage--)
-                    : null,
-              ),
-              const SizedBox(width: 8),
-              Text('$currentPage ... $totalPages'),
-              const SizedBox(width: 8),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward_ios),
-                onPressed: currentPage < totalPages
-                    ? () => setState(() => currentPage++)
-                    : null,
-              ),
-            ],
+              },
+            ),
           ),
         ],
       ),
     );
   }
-}
-
-class DataCell extends StatelessWidget {
-  const DataCell({super.key, required this.text, required this.context});
-
-  final String text;
-  final BuildContext context;
-
-  @override
-  Widget build(BuildContext context) => TableCell(
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        child: Text(text, style: AppTextStyles.text14pxRegular(context)),
-      ),
-    ),
-  );
-}
-
-class HeaderCell extends StatelessWidget {
-  const HeaderCell({super.key, required this.text, required this.context});
-
-  final String text;
-  final BuildContext context;
-
-  @override
-  Widget build(BuildContext context) => TableCell(
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        child: Text(text, style: AppTextStyles.buttonLarge20pxRegular(context)),
-      ),
-    ),
-  );
 }
 
 class ActionCell extends StatelessWidget {
@@ -225,9 +359,7 @@ class ActionCell extends StatelessWidget {
                   ? AppColors.darkModeAccent
                   : AppColors.lightModeAccent,
             ),
-            SvgPicture.asset(
-              Assets.imagesFluentDelete32Regular,
-            ),
+            SvgPicture.asset(Assets.imagesFluentDelete32Regular),
           ],
         ),
       ),

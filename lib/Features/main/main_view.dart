@@ -26,6 +26,8 @@ import '../admin_management/presentation/view/admin_management_view.dart';
 import '../chat/presentation/view/chat_view.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
+import '../unit_management/data/repo/property_repo.dart';
+import '../unit_management/presentation/cubit/property_cubit.dart';
 import '../unit_management/presentation/view/rent_to_lease_view.dart';
 import '../unit_management/presentation/view/sales_view.dart';
 import '../user_management/data/repo/user_search_repo.dart';
@@ -157,7 +159,13 @@ class _MainViewState extends State<MainView> {
                               ),
                             )
                             : activeIndex == 2
-                            ? SalesView()
+                            ? BlocProvider(
+                              create:
+                                  (_) => PropertyCubit(
+                                    propertyRepo:  getIt.get<PropertyRepo>(),
+                                  ),
+                              child: SalesView(),
+                            )
                             : activeIndex == 3
                             ? RentToLeaseView()
                             : activeIndex == 4
