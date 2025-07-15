@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
+import '../../../../core/widgets/custom_header_call.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
@@ -65,12 +66,12 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
               TableRow(
                 decoration: BoxDecoration(color: Colors.transparent),
                 children: [
-                  HeaderCell(text: S.of(context).unitNumber, context: context),
-                  HeaderCell(text: S.of(context).governorate, context: context),
-                  HeaderCell(text: S.of(context).contractDuration, context: context),
-                  HeaderCell(text: S.of(context).endDate, context: context),
-                  HeaderCell(text: S.of(context).status, context: context),
-                  HeaderCell(text: S.of(context).actions, context: context),
+                  CustomHeaderCall(text: S.of(context).unitNumber, context: context),
+                  CustomHeaderCall(text: S.of(context).governorate, context: context),
+                  CustomHeaderCall(text: S.of(context).contractDuration, context: context),
+                  CustomHeaderCall(text: S.of(context).endDate, context: context),
+                  CustomHeaderCall(text: S.of(context).status, context: context),
+                  CustomHeaderCall(text: S.of(context).actions, context: context),
                 ],
               ),
               ...List.generate(5, (index) {

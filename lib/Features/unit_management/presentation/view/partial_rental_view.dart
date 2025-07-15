@@ -1,4 +1,5 @@
 import 'package:book_apartment_dashboard/Features/unit_management/presentation/view/sales_view.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_header_call.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,12 +65,12 @@ class _PartialRentalViewState extends State<PartialRentalView> {
               TableRow(
                 decoration: BoxDecoration(color: Colors.transparent),
                 children: [
-                  HeaderCell(text: S.of(context).roomNumber, context: context),
-                  HeaderCell(text: S.of(context).roomType, context: context),
-                  HeaderCell(text: S.of(context).rentedBeds, context: context),
-                  HeaderCell(text: S.of(context).emptyBeds, context: context),
-                  HeaderCell(text: S.of(context).status, context: context),
-                  HeaderCell(text: S.of(context).actions, context: context),
+                  CustomHeaderCall(text: S.of(context).roomNumber, context: context),
+                  CustomHeaderCall(text: S.of(context).roomType, context: context),
+                  CustomHeaderCall(text: S.of(context).rentedBeds, context: context),
+                  CustomHeaderCall(text: S.of(context).emptyBeds, context: context),
+                  CustomHeaderCall(text: S.of(context).status, context: context),
+                  CustomHeaderCall(text: S.of(context).actions, context: context),
                 ],
               ),
               ...List.generate(5, (index) {
