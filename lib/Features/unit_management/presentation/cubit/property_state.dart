@@ -8,7 +8,7 @@ class PropertyInitial extends PropertyState {}
 class PropertyLoading extends PropertyState {}
 
 class PropertyLoaded extends PropertyState {
-  final List<PropertyModel> properties;
+  final PropertyModel properties;
 
   PropertyLoaded({required this.properties});
 }

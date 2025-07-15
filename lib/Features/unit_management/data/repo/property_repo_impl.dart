@@ -10,7 +10,7 @@ class PropertyRepoImpl implements PropertyRepo {
   PropertyRepoImpl({required this.dioConsumer});
 
   @override
-  Future<List<PropertyModel>> fetchProperties({
+  Future<PropertyModel> fetchProperties({
     required String propertyType,
     String? propertySaleStatus,
     String? propertyRentStatus,
@@ -21,7 +21,7 @@ class PropertyRepoImpl implements PropertyRepo {
       final response = await dioConsumer.get(
         '/api/Property/GetPropertyOnDashboard/?PropertyType=$propertyType&PageNumber=$pageNumber&PageSize=$pageSize&PropertySaleStatus=$propertySaleStatus&PropertyRentStatus=$propertyRentStatus',
       ) as Map<String, dynamic>;
-      return [PropertyModel.fromJson(response)]; // Return list with one PropertyModel
+return PropertyModel.fromJson(response);
     } catch (e) {
       throw Exception('Error fetching properties: $e');
     }

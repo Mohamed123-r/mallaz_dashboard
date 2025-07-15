@@ -1,7 +1,7 @@
 import 'package:book_apartment_dashboard/Features/unit_management/data/models/property_model.dart';
 
 abstract class PropertyRepo {
-  Future<List<PropertyModel>> fetchProperties({
+  Future<PropertyModel> fetchProperties({
     required String propertyType,
     required int pageNumber,
     required int pageSize,
