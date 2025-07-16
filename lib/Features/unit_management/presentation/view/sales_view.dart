@@ -65,7 +65,9 @@ class _SalesViewState extends State<SalesView> {
       S.of(context).underInspection('100'),
       S.of(context).sold('800'),
     ];
-    bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
+    bool isDark = context
+        .watch<ThemeCubit>()
+        .state == ThemeMode.dark;
 
     return BlocListener<PropertyCubit, PropertyState>(
       listener: (context, state) {
@@ -89,15 +91,15 @@ class _SalesViewState extends State<SalesView> {
                   selectedTabIndex = i;
                   currentPage = 1;
                   selectedStatus =
-                      i == 0
-                          ? ''
-                          : i == 1
-                          ? 'Available'
-                          : i == 2
-                          ? 'Waiting_for_reply'
-                          : i == 3
-                          ? 'UnderReview'
-                          : 'Sold';
+                  i == 0
+                      ? ''
+                      : i == 1
+                      ? 'Available'
+                      : i == 2
+                      ? 'Waiting_for_reply'
+                      : i == 3
+                      ? 'UnderReview'
+                      : 'Sold';
                 });
                 _fetchPage(currentPage);
               },
@@ -115,9 +117,9 @@ class _SalesViewState extends State<SalesView> {
     return BlocBuilder<PropertyCubit, PropertyState>(
       buildWhen:
           (previous, current) =>
-              current is PropertyLoading ||
-              current is PropertyError ||
-              current is PropertyLoaded,
+      current is PropertyLoading ||
+          current is PropertyError ||
+          current is PropertyLoaded,
       builder: (context, state) {
         if (state is PropertyLoading) return const CustomLoading();
         if (state is PropertyError) {
@@ -139,11 +141,9 @@ class _SalesViewState extends State<SalesView> {
         final properties = _lastProperties?.data ?? [];
         final totalCount = _lastTotalCount;
         final pageCount = (totalCount / rowsPerPage).ceil();
-
         logger.i(
           'Total Count: $totalCount, Rows Per Page: $rowsPerPage, Page Count: $pageCount',
         );
-
         return Column(
           children: [
             Expanded(child: _buildPropertyTable(properties)),
@@ -178,15 +178,27 @@ class _SalesViewState extends State<SalesView> {
           TableRow(
             decoration: const BoxDecoration(color: Colors.transparent),
             children: [
-              CustomHeaderCall(text: S.of(context).unitType, context: context),
+              CustomHeaderCall(text: S
+                  .of(context)
+                  .unitType, context: context),
               CustomHeaderCall(
-                text: S.of(context).governorate,
+                text: S
+                    .of(context)
+                    .governorate,
                 context: context,
               ),
-              CustomHeaderCall(text: S.of(context).addedDate, context: context),
-              CustomHeaderCall(text: S.of(context).ownerName, context: context),
-              CustomHeaderCall(text: S.of(context).status, context: context),
-              CustomHeaderCall(text: S.of(context).actions, context: context),
+              CustomHeaderCall(text: S
+                  .of(context)
+                  .addedDate, context: context),
+              CustomHeaderCall(text: S
+                  .of(context)
+                  .ownerName, context: context),
+              CustomHeaderCall(text: S
+                  .of(context)
+                  .status, context: context),
+              CustomHeaderCall(text: S
+                  .of(context)
+                  .actions, context: context),
             ],
           ),
           ...properties
@@ -254,7 +266,9 @@ class _SalesViewState extends State<SalesView> {
           onView: () {
             // تنفيذ منطق العرض هنا
           },
-          iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
+          iDark: context
+              .watch<ThemeCubit>()
+              .state == ThemeMode.dark,
         ),
       ],
     );
@@ -291,9 +305,9 @@ class ActionCell extends StatelessWidget {
               child: SvgPicture.asset(
                 Assets.imagesHugeiconsView,
                 color:
-                    iDark
-                        ? AppColors.darkModeAccent
-                        : AppColors.lightModeAccent,
+                iDark
+                    ? AppColors.darkModeAccent
+                    : AppColors.lightModeAccent,
               ),
             ),
             InkWell(
@@ -302,9 +316,9 @@ class ActionCell extends StatelessWidget {
               child: SvgPicture.asset(
                 Assets.imagesBasilEditOutline,
                 color:
-                    iDark
-                        ? AppColors.darkModeAccent
-                        : AppColors.lightModeAccent,
+                iDark
+                    ? AppColors.darkModeAccent
+                    : AppColors.lightModeAccent,
               ),
             ),
             InkWell(
@@ -313,9 +327,9 @@ class ActionCell extends StatelessWidget {
               child: SvgPicture.asset(
                 Assets.imagesFluentDelete32Regular,
                 color:
-                    iDark
-                        ? AppColors.darkModeAccent
-                        : AppColors.lightModeAccent,
+                iDark
+                    ? AppColors.darkModeAccent
+                    : AppColors.lightModeAccent,
               ),
             ),
           ],
