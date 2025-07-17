@@ -1,135 +1,207 @@
-
+import 'package:book_apartment_dashboard/core/widgets/custom_data_cell.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_header_call.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
+import 'package:book_apartment_dashboard/core/widgets/custom_pagination.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../../generated/l10n.dart';
+import '../../cubit/appointment_cubit.dart';
+import '../../cubit/appointment_status.dart';
 
-class TableSection extends StatelessWidget {
-  const TableSection({
-    super.key,
-    required this.isDark, required this.onTapSeeDetails,
-  });
+class TableSection extends StatefulWidget {
+  const TableSection({super.key, required this.isDark});
 
   final bool isDark;
-  final  VoidCallback onTapSeeDetails ;
+
+  @override
+  State<TableSection> createState() => _TableSectionState();
+}
+
+class _TableSectionState extends State<TableSection> {
+  final int rowsPerPage = 10;
+  int currentPage = 1;
+
+  @override
+  void initState() {
+    context.read<AppointmentCubit>().fetchAppointments(
+      pageNumber: currentPage,
+      pageSize: rowsPerPage,
+    );
+    super.initState();
+  }
+
+  void _onPageChanged(int page) {
+    if (!mounted) return;
+    setState(() => currentPage = page);
+    context.read<AppointmentCubit>().fetchAppointments(
+      pageNumber: page,
+      pageSize: rowsPerPage,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(
-        borderRadius: BorderRadius.circular(8),
-        color: AppColors.graysGray2,
-      ),
-      children: [
-        TableRow(
-          children: [
-            _tableHeaderCell(context, isDark, S.of(context).unitNumber),
-            _tableHeaderCell(context, isDark, S.of(context).userName),
-            _tableHeaderCell(context, isDark, S.of(context).phoneNumber),
-            _tableHeaderCell(context, isDark, S.of(context).ownerName),
-            _tableHeaderCell(context, isDark, S.of(context).phoneNumber),
-            _tableHeaderCell(context, isDark, S.of(context).status),
-            _tableHeaderCell(context, isDark, S.of(context).actions),
-          ],
-        ),
-        TableRow(
-          children: [
-            _tableDataCell(context, isDark, "1"),
-            _tableDataCell(context, isDark, "محمد"),
-            _tableDataCell(context, isDark, "010101010100"),
-            _tableDataCell(context, isDark, "احمد"),
-            _tableDataCell(context, isDark, "010101010100"),
-            TableCell(
-              child: Center(
-                child: DropdownButton(
-                  value: "محمد",
-                  items: ["محمد", "احمد"].map((String dropDownStringItem) {
-                    return DropdownMenuItem<String>(
-                      value: dropDownStringItem,
-                      child: Text(
-                        dropDownStringItem,
-                        style: AppTextStyles.subtitle16pxRegular(context).copyWith(
-                          color: isDark
-                              ? AppColors.darkModeText
-                              : AppColors.lightModeText,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValueSelected) {},
-                ),
+    return BlocBuilder<AppointmentCubit, AppointmentState>(
+      builder: (context, state) {
+        if (state is AppointmentLoading) return const CustomLoading();
+        if (state is AppointmentFailure) {
+          return Center(child: Text(S.of(context).errorOccurred(state.error)));
+        }
+        if (state is AppointmentSuccess) {
+          final appointments = state.appointments.data;
+          final totalCount = state.appointments.totalCount;
+          final pageCount = state.appointments.totalPage;
+
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    S.of(context).pending,
+                    style: AppTextStyles.subtitleTitle20pxRegular(
+                      context,
+                    ).copyWith(
+                      color:
+                          widget.isDark
+                              ? AppColors.darkModeButtonsPrimary
+                              : AppColors.lightModeButtonsPrimary,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    "( ${totalCount.toString()} )",
+                    style: AppTextStyles.subtitleTitle20pxRegular(
+                      context,
+                    ).copyWith(
+                      color:
+                          widget.isDark
+                              ? AppColors.darkModeButtonsPrimary
+                              : AppColors.lightModeButtonsPrimary,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            TableCell(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+              const SizedBox(height: 12),
+              Table(
+                border: TableBorder.all(
+                  borderRadius: BorderRadius.circular(8),
+                  color: AppColors.graysGray2,
+                ),
+                children: [
+                  TableRow(
                     children: [
-                      InkWell(
-                        onTap: onTapSeeDetails,
-                        borderRadius: BorderRadius.circular(8) ,
-                        child: SvgPicture.asset(
-                          Assets.imagesHugeiconsView,
-                          color: isDark
-                              ? AppColors.darkModeAccent
-                              : AppColors.lightModeAccent,
-                        ),
+                      CustomHeaderCall(
+                        text: S.of(context).unitNumber,
+                        context: null,
                       ),
-                      SvgPicture.asset(
-                        Assets.imagesBasilEditOutline,
-                        color: isDark
-                            ? AppColors.darkModeAccent
-                            : AppColors.lightModeAccent,
+                      CustomHeaderCall(
+                        text: S.of(context).userName,
+                        context: null,
+                      ),
+                      CustomHeaderCall(
+                        text: S.of(context).phoneNumber,
+                        context: null,
+                      ),
+                      CustomHeaderCall(
+                        text: S.of(context).ownerName,
+                        context: null,
+                      ),
+                      CustomHeaderCall(
+                        text: S.of(context).phoneNumber,
+                        context: null,
+                      ),
+                      CustomHeaderCall(
+                        text: S.of(context).status,
+                        context: null,
+                      ),
+                      CustomHeaderCall(
+                        text: S.of(context).actions,
+                        context: null,
                       ),
                     ],
                   ),
-                ),
+                  ...appointments
+                      .map(
+                        (appointment) => TableRow(
+                          children: [
+                            CustomDataCell(
+                              text: appointment.id.toString(),
+                              context: context,
+                            ),
+                            CustomDataCell(
+                              text: appointment.requesterName,
+                              context: context,
+                            ),
+                            CustomDataCell(
+                              text: appointment.requesterPhone,
+                              context: context,
+                            ),
+                            CustomDataCell(
+                              text: appointment.ownerName,
+                              context: context,
+                            ),
+                            CustomDataCell(
+                              text: appointment.ownerPhone,
+                              context: context,
+                            ),
+                            CustomDataCell(
+                              text: appointment.propertyType,
+                              context: context,
+                            ),
+
+                            TableCell(
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: SvgPicture.asset(
+                                          Assets.imagesHugeiconsView,
+                                          color:
+                                              widget.isDark
+                                                  ? AppColors.darkModeAccent
+                                                  : AppColors.lightModeAccent,
+                                        ),
+                                      ),
+                                      SvgPicture.asset(
+                                        Assets.imagesBasilEditOutline,
+                                        color:
+                                            widget.isDark
+                                                ? AppColors.darkModeAccent
+                                                : AppColors.lightModeAccent,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      ,
+                ],
               ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  TableCell _tableHeaderCell(BuildContext context, bool isDark, String text) {
-    return TableCell(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            text,
-            style: AppTextStyles.subtitle16pxRegular(context).copyWith(
-              color: isDark
-                  ? AppColors.darkModeText
-                  : AppColors.lightModeText,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  TableCell _tableDataCell(BuildContext context, bool isDark, String text) {
-    return TableCell(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            text,
-            style: AppTextStyles.text14pxRegular(context).copyWith(
-              color: isDark
-                  ? AppColors.darkModeText
-                  : AppColors.lightModeText,
-            ),
-          ),
-        ),
-      ),
+              const SizedBox(height: 12),
+              CustomPagination(
+                currentPage: currentPage,
+                pageCount: pageCount,
+                onPageChanged: _onPageChanged,
+              ),
+            ],
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

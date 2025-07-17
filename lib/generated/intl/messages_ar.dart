@@ -156,7 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "partialRent": MessageLookupByLibrary.simpleMessage("ايجار جزئي"),
         "partialRented": MessageLookupByLibrary.simpleMessage("مؤجرة جزئيا"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
-        "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
+        "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة :"),
         "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("بانتظار الرد"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
