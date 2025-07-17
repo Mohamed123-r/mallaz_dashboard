@@ -1,6 +1,7 @@
 import 'package:book_apartment_dashboard/Features/add_new_properties/data/repo/add_new_properties_repo.dart';
 import 'package:book_apartment_dashboard/Features/add_new_properties/data/repo/property_details_repo.dart';
 import 'package:book_apartment_dashboard/Features/home/data/repo/status_home_repo.dart';
+import 'package:book_apartment_dashboard/Features/home/presentation/cubit/appointment_cubit.dart';
 import 'package:book_apartment_dashboard/Features/home/presentation/cubit/status_home_cubit.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_appbar.dart';
 import 'package:book_apartment_dashboard/Features/main/widgets/custom_drawer.dart';
@@ -24,6 +25,7 @@ import '../admin_management/data/repo/admin_repo.dart';
 import '../admin_management/presentation/cubit/admin_cubit.dart';
 import '../admin_management/presentation/view/admin_management_view.dart';
 import '../chat/presentation/view/chat_view.dart';
+import '../home/data/repo/appointment_repo.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
 import '../unit_management/data/repo/property_repo.dart';
@@ -111,11 +113,21 @@ class _MainViewState extends State<MainView> {
                   child: Container(
                     child:
                         activeIndex == 0
-                            ? BlocProvider(
-                              create:
-                                  (context) => DashboardStatsCubit(
-                                    getIt.get<DashboardStatsRepo>(),
-                                  ),
+                            ? MultiBlocProvider(
+                              providers: [
+                                BlocProvider(
+                                  create:
+                                      (context) => DashboardStatsCubit(
+                                        getIt.get<DashboardStatsRepo>(),
+                                      ),
+                                ),
+                                BlocProvider(
+                                  create:
+                                      (context) => AppointmentCubit(
+                                        getIt.get<AppointmentRepo>(),
+                                      ),
+                                ),
+                              ],
                               child: HomeView(
                                 onTapSeeDetails: () {
                                   activeIndex = 0.1;
@@ -162,7 +174,7 @@ class _MainViewState extends State<MainView> {
                             ? BlocProvider(
                               create:
                                   (_) => PropertyCubit(
-                                    propertyRepo:  getIt.get<PropertyRepo>(),
+                                    propertyRepo: getIt.get<PropertyRepo>(),
                                   ),
                               child: SalesView(),
                             )

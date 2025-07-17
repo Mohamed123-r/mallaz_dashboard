@@ -14,46 +14,33 @@ import '../../../../generated/l10n.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key, required this.onTapSeeDetails});
-  final  VoidCallback onTapSeeDetails ;
+
+  final VoidCallback onTapSeeDetails;
+
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
-    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
 
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DataAnalysisSection(isDark: isDark),
+          SizedBox(
+            height: 12,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
-              spacing: 8,
+              spacing: 12,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  S.of(context).pending,
-                  style: AppTextStyles.subtitleTitle20pxRegular(
-                    context,
-                  ).copyWith(
-                    color:
-                        isDark
-                            ? AppColors.darkModeButtonsPrimary
-                            : AppColors.lightModeButtonsPrimary,
-                  ),
+
+
+
+                TableSection(
+                  isDark: isDark, //onTapSeeDetails: onTapSeeDetails,
                 ),
-                Text(
-                  S.of(context).today ,
-                  style: AppTextStyles.subtitleTitle20pxRegular(
-                    context,
-                  ).copyWith(
-                    color:
-                        isDark
-                            ? AppColors.darkModeGrayText
-                            : AppColors.lightModeGrayText,
-                  ),
-                ),
-                TableSection(isDark: isDark, onTapSeeDetails: onTapSeeDetails ),
               ],
             ),
           ),
@@ -62,4 +49,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-

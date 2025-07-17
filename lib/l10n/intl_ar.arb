@@ -22,7 +22,7 @@
   "confirm": "تأكيد",
   "logOut": "تسجيل خروج",
   "today": "اليوم",
-  "pending": "طلبات المعاينة (50)",
+  "pending": "طلبات المعاينة :",
   "unitNumber": "رقم الوحدة",
   "userName": "اسم المستخدم",
   "phoneNumber": "رقم الهاتف",
@@ -145,5 +145,6 @@
   "furnished": "مفروشة",
   "bathroom": "حمام",
   "forSaleOrRent": "نوع العملية",
+  "noMediaAvailable": "لا توجد وسائط متاحة",
   "rentType": "نوع الإيجار"
 }

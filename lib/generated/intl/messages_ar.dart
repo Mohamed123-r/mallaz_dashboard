@@ -147,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("عدد المستخدمين "),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
+        "noMediaAvailable":
+            MessageLookupByLibrary.simpleMessage("لا توجد وسائط متاحة"),
         "noUsersFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
         "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
@@ -156,7 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "partialRent": MessageLookupByLibrary.simpleMessage("ايجار جزئي"),
         "partialRented": MessageLookupByLibrary.simpleMessage("مؤجرة جزئيا"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
-        "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة (50)"),
+        "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة :"),
         "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("بانتظار الرد"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),

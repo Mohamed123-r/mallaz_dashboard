@@ -3,17 +3,14 @@ import 'package:book_apartment_dashboard/Features/add_new_properties/presentatio
 import 'package:book_apartment_dashboard/Features/add_new_properties/presentation/view/widgets/property_gallery.dart';
 import 'package:book_apartment_dashboard/core/utils/app_colors.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
-import 'package:book_apartment_dashboard/generated/intl/messages_en.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dio/dio.dart';
+
 
 import '../../../../core/services/theme_cubit.dart';
-
 import '../../data/repo/property_action_repo_impl.dart';
-
 import '../cubit/property_action_cubit.dart';
-
 import '../cubit/property_details_cubit.dart';
 import '../cubit/property_details_state.dart';
 
@@ -33,15 +30,12 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
       builder: (context, state) {
         bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
-        if (state is PropertyDetailsLoading ||
-            state is PropertyDetailsInitial) {
-          return CustomLoading();
+        if (state is PropertyDetailsLoading || state is PropertyDetailsInitial) {
+          return CustomLoading(); // تأكد أن هذا داخل هيكلة صحيحة
         }
         if (state is PropertyDetailsFailure) {
           return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 40, vertical: 16
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
             child: Column(
               children: [
                 Row(
@@ -51,13 +45,9 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                       onPressed: onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
-                        color:
-                            isDark
-                                ? AppColors.darkModeText
-                                : AppColors.lightModeText,
+                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
                       ),
                     ),
-
                   ],
                 ),
                 Expanded(
@@ -65,10 +55,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                     child: Text(
                       "هذه الوحدة غير موجودة",
                       style: TextStyle(
-                        color:
-                        isDark
-                            ? AppColors.darkModeText
-                            : AppColors.lightModeText,
+                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
                       ),
                     ),
                   ),
@@ -91,10 +78,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                       onPressed: onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
-                        color:
-                            isDark
-                                ? AppColors.darkModeText
-                                : AppColors.lightModeText,
+                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
                       ),
                     ),
                     Expanded(
@@ -117,9 +101,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 BlocProvider(
-                  create:
-                      (context) =>
-                          PropertyActionsCubit(PropertyActionsRepoImpl(Dio())),
+                  create: (context) => PropertyActionsCubit(PropertyActionsRepoImpl(Dio())),
                   child: ActionsSection(
                     propertyId: propertyId,
                     onTapBack: onTapBack,
