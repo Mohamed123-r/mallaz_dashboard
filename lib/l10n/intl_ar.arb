@@ -145,5 +145,6 @@
   "furnished": "مفروشة",
   "bathroom": "حمام",
   "forSaleOrRent": "نوع العملية",
+  "noMediaAvailable": "لا توجد وسائط متاحة",
   "rentType": "نوع الإيجار"
 }

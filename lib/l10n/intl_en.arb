@@ -147,5 +147,6 @@
   "bathroom": "Bathroom",
   "forSaleOrRent": "For Sale or Rent",
   "rentType": "Rent Type",
+  "noMediaAvailable": "No media available",
   "errorOccurred": "An error occurred: {error}"
 }

@@ -8,8 +8,8 @@ import '../../../../../generated/l10n.dart';
 
 class PropertyGallery extends StatefulWidget {
   final bool isDark;
-  final String mainImage; // يمكن أن يكون URL لصورة أو فيديو
-  final List<String> images; // يمكن أن تحتوي على صور أو فيديوهات
+  final String? mainImage;
+  final List<String> images;
 
   const PropertyGallery({
     super.key,
@@ -24,6 +24,7 @@ class PropertyGallery extends StatefulWidget {
 
 class _PropertyGalleryState extends State<PropertyGallery> {
   late List<VideoPlayerController> _videoControllers;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -32,23 +33,44 @@ class _PropertyGalleryState extends State<PropertyGallery> {
   }
 
   void _initializeVideoControllers() {
-    final urls = [widget.mainImage, ...widget.images];
-    _videoControllers = urls.map((url) {
-      if (url != null && (url.contains('.mp4') || url.contains('.mov'))) {
-        try {
-          return VideoPlayerController.network(url)
-            ..initialize().then((_) {
-              if (mounted) setState(() {});
-            }).catchError((error) {
-              print('Video initialization error: $error');
-            });
-        } catch (e) {
-          print('Error creating VideoPlayerController: $e');
-          return null;
-        }
+    final videoUrls = <String>[];
+    if (widget.mainImage != null && _isVideo(widget.mainImage!)) {
+      videoUrls.add(widget.mainImage!);
+    }
+    for (var image in widget.images) {
+      if (_isVideo(image)) {
+        videoUrls.add(image);
       }
-      return null;
+    }
+    _videoControllers = videoUrls.map((url) {
+      VideoPlayerController? controller;
+      try {
+        controller = VideoPlayerController.network(url)
+          ..initialize().then((_) {
+            if (mounted) {
+              controller?.play();
+              setState(() {
+                _isLoading = false;
+              });
+            }
+          }).catchError((error) {
+            print('Video initialization error for $url: $error');
+            if (mounted) {
+              setState(() {
+                _isLoading = false;
+              });
+            }
+          });
+        return controller;
+      } catch (e) {
+        print('Error creating VideoPlayerController for $url: $e');
+        return null;
+      }
     }).whereType<VideoPlayerController>().toList();
+  }
+
+  bool _isVideo(String url) {
+    return url.contains('.mp4') || url.contains('.mov');
   }
 
   @override
@@ -61,25 +83,30 @@ class _PropertyGalleryState extends State<PropertyGallery> {
 
   @override
   Widget build(BuildContext context) {
-    final displayItems = [
-      widget.mainImage,
-      if (widget.images.isNotEmpty) widget.images[0] else widget.mainImage,
-      if (widget.images.length > 1) widget.images[1] else widget.mainImage,
-    ];
+    final allMedia = <String>[];
+    if (widget.mainImage != null && widget.mainImage!.isNotEmpty) {
+      allMedia.add(widget.mainImage!);
+    }
+    allMedia.addAll(widget.images.where((image) => image.isNotEmpty));
 
-    // التحقق إذا كانت كل العناصر null أو فارغة
-    bool allMediaUnavailable = displayItems.every((item) => item == null || item.isEmpty);
+    bool allMediaUnavailable = allMedia.isEmpty;
 
     if (allMediaUnavailable) {
       return Center(
         child: Text(
-          'No media available',
+          S.of(context).noMediaAvailable,
           style: TextStyle(
             color: widget.isDark ? AppColors.darkModeText : AppColors.lightModeText,
           ),
         ),
       );
     }
+
+    final displayItems = [
+      allMedia[0],
+      if (allMedia.length > 1) allMedia[1] else allMedia[0],
+      if (allMedia.length > 2) allMedia[2] else allMedia[0],
+    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,29 +162,40 @@ class _PropertyGalleryState extends State<PropertyGallery> {
 
   Widget _buildMediaWidget(String? url, double height, {double? width}) {
     if (url == null || url.isEmpty) {
-      return SizedBox(height: height, width: width); // يترك المساحة فارغة
+      return Container(
+        height: height,
+        width: width ?? double.infinity,
+        color: AppColors.graysGray2,
+        child: Center(
+          child: Text(
+            S.of(context).noMediaAvailable,
+            style: TextStyle(
+              color: widget.isDark ? AppColors.darkModeText : AppColors.lightModeText,
+            ),
+          ),
+        ),
+      );
     }
 
-    if (url.contains('.mp4') || url.contains('.mov')) {
-      final index = [widget.mainImage, ...widget.images].indexOf(url);
-      if (index >= _videoControllers.length || !_videoControllers[index].value.isInitialized) {
-        return CustomLoading();
-      }
+    if (_isVideo(url)) {
+      final controller = _videoControllers.firstWhere(
+        (c) => c.dataSource == url,
+        orElse: () => VideoPlayerController.network(url),
+      );
       return SizedBox(
         height: height,
-        width: width,
-        child: VideoPlayer(_videoControllers[index]),
+        width: width ?? double.infinity,
+        child: VideoPlayer(controller),
       );
     } else {
       return Image.network(
         url,
         height: height,
-        width: width,
+        width: width ?? double.infinity,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return SizedBox(height: height, width: width); // يترك المساحة فارغة عند الخطأ
-        },
       );
     }
   }
+
+
 }

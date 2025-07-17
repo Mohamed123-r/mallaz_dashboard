@@ -1510,6 +1510,16 @@ class S {
     );
   }
 
+  /// `No media available`
+  String get noMediaAvailable {
+    return Intl.message(
+      'No media available',
+      name: 'noMediaAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error occurred: {error}`
   String errorOccurred(Object error) {
     return Intl.message(
