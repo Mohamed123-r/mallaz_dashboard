@@ -47,6 +47,7 @@ class _SalesViewState extends State<SalesView> {
 
   void _fetchPage(int page) {
     if (!mounted) return;
+    logger.i('Fetching page: $page with status: $selectedStatus');
     context.read<PropertyCubit>().fetchProperties(
       propertyType: 'Sale',
       pageNumber: page,
@@ -65,9 +66,7 @@ class _SalesViewState extends State<SalesView> {
       S.of(context).underInspection('100'),
       S.of(context).sold('800'),
     ];
-    bool isDark = context
-        .watch<ThemeCubit>()
-        .state == ThemeMode.dark;
+    bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
     return BlocListener<PropertyCubit, PropertyState>(
       listener: (context, state) {
@@ -75,6 +74,14 @@ class _SalesViewState extends State<SalesView> {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
+          setState(() {
+            _lastProperties = null;
+            _lastTotalCount = 0;
+          });
+        } else if (state is PropertyLoaded) {
+          logger.i(
+            'Loaded page: ${state.properties.pageNumber}, total: ${state.properties.totalCount}',
+          );
         }
       },
       child: Padding(
@@ -89,17 +96,17 @@ class _SalesViewState extends State<SalesView> {
               onTabSelected: (i) {
                 setState(() {
                   selectedTabIndex = i;
-                  currentPage = 1;
+                  currentPage = 1; // إعادة الصفحة إلى 1 عند تغيير التبويب
                   selectedStatus =
-                  i == 0
-                      ? ''
-                      : i == 1
-                      ? 'Available'
-                      : i == 2
-                      ? 'Waiting_for_reply'
-                      : i == 3
-                      ? 'UnderReview'
-                      : 'Sold';
+                      i == 0
+                          ? ''
+                          : i == 1
+                          ? 'Available'
+                          : i == 2
+                          ? 'Waiting_for_reply'
+                          : i == 3
+                          ? 'UnderReview'
+                          : 'Sold';
                 });
                 _fetchPage(currentPage);
               },
@@ -117,9 +124,9 @@ class _SalesViewState extends State<SalesView> {
     return BlocBuilder<PropertyCubit, PropertyState>(
       buildWhen:
           (previous, current) =>
-      current is PropertyLoading ||
-          current is PropertyError ||
-          current is PropertyLoaded,
+              current is PropertyLoading ||
+              current is PropertyError ||
+              current is PropertyLoaded,
       builder: (context, state) {
         if (state is PropertyLoading) return const CustomLoading();
         if (state is PropertyError) {
@@ -135,12 +142,25 @@ class _SalesViewState extends State<SalesView> {
         if (state is PropertyLoaded) {
           _lastProperties = state.properties;
           _lastTotalCount = state.properties.totalCount;
-          logger.i('Properties loaded: ${state.properties.data.length} items');
+          logger.i(
+            'Properties loaded: ${state.properties.data.length} items, page: ${state.properties.pageNumber}',
+          );
         }
 
         final properties = _lastProperties?.data ?? [];
         final totalCount = _lastTotalCount;
-        final pageCount = (totalCount / rowsPerPage).ceil();
+        final pageCount =
+            _lastProperties?.totalPage ?? (totalCount / rowsPerPage).ceil();
+
+        if (properties.isEmpty && totalCount == 0) {
+          return Center(
+            child: Text(
+              S.of(context).noDataAvailable,
+              style: AppTextStyles.text14pxRegular(context),
+            ),
+          );
+        }
+
         logger.i(
           'Total Count: $totalCount, Rows Per Page: $rowsPerPage, Page Count: $pageCount',
         );
@@ -178,27 +198,15 @@ class _SalesViewState extends State<SalesView> {
           TableRow(
             decoration: const BoxDecoration(color: Colors.transparent),
             children: [
-              CustomHeaderCall(text: S
-                  .of(context)
-                  .unitType, context: context),
+              CustomHeaderCall(text: S.of(context).unitType, context: context),
               CustomHeaderCall(
-                text: S
-                    .of(context)
-                    .governorate,
+                text: S.of(context).governorate,
                 context: context,
               ),
-              CustomHeaderCall(text: S
-                  .of(context)
-                  .addedDate, context: context),
-              CustomHeaderCall(text: S
-                  .of(context)
-                  .ownerName, context: context),
-              CustomHeaderCall(text: S
-                  .of(context)
-                  .status, context: context),
-              CustomHeaderCall(text: S
-                  .of(context)
-                  .actions, context: context),
+              CustomHeaderCall(text: S.of(context).addedDate, context: context),
+              CustomHeaderCall(text: S.of(context).ownerName, context: context),
+              CustomHeaderCall(text: S.of(context).status, context: context),
+              CustomHeaderCall(text: S.of(context).actions, context: context),
             ],
           ),
           ...properties
@@ -215,50 +223,52 @@ class _SalesViewState extends State<SalesView> {
     return TableRow(
       children: [
         CustomDataCell(text: property.id.toString() ?? '', context: context),
-        CustomDataCell(text: property.governorate ?? '', context: context),
-        CustomDataCell(text: property.createdAt ?? '', context: context),
-        CustomDataCell(text: property.ownerName ?? '', context: context),
-        CustomDataCell(text: property.ownerName ?? '', context: context),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-        //   child: DropdownButton<String>(
-        //     icon: const Icon(Icons.arrow_drop_down),
-        //     iconSize: 24,
-        //     underline: Container(color: Colors.transparent),
-        //     items: [
-        //       DropdownMenuItem(
-        //         value: 'Available',
-        //         child: Text(
-        //           S.of(context).availableShort,
-        //           style: AppTextStyles.text14pxRegular(context),
-        //         ),
-        //       ),
-        //       DropdownMenuItem(
-        //         value: 'Waiting_for_reply',
-        //         child: Text(
-        //           S.of(context).pendingShort,
-        //           style: AppTextStyles.text14pxRegular(context),
-        //         ),
-        //       ),
-        //       DropdownMenuItem(
-        //         value: 'UnderReview',
-        //         child: Text(
-        //           S.of(context).underInspectionShort,
-        //           style: AppTextStyles.text14pxRegular(context),
-        //         ),
-        //       ),
-        //       DropdownMenuItem(
-        //         value: 'Sold',
-        //         child: Text(
-        //           S.of(context).soldShort,
-        //           style: AppTextStyles.text14pxRegular(context),
-        //         ),
-        //       ),
-        //     ],
-        //     onChanged: null, // معطل كما في الكود الأصلي
-        //     value: status,
-        //   ),
-        // ),
+        CustomDataCell(text: property.governorate ?? 'N/A', context: context),
+        // عرض "N/A" إذا كان null
+        CustomDataCell(text: property.createdAt ?? 'N/A', context: context),
+        // عرض "N/A" إذا كان null
+        CustomDataCell(text: property.ownerName ?? 'N/A', context: context),
+        // عرض "N/A" إذا كان null
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+          child: DropdownButton<String>(
+            icon: const Icon(Icons.arrow_drop_down),
+            iconSize: 24,
+            underline: Container(color: Colors.transparent),
+            items: [
+              DropdownMenuItem(
+                value: 'Available',
+                child: Text(
+                  S.of(context).availableShort,
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
+              ),
+              DropdownMenuItem(
+                value: 'Waiting_for_reply',
+                child: Text(
+                  S.of(context).pendingShort,
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
+              ),
+              DropdownMenuItem(
+                value: 'UnderReview',
+                child: Text(
+                  S.of(context).underInspectionShort,
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
+              ),
+              DropdownMenuItem(
+                value: 'Sold',
+                child: Text(
+                  S.of(context).soldShort,
+                  style: AppTextStyles.text14pxRegular(context),
+                ),
+              ),
+            ],
+            onChanged: null,
+            value: status,
+          ),
+        ),
         ActionCell(
           index: 0,
           isView: true,
@@ -266,9 +276,7 @@ class _SalesViewState extends State<SalesView> {
           onView: () {
             // تنفيذ منطق العرض هنا
           },
-          iDark: context
-              .watch<ThemeCubit>()
-              .state == ThemeMode.dark,
+          iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
         ),
       ],
     );
@@ -305,9 +313,9 @@ class ActionCell extends StatelessWidget {
               child: SvgPicture.asset(
                 Assets.imagesHugeiconsView,
                 color:
-                iDark
-                    ? AppColors.darkModeAccent
-                    : AppColors.lightModeAccent,
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
               ),
             ),
             InkWell(
@@ -316,9 +324,9 @@ class ActionCell extends StatelessWidget {
               child: SvgPicture.asset(
                 Assets.imagesBasilEditOutline,
                 color:
-                iDark
-                    ? AppColors.darkModeAccent
-                    : AppColors.lightModeAccent,
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
               ),
             ),
             InkWell(
@@ -327,9 +335,9 @@ class ActionCell extends StatelessWidget {
               child: SvgPicture.asset(
                 Assets.imagesFluentDelete32Regular,
                 color:
-                iDark
-                    ? AppColors.darkModeAccent
-                    : AppColors.lightModeAccent,
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
               ),
             ),
           ],

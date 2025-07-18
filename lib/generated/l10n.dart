@@ -1500,6 +1500,16 @@ class S {
     );
   }
 
+  /// `No data available`
+  String get noDataAvailable {
+    return Intl.message(
+      'No data available',
+      name: 'noDataAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Rent Type`
   String get rentType {
     return Intl.message(

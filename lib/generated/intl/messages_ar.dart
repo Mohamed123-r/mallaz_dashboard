@@ -147,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newUsersCount":
             MessageLookupByLibrary.simpleMessage("عدد المستخدمين "),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
+        "noDataAvailable":
+            MessageLookupByLibrary.simpleMessage("لا توجد بيانات متاحة"),
         "noMediaAvailable":
             MessageLookupByLibrary.simpleMessage("لا توجد وسائط متاحة"),
         "noUsersFound":
