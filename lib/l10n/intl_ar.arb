@@ -144,6 +144,7 @@
   "next": "التالي",
   "furnished": "مفروشة",
   "bathroom": "حمام",
+  "noDataAvailable": "لا توجد بيانات متاحة",
   "forSaleOrRent": "نوع العملية",
   "noMediaAvailable": "لا توجد وسائط متاحة",
   "rentType": "نوع الإيجار"

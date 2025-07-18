@@ -146,6 +146,7 @@
   "furnished": "Furnished",
   "bathroom": "Bathroom",
   "forSaleOrRent": "For Sale or Rent",
+  "noDataAvailable": "No data available",
   "rentType": "Rent Type",
   "noMediaAvailable": "No media available",
   "errorOccurred": "An error occurred: {error}"

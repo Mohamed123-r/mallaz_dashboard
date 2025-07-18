@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New Notification Form"),
         "newUsersCount": MessageLookupByLibrary.simpleMessage("Users Count"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "noDataAvailable":
+            MessageLookupByLibrary.simpleMessage("No data available"),
         "noMediaAvailable":
             MessageLookupByLibrary.simpleMessage("No media available"),
         "noUsersFound": MessageLookupByLibrary.simpleMessage("No users found"),

@@ -1,5 +1,4 @@
 import 'package:book_apartment_dashboard/Features/unit_management/data/repo/property_repo.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../core/api/dio_consumer.dart';
 import '../models/property_model.dart';
@@ -19,9 +18,14 @@ class PropertyRepoImpl implements PropertyRepo {
   }) async {
     try {
       final response = await dioConsumer.get(
-        '/api/Property/GetPropertyOnDashboard/?PropertyType=$propertyType&PageNumber=$pageNumber&PageSize=$pageSize&PropertySaleStatus=$propertySaleStatus&PropertyRentStatus=$propertyRentStatus',
+        '/api/Property/GetPropertyOnDashboard/?PropertyType=$propertyType&PageNumber=$pageNumber&PageSize=$pageSize&PropertySaleStatus=${propertySaleStatus ?? ''}&PropertyRentStatus=${propertyRentStatus ?? ''}',
       ) as Map<String, dynamic>;
-return PropertyModel.fromJson(response);
+
+      if (response['success'] == false) {
+        throw Exception(response['message'] ?? 'Unknown error');
+      }
+
+      return PropertyModel.fromJson(response);
     } catch (e) {
       throw Exception('Error fetching properties: $e');
     }
