@@ -203,7 +203,7 @@ class _SalesViewState extends State<SalesView> {
                 text: S.of(context).governorate,
                 context: context,
               ),
-              CustomHeaderCall(text: S.of(context).addedDate, context: context),
+              CustomHeaderCall(text: S.of(context).unitNumber, context: context),
               CustomHeaderCall(text: S.of(context).ownerName, context: context),
               CustomHeaderCall(text: S.of(context).status, context: context),
               CustomHeaderCall(text: S.of(context).actions, context: context),
