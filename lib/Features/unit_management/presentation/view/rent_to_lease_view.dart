@@ -30,7 +30,6 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
     final tabs = [
       S.of(context).allUnits('1,500'),
       S.of(context).available('500'),
-      S.of(context).contractExpiring('100'),
       S.of(context).underInspection('100'),
       S.of(context).rentedUnits('800'),
     ];
