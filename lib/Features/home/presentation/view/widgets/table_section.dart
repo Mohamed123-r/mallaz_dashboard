@@ -5,7 +5,6 @@ import 'package:book_apartment_dashboard/core/widgets/custom_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../generated/assets.dart';
@@ -14,9 +13,14 @@ import '../../cubit/appointment_cubit.dart';
 import '../../cubit/appointment_status.dart';
 
 class TableSection extends StatefulWidget {
-  const TableSection({super.key, required this.isDark});
+  const TableSection({
+    super.key,
+    required this.isDark,
+    required this.onTapSeeDetails,
+  });
 
   final bool isDark;
+  final void Function(int id)  onTapSeeDetails;
 
   @override
   State<TableSection> createState() => _TableSectionState();
@@ -115,80 +119,73 @@ class _TableSectionState extends State<TableSection> {
                         text: S.of(context).phoneNumber,
                         context: null,
                       ),
-                      CustomHeaderCall(
-                        text: S.of(context).status,
-                        context: null,
-                      ),
+
                       CustomHeaderCall(
                         text: S.of(context).actions,
                         context: null,
                       ),
                     ],
                   ),
-                  ...appointments
-                      .map(
-                        (appointment) => TableRow(
-                          children: [
-                            CustomDataCell(
-                              text: appointment.id.toString(),
-                              context: context,
-                            ),
-                            CustomDataCell(
-                              text: appointment.requesterName,
-                              context: context,
-                            ),
-                            CustomDataCell(
-                              text: appointment.requesterPhone,
-                              context: context,
-                            ),
-                            CustomDataCell(
-                              text: appointment.ownerName,
-                              context: context,
-                            ),
-                            CustomDataCell(
-                              text: appointment.ownerPhone,
-                              context: context,
-                            ),
-                            CustomDataCell(
-                              text: appointment.propertyType,
-                              context: context,
-                            ),
+                  ...appointments.map(
+                    (appointment) => TableRow(
+                      children: [
+                        CustomDataCell(
+                          text: appointment.id.toString(),
+                          context: context,
+                        ),
+                        CustomDataCell(
+                          text: appointment.requesterName,
+                          context: context,
+                        ),
+                        CustomDataCell(
+                          text: appointment.requesterPhone,
+                          context: context,
+                        ),
+                        CustomDataCell(
+                          text: appointment.ownerName,
+                          context: context,
+                        ),
+                        CustomDataCell(
+                          text: appointment.ownerPhone,
+                          context: context,
+                        ),
 
-                            TableCell(
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {},
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: SvgPicture.asset(
-                                          Assets.imagesHugeiconsView,
-                                          color:
-                                              widget.isDark
-                                                  ? AppColors.darkModeAccent
-                                                  : AppColors.lightModeAccent,
-                                        ),
-                                      ),
-                                      SvgPicture.asset(
-                                        Assets.imagesBasilEditOutline,
-                                        color:
-                                            widget.isDark
-                                                ? AppColors.darkModeAccent
-                                                : AppColors.lightModeAccent,
-                                      ),
-                                    ],
+                        TableCell(
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      widget.onTapSeeDetails(appointment.id);
+                                    },
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: SvgPicture.asset(
+                                      Assets.imagesHugeiconsView,
+                                      color:
+                                          widget.isDark
+                                              ? AppColors.darkModeAccent
+                                              : AppColors.lightModeAccent,
+                                    ),
                                   ),
-                                ),
+                                  SvgPicture.asset(
+                                    Assets.imagesBasilEditOutline,
+                                    color:
+                                        widget.isDark
+                                            ? AppColors.darkModeAccent
+                                            : AppColors.lightModeAccent,
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      )
-                      ,
+                      ],
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 12),

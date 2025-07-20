@@ -7,43 +7,109 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/services/locale_cubit.dart';
 import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/widgets/custom_loading.dart';
 import '../../../../generated/l10n.dart';
+import '../../../add_new_properties/data/models/property_details_model.dart';
+import '../../../add_new_properties/presentation/cubit/property_details_cubit.dart';
+import '../../../add_new_properties/presentation/cubit/property_details_state.dart';
 
-class PreviewRequestsDetailsView extends StatelessWidget {
+class PreviewRequestsDetailsView extends StatefulWidget {
   const PreviewRequestsDetailsView({super.key, required this.onTapBack});
-  final  VoidCallback onTapBack;
+
+  final VoidCallback onTapBack;
+
+  @override
+  State<PreviewRequestsDetailsView> createState() =>
+      _PreviewRequestsDetailsViewState();
+}
+
+class _PreviewRequestsDetailsViewState
+    extends State<PreviewRequestsDetailsView> {
   @override
   Widget build(BuildContext context) {
     final isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: onTapBack,
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
-            ),
-          ),
-          Expanded(
-            child: Column(
+    return BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
+      builder: (context, state) {
+        if (state is PropertyDetailsLoading ||
+            state is PropertyDetailsInitial) {
+          return CustomLoading();
+        }
+        if (state is PropertyDetailsFailure) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _sectionTitle(context, isDark, S.of(context).unitData),
-                const SizedBox(height: 8),
-                _unitDetailsCard(context, isDark),
-                const SizedBox(height: 16),
-                _sectionTitle(context, isDark, S.of(context).contactData),
-                const SizedBox(height: 8),
-                _contactRow(context, isDark),
+                IconButton(
+                  onPressed: widget.onTapBack,
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color:
+                        isDark
+                            ? AppColors.darkModeText
+                            : AppColors.lightModeText,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _sectionTitle(context, isDark, S.of(context).unitData),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "هذه الوحدة غير موجودة",
+                            style: TextStyle(
+                              color:
+                                  isDark
+                                      ? AppColors.darkModeText
+                                      : AppColors.lightModeText,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+        if (state is PropertyDetailsSuccess) {
+          final details = state.details;
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed: widget.onTapBack,
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color:
+                        isDark
+                            ? AppColors.darkModeText
+                            : AppColors.lightModeText,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _sectionTitle(context, isDark, S.of(context).unitData),
+                      const SizedBox(height: 8),
+                      _unitDetailsCard(context, isDark, details),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return CustomLoading(); // حالة افتراضية إذا لم تتطابق الحالة
+      },
     );
   }
 
@@ -59,7 +125,11 @@ class PreviewRequestsDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _unitDetailsCard(BuildContext context, bool isDark) {
+  Widget _unitDetailsCard(
+    BuildContext context,
+    bool isDark,
+    PropertyDetailsModel details,
+  ) {
     return Container(
       height: 370,
       width: double.infinity,
@@ -83,26 +153,51 @@ class PreviewRequestsDetailsView extends StatelessWidget {
         children: [
           Expanded(
             flex: 4,
-            child: Image.asset(Assets.imagesTest1, fit: BoxFit.cover),
+            child:
+                details.mainImage.isNotEmpty
+                    ? Image.network(
+                      details.mainImage,
+                      fit: BoxFit.cover,
+                      errorBuilder:
+                          (context, error, stackTrace) => Image.asset(
+                            Assets.imagesTest1,
+                            fit: BoxFit.cover,
+                          ),
+                    )
+                    : Image.asset(Assets.imagesTest1, fit: BoxFit.cover),
           ),
           const SizedBox(width: 24),
-          Expanded(flex: 5, child: _unitDetailsColumn(context, isDark)),
+          Expanded(
+            flex: 5,
+            child: _unitDetailsColumn(context, isDark, details),
+          ),
         ],
       ),
     );
   }
 
-  Widget _unitDetailsColumn(BuildContext context, bool isDark) {
+  Widget _unitDetailsColumn(
+    BuildContext context,
+    bool isDark,
+    PropertyDetailsModel details,
+  ) {
+    // تحويل area إلى نص مع وحدة (م²)
+    final areaText = '${details.area} م²';
+    // تحويل price إلى نص
+    final priceText = details.price.toString();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          S.of(context).cityCairo,
+          details.governorate.isNotEmpty
+              ? details.governorate
+              : S.of(context).cityCairo,
           style: AppTextStyles.subtitleTitle20pxRegular(context),
         ),
         const SizedBox(height: 4),
         Text(
-          S.of(context).districtTagamoa,
+          details.city.isNotEmpty ? details.city : S.of(context).targetGroup,
           style: AppTextStyles.subtitle16pxRegular(context),
         ),
         const SizedBox(height: 4),
@@ -113,7 +208,7 @@ class PreviewRequestsDetailsView extends StatelessWidget {
               color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
             ),
             const SizedBox(width: 8),
-            Text('120 م²', style: AppTextStyles.text14pxRegular(context)),
+            Text(areaText, style: AppTextStyles.text14pxRegular(context)),
             const SizedBox(width: 24),
             SvgPicture.asset(
               Assets.imagesStairs,
@@ -121,7 +216,9 @@ class PreviewRequestsDetailsView extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              S.of(context).firstFloor,
+              details.floor.isNotEmpty
+                  ? details.floor
+                  : S.of(context).firstFloor,
               style: AppTextStyles.text14pxRegular(context),
             ),
             const SizedBox(width: 24),
@@ -131,19 +228,10 @@ class PreviewRequestsDetailsView extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              S.of(context).rooms3,
+              details.rooms.isNotEmpty ? details.rooms : S.of(context).rooms3,
               style: AppTextStyles.text14pxRegular(context),
             ),
           ],
-        ),
-        const SizedBox(height: 4),
-        Text(
-          S.of(context).detailedAddress,
-          style: AppTextStyles.subtitle16pxRegular(context),
-        ),
-        Text(
-          S.of(context).fullAddress,
-          style: AppTextStyles.text14pxRegular(context),
         ),
         const SizedBox(height: 16),
         Container(
@@ -153,196 +241,168 @@ class PreviewRequestsDetailsView extends StatelessWidget {
             color: isDark ? AppColors.lightModeText : AppColors.darkModeText,
           ),
           child: Text(
-            S.of(context).unitPrice('2,300,000'),
+            S.of(context).unitPrice(priceText),
             style: AppTextStyles.buttonLarge20pxRegular(context),
           ),
         ),
         const SizedBox(height: 16),
         Row(
           children: [
-            _unitFeaturesColumn(context, isDark),
-            const SizedBox(width: 64),
-            _unitStatusColumn(context),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _unitFeaturesColumn(BuildContext context, bool isDark) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        IconTextRow(context: context, isDark: isDark, asset: Assets.imagesWif, text: S.of(context).freeWifi),
-        const SizedBox(height: 4),
-        IconTextRow(context: context, isDark: isDark, asset: Assets.imagesParker, text: S.of(context).privateGarage),
-        const SizedBox(height: 4),
-        IconTextRow(context: context, isDark: isDark, asset: Assets.imagesSecurity, text: S.of(context).security247),
-      ],
-    );
-  }
-
-
-  Widget _unitStatusColumn(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).immediateHousing,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          S.of(context).fullyFinished,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          S.of(context).readyForDelivery,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          S.of(context).installmentsAvailable,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          S.of(context).downPayment('500,000'),
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-      ],
-    );
-  }
-
-  Widget _contactRow(BuildContext context, bool isDark) {
-    return Row(
-      children: [
-        _contactCard(context, isDark, S.of(context).ownerName, '010101010100'),
-        const SizedBox(width: 16),
-        _contactCard(context, isDark, S.of(context).clientName, '010101010100'),
-        Expanded(child: _noteCard(context, isDark)),
-      ],
-    );
-  }
-
-  Widget _contactCard(
-    BuildContext context,
-    bool isDark,
-    String name,
-    String phone,
-  ) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(width: 1, color: AppColors.graysGray4),
-      ),
-      color:
-          isDark ? AppColors.darkModeBackground : AppColors.lightModeBackground,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 35,
-              backgroundColor:
-                  isDark
-                      ? AppColors.darkModeButtonsPrimary
-                      : AppColors.lightModeButtonsPrimary,
-            ),
-            const SizedBox(height: 4),
-            Text(name, style: AppTextStyles.text14pxRegular(context)),
-            const SizedBox(height: 4),
-            Text(phone, style: AppTextStyles.text14pxRegular(context)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _noteCard(BuildContext context, bool isDark) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(width: 1, color: AppColors.graysGray4),
-      ),
-      color:
-          isDark ? AppColors.darkModeBackground : AppColors.lightModeBackground,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 16),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: 150,
-                  child: DropdownButton(
-                    value: S.of(context).mohamed,
-                    items:
-                        [S.of(context).mohamed, S.of(context).ahmed].map((
-                          String dropDownStringItem,
-                        ) {
-                          return DropdownMenuItem<String>(
-                            value: dropDownStringItem,
-                            child: Text(dropDownStringItem),
-                          );
-                        }).toList(),
-                    onChanged: (value) {},
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color:
-                          isDark
-                              ? AppColors.darkModeText
-                              : AppColors.lightModeText,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Container(
-                    width: 1,
-                    height: 40,
-                    color: AppColors.graysGray4,
-                  ),
-                ),
-                SizedBox(
-                  width: 360,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: S.of(context).addNoteHere,
-                      hintStyle: AppTextStyles.text14pxRegular(
-                        context,
-                      ).copyWith(
-                        color:
-                            isDark
-                                ? AppColors.darkModeGrayText
-                                : AppColors.lightModeGrayText,
-                      ),
-                      border: InputBorder.none,
-                    ),
+            if (details.description != null)
+              SizedBox(
+                width: 250,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    details.description!,
+                    maxLines: 7,
+                    overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.text14pxRegular(context),
                   ),
                 ),
+              ),
+
+            const SizedBox(width: 64),
+            Column(
+              children: [
+                // تفاصيل رئيسية
+                Text(
+                  S.of(context).mainFacilities,
+                  style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
+                    color:
+                        isDark
+                            ? AppColors.darkModeButtonsPrimary
+                            : AppColors.lightModeButtonsPrimary,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (details.hasWifi == true)
+                        IconTextRow(
+                          context: context,
+                          isDark: isDark,
+                          asset: Assets.imagesWif,
+                          text: S.of(context).freeWifi,
+                        ),
+                      if (details.isFurnished == true)
+                        IconTextRow(
+                          context: context,
+                          isDark: isDark,
+                          asset: Assets.imagesTrue,
+                          text: S.of(context).furnished,
+                        ),
+                      if (details.bathrooms != "")
+                        IconTextRow(
+                          context: context,
+                          isDark: isDark,
+                          asset: Assets.imagesTrue,
+                          text:
+                              "${details.bathrooms} ${S.of(context).bathroom}",
+                        ),
+                    ],
+                  ),
+                ),
+                // نوع الوحدة (شقة/فيلا...الخ)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    "${S.of(context).propertyType}: ${details.type}",
+                    style: AppTextStyles.text14pxRegular(context),
+                  ),
+                ),
+                // نوع البيع/الإيجار
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    "${S.of(context).forSaleOrRent}: ${details.propertyType}",
+                    style: AppTextStyles.text14pxRegular(context),
+                  ),
+                ),
+                // نوع الإيجار إذا كان متوفر
+                if (details.rentType != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Text(
+                      "${S.of(context).rentType}: ${details.rentType}",
+                      style: AppTextStyles.text14pxRegular(context),
+                    ),
+                  ),
               ],
-            ),
-            MaterialButton(
-              height: 50,
-              minWidth: 200,
-              onPressed: () {},
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                S.of(context).save,
-                style: AppTextStyles.buttonLarge20pxRegular(
-                  context,
-                ).copyWith(color: AppColors.black),
-              ),
-              color: AppColors.graysGray3,
             ),
           ],
         ),
-      ),
+      ],
+    );
+  }
+
+  Widget _unitFeaturesColumn(
+    BuildContext context,
+    bool isDark,
+    List<String> features,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IconTextRow(
+          context: context,
+          isDark: isDark,
+          asset: Assets.imagesWif,
+          text: features.isNotEmpty ? features[0] : S.of(context).freeWifi,
+        ),
+        const SizedBox(height: 4),
+        IconTextRow(
+          context: context,
+          isDark: isDark,
+          asset: Assets.imagesParker,
+          text: features.length > 1 ? features[1] : S.of(context).privateGarage,
+        ),
+        const SizedBox(height: 4),
+        IconTextRow(
+          context: context,
+          isDark: isDark,
+          asset: Assets.imagesSecurity,
+          text: features.length > 2 ? features[2] : S.of(context).security247,
+        ),
+      ],
+    );
+  }
+
+  Widget _unitStatusColumn(BuildContext context, List<String> statuses) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          statuses.isNotEmpty ? statuses[0] : S.of(context).immediateHousing,
+          style: AppTextStyles.text14pxRegular(context),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          statuses.length > 1 ? statuses[1] : S.of(context).fullyFinished,
+          style: AppTextStyles.text14pxRegular(context),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          statuses.length > 2 ? statuses[2] : S.of(context).readyForDelivery,
+          style: AppTextStyles.text14pxRegular(context),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          statuses.length > 3
+              ? statuses[3]
+              : S.of(context).installmentsAvailable,
+          style: AppTextStyles.text14pxRegular(context),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          S
+              .of(context)
+              .downPayment(statuses.length > 4 ? statuses[4] : '500,000'),
+          style: AppTextStyles.text14pxRegular(context),
+        ),
+      ],
     );
   }
 }
