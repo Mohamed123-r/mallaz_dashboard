@@ -129,18 +129,26 @@ class _MainViewState extends State<MainView> {
                                 ),
                               ],
                               child: HomeView(
-                                onTapSeeDetails: () {
+                                onTapSeeDetails: (id) {
                                   activeIndex = 0.1;
+                                  propertyId = id;
                                   setState(() {});
                                 },
                               ),
                             )
                             : activeIndex == 0.1
-                            ? PreviewRequestsDetailsView(
-                              onTapBack: () {
-                                activeIndex = 0;
-                                setState(() {});
-                              },
+                            ? BlocProvider(
+                              create:
+                                  (_) => PropertyDetailsCubit(
+                                    getIt.get<PropertyDetailsRepo>(),
+                                  )..fetchPropertyDetails(propertyId),
+                              child: PreviewRequestsDetailsView(
+                                onTapBack: () {
+                                  activeIndex = 0;
+                                  setState(() {});
+                                },
+
+                              ),
                             )
                             : activeIndex == 1
                             ? BlocProvider(
