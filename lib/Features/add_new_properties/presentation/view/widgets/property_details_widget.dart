@@ -6,6 +6,7 @@ import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../home/presentation/view/preview_requests_details_view.dart';
+import '../../../../home/presentation/view/widgets/icon_text_row.dart';
 import '../../../data/models/property_details_model.dart';
 
 class PropertyDetailsWidget extends StatelessWidget {
@@ -22,13 +23,11 @@ class PropertyDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Details Column
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // العنوان
             Text(
-              S.of(context).propertyDetails, // العنوان من الداتا
+              S.of(context).propertyDetails,
               style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
                 color:
                 isDark
@@ -37,7 +36,6 @@ class PropertyDetailsWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            // المالك (id فقط لأن اسم المالك غير متوفر في الـAPI)
             Row(
               children: [
                 CircleAvatar(
@@ -63,13 +61,11 @@ class PropertyDetailsWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            // المحافظة + المدينة
             Text(
               "${details.governorate} ${details.city}",
               style: AppTextStyles.subtitleTitle20pxRegular(context),
             ),
             const SizedBox(height: 4),
-            // المساحة - الدور - عدد الغرف
             Row(
               children: [
                 SvgPicture.asset(
@@ -124,7 +120,6 @@ class PropertyDetailsWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            // الوصف إذا متاح
             if (details.description != null)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -133,7 +128,6 @@ class PropertyDetailsWidget extends StatelessWidget {
                   style: AppTextStyles.text14pxRegular(context),
                 ),
               ),
-            // تفاصيل رئيسية
             Text(
               S.of(context).mainFacilities,
               style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
@@ -172,7 +166,6 @@ class PropertyDetailsWidget extends StatelessWidget {
                 ],
               ),
             ),
-            // نوع الوحدة (شقة/فيلا...الخ)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Text(
@@ -180,7 +173,6 @@ class PropertyDetailsWidget extends StatelessWidget {
                 style: AppTextStyles.text14pxRegular(context),
               ),
             ),
-            // نوع البيع/الإيجار
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Text(
@@ -188,7 +180,6 @@ class PropertyDetailsWidget extends StatelessWidget {
                 style: AppTextStyles.text14pxRegular(context),
               ),
             ),
-            // نوع الإيجار إذا كان متوفر
             if (details.rentType != null)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
