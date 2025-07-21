@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noMediaAvailable":
             MessageLookupByLibrary.simpleMessage("No media available"),
         "noUsersFound": MessageLookupByLibrary.simpleMessage("No users found"),
+        "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notificationText":
             MessageLookupByLibrary.simpleMessage("Notification Text"),
         "notificationTitle":

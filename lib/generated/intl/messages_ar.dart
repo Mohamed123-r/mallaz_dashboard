@@ -153,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا توجد وسائط متاحة"),
         "noUsersFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
+        "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
         "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("عنوان الاشعار"),

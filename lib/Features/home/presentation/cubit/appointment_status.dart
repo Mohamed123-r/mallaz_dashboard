@@ -16,3 +16,15 @@ class AppointmentFailure extends AppointmentState {
   final String error;
   AppointmentFailure(this.error);
 }
+
+class  AppointmentDetailsSuccess extends AppointmentState {
+  final AppointmentDetailsModel appointmentDetails;
+  AppointmentDetailsSuccess(this.appointmentDetails);
+}
+
+class AppointmentDetailsFailure extends AppointmentState {
+  final String error;
+  AppointmentDetailsFailure(this.error);
+}
+
+class AppointmentDetailsLoading extends AppointmentState {}

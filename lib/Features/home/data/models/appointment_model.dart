@@ -30,6 +30,26 @@ class AppointmentModel {
   }
 }
 
+class AppointmentDetailsModel {
+  final bool success;
+  final String message;
+  final Appointment data;
+
+  AppointmentDetailsModel({
+    required this.success,
+    required this.message,
+    required this.data,
+  });
+
+  factory AppointmentDetailsModel.fromJson(Map<String, dynamic> json) {
+    return AppointmentDetailsModel(
+      success: json['success'] ?? false,
+      message: json['message'] ?? '',
+      data: Appointment.fromJson(json['data']),
+    );
+  }
+}
+
 class Appointment {
   final int id;
   final int propertyId;
@@ -76,6 +96,25 @@ class Appointment {
       requesterName: json['requesterName'] ?? '',
       requesterPhone: json['requesterPhone'] ?? '',
       requesterImage: json['requesterImage'],
+    );
+  }
+
+
+ factory Appointment.fromMap(Map<String, dynamic> map) {
+    return Appointment(
+      id: map['id'] ?? 0,
+      propertyId: map['propertyId'] ?? 0,
+      title: map['title'] ?? '',
+      ownerName: map['ownerName'] ?? '',
+      ownerPhone: map['ownerPhone'] ?? '',
+      ownerImage: map['ownerImage'],
+      propertyType: map['propertyType'] ?? '',
+      createdAt: map['createdAt'] ?? '',
+      requesterId: map['requesterId'] ?? '',
+      notes: map['notes'] ?? '',
+      requesterName: map['requesterName'] ?? '',
+      requesterPhone: map['requesterPhone'] ?? '',
+      requesterImage: map['requesterImage'],
     );
   }
 }

@@ -8,17 +8,44 @@ import 'appointment_status.dart';
 
 class AppointmentCubit extends Cubit<AppointmentState> {
   final AppointmentRepo repo;
+
   AppointmentCubit(this.repo) : super(AppointmentInitial());
 
-  Future<void> fetchAppointments({required int pageNumber, required int pageSize}) async {
+  Future<void> fetchAppointments({
+    required int pageNumber,
+    required int pageSize,
+  }) async {
     emit(AppointmentLoading());
     try {
-      final res = await repo.getAppointments(pageNumber: pageNumber, pageSize: pageSize);
+      final res = await repo.getAppointments(
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+      );
       logger.i('Appointments Response: $res');
-      final response = AppointmentModel.fromJson(res);
-      emit(AppointmentSuccess(response));
+
+      emit(AppointmentSuccess(AppointmentModel.fromJson(res)));
     } catch (e) {
       emit(AppointmentFailure(e.toString()));
+    }
+  }
+
+}
+class AppointmentDetailsCubit extends Cubit<AppointmentState> {
+  final AppointmentRepo repo;
+
+  AppointmentDetailsCubit(this.repo) : super(AppointmentInitial());
+
+
+  void fetchAppointmentDetails({required int appointmentId}) async {
+    emit(AppointmentDetailsLoading());
+    try {
+      final response = await repo.getAppointmentDetails(
+        appointmentId: appointmentId,
+      )  ;
+      logger.i('Appointments Response: $response');
+      emit(AppointmentDetailsSuccess(AppointmentDetailsModel.fromJson(response)));
+    } catch (e) {
+      emit(AppointmentDetailsFailure(e.toString()));
     }
   }
 }
