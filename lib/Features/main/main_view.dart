@@ -137,17 +137,28 @@ class _MainViewState extends State<MainView> {
                               ),
                             )
                             : activeIndex == 0.1
-                            ? BlocProvider(
-                              create:
-                                  (_) => PropertyDetailsCubit(
-                                    getIt.get<PropertyDetailsRepo>(),
-                                  )..fetchPropertyDetails(propertyId),
+                            ? MultiBlocProvider(
+                              providers: [
+                                BlocProvider(
+                                  create:
+                                      (_) => PropertyDetailsCubit(
+                                        getIt.get<PropertyDetailsRepo>(),
+                                      )..fetchPropertyDetails(propertyId),
+                                ),
+                                BlocProvider(
+                                  create:
+                                      (context) => AppointmentDetailsCubit(
+                                        getIt.get<AppointmentRepo>(),
+                                      )..fetchAppointmentDetails(
+                                        appointmentId: propertyId,
+                                      ),
+                                ),
+                              ],
                               child: PreviewRequestsDetailsView(
                                 onTapBack: () {
                                   activeIndex = 0;
                                   setState(() {});
                                 },
-
                               ),
                             )
                             : activeIndex == 1

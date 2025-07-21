@@ -1,3 +1,4 @@
+import '../../../home/data/models/appointment_model.dart';
 import '../../data/models/property_details_model.dart';
 
 abstract class PropertyDetailsState {}

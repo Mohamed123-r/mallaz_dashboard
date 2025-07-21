@@ -1530,6 +1530,16 @@ class S {
     );
   }
 
+  /// `Notes`
+  String get notes {
+    return Intl.message(
+      'Notes',
+      name: 'notes',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error occurred: {error}`
   String errorOccurred(Object error) {
     return Intl.message(

@@ -149,5 +149,6 @@
   "noDataAvailable": "No data available",
   "rentType": "Rent Type",
   "noMediaAvailable": "No media available",
+  "notes": "Notes",
   "errorOccurred": "An error occurred: {error}"
 }

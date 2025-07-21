@@ -1,3 +1,4 @@
+import 'package:book_apartment_dashboard/Features/home/presentation/cubit/appointment_status.dart';
 import 'package:book_apartment_dashboard/core/utils/app_text_styles.dart';
 import 'package:book_apartment_dashboard/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,12 @@ import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_loading.dart';
 import '../../../../generated/l10n.dart';
+
 import '../../../add_new_properties/data/models/property_details_model.dart';
 import '../../../add_new_properties/presentation/cubit/property_details_cubit.dart';
 import '../../../add_new_properties/presentation/cubit/property_details_state.dart';
+import '../../data/models/appointment_model.dart';
+import '../cubit/appointment_cubit.dart';
 
 class PreviewRequestsDetailsView extends StatefulWidget {
   const PreviewRequestsDetailsView({super.key, required this.onTapBack});
@@ -29,87 +33,290 @@ class _PreviewRequestsDetailsViewState
   Widget build(BuildContext context) {
     final isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
-    return BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
-      builder: (context, state) {
-        if (state is PropertyDetailsLoading ||
-            state is PropertyDetailsInitial) {
-          return CustomLoading();
-        }
-        if (state is PropertyDetailsFailure) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                  onPressed: widget.onTapBack,
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color:
-                        isDark
-                            ? AppColors.darkModeText
-                            : AppColors.lightModeText,
-                  ),
-                ),
-                Expanded(
-                  child: Column(
+    return Column(
+      children: [
+        Expanded(
+          child: BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
+            builder: (context, state) {
+              if (state is PropertyDetailsLoading ||
+                  state is PropertyDetailsInitial) {
+                return CustomLoading();
+              }
+              if (state is PropertyDetailsFailure) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _sectionTitle(context, isDark, S.of(context).unitData),
-                      const SizedBox(height: 8),
+                      IconButton(
+                        onPressed: widget.onTapBack,
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color:
+                              isDark
+                                  ? AppColors.darkModeText
+                                  : AppColors.lightModeText,
+                        ),
+                      ),
                       Expanded(
-                        child: Center(
-                          child: Text(
-                            "هذه الوحدة غير موجودة",
-                            style: TextStyle(
-                              color:
-                                  isDark
-                                      ? AppColors.darkModeText
-                                      : AppColors.lightModeText,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _sectionTitle(
+                              context,
+                              isDark,
+                              S.of(context).unitData,
                             ),
-                          ),
+                            const SizedBox(height: 8),
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  "هذه الوحدة غير موجودة",
+                                  style: TextStyle(
+                                    color:
+                                        isDark
+                                            ? AppColors.darkModeText
+                                            : AppColors.lightModeText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          );
-        }
-        if (state is PropertyDetailsSuccess) {
-          final details = state.details;
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                  onPressed: widget.onTapBack,
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color:
-                        isDark
-                            ? AppColors.darkModeText
-                            : AppColors.lightModeText,
-                  ),
-                ),
-                Expanded(
-                  child: Column(
+                );
+              }
+              if (state is PropertyDetailsSuccess) {
+                final details = state.details;
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _sectionTitle(context, isDark, S.of(context).unitData),
-                      const SizedBox(height: 8),
-                      _unitDetailsCard(context, isDark, details),
+                      IconButton(
+                        onPressed: widget.onTapBack,
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color:
+                              isDark
+                                  ? AppColors.darkModeText
+                                  : AppColors.lightModeText,
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _sectionTitle(
+                              context,
+                              isDark,
+                              S.of(context).unitData,
+                            ),
+                            const SizedBox(height: 8),
+                            _unitDetailsCard(context, isDark, details),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
+                );
+              }
+              return CustomLoading(); // حالة افتراضية إذا لم تتطابق الحالة
+            },
+          ),
+        ),
+        const SizedBox(height: 16),
+        BlocBuilder<AppointmentDetailsCubit, AppointmentState>(
+          builder: (context, state) {
+            if (state is AppointmentDetailsLoading) {
+              return CustomLoading();
+            }
+            if (state is AppointmentDetailsFailure) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: widget.onTapBack,
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color:
+                            isDark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _sectionTitle(
+                            context,
+                            isDark,
+                            S.of(context).unitData,
+                          ),
+                          const SizedBox(height: 8),
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                "هذه الوحدة غير موجودة",
+                                style: TextStyle(
+                                  color:
+                                      isDark
+                                          ? AppColors.darkModeText
+                                          : AppColors.lightModeText,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              );
+            }
+            if (state is AppointmentDetailsSuccess) {
+              final details = state.appointmentDetails;
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _sectionTitle(
+                            context,
+                            isDark,
+                            S.of(context).contactData,
+                          ),
+                          const SizedBox(height: 8),
+                          _contactRow(context, isDark, details),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+            return CustomLoading(); // حالة افتراضية إذا لم تتطابق الحالة
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _contactRow(
+    BuildContext context,
+    bool isDark,
+    AppointmentDetailsModel details,
+  ) {
+    return Row(
+      children: [
+        _contactCard(
+          context,
+          isDark,
+          details.data.ownerName,
+          details.data.ownerPhone,
+          details.data.ownerImage,
+        ),
+        const SizedBox(width: 16),
+        _contactCard(
+          context,
+          isDark,
+          details.data.requesterName,
+          details.data.requesterPhone,
+          details.data.requesterImage,
+        ),
+        Expanded(child: _noteCard(context, isDark, details.data.notes)),
+      ],
+    );
+  }
+
+  Widget _contactCard(
+    BuildContext context,
+    bool isDark,
+    String name,
+    String phone,
+    String? image,
+  ) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        side: BorderSide(width: 1, color: AppColors.graysGray4),
+      ),
+      color:
+          isDark ? AppColors.darkModeBackground : AppColors.lightModeBackground,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 35,
+
+              backgroundColor:
+                  isDark
+                      ? AppColors.darkModeButtonsPrimary
+                      : AppColors.lightModeButtonsPrimary,
+              child:
+                  image != null
+                      ? Image.network(image, fit: BoxFit.cover)
+                      : Icon(
+                        Icons.person,
+                        size: 32,
+                        color:
+                            context.watch<ThemeCubit>().state == ThemeMode.dark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
+                      ),
             ),
-          );
-        }
-        return CustomLoading(); // حالة افتراضية إذا لم تتطابق الحالة
-      },
+            const SizedBox(height: 4),
+            Text(name, style: AppTextStyles.text14pxRegular(context)),
+            const SizedBox(height: 4),
+            Text(phone, style: AppTextStyles.text14pxRegular(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _noteCard(BuildContext context, bool isDark, String? note) {
+    return SizedBox(
+      height: 140,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(width: 1, color: AppColors.graysGray4),
+        ),
+        color:
+            isDark
+                ? AppColors.darkModeBackground
+                : AppColors.lightModeBackground,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 16),
+          child: Column(
+            children: [
+              _sectionTitle(context, isDark, S.of(context).notes),
+              Text(
+                note ?? " لا يوجد ملاحظات",
+                maxLines: 7,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
+                  color:
+                      isDark
+                          ? AppColors.darkModeButtonsPrimary
+                          : AppColors.lightModeButtonsPrimary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -333,74 +540,6 @@ class _PreviewRequestsDetailsViewState
               ],
             ),
           ],
-        ),
-      ],
-    );
-  }
-
-  Widget _unitFeaturesColumn(
-    BuildContext context,
-    bool isDark,
-    List<String> features,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        IconTextRow(
-          context: context,
-          isDark: isDark,
-          asset: Assets.imagesWif,
-          text: features.isNotEmpty ? features[0] : S.of(context).freeWifi,
-        ),
-        const SizedBox(height: 4),
-        IconTextRow(
-          context: context,
-          isDark: isDark,
-          asset: Assets.imagesParker,
-          text: features.length > 1 ? features[1] : S.of(context).privateGarage,
-        ),
-        const SizedBox(height: 4),
-        IconTextRow(
-          context: context,
-          isDark: isDark,
-          asset: Assets.imagesSecurity,
-          text: features.length > 2 ? features[2] : S.of(context).security247,
-        ),
-      ],
-    );
-  }
-
-  Widget _unitStatusColumn(BuildContext context, List<String> statuses) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          statuses.isNotEmpty ? statuses[0] : S.of(context).immediateHousing,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          statuses.length > 1 ? statuses[1] : S.of(context).fullyFinished,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          statuses.length > 2 ? statuses[2] : S.of(context).readyForDelivery,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          statuses.length > 3
-              ? statuses[3]
-              : S.of(context).installmentsAvailable,
-          style: AppTextStyles.text14pxRegular(context),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          S
-              .of(context)
-              .downPayment(statuses.length > 4 ? statuses[4] : '500,000'),
-          style: AppTextStyles.text14pxRegular(context),
         ),
       ],
     );

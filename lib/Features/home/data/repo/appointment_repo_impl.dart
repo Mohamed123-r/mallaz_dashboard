@@ -18,4 +18,16 @@ class AppointmentRepoImpl implements AppointmentRepo {
     );
     return response;
   }
+  @override
+  Future<Map<String, dynamic>> getAppointmentDetails({required int appointmentId}) async {
+    try {
+      final response = await dioConsumer.get(
+        '/api/Appointment/$appointmentId',
+      );
+      return response ;
+    } catch (e) {
+      throw Exception('Failed to fetch appointment details: $e');
+    }
+  }
+
 }

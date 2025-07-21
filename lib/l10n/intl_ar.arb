@@ -98,6 +98,7 @@
   "shared": "مشتركة",
   "empty": "فارغة",
   "rented": "مؤجرة",
+  "notes": "ملاحظات",
   "partialRented": "مؤجرة جزئيا",
   "full": "ممتلئة",
   "contractExpiring": "قارب انتهاء العقد ({count})",
