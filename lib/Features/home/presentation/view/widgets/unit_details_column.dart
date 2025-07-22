@@ -28,14 +28,14 @@ class UnitDetailsColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          details.governorate.isNotEmpty
-              ? details.governorate
+          details.governorate!.isNotEmpty
+              ? details.governorate!
               : S.of(context).cityCairo,
           style: AppTextStyles.subtitleTitle20pxRegular(context),
         ),
         const SizedBox(height: 4),
         Text(
-          details.city.isNotEmpty ? details.city : S.of(context).targetGroup,
+          details.city!.isNotEmpty ? details.city! : S.of(context).targetGroup,
           style: AppTextStyles.subtitle16pxRegular(context),
         ),
         const SizedBox(height: 4),
@@ -54,8 +54,8 @@ class UnitDetailsColumn extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              details.floor.isNotEmpty
-                  ? details.floor
+              details.floor!.isNotEmpty
+                  ? details.floor!
                   : S.of(context).firstFloor,
               style: AppTextStyles.text14pxRegular(context),
             ),
@@ -66,7 +66,7 @@ class UnitDetailsColumn extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              details.rooms.isNotEmpty ? details.rooms : S.of(context).rooms3,
+              details.rooms!.isNotEmpty ? details.rooms! : S.of(context).rooms3,
               style: AppTextStyles.text14pxRegular(context),
             ),
           ],

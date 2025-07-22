@@ -17,10 +17,12 @@ class TableSection extends StatefulWidget {
     super.key,
     required this.isDark,
     required this.onTapSeeDetails,
+    required this.onTapEddDetails,
   });
 
   final bool isDark;
   final void Function(int id)  onTapSeeDetails;
+  final  void Function(int id) onTapEddDetails;
 
   @override
   State<TableSection> createState() => _TableSectionState();
@@ -170,14 +172,20 @@ class _TableSectionState extends State<TableSection> {
                                               ? AppColors.darkModeAccent
                                               : AppColors.lightModeAccent,
                                     ),
+                                  ),    InkWell(
+                                    onTap: () {
+                                      widget.onTapEddDetails(appointment.id);
+                                    },
+                                    borderRadius: BorderRadius.circular(8),
+                                    child:      SvgPicture.asset(
+                                      Assets.imagesBasilEditOutline,
+                                      color:
+                                      widget.isDark
+                                          ? AppColors.darkModeAccent
+                                          : AppColors.lightModeAccent,
+                                    ),
                                   ),
-                                  SvgPicture.asset(
-                                    Assets.imagesBasilEditOutline,
-                                    color:
-                                        widget.isDark
-                                            ? AppColors.darkModeAccent
-                                            : AppColors.lightModeAccent,
-                                  ),
+
                                 ],
                               ),
                             ),

@@ -40,7 +40,7 @@ class _PreviewRequestsDetailsViewState
             isDark: isDark,
           ),
         ),
-        const SizedBox(height: 16),
+
         BuildAppointmentBlocBuilder(widget: widget, isDark: isDark),
       ],
     );

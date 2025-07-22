@@ -5,9 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/services/theme_cubit.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key, required this.onTapSeeDetails});
+  const HomeView({
+    super.key,
+    required this.onTapSeeDetails,
+    required this.onTapEddDetails,
+  });
 
-  final void Function(int id)  onTapSeeDetails;
+  final void Function(int id) onTapSeeDetails;
+  final void Function(int id) onTapEddDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +32,8 @@ class HomeView extends StatelessWidget {
               children: [
                 TableSection(
                   isDark: isDark,
-                  onTapSeeDetails:
-                  onTapSeeDetails,
-                      //onTapSeeDetails: onTapSeeDetails,
+                  onTapSeeDetails: onTapSeeDetails,
+                  onTapEddDetails: onTapEddDetails,
                 ),
               ],
             ),

@@ -11,6 +11,7 @@ import 'package:book_apartment_dashboard/Features/notification/presentation/view
 import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/cubit/user_cubit.dart';
 import 'package:book_apartment_dashboard/Features/user_management/presentation/view/user_management.dart';
+import 'package:book_apartment_dashboard/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
@@ -26,6 +27,7 @@ import '../admin_management/presentation/cubit/admin_cubit.dart';
 import '../admin_management/presentation/view/admin_management_view.dart';
 import '../chat/presentation/view/chat_view.dart';
 import '../home/data/repo/appointment_repo.dart';
+import '../home/presentation/view/edit_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
 import '../unit_management/data/repo/property_repo.dart';
@@ -134,6 +136,14 @@ class _MainViewState extends State<MainView> {
                                   propertyId = id;
                                   setState(() {});
                                 },
+                                onTapEddDetails: (id) {
+                                  activeIndex = 0.2;
+                                 propertyId = id;
+                                  setState(() {});
+                                  logger .i(
+                                    'onTapEddDetails: $id',
+                                  );
+                                },
                               ),
                             )
                             : activeIndex == 0.1
@@ -159,6 +169,19 @@ class _MainViewState extends State<MainView> {
                                   activeIndex = 0;
                                   setState(() {});
                                 },
+                              ),
+                            )
+                            : activeIndex == 0.2
+                            ? BlocProvider(
+                              create:
+                                  (context) => PropertyDetailsCubit(
+                                    getIt.get<PropertyDetailsRepo>(),
+                                  ),
+                              child: EditPropertiesDeteils(
+                                onTapBack: () {
+                                  activeIndex = 0;
+                                  setState(() {});
+                                }, propertyId: propertyId,
                               ),
                             )
                             : activeIndex == 1
