@@ -42,8 +42,8 @@ class PropertyDetailsWidget extends StatelessWidget {
                   radius: 28,
                   backgroundColor: AppColors.graysGray4,
                   child:
-                  details.ownerImage.isNotEmpty
-                      ? Image.network(details.ownerImage, fit: BoxFit.cover)
+                  details.ownerImage!.isNotEmpty
+                      ? Image.network(details.ownerImage!, fit: BoxFit.cover)
                       : Icon(
                     Icons.person,
                     size: 32,
@@ -55,7 +55,7 @@ class PropertyDetailsWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  details.ownerName,
+                  details.ownerName!,
                   style: AppTextStyles.buttonLarge20pxRegular(context),
                 ),
               ],
@@ -86,7 +86,7 @@ class PropertyDetailsWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  details.floor,
+                  details.floor?? "",
                   style: AppTextStyles.text14pxRegular(context),
                 ),
                 const SizedBox(width: 24),

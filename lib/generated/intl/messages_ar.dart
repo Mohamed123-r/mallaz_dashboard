@@ -73,13 +73,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "appName": MessageLookupByLibrary.simpleMessage("ملاذ"),
         "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
         "archive": MessageLookupByLibrary.simpleMessage("ارشفه"),
+        "area": MessageLookupByLibrary.simpleMessage("المساحه"),
         "available": m2,
         "availableShort": MessageLookupByLibrary.simpleMessage("متاح"),
         "bathroom": MessageLookupByLibrary.simpleMessage("حمام"),
+        "bathrooms": MessageLookupByLibrary.simpleMessage("الحمامات"),
         "blockUser": MessageLookupByLibrary.simpleMessage("حظر المستخدم"),
         "blockedUsers":
             MessageLookupByLibrary.simpleMessage("المستخدمين المحظورين"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "city": MessageLookupByLibrary.simpleMessage("المدينة"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
@@ -89,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contractExpiring": m3,
         "contractExpiringShort":
             MessageLookupByLibrary.simpleMessage("قارب انتهاء العقد"),
+        "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "detailedAddress":
             MessageLookupByLibrary.simpleMessage("العنوان بالتفصيل"),
         "districtTagamoa":
@@ -107,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorOccurred": m5,
         "families": MessageLookupByLibrary.simpleMessage("العائلات"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("الدور الأول"),
+        "floor": MessageLookupByLibrary.simpleMessage("الدور"),
         "forSale": MessageLookupByLibrary.simpleMessage("للبيع"),
         "forSaleOrRent": MessageLookupByLibrary.simpleMessage("نوع العملية"),
         "freeWifi": MessageLookupByLibrary.simpleMessage("واي فاي مجاني"),
@@ -168,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "previousNotifications":
             MessageLookupByLibrary.simpleMessage("اشعارات سابقه"),
+        "price": MessageLookupByLibrary.simpleMessage("السعر"),
         "privateGarage": MessageLookupByLibrary.simpleMessage("جراج خاص"),
         "propertyDetails":
             MessageLookupByLibrary.simpleMessage("بيانات العقار"),
@@ -187,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "role": MessageLookupByLibrary.simpleMessage("الدور"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("رقم الغرفة"),
         "roomType": MessageLookupByLibrary.simpleMessage("نوع الغرفة"),
+        "rooms": MessageLookupByLibrary.simpleMessage("الغرف"),
         "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "scheduleNotification":
@@ -216,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("العنوان"),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
         "totalUnits": MessageLookupByLibrary.simpleMessage("اجمالي الوحدات"),
+        "type": MessageLookupByLibrary.simpleMessage("النوع"),
         "unblock": MessageLookupByLibrary.simpleMessage("ألغاء الحظر"),
         "underInspection": m11,
         "underInspectionShort":

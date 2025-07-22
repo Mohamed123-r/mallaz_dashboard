@@ -94,7 +94,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                       child: PropertyGallery(
                         isDark: isDark,
                         mainImage: details.mainImage,
-                        images: details.images,
+                        images: details.images!,
                       ),
                     ),
                   ],

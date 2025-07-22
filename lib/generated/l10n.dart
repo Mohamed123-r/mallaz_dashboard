@@ -1320,6 +1320,86 @@ class S {
     );
   }
 
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message(
+      'Type',
+      name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rooms`
+  String get rooms {
+    return Intl.message(
+      'Rooms',
+      name: 'rooms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bathrooms`
+  String get bathrooms {
+    return Intl.message(
+      'Bathrooms',
+      name: 'bathrooms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area`
+  String get area {
+    return Intl.message(
+      'Area',
+      name: 'area',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor`
+  String get floor {
+    return Intl.message(
+      'Floor',
+      name: 'floor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Message`
   String get message {
     return Intl.message(
