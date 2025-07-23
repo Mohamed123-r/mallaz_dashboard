@@ -1639,6 +1639,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Changes Saved `
+  String get changesSaved {
+    return Intl.message(
+      'Changes Saved ',
+      name: 'changesSaved',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

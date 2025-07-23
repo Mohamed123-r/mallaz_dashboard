@@ -83,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser": MessageLookupByLibrary.simpleMessage("Block User"),
         "blockedUsers": MessageLookupByLibrary.simpleMessage("Blocked Users"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changesSaved": MessageLookupByLibrary.simpleMessage("Changes Saved "),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),

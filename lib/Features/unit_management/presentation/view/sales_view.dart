@@ -3,15 +3,21 @@ import 'package:book_apartment_dashboard/core/widgets/custom_data_cell.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_header_call.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_loading.dart';
 import 'package:book_apartment_dashboard/core/widgets/custom_pagination.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import '../../../../core/api/dio_consumer.dart';
+import '../../../../core/helper_functions/get_it.dart';
 import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
+import '../../../add_new_properties/data/models/property_details_model.dart';
+import '../../../add_new_properties/data/repo/property_details_repo.dart';
+import '../../../add_new_properties/presentation/cubit/property_details_cubit.dart';
+import '../../../add_new_properties/presentation/cubit/property_details_state.dart';
 import '../../../add_new_properties/presentation/view/widgets/tabs.dart';
 import '../../data/models/property_model.dart';
 import '../cubit/property_cubit.dart';
@@ -31,11 +37,19 @@ class _SalesViewState extends State<SalesView> {
   PropertyModel? _lastProperties;
   num _lastTotalCount = 0;
 
+  num allUnitsCount = 0;
+  int availableCount = 0;
+  int pendingCount = 0;
+  int underInspectionCount = 0;
+  int soldCount = 0;
+  int page = 0;
+
   @override
   void initState() {
     super.initState();
     selectedStatus = '';
     _fetchPage(currentPage);
+    _fetchCounts();
   }
 
   void _onPageChanged(int page) {
@@ -57,14 +71,44 @@ class _SalesViewState extends State<SalesView> {
     );
   }
 
+  Future<void> _fetchCounts() async {
+    final cubit = context.read<PropertyCubit>();
+
+    final all = await cubit.fetchPropertiesCount(propertyType: 'Sale');
+    final available = await cubit.fetchPropertiesCount(
+      propertyType: 'Sale',
+      propertySaleStatus: 'Available',
+    );
+    final pending = await cubit.fetchPropertiesCount(
+      propertyType: 'Sale',
+      propertySaleStatus: 'Waiting_for_reply',
+    );
+    final underInspection = await cubit.fetchPropertiesCount(
+      propertyType: 'Sale',
+      propertySaleStatus: 'UnderReview',
+    );
+    final sold = await cubit.fetchPropertiesCount(
+      propertyType: 'Sale',
+      propertySaleStatus: 'Sold',
+    );
+
+    setState(() {
+      allUnitsCount = all;
+      availableCount = available;
+      pendingCount = pending;
+      underInspectionCount = underInspection;
+      soldCount = sold;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      S.of(context).allUnits('1,500'),
-      S.of(context).available('500'),
-      S.of(context).pending1('100'),
-      S.of(context).underInspection('100'),
-      S.of(context).sold('800'),
+      S.of(context).allUnits(allUnitsCount.toString()),
+      S.of(context).available(availableCount.toString()),
+      S.of(context).pending1(pendingCount.toString()),
+      S.of(context).underInspection(underInspectionCount.toString()),
+      S.of(context).sold(soldCount.toString()),
     ];
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
@@ -96,7 +140,7 @@ class _SalesViewState extends State<SalesView> {
               onTabSelected: (i) {
                 setState(() {
                   selectedTabIndex = i;
-                  currentPage = 1; // إعادة الصفحة إلى 1 عند تغيير التبويب
+                  currentPage = 1;
                   selectedStatus =
                       i == 0
                           ? ''
@@ -187,9 +231,9 @@ class _SalesViewState extends State<SalesView> {
           color: AppColors.graysGray2,
         ),
         columnWidths: const {
-          0: FlexColumnWidth(1.5),
-          1: FlexColumnWidth(1.5),
-          2: FlexColumnWidth(1.5),
+          0: FlexColumnWidth(1.2),
+          1: FlexColumnWidth(1.2),
+          2: FlexColumnWidth(1.9),
           3: FlexColumnWidth(1.5),
           4: FlexColumnWidth(1.5),
           5: FlexColumnWidth(1.8),
@@ -203,7 +247,7 @@ class _SalesViewState extends State<SalesView> {
                 text: S.of(context).governorate,
                 context: context,
               ),
-              CustomHeaderCall(text: S.of(context).unitNumber, context: context),
+              CustomHeaderCall(text: S.of(context).addedDate, context: context),
               CustomHeaderCall(text: S.of(context).ownerName, context: context),
               CustomHeaderCall(text: S.of(context).status, context: context),
               CustomHeaderCall(text: S.of(context).actions, context: context),
@@ -218,18 +262,72 @@ class _SalesViewState extends State<SalesView> {
   }
 
   TableRow _buildPropertyRow(Property property) {
-    final status = property.propertySaleStatus ?? 'Available'; // معالجة null
+    final status = property.propertySaleStatus ?? 'Available';
 
     return TableRow(
       children: [
         CustomDataCell(text: property.id.toString() ?? '', context: context),
-        CustomDataCell(text: property.governorate ?? 'N/A', context: context),
-        // عرض "N/A" إذا كان null
-        CustomDataCell(text: property.createdAt ?? 'N/A', context: context),
-        // عرض "N/A" إذا كان null
-        CustomDataCell(text: property.ownerName ?? 'N/A', context: context),
-        // عرض "N/A" إذا كان null
-        Padding(
+        CustomDataCell(text: property.governorate ?? '', context: context),
+        CustomDataCell(text: property.createdAt ?? '', context: context),
+        CustomDataCell(text: property.ownerName ?? '', context: context),
+
+        BlocProvider(
+          create:
+              (context) =>
+                  PropertyDetailsCubit(getIt.get<PropertyDetailsRepo>()),
+          child: StateSection(
+            contextt: context,
+            status: status,
+            id: property.id,
+            page: currentPage,
+            rowsPerPage: rowsPerPage,
+            selectedStatus: selectedStatus!,
+          ),
+        ),
+
+        ActionCell(
+          index: 0,
+          isView: true,
+          onDelete: () {},
+          onView: () {},
+          iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
+        ),
+      ],
+    );
+  }
+}
+
+class StateSection extends StatefulWidget {
+  const StateSection({
+    super.key,
+    required this.contextt,
+    required this.status,
+    required this.id,
+    required this.page,
+    required this.rowsPerPage,
+    required this.selectedStatus,
+  });
+
+  final BuildContext contextt;
+  final String status;
+  final int id;
+  final int page;
+  final int rowsPerPage;
+
+  final String selectedStatus;
+
+  @override
+  State<StateSection> createState() => _StateSectionState();
+}
+
+class _StateSectionState extends State<StateSection> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
+      builder: (context, state) {
+        if (state is PropertyDetailsFailure) return Text(state.error);
+
+        return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
           child: DropdownButton<String>(
             icon: const Icon(Icons.arrow_drop_down),
@@ -265,20 +363,26 @@ class _SalesViewState extends State<SalesView> {
                 ),
               ),
             ],
-            onChanged: null,
-            value: status,
+            onChanged: (value) async {
+              await DioConsumer(dio: Dio()).put(
+                '/api/Property',
+                data: {"propertyId": widget.id, "propertySaleStatus": value},
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(S.of(context).changesSaved)),
+              );
+              context.read<PropertyCubit>().fetchProperties(
+                propertyType: 'Sale',
+                pageNumber: widget.page,
+                pageSize: widget.rowsPerPage,
+                propertySaleStatus: widget.selectedStatus ?? "",
+                propertyRentStatus: '',
+              );
+            },
+            value: widget.status,
           ),
-        ),
-        ActionCell(
-          index: 0,
-          isView: true,
-          onDelete: () {},
-          onView: () {
-            // تنفيذ منطق العرض هنا
-          },
-          iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
-        ),
-      ],
+        );
+      },
     );
   }
 }

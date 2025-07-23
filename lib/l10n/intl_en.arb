@@ -159,5 +159,6 @@
   "noMediaAvailable": "No media available",
   "notes": "Notes",
   "errorOccurred": "An error occurred: {error}",
-  "edit" : "Edit"
+  "edit" : "Edit",
+  "changesSaved" : "Changes Saved "
 }

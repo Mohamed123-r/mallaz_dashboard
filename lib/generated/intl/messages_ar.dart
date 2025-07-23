@@ -82,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedUsers":
             MessageLookupByLibrary.simpleMessage("المستخدمين المحظورين"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "changesSaved": MessageLookupByLibrary.simpleMessage("تم حفظ التغير"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),

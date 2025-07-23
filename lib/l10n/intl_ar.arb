@@ -158,5 +158,7 @@
   "forSaleOrRent": "نوع العملية",
   "noMediaAvailable": "لا توجد وسائط متاحة",
   "rentType": "نوع الإيجار",
-  "edit": "تعديل"
+  "edit": "تعديل",
+  "changesSaved" : "تم حفظ التغير"
 }
+
