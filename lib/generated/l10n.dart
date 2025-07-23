@@ -1629,6 +1629,26 @@ class S {
       args: [error],
     );
   }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Changes Saved `
+  String get changesSaved {
+    return Intl.message(
+      'Changes Saved ',
+      name: 'changesSaved',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

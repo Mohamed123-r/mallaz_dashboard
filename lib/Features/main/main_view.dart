@@ -49,6 +49,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   num activeIndex = 0.0;
   int propertyId = 1;
+  bool editFromAdd =false ;
 
   @override
   Widget build(BuildContext context) {
@@ -138,11 +139,8 @@ class _MainViewState extends State<MainView> {
                                 },
                                 onTapEddDetails: (id) {
                                   activeIndex = 0.2;
-                                 propertyId = id;
+                                  propertyId = id;
                                   setState(() {});
-                                  logger .i(
-                                    'onTapEddDetails: $id',
-                                  );
                                 },
                               ),
                             )
@@ -179,9 +177,10 @@ class _MainViewState extends State<MainView> {
                                   ),
                               child: EditPropertiesDeteils(
                                 onTapBack: () {
-                                  activeIndex = 0;
+                                  activeIndex = editFromAdd?1.1 : 0;
                                   setState(() {});
-                                }, propertyId: propertyId,
+                                },
+                                propertyId: propertyId,
                               ),
                             )
                             : activeIndex == 1
@@ -203,13 +202,19 @@ class _MainViewState extends State<MainView> {
                               create:
                                   (_) => PropertyDetailsCubit(
                                     getIt.get<PropertyDetailsRepo>(),
-                                  )..fetchPropertyDetails(propertyId),
+                                  ),
                               child: RequestsToAddNewPropertiesDetails(
                                 onTapBack: () {
                                   activeIndex = 1;
                                   setState(() {});
                                 },
                                 propertyId: propertyId,
+                                onTapEditDetails: (int id) {
+                                  activeIndex = 0.2;
+                                  propertyId = id;
+                                  editFromAdd =true ;
+                                  setState(() {});
+                                },
                               ),
                             )
                             : activeIndex == 2

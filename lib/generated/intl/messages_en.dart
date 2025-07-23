@@ -83,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser": MessageLookupByLibrary.simpleMessage("Block User"),
         "blockedUsers": MessageLookupByLibrary.simpleMessage("Blocked Users"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changesSaved": MessageLookupByLibrary.simpleMessage("Changes Saved "),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("Cairo"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
@@ -100,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "districtTagamoa":
             MessageLookupByLibrary.simpleMessage("Fifth Settlement"),
         "downPayment": m4,
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "empty": MessageLookupByLibrary.simpleMessage("Empty"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("Empty Beds"),

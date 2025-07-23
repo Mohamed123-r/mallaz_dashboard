@@ -82,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedUsers":
             MessageLookupByLibrary.simpleMessage("المستخدمين المحظورين"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "changesSaved": MessageLookupByLibrary.simpleMessage("تم حفظ التغير"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
         "cityCairo": MessageLookupByLibrary.simpleMessage("القاهرة"),
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
@@ -98,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "districtTagamoa":
             MessageLookupByLibrary.simpleMessage("التجمع الخامس"),
         "downPayment": m4,
+        "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "empty": MessageLookupByLibrary.simpleMessage("فارغة"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("الأسرة الفارغة"),

@@ -13,11 +13,11 @@ class ActionsSection extends StatelessWidget {
     super.key,
     required this.propertyId,
     required this.onTapBack,
+    required this.onTapEditDetails,
   });
-
   final int propertyId;
-
   final VoidCallback onTapBack;
+  final void Function(int id) onTapEditDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -51,48 +51,67 @@ class ActionsSection extends StatelessWidget {
           return state is PropertyActionsLoading
               ? SizedBox(height: 40, child: CustomLoading())
               : Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MaterialButton(
-                height: 40,
-                minWidth: 200,
-                onPressed:
-                state is PropertyActionsLoading
-                    ? null
-                    : () => cubit.acceptProperty(propertyId),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                color: AppColors.green,
-                child: Text(
-                  S.of(context).accept,
-                  style: AppTextStyles.buttonLarge20pxRegular(
-                    context,
-                  ).copyWith(color: AppColors.black),
-                ),
-              ),
-              const SizedBox(width: 20),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MaterialButton(
+                    height: 40,
+                    minWidth: 200,
+                    onPressed:
+                        state is PropertyActionsLoading
+                            ? null
+                            : () => cubit.acceptProperty(propertyId),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    color: AppColors.green,
+                    child: Text(
+                      S.of(context).accept,
+                      style: AppTextStyles.buttonLarge20pxRegular(
+                        context,
+                      ).copyWith(color: AppColors.black),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  MaterialButton(
+                    height: 40,
+                    minWidth: 200,
+                    onPressed: () {
+                      onTapEditDetails(propertyId);
+                    },
 
-              MaterialButton(
-                height: 40,
-                minWidth: 200,
-                onPressed:
-                state is PropertyActionsLoading
-                    ? null
-                    : () => cubit.deleteProperty(propertyId),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  S.of(context).reject,
-                  style: AppTextStyles.buttonLarge20pxRegular(
-                    context,
-                  ).copyWith(color: AppColors.black),
-                ),
-                color: AppColors.red,
-              ),
-            ],
-          );
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    color: AppColors.darkModeAccent,
+                    child: Text(
+                      S.of(context).edit,
+                      style: AppTextStyles.buttonLarge20pxRegular(
+                        context,
+                      ).copyWith(color: AppColors.black),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+
+                  MaterialButton(
+                    height: 40,
+                    minWidth: 200,
+                    onPressed:
+                        state is PropertyActionsLoading
+                            ? null
+                            : () => cubit.deleteProperty(propertyId),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    color: AppColors.red,
+                    child: Text(
+                      S.of(context).reject,
+                      style: AppTextStyles.buttonLarge20pxRegular(
+                        context,
+                      ).copyWith(color: AppColors.black),
+                    ),
+                  ),
+                ],
+              );
         },
       ),
     );

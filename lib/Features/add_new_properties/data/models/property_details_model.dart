@@ -17,6 +17,7 @@ class PropertyDetailsModel {
   final num? rentPrice;
   final String? priceRentType;
   final String? availabilityStatus;
+  final String? propertySaleStatus;
   final bool? hasWifi;
   final bool? isActive;
   final String? mainImage;
@@ -25,8 +26,8 @@ class PropertyDetailsModel {
   final String? ownerImage;
   final List<String>? images;
 
-  PropertyDetailsModel({
-      this.id,
+  PropertyDetailsModel({this.propertySaleStatus,
+    this.id,
      this.ownerName,
      this.ownerImage,
      this.title,
@@ -65,24 +66,25 @@ class PropertyDetailsModel {
       price: json['price'] ?? 0,
       floor: json['floor'] ?? "",
       propertyType: json['propertyType'] ?? "",
-      governorate: json['governorate'] ?? "",
-      city: json['city'] ?? "",
-      rentType: json['rentType'],
-      isFurnished: json['isFurnished'],
-      rentAdvance: json['rentAdvance'],
-      rentPrice: json['rentPrice'],
-      priceRentType: json['priceRentType'],
-      availabilityStatus: json['availabilityStatus'],
-      hasWifi: json['hasWifi'],
-      isActive: json['isActive'] ?? false,
+      governorate: json['governorate']?? "" ,
+      city: json['city']?? "" ,
+      rentType: json['rentType']?? "",
+      isFurnished: json['isFurnished']?? "",
+      rentAdvance: json['rentAdvance']?? "",
+      rentPrice: json['rentPrice']?? "",
+      priceRentType: json['priceRentType']?? "",
+      availabilityStatus: json['availabilityStatus']?? "",
+      propertySaleStatus: json['PropertySaleStatus']?? "",
+      hasWifi: json['hasWifi']?? "",
+      isActive: json['isActive'] ?? "",
       mainImage: json['mainImage'] ?? "",
-      ownerId: json['ownerId'] ?? "",
+      ownerId: json['ownerId']?? "",
       images:
           (json['images'] as List<dynamic>? ?? [])
               .map((e) => e.toString())
               .toList(),
-      ownerName: json['ownerName'] ?? "",
-      ownerImage: json['ownerImage'] ?? "",
+      ownerName: json['ownerName']?? "" ,
+      ownerImage: json['ownerImage']?? "" ,
     );
   }
   Map<String, dynamic> toJson() {
@@ -111,6 +113,7 @@ class PropertyDetailsModel {
       'ownerName': ownerName,
       'ownerImage': ownerImage,
       'images': images,
+      'propertySaleStatus':propertySaleStatus
     };
   }
 }
