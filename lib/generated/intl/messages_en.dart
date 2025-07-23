@@ -100,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "districtTagamoa":
             MessageLookupByLibrary.simpleMessage("Fifth Settlement"),
         "downPayment": m4,
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "empty": MessageLookupByLibrary.simpleMessage("Empty"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("Empty Beds"),

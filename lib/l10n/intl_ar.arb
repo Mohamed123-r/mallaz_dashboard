@@ -157,5 +157,6 @@
   "noDataAvailable": "لا توجد بيانات متاحة",
   "forSaleOrRent": "نوع العملية",
   "noMediaAvailable": "لا توجد وسائط متاحة",
-  "rentType": "نوع الإيجار"
+  "rentType": "نوع الإيجار",
+  "edit": "تعديل"
 }

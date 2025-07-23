@@ -158,5 +158,6 @@
   "rentType": "Rent Type",
   "noMediaAvailable": "No media available",
   "notes": "Notes",
-  "errorOccurred": "An error occurred: {error}"
+  "errorOccurred": "An error occurred: {error}",
+  "edit" : "Edit"
 }

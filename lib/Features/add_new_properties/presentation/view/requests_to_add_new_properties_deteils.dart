@@ -14,15 +14,28 @@ import '../cubit/property_action_cubit.dart';
 import '../cubit/property_details_cubit.dart';
 import '../cubit/property_details_state.dart';
 
-class RequestsToAddNewPropertiesDetails extends StatelessWidget {
+class RequestsToAddNewPropertiesDetails extends StatefulWidget {
   final VoidCallback onTapBack;
   final int propertyId;
+  final void Function(int id) onTapEditDetails;
 
   const RequestsToAddNewPropertiesDetails({
     super.key,
     required this.onTapBack,
-    required this.propertyId,
+    required this.propertyId, required this.onTapEditDetails,
   });
+
+  @override
+  State<RequestsToAddNewPropertiesDetails> createState() => _RequestsToAddNewPropertiesDetailsState();
+}
+
+class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewPropertiesDetails> {
+
+ @override
+  void initState() {
+    context.read<PropertyDetailsCubit>().fetchPropertyDetails(widget.propertyId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +55,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
-                      onPressed: onTapBack,
+                      onPressed: widget.onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
@@ -75,7 +88,7 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
-                      onPressed: onTapBack,
+                      onPressed: widget.onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
@@ -103,8 +116,8 @@ class RequestsToAddNewPropertiesDetails extends StatelessWidget {
                 BlocProvider(
                   create: (context) => PropertyActionsCubit(PropertyActionsRepoImpl(Dio())),
                   child: ActionsSection(
-                    propertyId: propertyId,
-                    onTapBack: onTapBack,
+                    propertyId: widget.propertyId,
+                    onTapBack: widget.onTapBack, onTapEditDetails: widget.onTapEditDetails ,
                   ),
                 ),
               ],
