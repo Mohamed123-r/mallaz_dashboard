@@ -160,5 +160,8 @@
   "notes": "Notes",
   "errorOccurred": "An error occurred: {error}",
   "edit" : "Edit",
-  "changesSaved" : "Changes Saved "
+  "changesSaved" : "Changes Saved ",
+  "confirmDeleteMessage" : "Are you sure you want to delete this item?",
+  "delete": "Delete",
+  "confirmDelete" : "Confirm Delete"
 }

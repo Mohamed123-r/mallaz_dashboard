@@ -17,10 +17,6 @@ class PropertyDetailsRepoImpl implements PropertyDetailsRepo {
 
   @override
   Future<void> updatePropertyDetails(PropertyDetailsModel property) async {
-    logger.w(
-      "Saving changes for : ${property.id},,,${property.propertySaleStatus},",
-    );
-
     await dioConsumer.put(
       '/api/Property',
       data: {
@@ -43,7 +39,6 @@ class PropertyDetailsRepoImpl implements PropertyDetailsRepo {
         "availabilityStatus": property.availabilityStatus,
         "hasWifi": property.hasWifi,
         "isActive": property.isActive,
-        "propertySaleStatus": property.propertySaleStatus,
       },
     );
   }

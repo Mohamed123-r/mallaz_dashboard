@@ -17,7 +17,6 @@ class PropertyDetailsModel {
   final num? rentPrice;
   final String? priceRentType;
   final String? availabilityStatus;
-  final String? propertySaleStatus;
   final bool? hasWifi;
   final bool? isActive;
   final String? mainImage;
@@ -26,32 +25,32 @@ class PropertyDetailsModel {
   final String? ownerImage;
   final List<String>? images;
 
-  PropertyDetailsModel({this.propertySaleStatus,
+  PropertyDetailsModel({
     this.id,
-     this.ownerName,
-     this.ownerImage,
-     this.title,
-     this.description,
-     this.type,
-     this.rooms,
-     this.bathrooms,
-     this.area,
-     this.price,
-     this.floor,
-     this.propertyType,
-     this.governorate,
-     this.city,
-     this.rentType,
-     this.isFurnished,
-     this.rentAdvance,
-     this.rentPrice,
-     this.priceRentType,
-     this.availabilityStatus,
-     this.hasWifi,
-     this.isActive,
-     this.mainImage,
-     this.ownerId,
-     this.images,
+    this.ownerName,
+    this.ownerImage,
+    this.title,
+    this.description,
+    this.type,
+    this.rooms,
+    this.bathrooms,
+    this.area,
+    this.price,
+    this.floor,
+    this.propertyType,
+    this.governorate,
+    this.city,
+    this.rentType,
+    this.isFurnished,
+    this.rentAdvance,
+    this.rentPrice,
+    this.priceRentType,
+    this.availabilityStatus,
+    this.hasWifi,
+    this.isActive,
+    this.mainImage,
+    this.ownerId,
+    this.images,
   });
 
   factory PropertyDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -66,25 +65,24 @@ class PropertyDetailsModel {
       price: json['price'] ?? 0,
       floor: json['floor'] ?? "",
       propertyType: json['propertyType'] ?? "",
-      governorate: json['governorate']?? "" ,
-      city: json['city']?? "" ,
-      rentType: json['rentType']?? "",
-      isFurnished: json['isFurnished']?? "",
-      rentAdvance: json['rentAdvance']?? "",
-      rentPrice: json['rentPrice']?? "",
-      priceRentType: json['priceRentType']?? "",
-      availabilityStatus: json['availabilityStatus']?? "",
-      propertySaleStatus: json['PropertySaleStatus']?? "",
-      hasWifi: json['hasWifi']?? "",
-      isActive: json['isActive'] ?? "",
+      governorate: json['governorate'] ?? "",
+      city: json['city'] ?? "",
+      rentType: json['rentType'],
+      isFurnished: json['isFurnished'],
+      rentAdvance: json['rentAdvance'],
+      rentPrice: json['rentPrice'],
+      priceRentType: json['priceRentType'],
+      availabilityStatus: json['availabilityStatus'],
+      hasWifi: json['hasWifi'],
+      isActive: json['isActive'] ?? false,
       mainImage: json['mainImage'] ?? "",
-      ownerId: json['ownerId']?? "",
+      ownerId: json['ownerId'] ?? "",
       images:
-          (json['images'] as List<dynamic>? ?? [])
-              .map((e) => e.toString())
-              .toList(),
-      ownerName: json['ownerName']?? "" ,
-      ownerImage: json['ownerImage']?? "" ,
+      (json['images'] as List<dynamic>? ?? [])
+          .map((e) => e.toString())
+          .toList(),
+      ownerName: json['ownerName'] ?? "",
+      ownerImage: json['ownerImage'] ?? "",
     );
   }
   Map<String, dynamic> toJson() {
@@ -113,7 +111,6 @@ class PropertyDetailsModel {
       'ownerName': ownerName,
       'ownerImage': ownerImage,
       'images': images,
-      'propertySaleStatus':propertySaleStatus
     };
   }
 }

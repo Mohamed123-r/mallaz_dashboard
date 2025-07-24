@@ -15,7 +15,10 @@ import '../../../../core/utils/app_text_styles.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../../add_new_properties/data/models/property_details_model.dart';
+import '../../../add_new_properties/data/repo/property_action_repo_impl.dart';
 import '../../../add_new_properties/data/repo/property_details_repo.dart';
+import '../../../add_new_properties/presentation/cubit/property_action_cubit.dart';
+import '../../../add_new_properties/presentation/cubit/property_action_state.dart';
 import '../../../add_new_properties/presentation/cubit/property_details_cubit.dart';
 import '../../../add_new_properties/presentation/cubit/property_details_state.dart';
 import '../../../add_new_properties/presentation/view/widgets/tabs.dart';
@@ -23,7 +26,14 @@ import '../../data/models/property_model.dart';
 import '../cubit/property_cubit.dart';
 
 class RentToLeaseView extends StatefulWidget {
-  const RentToLeaseView({super.key});
+  const RentToLeaseView({
+    super.key,
+    required this.onTapSeeDetails,
+    required this.onTapEddDetails,
+  });
+
+  final void Function(int id) onTapSeeDetails;
+  final void Function(int id) onTapEddDetails;
 
   @override
   State<RentToLeaseView> createState() => _RentToLeaseViewState();
@@ -135,13 +145,13 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
                   selectedTabIndex = i;
                   currentPage = 1;
                   selectedStatus =
-                  i == 0
-                      ? ''
-                      : i == 1
-                      ? 'Available'
-                      : i == 2
-                      ? 'UnderReview'
-                      : 'Rented';
+                      i == 0
+                          ? ''
+                          : i == 1
+                          ? 'Available'
+                          : i == 2
+                          ? 'UnderReview'
+                          : 'Rented';
                 });
                 _fetchPage(currentPage);
               },
@@ -159,9 +169,9 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
     return BlocBuilder<PropertyCubit, PropertyState>(
       buildWhen:
           (previous, current) =>
-      current is PropertyLoading ||
-          current is PropertyError ||
-          current is PropertyLoaded,
+              current is PropertyLoading ||
+              current is PropertyError ||
+              current is PropertyLoaded,
       builder: (context, state) {
         if (state is PropertyLoading) return const CustomLoading();
         if (state is PropertyError) {
@@ -234,14 +244,19 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
             decoration: const BoxDecoration(color: Colors.transparent),
             children: [
               CustomHeaderCall(text: S.of(context).unitType, context: context),
-              CustomHeaderCall(text: S.of(context).governorate, context: context),
+              CustomHeaderCall(
+                text: S.of(context).governorate,
+                context: context,
+              ),
               CustomHeaderCall(text: S.of(context).addedDate, context: context),
               CustomHeaderCall(text: S.of(context).ownerName, context: context),
               CustomHeaderCall(text: S.of(context).status, context: context),
               CustomHeaderCall(text: S.of(context).actions, context: context),
             ],
           ),
-          ...properties.map<TableRow>((property) => _buildPropertyRow(property)).toList(),
+          ...properties
+              .map<TableRow>((property) => _buildPropertyRow(property))
+              .toList(),
         ],
       ),
     );
@@ -258,7 +273,9 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
         CustomDataCell(text: property.ownerName ?? '', context: context),
 
         BlocProvider(
-          create: (context) => PropertyDetailsCubit(getIt.get<PropertyDetailsRepo>()),
+          create:
+              (context) =>
+                  PropertyDetailsCubit(getIt.get<PropertyDetailsRepo>()),
           child: RentStateSection(
             contextt: context,
             status: status,
@@ -269,12 +286,19 @@ class _RentToLeaseViewState extends State<RentToLeaseView> {
           ),
         ),
 
-        ActionCell(
-          index: 0,
-          isView: true,
-          onDelete: () {},
-          onView: () {},
-          iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
+        BlocProvider(
+          create:
+              (context) => PropertyActionsCubit(PropertyActionsRepoImpl(Dio())),
+          child: ActionCell(
+            id: property.id,
+            isView: true,
+            selectedStatus: selectedStatus!,
+            page: currentPage,
+            rowsPerPage: rowsPerPage,
+            onTapEddDetails: widget.onTapEddDetails,
+            onTapSeeDetails: widget.onTapSeeDetails,
+            iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
+          ),
         ),
       ],
     );
@@ -341,7 +365,6 @@ class _RentStateSectionState extends State<RentStateSection> {
             ],
             onChanged: (value) async {
               await DioConsumer(dio: Dio()).put(
-
                 '/api/Property',
                 data: {"propertyId": widget.id, "propertyRentStatus": value},
               );
@@ -365,19 +388,27 @@ class _RentStateSectionState extends State<RentStateSection> {
 }
 
 class ActionCell extends StatelessWidget {
-  final int index;
+  final int id;
   final bool isView;
   final bool iDark;
-  final VoidCallback onDelete;
-  final VoidCallback onView;
+  final int page;
+  final int rowsPerPage;
+
+  final String selectedStatus;
+  final void Function(int id) onTapSeeDetails;
+  final void Function(int id) onTapEddDetails;
 
   const ActionCell({
     super.key,
-    required this.index,
+    required this.id,
     this.isView = false,
-    required this.onDelete,
-    required this.onView,
+
     required this.iDark,
+    required this.onTapSeeDetails,
+    required this.onTapEddDetails,
+    required this.page,
+    required this.rowsPerPage,
+    required this.selectedStatus,
   });
 
   @override
@@ -389,28 +420,98 @@ class ActionCell extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
-              onTap: onView,
+              onTap: () {
+                onTapSeeDetails(id);
+              },
               borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 Assets.imagesHugeiconsView,
-                color: iDark ? AppColors.darkModeAccent : AppColors.lightModeAccent,
+                color:
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                onTapEddDetails(id);
+              },
               borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 Assets.imagesBasilEditOutline,
-                color: iDark ? AppColors.darkModeAccent : AppColors.lightModeAccent,
+                color:
+                    iDark
+                        ? AppColors.darkModeAccent
+                        : AppColors.lightModeAccent,
               ),
             ),
-            InkWell(
-              onTap: onDelete,
-              borderRadius: BorderRadius.circular(8),
-              child: SvgPicture.asset(
-                Assets.imagesFluentDelete32Regular,
-                color: iDark ? AppColors.darkModeAccent : AppColors.lightModeAccent,
-              ),
+
+            BlocConsumer<PropertyActionsCubit, PropertyActionsState>(
+              listener: (context, state) {
+                if (state is PropertyActionSuccess) {
+                  // Show success message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("تمت العملية بنجاح!"),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                  context.read<PropertyCubit>().fetchProperties(
+                    propertyType: 'Rent',
+                    pageNumber: page,
+                    pageSize: rowsPerPage,
+                    propertySaleStatus: selectedStatus ?? "",
+                    propertyRentStatus: '',
+                  );
+                } else if (state is PropertyActionFailure) {
+                  // Show error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("حدث خطأ: ${state.error}"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                final cubit = context.read<PropertyActionsCubit>();
+                return InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(S.of(context).confirmDelete),
+                          content: Text(S.of(context).confirmDeleteMessage),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(S.of(context).cancel),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                cubit.deleteProperty(id);
+                                Navigator.pop(context);
+                              },
+                              child: Text(S.of(context).delete),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(8),
+                  child: SvgPicture.asset(
+                    Assets.imagesFluentDelete32Regular,
+                    color:
+                        iDark
+                            ? AppColors.darkModeAccent
+                            : AppColors.lightModeAccent,
+                  ),
+                );
+              },
             ),
           ],
         ),

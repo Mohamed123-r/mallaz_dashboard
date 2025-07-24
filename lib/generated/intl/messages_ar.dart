@@ -88,11 +88,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "clientName": MessageLookupByLibrary.simpleMessage("اسم العميل"),
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
+        "confirmDelete": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
+        "confirmDeleteMessage": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف هذا العنصر؟"),
         "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
         "contractDuration": MessageLookupByLibrary.simpleMessage("مدة العقد"),
         "contractExpiring": m3,
         "contractExpiringShort":
             MessageLookupByLibrary.simpleMessage("قارب انتهاء العقد"),
+        "delete": MessageLookupByLibrary.simpleMessage("حذف"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "detailedAddress":
             MessageLookupByLibrary.simpleMessage("العنوان بالتفصيل"),
