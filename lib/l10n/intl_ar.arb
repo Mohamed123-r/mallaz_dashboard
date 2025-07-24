@@ -17,8 +17,8 @@
   "provideSupport": "تقديم الدعم",
   "sendNotification": "ارسال اشعار",
   "adminManagement": "إدارة المشرفين",
-  "adminDetails" : "بيانات المشرف",
-  "close" : "إغلاق",
+  "adminDetails": "بيانات المشرف",
+  "close": "إغلاق",
   "confirm": "تأكيد",
   "logOut": "تسجيل خروج",
   "today": "اليوم",
@@ -29,8 +29,8 @@
   "ownerName": "اسم المالك",
   "status": "الحالة",
   "actions": "الإجراءات",
-  "cancel" : "إلغاء",
-  "logoutQua":  "هل تريد تسجيل الخروج من التطبيق؟",
+  "cancel": "إلغاء",
+  "logoutQua": "هل تريد تسجيل الخروج من التطبيق؟",
   "unitData": "بيانات الوحدة",
   "contactData": "بيانات التواصل",
   "cityCairo": "القاهرة",
@@ -129,13 +129,12 @@
   "title": "العنوان",
   "description": "الوصف",
   "type": "النوع",
-  "rooms":  "الغرف",
-  "bathrooms":  "الحمامات",
+  "rooms": "الغرف",
+  "bathrooms": "الحمامات",
   "area": "المساحه",
   "price": "السعر",
   "floor": "الدور",
   "city": "المدينة",
-
   "message": "الرساله",
   "sendDate": "تاريخ الارسال",
   "group": "الفئه",
@@ -159,6 +158,9 @@
   "noMediaAvailable": "لا توجد وسائط متاحة",
   "rentType": "نوع الإيجار",
   "edit": "تعديل",
-  "changesSaved" : "تم حفظ التغير"
+  "changesSaved": "تم حفظ التغير",
+  "confirmDeleteMessage": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+  "delete": "حذف",
+  "confirmDelete": "تأكيد الحذف"
 }
 

@@ -15,6 +15,7 @@ class ActionsSection extends StatelessWidget {
     required this.onTapBack,
     required this.onTapEditDetails,
   });
+
   final int propertyId;
   final VoidCallback onTapBack;
   final void Function(int id) onTapEditDetails;
@@ -48,70 +49,90 @@ class ActionsSection extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = context.read<PropertyActionsCubit>();
-          return state is PropertyActionsLoading
-              ? SizedBox(height: 40, child: CustomLoading())
-              : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MaterialButton(
-                    height: 40,
-                    minWidth: 200,
-                    onPressed:
-                        state is PropertyActionsLoading
-                            ? null
-                            : () => cubit.acceptProperty(propertyId),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    color: AppColors.green,
-                    child: Text(
-                      S.of(context).accept,
-                      style: AppTextStyles.buttonLarge20pxRegular(
-                        context,
-                      ).copyWith(color: AppColors.black),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  MaterialButton(
-                    height: 40,
-                    minWidth: 200,
-                    onPressed: () {
-                      onTapEditDetails(propertyId);
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MaterialButton(
+                height: 40,
+                minWidth: 200,
+                onPressed:
+                    state is PropertyActionsLoading
+                        ? null
+                        : () => cubit.acceptProperty(propertyId),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                color: AppColors.green,
+                child: Text(
+                  S.of(context).accept,
+                  style: AppTextStyles.buttonLarge20pxRegular(
+                    context,
+                  ).copyWith(color: AppColors.black),
+                ),
+              ),
+              const SizedBox(width: 20),
+              MaterialButton(
+                height: 40,
+                minWidth: 200,
+                onPressed: () {
+                  onTapEditDetails(propertyId);
+                },
+
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                color: AppColors.darkModeAccent,
+                child: Text(
+                  S.of(context).edit,
+                  style: AppTextStyles.buttonLarge20pxRegular(
+                    context,
+                  ).copyWith(color: AppColors.black),
+                ),
+              ),
+              const SizedBox(width: 20),
+
+              MaterialButton(
+                height: 40,
+                minWidth: 200,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(S.of(context).confirmDelete),
+                        content: Text(S.of(context).confirmDeleteMessage),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(S.of(context).cancel),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              cubit.deleteProperty(propertyId);
+                              Navigator.pop(context);
+                            },
+                            child: Text(S.of(context).reject),
+                          ),
+                        ],
+                      );
                     },
-
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    color: AppColors.darkModeAccent,
-                    child: Text(
-                      S.of(context).edit,
-                      style: AppTextStyles.buttonLarge20pxRegular(
-                        context,
-                      ).copyWith(color: AppColors.black),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-
-                  MaterialButton(
-                    height: 40,
-                    minWidth: 200,
-                    onPressed:
-                        state is PropertyActionsLoading
-                            ? null
-                            : () => cubit.deleteProperty(propertyId),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    color: AppColors.red,
-                    child: Text(
-                      S.of(context).reject,
-                      style: AppTextStyles.buttonLarge20pxRegular(
-                        context,
-                      ).copyWith(color: AppColors.black),
-                    ),
-                  ),
-                ],
-              );
+                  );
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                color: AppColors.red,
+                child: Text(
+                  S.of(context).reject,
+                  style: AppTextStyles.buttonLarge20pxRegular(
+                    context,
+                  ).copyWith(color: AppColors.black),
+                ),
+              ),
+            ],
+          );
         },
       ),
     );

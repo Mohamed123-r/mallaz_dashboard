@@ -7,7 +7,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../../../../core/services/theme_cubit.dart';
 import '../../data/repo/property_action_repo_impl.dart';
 import '../cubit/property_action_cubit.dart';
@@ -17,23 +16,29 @@ import '../cubit/property_details_state.dart';
 class RequestsToAddNewPropertiesDetails extends StatefulWidget {
   final VoidCallback onTapBack;
   final int propertyId;
+  final bool isSaleAndRent;
   final void Function(int id) onTapEditDetails;
 
   const RequestsToAddNewPropertiesDetails({
     super.key,
     required this.onTapBack,
-    required this.propertyId, required this.onTapEditDetails,
+    required this.propertyId,
+    required this.onTapEditDetails,
+    required this.isSaleAndRent,
   });
 
   @override
-  State<RequestsToAddNewPropertiesDetails> createState() => _RequestsToAddNewPropertiesDetailsState();
+  State<RequestsToAddNewPropertiesDetails> createState() =>
+      _RequestsToAddNewPropertiesDetailsState();
 }
 
-class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewPropertiesDetails> {
-
- @override
+class _RequestsToAddNewPropertiesDetailsState
+    extends State<RequestsToAddNewPropertiesDetails> {
+  @override
   void initState() {
-    context.read<PropertyDetailsCubit>().fetchPropertyDetails(widget.propertyId);
+    context.read<PropertyDetailsCubit>().fetchPropertyDetails(
+      widget.propertyId,
+    );
     super.initState();
   }
 
@@ -43,7 +48,8 @@ class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewProp
       builder: (context, state) {
         bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
 
-        if (state is PropertyDetailsLoading || state is PropertyDetailsInitial) {
+        if (state is PropertyDetailsLoading ||
+            state is PropertyDetailsInitial) {
           return CustomLoading(); // تأكد أن هذا داخل هيكلة صحيحة
         }
         if (state is PropertyDetailsFailure) {
@@ -58,7 +64,10 @@ class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewProp
                       onPressed: widget.onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
-                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                        color:
+                            isDark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
                       ),
                     ),
                   ],
@@ -68,7 +77,10 @@ class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewProp
                     child: Text(
                       "هذه الوحدة غير موجودة",
                       style: TextStyle(
-                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                        color:
+                            isDark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
                       ),
                     ),
                   ),
@@ -91,7 +103,10 @@ class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewProp
                       onPressed: widget.onTapBack,
                       icon: Icon(
                         Icons.arrow_back_ios,
-                        color: isDark ? AppColors.darkModeText : AppColors.lightModeText,
+                        color:
+                            isDark
+                                ? AppColors.darkModeText
+                                : AppColors.lightModeText,
                       ),
                     ),
                     Expanded(
@@ -113,11 +128,18 @@ class _RequestsToAddNewPropertiesDetailsState extends State<RequestsToAddNewProp
                   ],
                 ),
                 const SizedBox(height: 12),
-                BlocProvider(
-                  create: (context) => PropertyActionsCubit(PropertyActionsRepoImpl(Dio())),
-                  child: ActionsSection(
-                    propertyId: widget.propertyId,
-                    onTapBack: widget.onTapBack, onTapEditDetails: widget.onTapEditDetails ,
+                Visibility(
+                  visible: !widget.isSaleAndRent,
+                  child: BlocProvider(
+                    create:
+                        (context) => PropertyActionsCubit(
+                          PropertyActionsRepoImpl(Dio()),
+                        ),
+                    child: ActionsSection(
+                      propertyId: widget.propertyId,
+                      onTapBack: widget.onTapBack,
+                      onTapEditDetails: widget.onTapEditDetails,
+                    ),
                   ),
                 ),
               ],

@@ -15,7 +15,10 @@ import '../../../../core/utils/app_text_styles.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
 import '../../../add_new_properties/data/models/property_details_model.dart';
+import '../../../add_new_properties/data/repo/property_action_repo_impl.dart';
 import '../../../add_new_properties/data/repo/property_details_repo.dart';
+import '../../../add_new_properties/presentation/cubit/property_action_cubit.dart';
+import '../../../add_new_properties/presentation/cubit/property_action_state.dart';
 import '../../../add_new_properties/presentation/cubit/property_details_cubit.dart';
 import '../../../add_new_properties/presentation/cubit/property_details_state.dart';
 import '../../../add_new_properties/presentation/view/widgets/tabs.dart';
@@ -23,7 +26,14 @@ import '../../data/models/property_model.dart';
 import '../cubit/property_cubit.dart';
 
 class SalesView extends StatefulWidget {
-  const SalesView({super.key});
+  const SalesView({
+    super.key,
+    required this.onTapSeeDetails,
+    required this.onTapEddDetails,
+  });
+
+  final void Function(int id) onTapSeeDetails;
+  final void Function(int id) onTapEddDetails;
 
   @override
   State<SalesView> createState() => _SalesViewState();
@@ -56,12 +66,11 @@ class _SalesViewState extends State<SalesView> {
     if (!mounted) return;
     setState(() => currentPage = page);
     _fetchPage(page);
-    logger.i('Page changed to: $page');
   }
 
   void _fetchPage(int page) {
     if (!mounted) return;
-    logger.i('Fetching page: $page with status: $selectedStatus');
+
     context.read<PropertyCubit>().fetchProperties(
       propertyType: 'Sale',
       pageNumber: page,
@@ -122,11 +131,7 @@ class _SalesViewState extends State<SalesView> {
             _lastProperties = null;
             _lastTotalCount = 0;
           });
-        } else if (state is PropertyLoaded) {
-          logger.i(
-            'Loaded page: ${state.properties.pageNumber}, total: ${state.properties.totalCount}',
-          );
-        }
+        } else if (state is PropertyLoaded) {}
       },
       child: Padding(
         padding: const EdgeInsetsDirectional.only(top: 24, start: 16, end: 16),
@@ -186,9 +191,6 @@ class _SalesViewState extends State<SalesView> {
         if (state is PropertyLoaded) {
           _lastProperties = state.properties;
           _lastTotalCount = state.properties.totalCount;
-          logger.i(
-            'Properties loaded: ${state.properties.data.length} items, page: ${state.properties.pageNumber}',
-          );
         }
 
         final properties = _lastProperties?.data ?? [];
@@ -205,9 +207,6 @@ class _SalesViewState extends State<SalesView> {
           );
         }
 
-        logger.i(
-          'Total Count: $totalCount, Rows Per Page: $rowsPerPage, Page Count: $pageCount',
-        );
         return Column(
           children: [
             Expanded(child: _buildPropertyTable(properties)),
@@ -285,12 +284,21 @@ class _SalesViewState extends State<SalesView> {
           ),
         ),
 
-        ActionCell(
-          index: 0,
-          isView: true,
-          onDelete: () {},
-          onView: () {},
-          iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
+        BlocProvider(
+          create:
+              (context) => PropertyActionsCubit(PropertyActionsRepoImpl(Dio())),
+          child: ActionCell(
+            page: currentPage,
+            rowsPerPage: rowsPerPage,
+            selectedStatus: selectedStatus!,
+            id: property.id,
+            isView: true,
+
+            onTapSeeDetails: widget.onTapSeeDetails,
+            onTapEddDetails: widget.onTapEddDetails,
+
+            iDark: context.watch<ThemeCubit>().state == ThemeMode.dark,
+          ),
         ),
       ],
     );
@@ -388,19 +396,27 @@ class _StateSectionState extends State<StateSection> {
 }
 
 class ActionCell extends StatelessWidget {
-  final int index;
+  final int id;
   final bool isView;
   final bool iDark;
-  final VoidCallback onDelete;
-  final VoidCallback onView;
+  final int page;
+  final int rowsPerPage;
+
+  final String selectedStatus;
+  final void Function(int id) onTapSeeDetails;
+  final void Function(int id) onTapEddDetails;
 
   const ActionCell({
     super.key,
-    required this.index,
+    required this.id,
     this.isView = false,
-    required this.onDelete,
-    required this.onView,
+
     required this.iDark,
+    required this.onTapSeeDetails,
+    required this.onTapEddDetails,
+    required this.page,
+    required this.rowsPerPage,
+    required this.selectedStatus,
   });
 
   @override
@@ -412,7 +428,9 @@ class ActionCell extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
-              onTap: onView,
+              onTap: () {
+                onTapSeeDetails(id);
+              },
               borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 Assets.imagesHugeiconsView,
@@ -423,7 +441,9 @@ class ActionCell extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                onTapEddDetails(id);
+              },
               borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 Assets.imagesBasilEditOutline,
@@ -433,16 +453,73 @@ class ActionCell extends StatelessWidget {
                         : AppColors.lightModeAccent,
               ),
             ),
-            InkWell(
-              onTap: onDelete,
-              borderRadius: BorderRadius.circular(8),
-              child: SvgPicture.asset(
-                Assets.imagesFluentDelete32Regular,
-                color:
-                    iDark
-                        ? AppColors.darkModeAccent
-                        : AppColors.lightModeAccent,
-              ),
+
+            BlocConsumer<PropertyActionsCubit, PropertyActionsState>(
+              listener: (context, state) {
+                if (state is PropertyActionSuccess) {
+                  // Show success message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("تمت العملية بنجاح!"),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                  context.read<PropertyCubit>().fetchProperties(
+                    propertyType: 'Sale',
+                    pageNumber: page,
+                    pageSize: rowsPerPage,
+                    propertySaleStatus: selectedStatus ?? "",
+                    propertyRentStatus: '',
+                  );
+                } else if (state is PropertyActionFailure) {
+                  // Show error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("حدث خطأ: ${state.error}"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                final cubit = context.read<PropertyActionsCubit>();
+                return InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(S.of(context).confirmDelete),
+                          content: Text(S.of(context).confirmDeleteMessage),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(S.of(context).cancel),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                cubit.deleteProperty(id);
+                                Navigator.pop(context);
+                              },
+                              child: Text(S.of(context).delete),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(8),
+                  child: SvgPicture.asset(
+                    Assets.imagesFluentDelete32Regular,
+                    color:
+                        iDark
+                            ? AppColors.darkModeAccent
+                            : AppColors.lightModeAccent,
+                  ),
+                );
+              },
             ),
           ],
         ),

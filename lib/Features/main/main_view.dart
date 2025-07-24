@@ -49,7 +49,12 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   num activeIndex = 0.0;
   int propertyId = 1;
-  bool editFromAdd =false ;
+
+  bool editFromAdd = false;
+  bool editFromSale = false;
+  bool seeFromSale = false;
+  bool editFromRent = false;
+  bool seeFromRent = false;
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +182,16 @@ class _MainViewState extends State<MainView> {
                                   ),
                               child: EditPropertiesDeteils(
                                 onTapBack: () {
-                                  activeIndex = editFromAdd?1.1 : 0;
+                                  activeIndex =
+                                      editFromAdd
+                                          ? 1.1
+                                          : editFromSale
+                                          ? 2
+                                          : seeFromRent
+                                          ? 3
+                                          : 0;
+                                  editFromSale = false;
+                                  editFromAdd = false;
                                   setState(() {});
                                 },
                                 propertyId: propertyId,
@@ -205,16 +219,23 @@ class _MainViewState extends State<MainView> {
                                   ),
                               child: RequestsToAddNewPropertiesDetails(
                                 onTapBack: () {
-                                  activeIndex = 1;
+                                  activeIndex =
+                                      seeFromSale
+                                          ? 2
+                                          : seeFromRent
+                                          ? 3
+                                          : 1;
+                                  seeFromSale = false;
                                   setState(() {});
                                 },
                                 propertyId: propertyId,
                                 onTapEditDetails: (int id) {
                                   activeIndex = 0.2;
                                   propertyId = id;
-                                  editFromAdd =true ;
+                                  editFromAdd = true;
                                   setState(() {});
                                 },
+                                isSaleAndRent: seeFromSale,
                               ),
                             )
                             : activeIndex == 2
@@ -223,10 +244,42 @@ class _MainViewState extends State<MainView> {
                                   (_) => PropertyCubit(
                                     propertyRepo: getIt.get<PropertyRepo>(),
                                   ),
-                              child: SalesView(),
+                              child: SalesView(
+                                onTapSeeDetails: (id) {
+                                  activeIndex = 1.1;
+                                  propertyId = id;
+                                  setState(() {});
+                                  seeFromSale = true;
+                                },
+                                onTapEddDetails: (id) {
+                                  activeIndex = 0.2;
+                                  propertyId = id;
+                                  setState(() {});
+                                  editFromSale = true;
+                                },
+                              ),
                             )
                             : activeIndex == 3
-                            ? RentToLeaseView()
+                            ? BlocProvider(
+                              create:
+                                  (_) => PropertyCubit(
+                                    propertyRepo: getIt.get<PropertyRepo>(),
+                                  ),
+                              child: RentToLeaseView(
+                                onTapSeeDetails: (id) {
+                                  activeIndex = 1.1;
+                                  propertyId = id;
+                                  setState(() {});
+                                  seeFromRent = true;
+                                },
+                                onTapEddDetails: (id) {
+                                  activeIndex = 0.2;
+                                  propertyId = id;
+                                  setState(() {});
+                                  editFromRent = true;
+                                },
+                              ),
+                            )
                             : activeIndex == 4
                             ? MultiBlocProvider(
                               providers: [

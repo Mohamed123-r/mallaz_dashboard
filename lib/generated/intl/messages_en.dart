@@ -89,12 +89,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
+        "confirmDeleteMessage": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this item?"),
         "contactData": MessageLookupByLibrary.simpleMessage("Contact Data"),
         "contractDuration":
             MessageLookupByLibrary.simpleMessage("Contract Duration"),
         "contractExpiring": m3,
         "contractExpiringShort":
             MessageLookupByLibrary.simpleMessage("Contract Expiring"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "detailedAddress":
             MessageLookupByLibrary.simpleMessage("Detailed Address"),
