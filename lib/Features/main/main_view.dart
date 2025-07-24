@@ -49,42 +49,58 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   num activeIndex = 0.0;
   int propertyId = 1;
-  bool editFromAdd =false ;
+  bool editFromAdd = false;
 
   @override
   Widget build(BuildContext context) {
     List<DrawerItemModel> drawerItems = [
       DrawerItemModel(
-        title: S.of(context).homeScreen,
+        title: S
+            .of(context)
+            .homeScreen,
         image: Assets.imagesHomeIcon,
       ),
       DrawerItemModel(
-        title: S.of(context).addRecuist,
+        title: S
+            .of(context)
+            .addRecuist,
         image: Assets.imagesMask,
       ),
       DrawerItemModel(
-        title: S.of(context).manageSalesUnits,
+        title: S
+            .of(context)
+            .manageSalesUnits,
         image: Assets.imagesWeuiHomeOutlined,
       ),
 
       DrawerItemModel(
-        title: S.of(context).manageFullRentUnits,
+        title: S
+            .of(context)
+            .manageFullRentUnits,
         image: Assets.imagesMaterialSymbolsLight,
       ),
       DrawerItemModel(
-        title: S.of(context).manageUsers,
+        title: S
+            .of(context)
+            .manageUsers,
         image: Assets.imagesUsersIcon,
       ),
       DrawerItemModel(
-        title: S.of(context).adminManagement,
+        title: S
+            .of(context)
+            .adminManagement,
         image: Assets.imagesSeationgIcon,
       ),
       DrawerItemModel(
-        title: S.of(context).provideSupport,
+        title: S
+            .of(context)
+            .provideSupport,
         image: Assets.imagesAskIcon,
       ),
       DrawerItemModel(
-        title: S.of(context).sendNotification,
+        title: S
+            .of(context)
+            .sendNotification,
         image: Assets.imagesNotificationIcon,
       ),
     ];
@@ -115,160 +131,179 @@ class _MainViewState extends State<MainView> {
                 Expanded(
                   child: Container(
                     child:
-                        activeIndex == 0
-                            ? MultiBlocProvider(
-                              providers: [
-                                BlocProvider(
-                                  create:
-                                      (context) => DashboardStatsCubit(
-                                        getIt.get<DashboardStatsRepo>(),
-                                      ),
-                                ),
-                                BlocProvider(
-                                  create:
-                                      (context) => AppointmentCubit(
-                                        getIt.get<AppointmentRepo>(),
-                                      ),
-                                ),
-                              ],
-                              child: HomeView(
-                                onTapSeeDetails: (id) {
-                                  activeIndex = 0.1;
-                                  propertyId = id;
-                                  setState(() {});
-                                },
-                                onTapEddDetails: (id) {
-                                  activeIndex = 0.2;
-                                  propertyId = id;
-                                  setState(() {});
-                                },
+                    activeIndex == 0
+                        ? MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create:
+                              (context) =>
+                              DashboardStatsCubit(
+                                getIt.get<DashboardStatsRepo>(),
                               ),
-                            )
-                            : activeIndex == 0.1
-                            ? MultiBlocProvider(
-                              providers: [
-                                BlocProvider(
-                                  create:
-                                      (_) => PropertyDetailsCubit(
-                                        getIt.get<PropertyDetailsRepo>(),
-                                      )..fetchPropertyDetails(propertyId),
-                                ),
-                                BlocProvider(
-                                  create:
-                                      (context) => AppointmentDetailsCubit(
-                                        getIt.get<AppointmentRepo>(),
-                                      )..fetchAppointmentDetails(
-                                        appointmentId: propertyId,
-                                      ),
-                                ),
-                              ],
-                              child: PreviewRequestsDetailsView(
-                                onTapBack: () {
-                                  activeIndex = 0;
-                                  setState(() {});
-                                },
+                        ),
+                        BlocProvider(
+                          create:
+                              (context) =>
+                              AppointmentCubit(
+                                getIt.get<AppointmentRepo>(),
                               ),
-                            )
-                            : activeIndex == 0.2
-                            ? BlocProvider(
-                              create:
-                                  (context) => PropertyDetailsCubit(
-                                    getIt.get<PropertyDetailsRepo>(),
-                                  ),
-                              child: EditPropertiesDeteils(
-                                onTapBack: () {
-                                  activeIndex = editFromAdd?1.1 : 0;
-                                  setState(() {});
-                                },
-                                propertyId: propertyId,
-                              ),
-                            )
-                            : activeIndex == 1
-                            ? BlocProvider(
-                              create:
-                                  (context) => PropertyRequestCubit(
-                                    getIt.get<PropertyRequestRepo>(),
-                                  ),
-                              child: RequestsToAddNewProperties(
-                                onTapSeeDetails: (int id) {
-                                  propertyId = id;
-                                  activeIndex = 1.1;
-                                  setState(() {});
-                                },
-                              ),
-                            )
-                            : activeIndex == 1.1
-                            ? BlocProvider(
-                              create:
-                                  (_) => PropertyDetailsCubit(
-                                    getIt.get<PropertyDetailsRepo>(),
-                                  ),
-                              child: RequestsToAddNewPropertiesDetails(
-                                onTapBack: () {
-                                  activeIndex = 1;
-                                  setState(() {});
-                                },
-                                propertyId: propertyId,
-                                onTapEditDetails: (int id) {
-                                  activeIndex = 0.2;
-                                  propertyId = id;
-                                  editFromAdd =true ;
-                                  setState(() {});
-                                },
-                              ),
-                            )
-                            : activeIndex == 2
-                            ? BlocProvider(
-                              create:
-                                  (_) => PropertyCubit(
-                                    propertyRepo: getIt.get<PropertyRepo>(),
-                                  ),
-                              child: SalesView(),
-                            )
-                            : activeIndex == 3
-                            ? RentToLeaseView()
-                            : activeIndex == 4
-                            ? MultiBlocProvider(
-                              providers: [
-                                BlocProvider(
-                                  create:
-                                      (context) =>
-                                          UserCubit(getIt.get<UserRepo>()),
-                                ),
-                                BlocProvider(
-                                  create:
-                                      (context) => UserSearchCubit(
-                                        userSearchRepo:
-                                            getIt.get<UserSearchRepo>(),
-                                      ),
-                                ),
-                              ],
-                              child: UserManagementView(
-                                onPressedBack: () {
-                                  activeIndex = 0;
-                                  setState(() {});
-                                  DelayStreamTransformer(
-                                    const Duration(seconds: 1),
-                                  );
+                        ),
+                      ],
+                      child: HomeView(
+                        onTapSeeDetails: (id) {
+                          activeIndex = 0.1;
+                          propertyId = id;
+                          setState(() {});
+                        },
+                        onTapEddDetails: (id) {
+                          activeIndex = 0.2;
+                          propertyId = id;
+                          setState(() {});
+                        },
+                      ),
+                    )
+                        : activeIndex == 0.1
+                        ? MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create:
+                              (_) =>
+                          PropertyDetailsCubit(
+                            getIt.get<PropertyDetailsRepo>(),
+                          )
+                            ..fetchPropertyDetails(propertyId),
+                        ),
+                        BlocProvider(
+                          create:
+                              (context) =>
+                          AppointmentDetailsCubit(
+                            getIt.get<AppointmentRepo>(),
+                          )
+                            ..fetchAppointmentDetails(
+                              appointmentId: propertyId,
+                            ),
+                        ),
+                      ],
+                      child: PreviewRequestsDetailsView(
+                        onTapBack: () {
+                          activeIndex = 0;
+                          setState(() {});
+                        },
+                      ),
+                    )
+                        : activeIndex == 0.2
+                        ? BlocProvider(
+                      create:
+                          (context) =>
+                          PropertyDetailsCubit(
+                            getIt.get<PropertyDetailsRepo>(),
+                          ),
+                      child: EditPropertiesDeteils(
+                        onTapBack: () {
+                          activeIndex = editFromAdd ? 1.1 : 0;
+                          setState(() {});
+                        },
+                        propertyId: propertyId,
+                      ),
+                    )
+                        : activeIndex == 1
+                        ? BlocProvider(
+                      create:
+                          (context) =>
+                          PropertyRequestCubit(
+                            getIt.get<PropertyRequestRepo>(),
+                          ),
+                      child: RequestsToAddNewProperties(
+                        onTapSeeDetails: (int id) {
+                          propertyId = id;
+                          activeIndex = 1.1;
+                          setState(() {});
+                        },
+                      ),
+                    )
+                        : activeIndex == 1.1
+                        ? BlocProvider(
+                      create:
+                          (_) =>
+                          PropertyDetailsCubit(
+                            getIt.get<PropertyDetailsRepo>(),
+                          ),
+                      child: RequestsToAddNewPropertiesDetails(
+                        onTapBack: () {
+                          activeIndex = 1;
+                          setState(() {});
+                        },
+                        propertyId: propertyId,
+                        onTapEditDetails: (int id) {
+                          activeIndex = 0.2;
+                          propertyId = id;
+                          editFromAdd = true;
+                          setState(() {});
+                        },
+                      ),
+                    )
+                        : activeIndex == 2
+                        ? BlocProvider(
+                      create:
+                          (_) =>
+                          PropertyCubit(
+                            propertyRepo: getIt.get<PropertyRepo>(),
+                          ),
+                      child: SalesView(),
+                    )
+                        : activeIndex == 3
+                        ? BlocProvider(
+                      create:
+                          (_) =>
+                          PropertyCubit(
+                            propertyRepo: getIt.get<PropertyRepo>(),
+                          ),
+                      child: RentToLeaseView(),
+                    )
 
-                                  activeIndex = 4;
-
-                                  setState(() {});
-                                },
+                        : activeIndex == 4
+                        ? MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create:
+                              (context) =>
+                              UserCubit(getIt.get<UserRepo>()),
+                        ),
+                        BlocProvider(
+                          create:
+                              (context) =>
+                              UserSearchCubit(
+                                userSearchRepo:
+                                getIt.get<UserSearchRepo>(),
                               ),
-                            )
-                            : activeIndex == 5
-                            ? BlocProvider(
-                              create:
-                                  (context) =>
-                                      AdminCubit(getIt.get<AdminRepo>()),
-                              child: AdminManagementView(),
-                            )
-                            : activeIndex == 6
-                            ? ChatView()
-                            : activeIndex == 7
-                            ? NotificationView()
-                            : Container(color: Colors.red),
+                        ),
+                      ],
+                      child: UserManagementView(
+                        onPressedBack: () {
+                          activeIndex = 0;
+                          setState(() {});
+                          DelayStreamTransformer(
+                            const Duration(seconds: 1),
+                          );
+
+                          activeIndex = 4;
+
+                          setState(() {});
+                        },
+                      ),
+                    )
+                        : activeIndex == 5
+                        ? BlocProvider(
+                      create:
+                          (context) =>
+                          AdminCubit(getIt.get<AdminRepo>()),
+                      child: AdminManagementView(),
+                    )
+                        : activeIndex == 6
+                        ? ChatView()
+                        : activeIndex == 7
+                        ? NotificationView()
+                        : Container(color: Colors.red),
                   ),
                 ),
               ],
