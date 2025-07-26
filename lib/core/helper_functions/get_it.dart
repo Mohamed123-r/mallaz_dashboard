@@ -12,6 +12,8 @@ import 'package:get_it/get_it.dart';
 import '../../Features/admin_management/data/repo/admin_repo.dart';
 import '../../Features/admin_management/data/repo/admin_repo_impl.dart';
 import '../../Features/home/data/repo/appointment_repo.dart';
+import '../../Features/notification/data/repo/notification_repo.dart';
+import '../../Features/notification/data/repo/notification_repo_impl.dart';
 import '../../Features/unit_management/data/repo/property_repo.dart';
 import '../../Features/unit_management/data/repo/property_repo_impl.dart';
 import '../../Features/user_management/data/repo/user_search_repo.dart';
@@ -30,6 +32,9 @@ void setupGetIt() {
   );
   getIt.registerSingleton<DashboardStatsRepo>(
     DashboardStatsRepoImpl(dioConsumer: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<NotificationRepo>(
+    NotificationRepoImpl(dioConsumer: getIt<DioConsumer>()),
   );
   getIt.registerSingleton<AppointmentRepo>(
     AppointmentRepoImpl(dioConsumer: getIt<DioConsumer>()),

@@ -30,6 +30,8 @@ import '../home/data/repo/appointment_repo.dart';
 import '../home/presentation/view/edit_properties_deteils.dart';
 import '../home/presentation/view/home_view.dart';
 import '../home/presentation/view/preview_requests_details_view.dart';
+import '../notification/data/repo/notification_repo.dart';
+import '../notification/presentation/cubit/notification_cubit.dart';
 import '../unit_management/data/repo/property_repo.dart';
 import '../unit_management/presentation/cubit/property_cubit.dart';
 import '../unit_management/presentation/view/rent_to_lease_view.dart';
@@ -320,7 +322,12 @@ class _MainViewState extends State<MainView> {
                             : activeIndex == 6
                             ? ChatView()
                             : activeIndex == 7
-                            ? NotificationView()
+                            ? BlocProvider(
+                          create:
+                              (context) =>
+                                  NotificationCubit(getIt.get<NotificationRepo>()),
+  child: NotificationView(),
+)
                             : Container(color: Colors.red),
                   ),
                 ),
