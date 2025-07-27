@@ -12,8 +12,7 @@ class ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
-    String currentLanguage = context.watch<LocaleCubit>().state.languageCode;
-    return Row(
+ return Row(
       children: [
         Expanded(flex: 6, child: UsersMessagesPane(isDark: isDark)),
         VerticalDivider(width: 1, thickness: 1, color: AppColors.graysGray2),
@@ -23,7 +22,7 @@ class ChatView extends StatelessWidget {
   }
 }
 
-// ====== الجزء الأيسر: الدردشة الجارية ======
+
 class CurrentChatPane extends StatelessWidget {
   const CurrentChatPane({super.key, required this.isDark});
 
@@ -41,7 +40,6 @@ class CurrentChatPane extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // العنوان
           Padding(
             padding: EdgeInsets.only(bottom: 12),
             child: Text(
@@ -54,7 +52,6 @@ class CurrentChatPane extends StatelessWidget {
               ),
             ),
           ),
-          // الشريط العلوي للمحادثة
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
             decoration: BoxDecoration(
@@ -104,9 +101,7 @@ class CurrentChatPane extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          // الرسائل
           const Expanded(child: _ChatMessagesList()),
-          // إدخال الرسالة
           _ChatInputBar(isDark),
         ],
       ),
@@ -119,7 +114,6 @@ class _ChatMessagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // رسائل وهمية
     final messages = [
       ChatMessage(
         isMe: false,
@@ -270,7 +264,6 @@ class _ChatInputBar extends StatelessWidget {
             icon: const Icon(Icons.attach_file, color: Colors.black87),
             onPressed: () {},
           ),
-          // حقل الإدخال
           Expanded(
             child: Container(
               height: 32,
@@ -315,7 +308,7 @@ class _ChatInputBar extends StatelessWidget {
   }
 }
 
-// ====== الجزء الأيمن: رسائل المستخدمين ======
+
 class UsersMessagesPane extends StatelessWidget {
   const UsersMessagesPane({super.key, required this.isDark});
 
@@ -323,8 +316,7 @@ class UsersMessagesPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // بيانات المستخدمين والرسائل الجانبية (وهمية)
-    final users = [
+  final users = [
       UserMsg(
         name: "اسماء حسن",
         lastMsg: "شقه ايجار بمنطقة الاسكندرية",
@@ -365,7 +357,7 @@ class UsersMessagesPane extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // العنوان
+
           Text(
             "رسائل المستخدمين",
             style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
@@ -376,7 +368,6 @@ class UsersMessagesPane extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          // حقل البحث
           Container(
             height: 42,
             margin: const EdgeInsets.only(bottom: 18),
@@ -396,7 +387,6 @@ class UsersMessagesPane extends StatelessWidget {
               ),
             ),
           ),
-          // قائمة المستخدمين
           Expanded(
             child: ListView.builder(
               itemCount: users.length,
@@ -489,7 +479,6 @@ class _UserMessageTile extends StatelessWidget {
               ],
             ),
           ),
-          // الوقت
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
