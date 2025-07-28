@@ -22,7 +22,6 @@ class ChatView extends StatelessWidget {
   }
 }
 
-
 class CurrentChatPane extends StatelessWidget {
   const CurrentChatPane({super.key, required this.isDark});
 
