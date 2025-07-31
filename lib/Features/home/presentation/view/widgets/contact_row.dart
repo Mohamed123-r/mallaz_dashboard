@@ -1,6 +1,12 @@
+import 'package:book_apartment_dashboard/Features/home/data/repo/appointment_repo_impl.dart';
+import 'package:book_apartment_dashboard/Features/home/presentation/cubit/edit_note_cubit.dart';
+import 'package:book_apartment_dashboard/core/api/dio_consumer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/appointment_model.dart';
+import '../../../data/repo/appointment_repo.dart';
 import 'contact_card.dart';
 import 'note_card.dart';
 
@@ -36,10 +42,17 @@ class ContactRow extends StatelessWidget {
           image: details.data.requesterImage,
         ),
         Expanded(
-          child: NoteCard(
-            context: context,
-            isDark: isDark,
-            note: details.data.notes,
+          child: BlocProvider(
+            create:
+                (context) => EditNoteCubit(
+                  AppointmentRepoImpl(dioConsumer: DioConsumer(dio: Dio())),
+                ),
+            child: NoteCard(
+              context: context,
+              isDark: isDark,
+              note: details.data.notes,
+              appointmentId: details.data.id,
+            ),
           ),
         ),
       ],

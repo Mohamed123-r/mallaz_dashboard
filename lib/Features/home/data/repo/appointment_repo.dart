@@ -1,3 +1,5 @@
+import '../models/edit_note_model.dart';
+
 abstract class AppointmentRepo {
   Future<Map<String, dynamic>> getAppointments({
     required int pageNumber,
@@ -6,5 +8,9 @@ abstract class AppointmentRepo {
 
   Future<Map<String, dynamic>> getAppointmentDetails({
     required int appointmentId,
+  });
+  Future<EditNoteModel> editAppointmentNote({
+    required int appointmentId,
+    required String note,
   });
 }
