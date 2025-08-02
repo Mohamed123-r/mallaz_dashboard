@@ -25,6 +25,8 @@ import '../add_new_properties/presentation/view/requests_to_add_new_properties_d
 import '../admin_management/data/repo/admin_repo.dart';
 import '../admin_management/presentation/cubit/admin_cubit.dart';
 import '../admin_management/presentation/view/admin_management_view.dart';
+import '../chat/data/repo/chat_repo.dart';
+import '../chat/presentation/cubit/chat_cubit.dart';
 import '../chat/presentation/view/chat_view.dart';
 import '../home/data/repo/appointment_repo.dart';
 import '../home/presentation/view/edit_properties_deteils.dart';
@@ -320,7 +322,15 @@ class _MainViewState extends State<MainView> {
                               child: AdminManagementView(),
                             )
                             : activeIndex == 6
-                            ? ChatView()
+                            ?
+
+                        BlocProvider(
+                          create:
+                              (context) =>
+                                  ChatCubit(getIt.get<ChatRepo>()),
+                          child:  ChatView(),
+                        )
+
                             : activeIndex == 7
                             ? BlocProvider(
                           create:

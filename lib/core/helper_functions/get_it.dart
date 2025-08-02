@@ -11,6 +11,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../Features/admin_management/data/repo/admin_repo.dart';
 import '../../Features/admin_management/data/repo/admin_repo_impl.dart';
+import '../../Features/chat/data/repo/chat_repo.dart';
+import '../../Features/chat/data/repo/chat_repo_impl.dart';
 import '../../Features/home/data/repo/appointment_repo.dart';
 import '../../Features/notification/data/repo/notification_repo.dart';
 import '../../Features/notification/data/repo/notification_repo_impl.dart';
@@ -50,5 +52,8 @@ void setupGetIt() {
   );
   getIt.registerSingleton<PropertyRepo>(
     PropertyRepoImpl(dioConsumer: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<ChatRepo>(
+    ChatRepoImpl(dioConsumer: getIt<DioConsumer>()),
   );
 }
