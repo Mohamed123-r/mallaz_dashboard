@@ -19,7 +19,7 @@ class ChatListFailure extends ChatState {
 }
 
 class ChatHistoryLoaded extends ChatState {
-  final List<ChatMessageItem> data;
+  final List<dynamic> data;
   ChatHistoryLoaded(this.data);
 }
 class ChatHistoryLoading extends ChatState {}
@@ -29,7 +29,7 @@ class ChatHistoryFailure extends ChatState {
 }
 
 class ChatSendSuccess extends ChatState {
-  final ChatMessageItem message;
+  final dynamic message;
   ChatSendSuccess(this.message);
 }
 class ChatSendFailure extends ChatState {

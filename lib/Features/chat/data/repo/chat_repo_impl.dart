@@ -19,15 +19,15 @@ class ChatRepoImpl implements ChatRepo {
   }
 
   @override
-  Future<ChatHistoryModel> getChatHistory(String chatId) async {
+  Future<Map<dynamic,dynamic>> getChatHistory(String chatId) async {
     final res = await dioConsumer.get(
       "/api/ChatMassage/history/$chatId",
     );
-    return ChatHistoryModel.fromJson(res.data);
+    return res;
   }
 
   @override
-  Future<SendMessageModel> sendMessage({required String receiverUserId, required String content, }) async {
+  Future<Map<dynamic,dynamic>> sendMessage({required String receiverUserId, required String content, }) async {
     final res = await dioConsumer.post(
       "http://realestateunits.runasp.net/api/ChatMassage",
       data: {
@@ -35,7 +35,7 @@ class ChatRepoImpl implements ChatRepo {
         "content": content,
       },
     );
-    return SendMessageModel.fromJson(res.data);
+    return res;
   }
 
   @override

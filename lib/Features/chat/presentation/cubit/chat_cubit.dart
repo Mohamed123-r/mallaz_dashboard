@@ -10,28 +10,18 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this.repo) : super(ChatInitial());
 
-  Future<void> fetchChats() async {
-    emit(ChatListLoading());
-    try {
-      final res = await repo.getAllChats();
-      logger.i('Fetched Chats: ${res}');
-      emit(
-        ChatListLoaded(
-          res['data']
-
-        ),
-      );
-    } catch (e) {
-      emit(ChatListFailure(e.toString()));
-    }
-  }
-
-  Future<void> fetchChatHistory(String chatId) async {
+  Future<void> fetchChatHistory( String receiverUserId) async {
     emit(ChatHistoryLoading());
     try {
-      final res = await repo.getChatHistory(chatId);
-      emit(ChatHistoryLoaded(res.data));
+      final res = await repo.getChatHistory(receiverUserId);
+      logger.i('Fetched Chat History for chatId $receiverUserId: ${res}');
+      if (res["data"] == null || res["data"].isEmpty) {
+        logger.w('No data returned for chatId $receiverUserId');
+      }
+      emit(ChatHistoryLoaded(res["data"] ?? []));
+    // تحديث قائمة الدردشة بعد جلب التاريخ
     } catch (e) {
+      logger.e('Error fetching chat history: $e');
       emit(ChatHistoryFailure(e.toString()));
     }
   }
@@ -45,12 +35,15 @@ class ChatCubit extends Cubit<ChatState> {
         receiverUserId: receiverUserId,
         content: content,
       );
-      if (res.success && res.data != null) {
-        emit(ChatSendSuccess(res.data!));
+      logger.i('Send Message Response: $res');
+      if (res["success"] && res["data"] != null) {
+        emit(ChatSendSuccess(res["data"]));
+        await fetchChatHistory(receiverUserId); // تحديث الـ history
       } else {
-        emit(ChatSendFailure(res.message));
+        emit(ChatSendFailure(res["message"] ?? "Failed to send message"));
       }
     } catch (e) {
+      logger.e('Error sending message: $e');
       emit(ChatSendFailure(e.toString()));
     }
   }
@@ -67,4 +60,24 @@ class ChatCubit extends Cubit<ChatState> {
       emit(ChatDeleteFailure(e.toString()));
     }
   }
+}
+
+class FetchChatsCubit extends Cubit<ChatState> {
+  final ChatRepo repo;
+
+  FetchChatsCubit(this.repo) : super(ChatInitial());
+
+  Future<void> fetchChats() async {
+    emit(ChatListLoading());
+    try {
+      final res = await repo.getAllChats();
+      logger.i('Fetched Chats: ${res}');
+      emit(ChatListLoaded(res['data']));
+    } catch (e) {
+      logger.e('Error fetching chats: $e');
+      emit(ChatListFailure(e.toString()));
+    }
+  }
+
+
 }

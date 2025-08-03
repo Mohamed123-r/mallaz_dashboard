@@ -324,12 +324,23 @@ class _MainViewState extends State<MainView> {
                             : activeIndex == 6
                             ?
 
-                        BlocProvider(
+                        MultiBlocProvider(
+  providers: [
+    BlocProvider(
                           create:
                               (context) =>
                                   ChatCubit(getIt.get<ChatRepo>()),
-                          child:  ChatView(),
-                        )
+
+                        ),    BlocProvider(
+                          create:
+                              (context) =>
+                                  FetchChatsCubit(getIt.get<ChatRepo>()),
+
+                        ),
+
+  ],
+  child: ChatView(),
+)
 
                             : activeIndex == 7
                             ? BlocProvider(

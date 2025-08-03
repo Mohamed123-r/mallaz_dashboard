@@ -4,8 +4,8 @@ import '../models/send_message_model.dart';
 
 abstract class ChatRepo {
   Future<Map<dynamic,dynamic>> getAllChats();
-  Future<ChatHistoryModel> getChatHistory(String chatId);
-  Future<SendMessageModel> sendMessage({
+  Future<Map<dynamic,dynamic>> getChatHistory(String chatId);
+  Future<Map<dynamic,dynamic>> sendMessage({
     required String receiverUserId,
     required String content,
   });
