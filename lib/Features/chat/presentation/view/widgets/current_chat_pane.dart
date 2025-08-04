@@ -116,18 +116,6 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                             ),
                           ],
                         ),
-                        const Spacer(),
-                        IconButton(
-                          icon: const Icon(Icons.call, color: Colors.black87),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.videocam,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () {},
-                        ),
                       ],
                     ),
                   ),
@@ -235,34 +223,6 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                     ),
                     child: Row(
                       children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.more_horiz,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.camera_alt_outlined,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.image_outlined,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.attach_file,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () {},
-                        ),
                         Expanded(
                           child: Container(
                             height: 32,
