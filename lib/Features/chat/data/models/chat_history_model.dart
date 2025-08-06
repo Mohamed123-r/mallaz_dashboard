@@ -45,9 +45,10 @@ class ChatHistoryModel {
     return ChatHistoryModel(
       success: json['success'],
       message: json['message'],
-      data: (json['data'] as List)
-          .map((e) => ChatMessageItem.fromJson(e))
-          .toList(),
+      data:
+          (json['data'] as List)
+              .map((e) => ChatMessageItem.fromJson(e))
+              .toList(),
     );
   }
 }

@@ -40,9 +40,6 @@ class ChatListItem {
       'date': date,
     };
   }
-
-
-
 }
 
 class ChatListModel {
@@ -60,9 +57,8 @@ class ChatListModel {
     return ChatListModel(
       success: json['success'],
       message: json['message'],
-      data: (json['data'] as List)
-          .map((e) => ChatListItem.fromJson(e))
-          .toList(),
+      data:
+          (json['data'] as List).map((e) => ChatListItem.fromJson(e)).toList(),
     );
   }
 }

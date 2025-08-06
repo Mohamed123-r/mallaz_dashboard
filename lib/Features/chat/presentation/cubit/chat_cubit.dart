@@ -4,22 +4,24 @@ import '../../data/models/chat_history_model.dart';
 import '../../data/models/chat_list_model.dart';
 import '../../data/repo/chat_repo.dart';
 import 'chat_state.dart';
-
+ String id  = "";
 class ChatCubit extends Cubit<ChatState> {
   final ChatRepo repo;
+  // إضافة متغير لتخزين معرف المستخدم المستلم
 
   ChatCubit(this.repo) : super(ChatInitial());
 
-  Future<void> fetchChatHistory( String receiverUserId) async {
+  Future<void> fetchChatHistory(String receiverUserId) async {
     emit(ChatHistoryLoading());
+  // تحديث معرف المستخدم المستلم
     try {
       final res = await repo.getChatHistory(receiverUserId);
       logger.i('Fetched Chat History for chatId $receiverUserId: ${res}');
       if (res["data"] == null || res["data"].isEmpty) {
         logger.w('No data returned for chatId $receiverUserId');
-      }
+      };
+        id = receiverUserId;
       emit(ChatHistoryLoaded(res["data"] ?? []));
-    // تحديث قائمة الدردشة بعد جلب التاريخ
     } catch (e) {
       logger.e('Error fetching chat history: $e');
       emit(ChatHistoryFailure(e.toString()));
@@ -48,16 +50,43 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
-  Future<void> deleteMessage(int messageId) async {
+
+
+  Future<void> deleteSpecificMessage(int messageId) async {
+    emit(ChatHistoryLoading());
     try {
-      final success = await repo.deleteMessage(messageId);
-      if (success) {
+      final res = await repo.deleteSpecificMessage(messageId);
+    if (res["success"]) {
         emit(ChatDeleteSuccess());
+
+        await fetchChatHistory(id);
+
       } else {
-        emit(ChatDeleteFailure("Failed to delete message"));
+        emit(ChatDeleteFailure(res["message"] ?? "Failed to delete message"));
       }
     } catch (e) {
+      logger.e('Error deleting specific message: $e');
       emit(ChatDeleteFailure(e.toString()));
+    }
+  }
+  // دالة جديدة: جعل كل الرسائل مقروءة
+  Future<void> markAllMessagesRead(String chatId) async {
+    emit(ChatHistoryLoading());
+    try {
+      final res = await repo.markAllMessagesRead(chatId);
+      if (res["success"]) {
+        FetchChatsCubit(
+          repo,
+        ).fetchChats();
+
+        await fetchChatHistory(id);
+
+
+      } else {
+   }
+    } catch (e) {
+      logger.e('Error marking all messages read: $e');
+
     }
   }
 }
@@ -78,6 +107,4 @@ class FetchChatsCubit extends Cubit<ChatState> {
       emit(ChatListFailure(e.toString()));
     }
   }
-
-
 }

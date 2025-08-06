@@ -11,7 +11,6 @@ import '../../cubit/chat_state.dart';
 
 class UsersMessagesPane extends StatelessWidget {
   const UsersMessagesPane({
-
     super.key,
     required this.isDark,
     required this.onUserTap,
@@ -42,7 +41,10 @@ class UsersMessagesPane extends StatelessWidget {
                 Text(
                   "رسائل المستخدمين",
                   style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
-                    color: isDark ? AppColors.darkModeButtonsPrimary : AppColors.lightModeButtonsPrimary,
+                    color:
+                        isDark
+                            ? AppColors.darkModeButtonsPrimary
+                            : AppColors.lightModeButtonsPrimary,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -58,7 +60,9 @@ class UsersMessagesPane extends StatelessWidget {
                         child: UserMessageTile(
                           user: user,
                           isDark: isDark,
-                          isSelected: selectedUser != null && selectedUser["senderId"] == user["senderId"],
+                          isSelected:
+                              selectedUser != null &&
+                              selectedUser["senderId"] == user["senderId"],
                         ),
                       );
                     },

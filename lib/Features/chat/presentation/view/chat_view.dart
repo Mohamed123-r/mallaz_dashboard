@@ -21,6 +21,7 @@ class ChatView extends StatefulWidget {
 class _ChatViewState extends State<ChatView> {
   dynamic selectedUser = null;
   String selectedChatId = "";
+  int chatId = 0;
 
   @override
   void initState() {
@@ -32,8 +33,11 @@ class _ChatViewState extends State<ChatView> {
     setState(() {
       selectedUser = user;
       selectedChatId = user["senderId"];
+      chatId = user["chatId"];
     });
     context.read<ChatCubit>().fetchChatHistory(selectedChatId);
+    context.read<ChatCubit>().markAllMessagesRead(chatId.toString());
+
   }
 
   @override
@@ -56,6 +60,7 @@ class _ChatViewState extends State<ChatView> {
             isDark: isDark,
             selectedUser: selectedUser,
             currentUserId: selectedChatId,
+            chatId: chatId ,
           ),
         ),
       ],

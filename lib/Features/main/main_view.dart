@@ -322,33 +322,30 @@ class _MainViewState extends State<MainView> {
                               child: AdminManagementView(),
                             )
                             : activeIndex == 6
-                            ?
-
-                        MultiBlocProvider(
-  providers: [
-    BlocProvider(
-                          create:
-                              (context) =>
-                                  ChatCubit(getIt.get<ChatRepo>()),
-
-                        ),    BlocProvider(
-                          create:
-                              (context) =>
-                                  FetchChatsCubit(getIt.get<ChatRepo>()),
-
-                        ),
-
-  ],
-  child: ChatView(),
-)
-
+                            ? MultiBlocProvider(
+                              providers: [
+                                BlocProvider(
+                                  create:
+                                      (context) =>
+                                          ChatCubit(getIt.get<ChatRepo>()),
+                                ),
+                                BlocProvider(
+                                  create:
+                                      (context) => FetchChatsCubit(
+                                        getIt.get<ChatRepo>(),
+                                      ),
+                                ),
+                              ],
+                              child: ChatView(),
+                            )
                             : activeIndex == 7
                             ? BlocProvider(
-                          create:
-                              (context) =>
-                                  NotificationCubit(getIt.get<NotificationRepo>()),
-  child: NotificationView(),
-)
+                              create:
+                                  (context) => NotificationCubit(
+                                    getIt.get<NotificationRepo>(),
+                                  ),
+                              child: NotificationView(),
+                            )
                             : Container(color: Colors.red),
                   ),
                 ),

@@ -5,7 +5,6 @@ import '../../../../../constant.dart';
 import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
-
 import '../../cubit/chat_cubit.dart';
 import '../../cubit/chat_state.dart';
 
@@ -15,11 +14,13 @@ class CurrentChatPane extends StatefulWidget {
     required this.isDark,
     required this.selectedUser,
     required this.currentUserId,
+    required this.chatId,
   });
 
   final bool isDark;
   final dynamic selectedUser;
-  final String? currentUserId;
+  final String currentUserId;
+  final int chatId;
 
   @override
   State<CurrentChatPane> createState() => _CurrentChatPaneState();
@@ -27,6 +28,8 @@ class CurrentChatPane extends StatefulWidget {
 
 class _CurrentChatPaneState extends State<CurrentChatPane> {
   final TextEditingController _controller = TextEditingController();
+
+  bool deleteMessage = false;
 
   @override
   void initState() {
@@ -196,10 +199,66 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                     ),
                                     if (isMe) const SizedBox(width: 7),
                                     if (isMe)
-                                      const CircleAvatar(
-                                        backgroundImage: null,
-                                        radius: 17,
-                                        child: Icon(Icons.person, size: 20),
+                                      Row(
+                                        children: [
+                                          const CircleAvatar(
+                                            backgroundImage: null,
+                                            radius: 17,
+                                            child: Icon(Icons.person, size: 20),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ),
+                                            onPressed: () async {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                      "حذف الرسالة",
+                                                    ),
+                                                    content: const Text(
+                                                      "هل أنت متأكد من حذف هذه الرسالة؟",
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(
+                                                            context,
+                                                          ).pop();
+                                                        },
+                                                        child: const Text(
+                                                          "إلغاء",
+                                                        ),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          deleteMessage = true;
+
+                                                          Navigator.of(
+                                                            context,
+                                                          ).pop();
+                                                        },
+                                                        child: const Text(
+                                                          "حذف",
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              deleteMessage
+                                                  ? await context
+                                                      .read<ChatCubit>()
+                                                      .deleteSpecificMessage(
+                                                        msg["id"],
+                                                      )
+                                                  : null;
+                                            },
+                                          ),
+                                        ],
                                       ),
                                   ],
                                 ),

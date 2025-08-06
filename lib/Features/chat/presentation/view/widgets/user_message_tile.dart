@@ -6,9 +6,10 @@ import '../../../../../core/utils/app_text_styles.dart';
 class UserMessageTile extends StatelessWidget {
   final Map<String, dynamic> user;
   final bool isDark;
-    final bool isSelected;
+  final bool isSelected;
 
-  const UserMessageTile({super.key,
+  const UserMessageTile({
+    super.key,
     required this.user,
     required this.isDark,
     required this.isSelected,
@@ -21,23 +22,23 @@ class UserMessageTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color:
-        isSelected
-            ? (isDark
-            ? AppColors.darkModeButtonsPrimary.withOpacity(0.15)
-            : AppColors.lightModeButtonsPrimary.withOpacity(0.15))
-            : Colors.transparent,
+            isSelected
+                ? (isDark
+                    ? AppColors.darkModeButtonsPrimary.withOpacity(0.15)
+                    : AppColors.lightModeButtonsPrimary.withOpacity(0.15))
+                : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
           CircleAvatar(
             backgroundImage:
-            user["userImage"] != null && user["userImage"]!.isNotEmpty
-                ? NetworkImage(user["userImage"]!)
-                : null,
+                user["userImage"] != null && user["userImage"]!.isNotEmpty
+                    ? NetworkImage(user["userImage"]!)
+                    : null,
             radius: 20,
             child:
-            user["userImage"] == null ? Icon(Icons.person, size: 24) : null,
+                user["userImage"] == null ? Icon(Icons.person, size: 24) : null,
           ),
           const SizedBox(width: 9),
           Expanded(
@@ -50,7 +51,8 @@ class UserMessageTile extends StatelessWidget {
                       user["userName"],
                       style: AppTextStyles.subtitle16pxRegular(context),
                     ),
-                    if (user["unReaded"] == 0)
+                   user["unReaded"] == 0 || isSelected?
+                      SizedBox() :
                       Container(
                         margin: const EdgeInsetsDirectional.only(start: 6),
                         padding: const EdgeInsets.symmetric(
@@ -59,9 +61,9 @@ class UserMessageTile extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color:
-                          isDark
-                              ? AppColors.darkModeButtonsPrimary
-                              : AppColors.lightModeButtonsPrimary,
+                              isDark
+                                  ? AppColors.darkModeButtonsPrimary
+                                  : AppColors.lightModeButtonsPrimary,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -75,26 +77,31 @@ class UserMessageTile extends StatelessWidget {
                   user["lastMessage"],
                   style: AppTextStyles.subtitle16pxRegular(context).copyWith(
                     color:
-                    user["unReaded"] > 0
-                        ? isDark
-                        ? AppColors.white
-                        : AppColors.black
-                        : AppColors.graysGray2,
+                        user["unReaded"] > 0
+                            ? isDark
+                                ? AppColors.white
+                                : AppColors.black
+                            : AppColors.graysGray2,
                   ),
                 ),
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                user["date"],
-                style: AppTextStyles.text14pxRegular(
-                  context,
-                ).copyWith(color: AppColors.graysGray2),
-              ),
-            ],
+          SizedBox(
+            width: 142,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  user["date"],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.text14pxRegular(
+                    context,
+                  ).copyWith(color: AppColors.graysGray2),
+                ),
+              ],
+            ),
           ),
         ],
       ),

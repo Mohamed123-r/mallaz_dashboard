@@ -15,7 +15,8 @@ class SendMessageModel {
     return SendMessageModel(
       success: json['success'],
       message: json['message'],
-      data: json['data'] != null ? ChatMessageItem.fromJson(json['data']) : null,
+      data:
+          json['data'] != null ? ChatMessageItem.fromJson(json['data']) : null,
     );
   }
 }
