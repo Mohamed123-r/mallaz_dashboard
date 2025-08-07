@@ -154,6 +154,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("Manage Sales Units"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("Manage Users"),
+        "mediaLoadError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while loading media"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("Mobile Number"),
         "mohamed": MessageLookupByLibrary.simpleMessage("Mohamed"),

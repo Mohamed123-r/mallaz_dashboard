@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageSalesUnits":
             MessageLookupByLibrary.simpleMessage("إدارة وحدات البيع"),
         "manageUsers": MessageLookupByLibrary.simpleMessage("إدارة المستخدمين"),
+        "mediaLoadError":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء تحميل الوسائط"),
         "message": MessageLookupByLibrary.simpleMessage("الرساله"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("رقم الموبايل"),
         "mohamed": MessageLookupByLibrary.simpleMessage("محمد"),

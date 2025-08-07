@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../core/widgets/custom_loading.dart';
@@ -42,31 +41,24 @@ class _PropertyGalleryState extends State<PropertyGallery> {
         videoUrls.add(image);
       }
     }
-    _videoControllers = videoUrls.map((url) {
-      VideoPlayerController? controller;
-      try {
-        controller = VideoPlayerController.network(url)
-          ..initialize().then((_) {
-            if (mounted) {
-              controller?.play();
-              setState(() {
-                _isLoading = false;
-              });
-            }
-          }).catchError((error) {
-            print('Video initialization error for $url: $error');
-            if (mounted) {
-              setState(() {
-                _isLoading = false;
-              });
-            }
-          });
-        return controller;
-      } catch (e) {
-        print('Error creating VideoPlayerController for $url: $e');
-        return null;
-      }
-    }).whereType<VideoPlayerController>().toList();
+    _videoControllers =
+        videoUrls
+            .map(
+              (url) => VideoPlayerController.network(url)
+                ..initialize()
+                    .then((_) {
+                      if (mounted) {
+                        setState(() {});
+                      }
+                    })
+                    .catchError((error) {
+                      print('Video initialization error for $url: $error');
+                    }),
+            )
+            .toList();
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   bool _isVideo(String url) {
@@ -81,6 +73,52 @@ class _PropertyGalleryState extends State<PropertyGallery> {
     super.dispose();
   }
 
+  void _showMediaDialog(String url) {
+    VideoPlayerController? controller;
+    if (_isVideo(url)) {
+      controller = _videoControllers.firstWhere(
+        (c) => c.dataSource == url,
+        orElse: () => VideoPlayerController.network(url),
+      );
+      controller.initialize().then((_) {
+        controller!.play();
+        setState(() {});
+      });
+    }
+
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            content:
+                _isVideo(url)
+                    ? SizedBox(
+                      width: double.maxFinite,
+                      child: AspectRatio(
+                        aspectRatio: controller!.value.aspectRatio,
+                        child: VideoPlayer(controller),
+                      ),
+                    )
+                    : Image.network(url),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (_isVideo(url)) {
+                    controller!.pause();
+                  }
+                  Navigator.pop(context);
+                },
+                child: Text(S.of(context).close),
+              ),
+            ],
+          ),
+    ).then((_) {
+      if (_isVideo(url)) {
+        controller!.pause();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final allMedia = <String>[];
@@ -92,13 +130,33 @@ class _PropertyGalleryState extends State<PropertyGallery> {
     bool allMediaUnavailable = allMedia.isEmpty;
 
     if (allMediaUnavailable) {
-      return Center(
-        child: Text(
-          S.of(context).noMediaAvailable,
-          style: TextStyle(
-            color: widget.isDark ? AppColors.darkModeText : AppColors.lightModeText,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Text(
+              S.of(context).gallery,
+              style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
+                color:
+                    widget.isDark
+                        ? AppColors.darkModeButtonsPrimary
+                        : AppColors.lightModeButtonsPrimary,
+              ),
+            ),
           ),
-        ),
+          Center(
+            child: Text(
+              S.of(context).noMediaAvailable,
+              style: TextStyle(
+                color:
+                    widget.isDark
+                        ? AppColors.darkModeText
+                        : AppColors.lightModeText,
+              ),
+            ),
+          ),
+        ],
       );
     }
 
@@ -116,9 +174,10 @@ class _PropertyGalleryState extends State<PropertyGallery> {
           child: Text(
             S.of(context).gallery,
             style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
-              color: widget.isDark
-                  ? AppColors.darkModeButtonsPrimary
-                  : AppColors.lightModeButtonsPrimary,
+              color:
+                  widget.isDark
+                      ? AppColors.darkModeButtonsPrimary
+                      : AppColors.lightModeButtonsPrimary,
             ),
           ),
         ),
@@ -129,7 +188,10 @@ class _PropertyGalleryState extends State<PropertyGallery> {
               flex: 6,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: _buildMediaWidget(displayItems[0], 286),
+                child: GestureDetector(
+                  onTap: () => _showMediaDialog(displayItems[0]),
+                  child: _buildMediaWidget(displayItems[0], 286),
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -139,12 +201,18 @@ class _PropertyGalleryState extends State<PropertyGallery> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: _buildMediaWidget(displayItems[1], 140),
+                    child: GestureDetector(
+                      onTap: () => _showMediaDialog(displayItems[1]),
+                      child: _buildMediaWidget(displayItems[1], 140),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: _buildMediaWidget(displayItems[2], 140),
+                    child: GestureDetector(
+                      onTap: () => _showMediaDialog(displayItems[2]),
+                      child: _buildMediaWidget(displayItems[2], 140),
+                    ),
                   ),
                 ],
               ),
@@ -154,7 +222,14 @@ class _PropertyGalleryState extends State<PropertyGallery> {
         const SizedBox(height: 16),
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: _buildMediaWidget(displayItems[0], 170, width: double.infinity),
+          child: GestureDetector(
+            onTap: () => _showMediaDialog(displayItems[0]),
+            child: _buildMediaWidget(
+              displayItems[0],
+              170,
+              width: double.infinity,
+            ),
+          ),
         ),
       ],
     );
@@ -166,13 +241,33 @@ class _PropertyGalleryState extends State<PropertyGallery> {
         height: height,
         width: width ?? double.infinity,
         color: AppColors.graysGray2,
-        child: Center(
-          child: Text(
-            S.of(context).noMediaAvailable,
-            style: TextStyle(
-              color: widget.isDark ? AppColors.darkModeText : AppColors.lightModeText,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                S.of(context).gallery,
+                style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
+                  color:
+                      widget.isDark
+                          ? AppColors.darkModeButtonsPrimary
+                          : AppColors.lightModeButtonsPrimary,
+                ),
+              ),
             ),
-          ),
+            Center(
+              child: Text(
+                S.of(context).noMediaAvailable,
+                style: TextStyle(
+                  color:
+                      widget.isDark
+                          ? AppColors.darkModeText
+                          : AppColors.lightModeText,
+                ),
+              ),
+            ),
+          ],
         ),
       );
     }
@@ -185,7 +280,10 @@ class _PropertyGalleryState extends State<PropertyGallery> {
       return SizedBox(
         height: height,
         width: width ?? double.infinity,
-        child: VideoPlayer(controller),
+        child:
+            controller.value.isInitialized
+                ? VideoPlayer(controller)
+                : CustomLoading(),
       );
     } else {
       return Image.network(
@@ -193,9 +291,12 @@ class _PropertyGalleryState extends State<PropertyGallery> {
         height: height,
         width: width ?? double.infinity,
         fit: BoxFit.cover,
+        errorBuilder:
+            (context, error, stackTrace) => Container(
+              color: AppColors.graysGray2,
+              child: Center(child: Text(S.of(context).mediaLoadError)),
+            ),
       );
     }
   }
-
-
 }

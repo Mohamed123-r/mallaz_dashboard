@@ -1680,6 +1680,16 @@ class S {
     );
   }
 
+  /// `An error occurred while loading media`
+  String get mediaLoadError {
+    return Intl.message(
+      'An error occurred while loading media',
+      name: 'mediaLoadError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This screen is not supported at the moment, the display must be larger than 1200px`
   String get screenNotSupported {
     return Intl.message(

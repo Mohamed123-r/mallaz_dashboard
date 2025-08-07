@@ -162,6 +162,7 @@
   "confirmDeleteMessage": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
   "delete": "حذف",
   "confirmDelete": "تأكيد الحذف",
+  "mediaLoadError" : "حدث خطأ أثناء تحميل الوسائط",
   "screenNotSupported" : "هذه الشاشة غير مدعومة في الوقت الحالي , يجب ان يكون العرض اكبر من 1200px "
 }
 
