@@ -204,6 +204,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("جدوله الاشعار"),
+        "screenNotSupported": MessageLookupByLibrary.simpleMessage(
+            "هذه الشاشة غير مدعومة في الوقت الحالي , يجب ان يكون العرض اكبر من 1200px "),
         "searchHint":
             MessageLookupByLibrary.simpleMessage(" اكتب اسم المستخدم كامل...."),
         "searchId": MessageLookupByLibrary.simpleMessage("ابحث ب Id الوحدة..."),

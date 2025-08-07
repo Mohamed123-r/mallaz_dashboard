@@ -1679,6 +1679,16 @@ class S {
       args: [],
     );
   }
+
+  /// `This screen is not supported at the moment, the display must be larger than 1200px`
+  String get screenNotSupported {
+    return Intl.message(
+      'This screen is not supported at the moment, the display must be larger than 1200px',
+      name: 'screenNotSupported',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

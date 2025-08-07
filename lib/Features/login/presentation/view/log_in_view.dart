@@ -42,121 +42,148 @@ class LogInBodyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: BlocConsumer<LoginCubit, LoginState>(
-                listener: (context, state) {
-                  if (state is LoginSuccess) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.loginModel.message)),
-                    );
-                    if (state.loginModel.data != null) {
-                      CacheHelper().saveMap(
-                        key: userData,
-                        value: state.loginModel.data!.toJson(),
-                      );
-                    }
-                    CacheHelper.sharedPreferences.setBool(isSuccessLogin, true);
-                    Navigator.of(context).pushNamed(MainView.routeName);
-                  } else if (state is LoginFailure) {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(state.error)));
-                  }
-                },
-                builder: (context, state) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Assets.imagesLogo,
-                        width: 360,
-                        fit: BoxFit.cover,
-                      ),
-                      Text(
-                        S.of(context).logIn,
-                        style: AppTextStyles.subtitleTitle20pxRegular(context),
-                      ),
-                      SizedBox(height: 30),
-                      SizedBox(
-                        width: 380,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CustomTextField(
-                              title: S.of(context).phoneNumber,
-                              hintText: "01000000000",
-                              keyboardType: TextInputType.emailAddress,
-                              controller: emailController,
-                            ),
-                            SizedBox(height: 24),
-                            CustomPasswordTextField(
-                              title: S.of(context).password,
-                              hintText: "**********",
-                              controller: passwordController,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 24),
-                      MaterialButton(
-                        height: 62,
-                        minWidth: 380,
-                        onPressed: () {
-                          final email = emailController.text;
-                          final password = passwordController.text;
-                          if (email.isNotEmpty && password.isNotEmpty) {
-                            context.read<LoginCubit>().login(email, password);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Please fill all fields')),
-                            );
-                          }
-                        },
-                        color:
-                            context.watch<ThemeCubit>().state == ThemeMode.dark
-                                ? AppColors.darkModeButtonsPrimary
-                                : AppColors.lightModeButtonsPrimary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child:
-                            state is LoginLoading
-                                ? CircularProgressIndicator(
-                                  color:
-                                      context.watch<ThemeCubit>().state ==
-                                              ThemeMode.dark
-                                          ? AppColors.darkModeText
-                                          : AppColors.lightModeText,
-                                )
-                                : Text(
-                                  S.of(context).logIn,
-                                  style: AppTextStyles.buttonLarge20pxRegular(
-                                    context,
-                                  ).copyWith(
-                                    color:
-                                        context.watch<ThemeCubit>().state ==
-                                                ThemeMode.dark
-                                            ? AppColors.darkModeText
-                                            : AppColors.lightModeText,
-                                  ),
-                                ),
-                      ),
-                    ],
-                  );
-                },
+    return MediaQuery.of(context).size.width < 1200
+        ? Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Text(
+                "${S.of(context).screenNotSupported}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ),
-          Expanded(
-            child: Image.asset(Assets.imagesLoginImage, fit: BoxFit.cover),
+        )
+        : Scaffold(
+          body: Row(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: BlocConsumer<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginSuccess) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.loginModel.message)),
+                        );
+                        if (state.loginModel.data != null) {
+                          CacheHelper().saveMap(
+                            key: userData,
+                            value: state.loginModel.data!.toJson(),
+                          );
+                        }
+                        CacheHelper.sharedPreferences.setBool(
+                          isSuccessLogin,
+                          true,
+                        );
+                        Navigator.of(context).pushNamed(MainView.routeName);
+                      } else if (state is LoginFailure) {
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(state.error)));
+                      }
+                    },
+                    builder: (context, state) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            Assets.imagesLogo,
+                            width: 360,
+                            fit: BoxFit.cover,
+                          ),
+                          Text(
+                            S.of(context).logIn,
+                            style: AppTextStyles.subtitleTitle20pxRegular(
+                              context,
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          SizedBox(
+                            width: 380,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                CustomTextField(
+                                  title: S.of(context).phoneNumber,
+                                  hintText: "01000000000",
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: emailController,
+                                ),
+                                SizedBox(height: 24),
+                                CustomPasswordTextField(
+                                  title: S.of(context).password,
+                                  hintText: "**********",
+                                  controller: passwordController,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 24),
+                          MaterialButton(
+                            height: 62,
+                            minWidth: 380,
+                            onPressed: () {
+                              final email = emailController.text;
+                              final password = passwordController.text;
+                              if (email.isNotEmpty && password.isNotEmpty) {
+                                context.read<LoginCubit>().login(
+                                  email,
+                                  password,
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Please fill all fields'),
+                                  ),
+                                );
+                              }
+                            },
+                            color:
+                                context.watch<ThemeCubit>().state ==
+                                        ThemeMode.dark
+                                    ? AppColors.darkModeButtonsPrimary
+                                    : AppColors.lightModeButtonsPrimary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child:
+                                state is LoginLoading
+                                    ? CircularProgressIndicator(
+                                      color:
+                                          context.watch<ThemeCubit>().state ==
+                                                  ThemeMode.dark
+                                              ? AppColors.darkModeText
+                                              : AppColors.lightModeText,
+                                    )
+                                    : Text(
+                                      S.of(context).logIn,
+                                      style:
+                                          AppTextStyles.buttonLarge20pxRegular(
+                                            context,
+                                          ).copyWith(
+                                            color:
+                                                context
+                                                            .watch<ThemeCubit>()
+                                                            .state ==
+                                                        ThemeMode.dark
+                                                    ? AppColors.darkModeText
+                                                    : AppColors.lightModeText,
+                                          ),
+                                    ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Image.asset(Assets.imagesLoginImage, fit: BoxFit.cover),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        );
   }
 }

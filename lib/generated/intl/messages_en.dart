@@ -209,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("Schedule Notification"),
+        "screenNotSupported": MessageLookupByLibrary.simpleMessage(
+            "This screen is not supported at the moment, the display must be larger than 1200px"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search by full username..."),
         "searchId":

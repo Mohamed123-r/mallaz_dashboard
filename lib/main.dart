@@ -16,12 +16,6 @@ import 'core/services/locale_cubit.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // doWhenWindowReady(() {
-  //   appWindow.minSize = Size(1300, 900);
-  //   appWindow.alignment = Alignment.center;
-  //   appWindow.show();
-  // });
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper().init();
   Bloc.observer = CustomBlocObserver();
