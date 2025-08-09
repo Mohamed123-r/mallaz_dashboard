@@ -12,34 +12,36 @@ import '../../cubit/user_search_cubit.dart';
 import '../../cubit/user_state.dart';
 
 class BuildCountHeader extends StatelessWidget {
-   BuildCountHeader({super.key});
+  BuildCountHeader({super.key});
+
   final TextEditingController searchController = TextEditingController();
   final BehaviorSubject<String> _searchSubject = BehaviorSubject<String>();
 
   @override
   Widget build(BuildContext context) {
-
-    // إعداد debounce للبحث بعد 500 مللي ثانية
     _searchSubject.stream
         .debounceTime(const Duration(milliseconds: 500))
         .distinct()
         .listen((query) {
-      if (query.isNotEmpty) {
-        context.read<UserSearchCubit>().searchUsersByName(query);
-      } else {
-        // إعادة تحميل البيانات الأساسية وإعادة تعيين البحث
-        context.read<UserCubit>().fetchUsers(page: 1);
-        context.read<UserSearchCubit>().resetSearch();
-      }
-    });
+          if (query.isNotEmpty) {
+            context.read<UserSearchCubit>().searchUsersByName(query);
+          } else {
+            context.read<UserCubit>().fetchUsers(page: 1);
+            context.read<UserSearchCubit>().resetSearch();
+          }
+        });
 
     return BlocBuilder<UserCubit, UserState>(
-      buildWhen: (previous, current) =>
-      current is UserSuccess || current is UserLoading || current is UserFailure,
+      buildWhen:
+          (previous, current) =>
+              current is UserSuccess ||
+              current is UserLoading ||
+              current is UserFailure,
       builder: (context, state) {
-        final count = (state is UserSuccess && state.users.data != null)
-            ? state.users.totalCount ?? 0
-            : 0;
+        final count =
+            (state is UserSuccess && state.users.data != null)
+                ? state.users.totalCount ?? 0
+                : 0;
 
         return Row(
           children: [
@@ -59,7 +61,7 @@ class BuildCountHeader extends StatelessWidget {
               child: TextFormField(
                 controller: searchController,
                 onChanged: (value) {
-                  _searchSubject.add(value); // إضافة النص إلى الـ Subject
+                  _searchSubject.add(value);
                 },
                 decoration: InputDecoration(
                   prefixIcon: SvgPicture.asset(
@@ -67,8 +69,9 @@ class BuildCountHeader extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                   ),
                   hintText: S.of(context).searchHint,
-                  hintStyle: AppTextStyles.subtitle16pxRegular(context)
-                      .copyWith(color: AppColors.lightModeGrayText),
+                  hintStyle: AppTextStyles.subtitle16pxRegular(
+                    context,
+                  ).copyWith(color: AppColors.lightModeGrayText),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(800),
                     borderSide: BorderSide(color: AppColors.graysGray3),

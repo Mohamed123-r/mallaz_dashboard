@@ -30,7 +30,9 @@ class ActionsSection extends StatelessWidget {
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text("تمت العملية بنجاح!"),
+                content: Text(
+                  S.of(context).success
+                ),
                 backgroundColor: Colors.green,
               ),
             );
@@ -41,7 +43,7 @@ class ActionsSection extends StatelessWidget {
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text("حدث خطأ: ${state.error}"),
+                content: Text("${ S.of(context).error} ${state.error}"),
                 backgroundColor: Colors.red,
               ),
             );

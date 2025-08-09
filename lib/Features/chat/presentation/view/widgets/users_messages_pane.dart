@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../data/models/chat_list_model.dart';
 import '../../cubit/chat_cubit.dart';
 import '../../cubit/chat_state.dart';
@@ -29,7 +30,7 @@ class UsersMessagesPane extends StatelessWidget {
           return CustomLoading();
         }
         if (state is ChatListFailure) {
-          return Center(child: Text("حدث خطأ: ${state.error}"));
+          return Center(child: Text(state.error));
         }
         if (state is ChatListLoaded) {
           final List users = state.chats;
@@ -39,7 +40,7 @@ class UsersMessagesPane extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "رسائل المستخدمين",
+                  S.of(context).user_message,
                   style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
                     color:
                         isDark

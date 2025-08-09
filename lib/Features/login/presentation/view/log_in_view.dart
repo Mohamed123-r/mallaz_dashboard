@@ -135,7 +135,7 @@ class LogInBodyView extends StatelessWidget {
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text('Please fill all fields'),
+                                    content: Text(S.of(context).fillAllFields),
                                   ),
                                 );
                               }

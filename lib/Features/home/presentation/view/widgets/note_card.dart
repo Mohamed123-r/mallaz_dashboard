@@ -76,7 +76,7 @@ class NoteCard extends StatelessWidget {
                               text: note ?? "",
                             );
                             return AlertDialog(
-                              title: Text("تعديل الملاحظة"),
+                              title: Text(S.of(context).editNote),
                               content: SizedBox(
                                 height: 100,
                                 width: 300,
@@ -84,7 +84,7 @@ class NoteCard extends StatelessWidget {
                                   maxLines: 2,
                                   controller: controller,
                                   decoration: InputDecoration(
-                                    hintText: "أدخل الملاحظة الجديدة",
+                                    hintText: S.of(context).addNote,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide(
@@ -126,7 +126,7 @@ class NoteCard extends StatelessWidget {
                 ],
               ),
               Text(
-                note ?? " لا يوجد ملاحظات",
+                note ?? S.of(context).notNote,
                 maxLines: 7,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.buttonLarge20pxRegular(context),

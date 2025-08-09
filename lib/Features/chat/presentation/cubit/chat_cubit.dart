@@ -7,13 +7,11 @@ import 'chat_state.dart';
  String id  = "";
 class ChatCubit extends Cubit<ChatState> {
   final ChatRepo repo;
-  // إضافة متغير لتخزين معرف المستخدم المستلم
 
   ChatCubit(this.repo) : super(ChatInitial());
 
   Future<void> fetchChatHistory(String receiverUserId) async {
     emit(ChatHistoryLoading());
-  // تحديث معرف المستخدم المستلم
     try {
       final res = await repo.getChatHistory(receiverUserId);
       logger.i('Fetched Chat History for chatId $receiverUserId: ${res}');

@@ -37,9 +37,9 @@ class BuildAppointmentBlocBuilder extends StatelessWidget {
                   icon: Icon(
                     Icons.arrow_back_ios,
                     color:
-                    isDark
-                        ? AppColors.darkModeText
-                        : AppColors.lightModeText,
+                        isDark
+                            ? AppColors.darkModeText
+                            : AppColors.lightModeText,
                   ),
                 ),
                 Expanded(
@@ -55,12 +55,12 @@ class BuildAppointmentBlocBuilder extends StatelessWidget {
                       Expanded(
                         child: Center(
                           child: Text(
-                            "هذه الوحدة غير موجودة",
+                            S.of(context).unit_exist,
                             style: TextStyle(
                               color:
-                              isDark
-                                  ? AppColors.darkModeText
-                                  : AppColors.lightModeText,
+                                  isDark
+                                      ? AppColors.darkModeText
+                                      : AppColors.lightModeText,
                             ),
                           ),
                         ),

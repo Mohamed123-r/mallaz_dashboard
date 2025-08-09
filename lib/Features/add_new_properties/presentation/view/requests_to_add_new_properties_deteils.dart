@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/theme_cubit.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/repo/property_action_repo_impl.dart';
 import '../cubit/property_action_cubit.dart';
 import '../cubit/property_details_cubit.dart';
@@ -75,7 +76,7 @@ class _RequestsToAddNewPropertiesDetailsState
                 Expanded(
                   child: Center(
                     child: Text(
-                      "هذه الوحدة غير موجودة",
+                    S.of(context).unit_exist  ,
                       style: TextStyle(
                         color:
                             isDark

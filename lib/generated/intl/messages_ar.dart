@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "actions": MessageLookupByLibrary.simpleMessage("الإجراءات"),
         "active": MessageLookupByLibrary.simpleMessage("مفعل"),
         "addNewAdmin": MessageLookupByLibrary.simpleMessage("إضافة عضو جديد"),
+        "addNote":
+            MessageLookupByLibrary.simpleMessage("أدخل الملاحظة الجديدة"),
         "addNoteHere": MessageLookupByLibrary.simpleMessage("أضف ملحوظتك هنا"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
@@ -96,7 +98,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "contractExpiring": m3,
         "contractExpiringShort":
             MessageLookupByLibrary.simpleMessage("قارب انتهاء العقد"),
+        "currentChat": MessageLookupByLibrary.simpleMessage("الدردشة الجارية"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "delete_massage": MessageLookupByLibrary.simpleMessage("حذف الرسالة"),
+        "delete_massage_confirmation": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف هذه الرسالة؟"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "detailedAddress":
             MessageLookupByLibrary.simpleMessage("العنوان بالتفصيل"),
@@ -104,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("التجمع الخامس"),
         "downPayment": m4,
         "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+        "editNote": MessageLookupByLibrary.simpleMessage("تعديل الملاحظة"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "empty": MessageLookupByLibrary.simpleMessage("فارغة"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("الأسرة الفارغة"),
@@ -114,8 +121,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ادخل نص الاشعار"),
         "enterNotificationTitle":
             MessageLookupByLibrary.simpleMessage("ادخل عنوان الاشعار"),
+        "error": MessageLookupByLibrary.simpleMessage("حدث خطأ: "),
         "errorOccurred": m5,
         "families": MessageLookupByLibrary.simpleMessage("العائلات"),
+        "fillAllFields": MessageLookupByLibrary.simpleMessage(
+            "يرجى ملء جميع الحقول المطلوبة"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("الدور الأول"),
         "floor": MessageLookupByLibrary.simpleMessage("الدور"),
         "forSale": MessageLookupByLibrary.simpleMessage("للبيع"),
@@ -141,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "logoutQua": MessageLookupByLibrary.simpleMessage(
             "هل تريد تسجيل الخروج من التطبيق؟"),
+        "m": MessageLookupByLibrary.simpleMessage("م²"),
         "mainFacilities":
             MessageLookupByLibrary.simpleMessage("المرافق الرئيسية"),
         "manageFullRentUnits":
@@ -162,11 +173,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("لا توجد بيانات متاحة"),
+        "noDataFound":
+            MessageLookupByLibrary.simpleMessage("البيانات غير موجودة"),
         "noMediaAvailable":
             MessageLookupByLibrary.simpleMessage("لا توجد وسائط متاحة"),
         "noUsersFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على مستخدمين"),
+        "no_message": MessageLookupByLibrary.simpleMessage("لا توجد رسائل بعد"),
+        "notNote": MessageLookupByLibrary.simpleMessage(" لا يوجد ملاحظات"),
         "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
+        "notificationSentSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم إرسال النوتيفيكيشن بنجاح"),
         "notificationText": MessageLookupByLibrary.simpleMessage("نص الاشعار"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("عنوان الاشعار"),
@@ -198,11 +215,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "rentedUnits": m8,
         "rentedUnits1": MessageLookupByLibrary.simpleMessage("الوحدات المؤجرة"),
         "requestsCount": MessageLookupByLibrary.simpleMessage("عدد الطلبات"),
+        "requiredField":
+            MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
         "role": MessageLookupByLibrary.simpleMessage("الدور"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("رقم الغرفة"),
         "roomType": MessageLookupByLibrary.simpleMessage("نوع الغرفة"),
         "rooms": MessageLookupByLibrary.simpleMessage("الغرف"),
-        "rooms3": MessageLookupByLibrary.simpleMessage("3 غرف"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("جدوله الاشعار"),
@@ -214,6 +232,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "security247": MessageLookupByLibrary.simpleMessage("أمن وحراسة 24/7"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("اختيار الفئه المستهدفه"),
+        "select_chat":
+            MessageLookupByLibrary.simpleMessage("اختر مستخدم لعرض المحادثة"),
         "send": MessageLookupByLibrary.simpleMessage("ارسال"),
         "sendDate": MessageLookupByLibrary.simpleMessage("تاريخ الارسال"),
         "sendNotification": MessageLookupByLibrary.simpleMessage("ارسال اشعار"),
@@ -228,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "soldUnits": MessageLookupByLibrary.simpleMessage("الوحدات المباعة"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "students": MessageLookupByLibrary.simpleMessage("الطلاب"),
+        "success": MessageLookupByLibrary.simpleMessage("تمت العملية بنجاح!"),
         "targetGroup": MessageLookupByLibrary.simpleMessage("الفئه المستهدفه"),
         "tenants": MessageLookupByLibrary.simpleMessage("المستأجرين"),
         "title": MessageLookupByLibrary.simpleMessage("العنوان"),
@@ -242,7 +263,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "unitNumber": MessageLookupByLibrary.simpleMessage("رقم الوحدة"),
         "unitPrice": m12,
         "unitType": MessageLookupByLibrary.simpleMessage("نوع الوحدة"),
+        "unit_exist":
+            MessageLookupByLibrary.simpleMessage("هذه الوحدة غير موجودة"),
         "userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+        "user_message": MessageLookupByLibrary.simpleMessage("رسالة المستخدم"),
+        "videoError":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء تحميل الفيديو"),
         "villa": MessageLookupByLibrary.simpleMessage("فيلا"),
         "withEmptyBeds": m13
       };

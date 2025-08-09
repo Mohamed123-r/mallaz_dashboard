@@ -25,18 +25,19 @@ class UnitDetailsCard extends StatelessWidget {
         ..initialize().then((_) {
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-              content: VideoPlayer(controller!),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    controller!.pause();
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Close'),
+            builder:
+                (context) => AlertDialog(
+                  content: VideoPlayer(controller!),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        controller!.pause();
+                        Navigator.pop(context);
+                      },
+                      child: Text(S.of(context).close),
+                    ),
+                  ],
                 ),
-              ],
-            ),
           ).then((_) {
             controller!.dispose();
           });
@@ -44,18 +45,21 @@ class UnitDetailsCard extends StatelessWidget {
     } else {
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Image.network(
-            url,
-            errorBuilder: (context, error, stackTrace) => const Text('Image not available'),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Close'),
+        builder:
+            (context) => AlertDialog(
+              content: Image.network(
+                url,
+                errorBuilder:
+                    (context, error, stackTrace) =>
+                        Text(S.of(context).noMediaAvailable),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(S.of(context).close),
+                ),
+              ],
             ),
-          ],
-        ),
       );
     }
   }
@@ -72,19 +76,16 @@ class UnitDetailsCard extends StatelessWidget {
           if (details.mainImage == null || details.mainImage!.isEmpty) {
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                content:  Text(
-                  S.of(context).noMediaAvailable,
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child:  Text(
-                      S.of(context).cancel,
-                    ),
+              builder:
+                  (context) => AlertDialog(
+                    content: Text(S.of(context).noMediaAvailable),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(S.of(context).cancel),
+                      ),
+                    ],
                   ),
-                ],
-              ),
             );
           } else {
             _showMediaDialog(details.mainImage!);
@@ -103,35 +104,49 @@ class UnitDetailsCard extends StatelessWidget {
                 offset: const Offset(0, 3),
               ),
             ],
-            color: isDark
-                ? AppColors.darkModeBackground
-                : AppColors.lightModeBackground,
+            color:
+                isDark
+                    ? AppColors.darkModeBackground
+                    : AppColors.lightModeBackground,
           ),
           child: Row(
             children: [
               Expanded(
                 flex: 4,
-                child: details.mainImage!.isNotEmpty
-                    ? (_isVideo(details.mainImage!)
-                    ? FutureBuilder(
-                  future: VideoPlayerController.network(details.mainImage!).initialize(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return VideoPlayer(VideoPlayerController.network(details.mainImage!));
-                    } else {
-                      return Image.asset(Assets.imagesTest1, fit: BoxFit.cover);
-                    }
-                  },
-                )
-                    : Image.network(
-                  details.mainImage!,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Image.asset(
-                    Assets.imagesTest1,
-                    fit: BoxFit.cover,
-                  ),
-                ))
-                    : Image.asset(Assets.imagesTest1, fit: BoxFit.cover),
+                child:
+                    details.mainImage!.isNotEmpty
+                        ? (_isVideo(details.mainImage!)
+                            ? FutureBuilder(
+                              future:
+                                  VideoPlayerController.network(
+                                    details.mainImage!,
+                                  ).initialize(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return VideoPlayer(
+                                    VideoPlayerController.network(
+                                      details.mainImage!,
+                                    ),
+                                  );
+                                } else {
+                                  return Image.asset(
+                                    Assets.imagesTest1,
+                                    fit: BoxFit.cover,
+                                  );
+                                }
+                              },
+                            )
+                            : Image.network(
+                              details.mainImage!,
+                              fit: BoxFit.cover,
+                              errorBuilder:
+                                  (context, error, stackTrace) => Image.asset(
+                                    Assets.imagesTest1,
+                                    fit: BoxFit.cover,
+                                  ),
+                            ))
+                        : Image.asset(Assets.imagesTest1, fit: BoxFit.cover),
               ),
               const SizedBox(width: 24),
               Expanded(

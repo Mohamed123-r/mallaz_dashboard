@@ -5,6 +5,7 @@ import '../../../../../constant.dart';
 import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../cubit/chat_cubit.dart';
 import '../../cubit/chat_state.dart';
 
@@ -69,14 +70,14 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
       ),
       child:
           user == null
-              ? const Center(child: Text("اختر مستخدم لعرض المحادثة"))
+              ? Center(child: Text(S.of(context).select_chat))
               : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Text(
-                      "الدردشة الجارية",
+                      S.of(context).currentChat,
                       style: AppTextStyles.buttonLarge20pxRegular(
                         context,
                       ).copyWith(
@@ -98,26 +99,22 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                     ),
                     child: Row(
                       children: [
-                        const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              user["receiverUserId"] ?? "غير معروف",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            const Text(
-                              "نشطة الآن",
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
+                        CircleAvatar(
+                          backgroundImage:
+                              user["userImage"] != null &&
+                                      user["userImage"]!.isNotEmpty
+                                  ? NetworkImage(user["userImage"]!)
+                                  : null,
+                          radius: 20,
+                          child:
+                              user["userImage"] == null
+                                  ? Icon(Icons.person, size: 24)
+                                  : null,
+                        ),
+                        const SizedBox(width: 9),
+                        Text(
+                          user["userName"],
+                          style: AppTextStyles.subtitle16pxRegular(context),
                         ),
                       ],
                     ),
@@ -130,7 +127,7 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                           return CustomLoading();
                         }
                         if (state is ChatHistoryFailure) {
-                          return Center(child: Text("حدث خطأ: ${state.error}"));
+                          return Center(child: Text(state.error));
                         }
                         if (state is ChatHistoryLoaded) {
                           final data = state.data;
@@ -164,15 +161,6 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text(
-                                                isMe
-                                                    ? "أنا"
-                                                    : user["receiverUserId"] ??
-                                                        "غير معروف",
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
                                               const SizedBox(width: 4),
                                               Text(
                                                 msg["createdAt"] ?? "",
@@ -180,6 +168,13 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                                   color: Colors.black54,
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4),
+                                              Text(
+                                                user["userName"] ?? "",
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w700,
                                                 ),
                                               ),
                                             ],
@@ -216,11 +211,15 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                                 context: context,
                                                 builder: (context) {
                                                   return AlertDialog(
-                                                    title: const Text(
-                                                      "حذف الرسالة",
+                                                    title: Text(
+                                                      S
+                                                          .of(context)
+                                                          .delete_massage,
                                                     ),
-                                                    content: const Text(
-                                                      "هل أنت متأكد من حذف هذه الرسالة؟",
+                                                    content: Text(
+                                                      S
+                                                          .of(context)
+                                                          .delete_massage_confirmation,
                                                     ),
                                                     actions: [
                                                       TextButton(
@@ -229,8 +228,8 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                                             context,
                                                           ).pop();
                                                         },
-                                                        child: const Text(
-                                                          "إلغاء",
+                                                        child: Text(
+                                                          S.of(context).cancel,
                                                         ),
                                                       ),
                                                       TextButton(
@@ -241,8 +240,8 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                                             context,
                                                           ).pop();
                                                         },
-                                                        child: const Text(
-                                                          "حذف",
+                                                        child: Text(
+                                                          S.of(context).delete,
                                                         ),
                                                       ),
                                                     ],
@@ -266,7 +265,12 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                             },
                           );
                         }
-                        return const Center(child: Text("لا توجد رسائل بعد"));
+                        return Center(
+                          child: Text(
+                            S.of(context).no_message,
+                            style: AppTextStyles.subtitle16pxRegular(context),
+                          ),
+                        );
                       },
                     ),
                   ),

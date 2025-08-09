@@ -25,8 +25,6 @@ class UserManagementView extends StatefulWidget {
 class _UserManagementViewState extends State<UserManagementView> {
   int currentPage = 1;
   final int rowsPerPage = 7;
-
-  // لحفظ آخر داتا ناجحة (لضمان الجدول لا يختفي أثناء عمليات البلوك/أنلوك)
   List<dynamic> _lastUsers = [];
   num _lastTotalCount = 0;
 
@@ -52,11 +50,15 @@ class _UserManagementViewState extends State<UserManagementView> {
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
         if (state is UserBlockOperationSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          _fetchPage(currentPage); // تحديث الداتا بعد العملية
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+          _fetchPage(currentPage);
         }
         if (state is UserBlockOperationError) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error)));
         }
       },
       child: Padding(
@@ -77,11 +79,12 @@ class _UserManagementViewState extends State<UserManagementView> {
     return BlocBuilder<UserSearchCubit, UserSearchState>(
       builder: (context, searchState) {
         return BlocBuilder<UserCubit, UserState>(
-          buildWhen: (previous, current) =>
-          current is UserSuccess ||
-              current is UserLoading ||
-              current is UserFailure ||
-              current is UserBlockOperationInProgress,
+          buildWhen:
+              (previous, current) =>
+                  current is UserSuccess ||
+                  current is UserLoading ||
+                  current is UserFailure ||
+                  current is UserBlockOperationInProgress,
           builder: (context, state) {
             String? blockingUserId;
             bool? isBlocking;
@@ -89,15 +92,17 @@ class _UserManagementViewState extends State<UserManagementView> {
             if (state is UserBlockOperationInProgress) {
               blockingUserId = state.userId;
               isBlocking = state.isLock;
-              state = context.read<UserCubit>().state; // نحتفظ بآخر حالة داتا ناجحة
+              state = context.read<UserCubit>().state;
             }
 
-            if (state is UserLoading) return CustomLoading(); // حالة التحميل مكان الجدول
+            if (state is UserLoading) return CustomLoading();
             if (state is UserFailure) {
               return Center(
                 child: Text(
                   state.error,
-                  style: AppTextStyles.text14pxRegular(context).copyWith(color: Colors.red),
+                  style: AppTextStyles.text14pxRegular(
+                    context,
+                  ).copyWith(color: Colors.red),
                 ),
               );
             }
@@ -106,28 +111,35 @@ class _UserManagementViewState extends State<UserManagementView> {
               _lastTotalCount = state.users.totalCount ?? 0;
             }
 
-            // استخدام بيانات البحث إذا كانت موجودة وغير فارغة، وإلا استخدم البيانات الأساسية
             List<dynamic> users = _lastUsers;
             num totalCount = _lastTotalCount;
             if (searchState is UserSearchSuccess) {
-              if (searchState.userSearchModel.data != null && searchState.userSearchModel.data!.isNotEmpty) {
+              if (searchState.userSearchModel.data != null &&
+                  searchState.userSearchModel.data!.isNotEmpty) {
                 users = searchState.userSearchModel.data!;
-                totalCount = searchState.userSearchModel.data!.length ?? users.length;
+                totalCount =
+                    searchState.userSearchModel.data!.length ?? users.length;
               } else {
                 return Center(
-                  child: Text('البيانات غير موجودة', style: TextStyle(fontSize: 16)),
-                ); // إظهار رسالة عندما لا تكون هناك نتائج بحث
+                  child: Text(
+                    S.of(context).noDataFound,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                );
               }
             }
 
             if (users.isEmpty && searchState is! UserSearchSuccess) {
               return Center(
-                child: Text('لا يوجد بيانات', style: TextStyle(fontSize: 16)),
-              ); // عرض "لا يوجد بيانات" للبيانات الأساسية إذا كانت فارغة
+                child: Text(
+                  S.of(context).noDataFound,
+                  style: TextStyle(fontSize: 16),
+                ),
+              );
             }
 
             if (searchState is UserSearchLoading) {
-              return Center(child: CustomLoading()); // عرض مؤشر التحميل أثناء البحث
+              return Center(child: CustomLoading());
             }
 
             final int pageCount = (totalCount / rowsPerPage).ceil();
@@ -186,16 +198,35 @@ class _UserManagementViewState extends State<UserManagementView> {
 
   TableRow _buildUserRow(dynamic user, String? blockingUserId) {
     // التعامل مع isBlocked بشكل آمن
-    final isBlocked = user is Map<String, dynamic> ? user['isBlocked'] ?? false : (user.isBlocked ?? false);
+    final isBlocked =
+        user is Map<String, dynamic>
+            ? user['isBlocked'] ?? false
+            : (user.isBlocked ?? false);
     final isActive = !isBlocked;
-    final userId = user.id ?? (user is Map<String, dynamic> ? user['id'] ?? '' : '');
+    final userId =
+        user.id ?? (user is Map<String, dynamic> ? user['id'] ?? '' : '');
     final showLoading = blockingUserId == userId;
 
     return TableRow(
       children: [
-        CustomDataCell(text: user.userName ?? (user is Map<String, dynamic> ? user['userName'] ?? '' : ''), context: context),
-        CustomDataCell(text: user.phoneNumber ?? (user is Map<String, dynamic> ? user['phoneNumber'] ?? '-' : '-'), context: context),
-        CustomDataCell(text: user.email ?? (user is Map<String, dynamic> ? user['email'] ?? '' : ''), context: context),
+        CustomDataCell(
+          text:
+              user.userName ??
+              (user is Map<String, dynamic> ? user['userName'] ?? '' : ''),
+          context: context,
+        ),
+        CustomDataCell(
+          text:
+              user.phoneNumber ??
+              (user is Map<String, dynamic> ? user['phoneNumber'] ?? '-' : '-'),
+          context: context,
+        ),
+        CustomDataCell(
+          text:
+              user.email ??
+              (user is Map<String, dynamic> ? user['email'] ?? '' : ''),
+          context: context,
+        ),
         CustomDataCell(
           text: isActive ? S.of(context).active : S.of(context).inactive,
           context: context,
@@ -207,26 +238,36 @@ class _UserManagementViewState extends State<UserManagementView> {
               child: MaterialButton(
                 height: 40,
                 minWidth: 180,
-                onPressed: showLoading
-                    ? null
-                    : () {
-                  final userCubit = context.read<UserCubit>();
-                  if (isActive) {
-                    userCubit.lockUser(userId); // يعمل لجميع الحالات
-                  } else {
-                    userCubit.unlockUser(userId); // يعمل لجميع الحالات
-                  }
-                },
+                onPressed:
+                    showLoading
+                        ? null
+                        : () {
+                          final userCubit = context.read<UserCubit>();
+                          if (isActive) {
+                            userCubit.lockUser(userId);
+                          } else {
+                            userCubit.unlockUser(userId);
+                          }
+                        },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                color: isActive ? AppColors.red : AppColors.green, // يتغير في جميع الحالات
-                child: showLoading
-                    ? const SizedBox(width: 24, height: 24, child: CustomLoading())
-                    : Text(
-                  isActive ? S.of(context).blockUser : S.of(context).unblock,
-                  style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(color: AppColors.black),
-                ),
+                color: isActive ? AppColors.red : AppColors.green,
+                child:
+                    showLoading
+                        ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CustomLoading(),
+                        )
+                        : Text(
+                          isActive
+                              ? S.of(context).blockUser
+                              : S.of(context).unblock,
+                          style: AppTextStyles.buttonLarge20pxRegular(
+                            context,
+                          ).copyWith(color: AppColors.black),
+                        ),
               ),
             ),
           ),

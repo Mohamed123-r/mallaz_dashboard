@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 
@@ -49,7 +50,7 @@ class CustomTextField extends StatelessWidget {
               validator ??
               (value) {
                 if (value == null || value.isEmpty) {
-                  return "ه";
+                  return '${S.of(context).requiredField}';
                 }
                 return null;
               },

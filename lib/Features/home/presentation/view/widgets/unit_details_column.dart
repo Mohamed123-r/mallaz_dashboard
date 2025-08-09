@@ -66,7 +66,7 @@ class UnitDetailsColumn extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              details.rooms!.isNotEmpty ? details.rooms! : S.of(context).rooms3,
+              details.rooms!.isNotEmpty ? details.rooms! : "",
               style: AppTextStyles.text14pxRegular(context),
             ),
           ],
@@ -107,9 +107,9 @@ class UnitDetailsColumn extends StatelessWidget {
                   S.of(context).mainFacilities,
                   style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
                     color:
-                    isDark
-                        ? AppColors.darkModeButtonsPrimary
-                        : AppColors.lightModeButtonsPrimary,
+                        isDark
+                            ? AppColors.darkModeButtonsPrimary
+                            : AppColors.lightModeButtonsPrimary,
                   ),
                 ),
                 Padding(
@@ -137,7 +137,7 @@ class UnitDetailsColumn extends StatelessWidget {
                           isDark: isDark,
                           asset: Assets.imagesTrue,
                           text:
-                          "${details.bathrooms} ${S.of(context).bathroom}",
+                              "${details.bathrooms} ${S.of(context).bathroom}",
                         ),
                     ],
                   ),
@@ -172,4 +172,3 @@ class UnitDetailsColumn extends StatelessWidget {
     );
   }
 }
-

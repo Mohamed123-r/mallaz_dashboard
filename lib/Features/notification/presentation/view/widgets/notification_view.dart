@@ -12,8 +12,6 @@ import '../../../../../generated/l10n.dart';
 import '../../cubit/notification_cubit.dart';
 import '../../cubit/notification_status.dart';
 
-// -------------------- Notification Main View --------------------
-
 class NotificationView extends StatefulWidget {
   const NotificationView({super.key});
 
@@ -39,7 +37,7 @@ class _NotificationViewState extends State<NotificationView> {
       listener: (context, state) {
         if (state is NotificationSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("تم إرسال النوتيفيكيشن بنجاح")),
+            SnackBar(content: Text(S.of(context).notificationSentSuccessfully)),
           );
         }
         if (state is NotificationFailure) {
@@ -54,7 +52,6 @@ class _NotificationViewState extends State<NotificationView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // نموذج إرسال إشعار جديد
               Text(
                 S.of(context).newNotificationForm,
                 style: AppTextStyles.buttonLarge20pxRegular(context).copyWith(
@@ -165,7 +162,6 @@ class _NotificationViewState extends State<NotificationView> {
               NotificationTableSection(
                 isDark: isDark,
                 onTapShowMore: (id) {
-                  // منطق عرض تفاصيل الإشعار
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("عرض تفاصيل الإشعار ID: $id")),
                   );
@@ -178,8 +174,6 @@ class _NotificationViewState extends State<NotificationView> {
     );
   }
 }
-
-// -------------------- Notification Table Section --------------------
 
 class NotificationTableSection extends StatefulWidget {
   const NotificationTableSection({
@@ -277,7 +271,10 @@ class _NotificationTableSectionState extends State<NotificationTableSection> {
                         text: S.of(context).message,
                         context: context,
                       ),
-                      CustomHeaderCall(text: "تاريخ الإرسال", context: context),
+                      CustomHeaderCall(
+                        text: S.of(context).sendDate,
+                        context: context,
+                      ),
                       CustomHeaderCall(
                         text: S.of(context).actions,
                         context: context,

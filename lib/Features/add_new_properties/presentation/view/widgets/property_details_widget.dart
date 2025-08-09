@@ -72,7 +72,7 @@ class PropertyDetailsWidget extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '${details.area} م²',
+              '${details.area}${S.of(context).m}}',
               style: AppTextStyles.text14pxRegular(context),
             ),
             const SizedBox(width: 24),
@@ -92,7 +92,7 @@ class PropertyDetailsWidget extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              "${details.rooms} غرف",
+              "${details.rooms} ${S.of(context).rooms}",
               style: AppTextStyles.text14pxRegular(context),
             ),
           ],

@@ -52,7 +52,7 @@ class _PropertyGalleryState extends State<PropertyGallery> {
                       }
                     })
                     .catchError((error) {
-                      print('Video initialization error for $url: $error');
+                      print( S.of(context).videoError);
                     }),
             )
             .toList();

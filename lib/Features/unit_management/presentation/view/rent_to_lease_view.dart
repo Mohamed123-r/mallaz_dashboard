@@ -467,7 +467,7 @@ class ActionCell extends StatelessWidget {
                   // Show error message
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text("حدث خطأ: ${state.error}"),
+                      content: Text(state.error),
                       backgroundColor: Colors.red,
                     ),
                   );

@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "addNewAdmin": MessageLookupByLibrary.simpleMessage("Add New Admin"),
+        "addNote": MessageLookupByLibrary.simpleMessage("Add New Note"),
         "addNoteHere":
             MessageLookupByLibrary.simpleMessage("Add your note here"),
         "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),
@@ -98,7 +99,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "contractExpiring": m3,
         "contractExpiringShort":
             MessageLookupByLibrary.simpleMessage("Contract Expiring"),
+        "currentChat": MessageLookupByLibrary.simpleMessage("Ongoing Chat"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "delete_massage":
+            MessageLookupByLibrary.simpleMessage("Delete Message"),
+        "delete_massage_confirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this message?"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "detailedAddress":
             MessageLookupByLibrary.simpleMessage("Detailed Address"),
@@ -106,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fifth Settlement"),
         "downPayment": m4,
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "editNote": MessageLookupByLibrary.simpleMessage("Edit Note"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "empty": MessageLookupByLibrary.simpleMessage("Empty"),
         "emptyBeds": MessageLookupByLibrary.simpleMessage("Empty Beds"),
@@ -116,8 +123,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter notification text"),
         "enterNotificationTitle":
             MessageLookupByLibrary.simpleMessage("Enter notification title"),
+        "error": MessageLookupByLibrary.simpleMessage("An error occurred: "),
         "errorOccurred": m5,
         "families": MessageLookupByLibrary.simpleMessage("Families"),
+        "fillAllFields": MessageLookupByLibrary.simpleMessage(
+            "Please fill in all required fields"),
         "firstFloor": MessageLookupByLibrary.simpleMessage("First Floor"),
         "floor": MessageLookupByLibrary.simpleMessage("Floor"),
         "forSale": MessageLookupByLibrary.simpleMessage("For Sale"),
@@ -145,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "logoutQua": MessageLookupByLibrary.simpleMessage(
             "Do you want to log out of the app?"),
+        "m": MessageLookupByLibrary.simpleMessage("m²"),
         "mainFacilities":
             MessageLookupByLibrary.simpleMessage("Main Facilities"),
         "manageFullRentUnits":
@@ -165,10 +176,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("No data available"),
+        "noDataFound": MessageLookupByLibrary.simpleMessage("No data found"),
         "noMediaAvailable":
             MessageLookupByLibrary.simpleMessage("No media available"),
         "noUsersFound": MessageLookupByLibrary.simpleMessage("No users found"),
+        "no_message": MessageLookupByLibrary.simpleMessage("No messages yet"),
+        "notNote": MessageLookupByLibrary.simpleMessage(" No notes available"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
+        "notificationSentSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Notification sent successfully"),
         "notificationText":
             MessageLookupByLibrary.simpleMessage("Notification Text"),
         "notificationTitle":
@@ -203,11 +219,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "rentedUnits": m8,
         "rentedUnits1": MessageLookupByLibrary.simpleMessage("Rented Units"),
         "requestsCount": MessageLookupByLibrary.simpleMessage("Requests Count"),
+        "requiredField":
+            MessageLookupByLibrary.simpleMessage("This field is required"),
         "role": MessageLookupByLibrary.simpleMessage("Role"),
         "roomNumber": MessageLookupByLibrary.simpleMessage("Room Number"),
         "roomType": MessageLookupByLibrary.simpleMessage("Room Type"),
         "rooms": MessageLookupByLibrary.simpleMessage("Rooms"),
-        "rooms3": MessageLookupByLibrary.simpleMessage("3 Rooms"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "scheduleNotification":
             MessageLookupByLibrary.simpleMessage("Schedule Notification"),
@@ -220,6 +237,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "security247": MessageLookupByLibrary.simpleMessage("24/7 Security"),
         "selectTargetGroup":
             MessageLookupByLibrary.simpleMessage("Select Target Group"),
+        "select_chat": MessageLookupByLibrary.simpleMessage(
+            "Select a user to view the chat"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sendDate": MessageLookupByLibrary.simpleMessage("Send Date"),
         "sendNotification":
@@ -235,6 +254,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "soldUnits": MessageLookupByLibrary.simpleMessage("Sold Units"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "students": MessageLookupByLibrary.simpleMessage("Students"),
+        "success": MessageLookupByLibrary.simpleMessage(
+            "Operation completed successfully!"),
         "targetGroup": MessageLookupByLibrary.simpleMessage("Target Group"),
         "tenants": MessageLookupByLibrary.simpleMessage("Tenants"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
@@ -249,7 +270,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "unitNumber": MessageLookupByLibrary.simpleMessage("Unit Number"),
         "unitPrice": m12,
         "unitType": MessageLookupByLibrary.simpleMessage("Unit Type"),
+        "unit_exist":
+            MessageLookupByLibrary.simpleMessage("This unit does not exist"),
         "userName": MessageLookupByLibrary.simpleMessage("User Name"),
+        "user_message": MessageLookupByLibrary.simpleMessage("User Message"),
+        "videoError": MessageLookupByLibrary.simpleMessage(
+            "Video initialization error for"),
         "villa": MessageLookupByLibrary.simpleMessage("Villa"),
         "withEmptyBeds": m13
       };

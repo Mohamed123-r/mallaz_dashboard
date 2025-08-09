@@ -15,106 +15,7 @@ import '../../../../generated/l10n.dart';
 import '../cubit/admin_cubit.dart';
 import '../cubit/admin_state.dart';
 
-//
-// // === MODEL ===
-// class AdminModel {
-//   final String id;
-//   final String userName;
-//   final String email;
-//   final String phoneNumber;
-//   final bool isBlocked;
-//
-//   AdminModel({
-//     required this.id,
-//     required this.userName,
-//     required this.email,
-//     required this.phoneNumber,
-//     required this.isBlocked,
-//   });
-//
-//   factory AdminModel.fromJson(Map<String, dynamic> json) {
-//     return AdminModel(
-//       id: json['id'] ?? '',
-//       userName: json['userName'] ?? '',
-//       email: json['email'] ?? '',
-//       phoneNumber: json['phoneNumber'] ?? '',
-//       isBlocked: json['isBlocked'] ?? false,
-//     );
-//   }
-// }
-//
-// class GetAllAdminsResponse {
-//   final bool success;
-//   final String message;
-//   final List<AdminModel> data;
-//
-//   GetAllAdminsResponse({
-//     required this.success,
-//     required this.message,
-//     required this.data,
-//   });
-//
-//   factory GetAllAdminsResponse.fromJson(Map<String, dynamic> json) {
-//     return GetAllAdminsResponse(
-//       success: json['success'] ?? false,
-//       message: json['message'] ?? '',
-//       data: (json['data'] as List<dynamic>? ?? [])
-//           .map((e) => AdminModel.fromJson(e))
-//           .toList(),
-//     );
-//   }
-// }
-//
-// // === REPO ===
-// abstract class AdminRepo {
-//   Future<GetAllAdminsResponse> getAllAdmins();
-// }
-//
-// class AdminRepoImpl implements AdminRepo {
-//   final Dio dio;
-//   AdminRepoImpl(this.dio);
-//
-//   @override
-//   Future<GetAllAdminsResponse> getAllAdmins() async {
-//     final response = await dio.get('http://realestateunits.runasp.net/api/User/GetAllAdmins');
-//     return GetAllAdminsResponse.fromJson(response.data);
-//   }
-// }
-//
-// // === STATE ===
-// abstract class AdminState {}
-//
-// class AdminInitial extends AdminState {}
-//
-// class AdminLoading extends AdminState {}
-//
-// class AdminSuccess extends AdminState {
-//   final List<AdminModel> admins;
-//   AdminSuccess(this.admins);
-// }
-//
-// class AdminFailure extends AdminState {
-//   final String error;
-//   AdminFailure(this.error);
-// }
-//
-// // === CUBIT ===
-// class AdminCubit extends Cubit<AdminState> {
-//   final AdminRepo repo;
-//   AdminCubit(this.repo) : super(AdminInitial());
-//
-//   Future<void> fetchAllAdmins() async {
-//     emit(AdminLoading());
-//     try {
-//       final res = await repo.getAllAdmins();
-//       emit(AdminSuccess(res.data));
-//     } catch (e) {
-//       emit(AdminFailure(e.toString()));
-//     }
-//   }
-// }
 
-// === MAIN VIEW ===
 class AdminManagementView extends StatefulWidget {
   const AdminManagementView({super.key});
 
@@ -134,8 +35,7 @@ class _AdminManagementViewState extends State<AdminManagementView> {
 
   void _onPageChanged(int page) {
     setState(() => currentPage = page);
-    // paging supported in backend? If yes: fetch with page param
-    context.read<AdminCubit>().fetchAllAdmins(); // update if needed with page
+    context.read<AdminCubit>().fetchAllAdmins();
   }
 
   @override
@@ -202,8 +102,6 @@ class _AdminManagementViewState extends State<AdminManagementView> {
                   1,
                   1000,
                 );
-
-                // Pagination: cut admins for current page
                 final start = (currentPage - 1) * rowsPerPage;
                 final end = (start + rowsPerPage).clamp(0, totalCount);
                 final pagedAdmins = admins.sublist(start, end);
@@ -396,17 +294,6 @@ class ActionCell extends StatelessWidget {
                         : AppColors.lightModeAccent,
               ),
             ),
-            // InkWell(
-            //   onTap: onDelete,
-            //   borderRadius: BorderRadius.circular(8),
-            //   child: SvgPicture.asset(
-            //     Assets.imagesBasilEditOutline,
-            //     color:
-            //         iDark
-            //             ? AppColors.darkModeAccent
-            //             : AppColors.lightModeAccent,
-            //   ),
-            // ),
           ],
         ),
       ),

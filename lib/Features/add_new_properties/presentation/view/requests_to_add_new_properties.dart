@@ -24,7 +24,6 @@ import '../cubit/add_new_properties_stats.dart';
 class RequestsToAddNewProperties extends StatefulWidget {
   const RequestsToAddNewProperties({super.key, required this.onTapSeeDetails});
 
-  /// Callback receives the id of the property item pressed
   final void Function(int id) onTapSeeDetails;
 
   @override
@@ -38,9 +37,6 @@ class _RequestsToAddNewPropertiesState
   final tabs = <String>[];
   final searchController = TextEditingController();
   final _searchSubject = BehaviorSubject<String>();
-
-
-
 
   @override
   void didChangeDependencies() {
@@ -76,15 +72,14 @@ class _RequestsToAddNewPropertiesState
         .debounceTime(const Duration(milliseconds: 1000))
         .distinct()
         .listen((query) {
-      if (query.isNotEmpty) {
-        widget.onTapSeeDetails(
-          int.tryParse(query) ?? 0,
-        );
-      }
-    });
+          if (query.isNotEmpty) {
+            widget.onTapSeeDetails(int.tryParse(query) ?? 0);
+          }
+        });
 
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
-    final locale = context.watch<LocaleCubit>().state == Locale('ar') ? 'ar' : 'en';
+    final locale =
+        context.watch<LocaleCubit>().state == Locale('ar') ? 'ar' : 'en';
     return Padding(
       padding: const EdgeInsetsDirectional.only(top: 24, start: 16, end: 16),
       child: Column(
@@ -101,22 +96,23 @@ class _RequestsToAddNewPropertiesState
                     style: AppTextStyles.buttonLarge20pxRegular(context),
                   ),
                   const SizedBox(width: 8),
-                  Text("$count", style: AppTextStyles.buttonLarge20pxRegular(context)),
+                  Text(
+                    "$count",
+                    style: AppTextStyles.buttonLarge20pxRegular(context),
+                  ),
                   const Spacer(),
                   SizedBox(
                     width: 380,
                     height: 48,
                     child: TextFormField(
-
-                      keyboardType: TextInputType.number ,
+                      keyboardType: TextInputType.number,
 
                       controller: searchController,
 
                       onChanged: (value) {
-                        _searchSubject.add(value); // إضافة النص إلى الـ Subject
+                        _searchSubject.add(value);
                       },
                       decoration: InputDecoration(
-
                         prefixIcon: SvgPicture.asset(
                           Assets.imagesSearchIcon,
                           fit: BoxFit.scaleDown,
@@ -124,9 +120,9 @@ class _RequestsToAddNewPropertiesState
 
                         hintText: S.of(context).searchId,
 
-
-                        hintStyle: AppTextStyles.subtitle16pxRegular(context)
-                            .copyWith(color: AppColors.lightModeGrayText),
+                        hintStyle: AppTextStyles.subtitle16pxRegular(
+                          context,
+                        ).copyWith(color: AppColors.lightModeGrayText),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(800),
                           borderSide: BorderSide(color: AppColors.graysGray3),
@@ -146,7 +142,6 @@ class _RequestsToAddNewPropertiesState
                       ),
                     ),
                   ),
-
                 ],
               );
             },

@@ -45,7 +45,6 @@ class ChatRepoImpl implements ChatRepo {
     return res;
   }
 
-  // API جديدة: جعل كل الرسائل مقروءة
   @override
   Future<Map<dynamic, dynamic>> markAllMessagesRead(String chatId) async {
     final res = await dioConsumer.put(

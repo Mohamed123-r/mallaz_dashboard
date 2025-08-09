@@ -11,12 +11,12 @@ import '../../../add_new_properties/presentation/cubit/property_details_state.da
 
 class EditPropertiesDeteils extends StatefulWidget {
   final VoidCallback onTapBack;
-  final int propertyId; // أضف propertyId كـ parameter
+  final int propertyId;
 
   const EditPropertiesDeteils({
     super.key,
     required this.onTapBack,
-    required this.propertyId, // اجباري
+    required this.propertyId,
   });
 
   @override
@@ -52,7 +52,7 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
     _rentTypeController = TextEditingController();
     context.read<PropertyDetailsCubit>().fetchPropertyDetails(
       widget.propertyId,
-    ); // استدعاء البيانات
+    );
   }
 
   @override
@@ -74,7 +74,6 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
   void _saveChanges() {
     final property = PropertyDetailsModel(
       id: widget.propertyId,
-      // أضف الـ id من الـ widget
       title: _titleController.text,
       description: _descriptionController.text,
       type: _typeController.text,
@@ -84,7 +83,6 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
       price: int.tryParse(_priceController.text) ?? 0,
       floor: _floorController.text,
       propertyType: "Sale",
-      // حدد قيمة صحيحة
       governorate: _governorateController.text,
       city: _cityController.text,
       rentType:
@@ -95,7 +93,7 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
     logger.w("Saving changes for propertyId: ${property.id}");
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(SnackBar(content: Text("S.of(context).changesSaved")));
+    ).showSnackBar(SnackBar(content: Text(S.of(context).changesSaved)));
   }
 
   @override
@@ -108,8 +106,7 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
     return BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
       builder: (context, state) {
         if (state is PropertyDetailsLoading) return CustomLoading();
-        if (state is PropertyDetailsFailure)
-          return Text(state.error); // اعرض الخطأ
+        if (state is PropertyDetailsFailure) return Text(state.error);
         if (state is PropertyDetailsSuccess) {
           final details = state.details;
           _titleController.text = details.title ?? '';
@@ -149,7 +146,7 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                           controller: _titleController,
                           decoration: InputDecoration(
                             labelText: S.of(context).title,
-                    
+
                             border: buildOutlineInputBorder(isDark),
                           ),
                         ),
@@ -164,18 +161,20 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                         TextFormField(
                           controller: _priceController,
                           decoration: InputDecoration(
-                            labelText: S.of(context).price, border: buildOutlineInputBorder(isDark),
+                            labelText: S.of(context).price,
+                            border: buildOutlineInputBorder(isDark),
                           ),
                           keyboardType: TextInputType.number,
                         ),
                         Row(
-                          spacing:16 ,
+                          spacing: 16,
                           children: [
                             Expanded(
                               child: TextFormField(
                                 controller: _typeController,
                                 decoration: InputDecoration(
-                                  labelText: S.of(context).type, border: buildOutlineInputBorder(isDark),
+                                  labelText: S.of(context).type,
+                                  border: buildOutlineInputBorder(isDark),
                                 ),
                               ),
                             ),
@@ -183,12 +182,12 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                               child: TextFormField(
                                 controller: _areaController,
                                 decoration: InputDecoration(
-                                  labelText: S.of(context).area, border: buildOutlineInputBorder(isDark),
+                                  labelText: S.of(context).area,
+                                  border: buildOutlineInputBorder(isDark),
                                 ),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
-                          
                           ],
                         ),
 
@@ -199,7 +198,8 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                               child: TextFormField(
                                 controller: _roomsController,
                                 decoration: InputDecoration(
-                                  labelText: S.of(context).rooms, border: buildOutlineInputBorder(isDark),
+                                  labelText: S.of(context).rooms,
+                                  border: buildOutlineInputBorder(isDark),
                                 ),
                                 keyboardType: TextInputType.number,
                               ),
@@ -208,7 +208,8 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                               child: TextFormField(
                                 controller: _bathroomsController,
                                 decoration: InputDecoration(
-                                  labelText: S.of(context).bathrooms, border: buildOutlineInputBorder(isDark),
+                                  labelText: S.of(context).bathrooms,
+                                  border: buildOutlineInputBorder(isDark),
                                 ),
                                 keyboardType: TextInputType.number,
                               ),
@@ -219,7 +220,8 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                         TextFormField(
                           controller: _floorController,
                           decoration: InputDecoration(
-                            labelText: S.of(context).floor, border: buildOutlineInputBorder(isDark),
+                            labelText: S.of(context).floor,
+                            border: buildOutlineInputBorder(isDark),
                           ),
                         ),
                         Row(
@@ -229,7 +231,8 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                               child: TextFormField(
                                 controller: _governorateController,
                                 decoration: InputDecoration(
-                                  labelText: S.of(context).governorate, border: buildOutlineInputBorder(isDark),
+                                  labelText: S.of(context).governorate,
+                                  border: buildOutlineInputBorder(isDark),
                                 ),
                               ),
                             ),
@@ -237,7 +240,8 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                               child: TextFormField(
                                 controller: _cityController,
                                 decoration: InputDecoration(
-                                  labelText: S.of(context).city, border: buildOutlineInputBorder(isDark),
+                                  labelText: S.of(context).city,
+                                  border: buildOutlineInputBorder(isDark),
                                 ),
                               ),
                             ),
@@ -246,29 +250,33 @@ class _EditPropertyScreenState extends State<EditPropertiesDeteils> {
                         TextFormField(
                           controller: _rentTypeController,
                           decoration: InputDecoration(
-                            labelText: S.of(context).rentType, border: buildOutlineInputBorder(isDark),
+                            labelText: S.of(context).rentType,
+                            border: buildOutlineInputBorder(isDark),
                           ),
                         ),
                         MaterialButton(
-                        minWidth: 200 ,
-                            height: 56,
-                            shape: RoundedRectangleBorder(
+                          minWidth: 200,
+                          height: 56,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                            color: isDark
-                                ? AppColors.darkModeButtonsPrimary
-                                : AppColors.lightModeButtonsPrimary,
+                          color:
+                              isDark
+                                  ? AppColors.darkModeButtonsPrimary
+                                  : AppColors.lightModeButtonsPrimary,
                           onPressed: _saveChanges,
-                          child: Text(S.of(context).save,
+                          child: Text(
+                            S.of(context).save,
                             style: TextStyle(
-                              fontSize: 22  ,
-                              color: isDark
-                                  ? AppColors.darkModeText
-                                  : AppColors.lightModeText,
+                              fontSize: 22,
+                              color:
+                                  isDark
+                                      ? AppColors.darkModeText
+                                      : AppColors.lightModeText,
                             ),
                           ),
                         ),
-                        SizedBox()
+                        SizedBox(),
                       ],
                     ),
                   ),

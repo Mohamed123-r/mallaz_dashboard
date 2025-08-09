@@ -420,16 +420,6 @@ class S {
     );
   }
 
-  /// `3 Rooms`
-  String get rooms3 {
-    return Intl.message(
-      '3 Rooms',
-      name: 'rooms3',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Detailed Address`
   String get detailedAddress {
     return Intl.message(
@@ -1695,6 +1685,186 @@ class S {
     return Intl.message(
       'This screen is not supported at the moment, the display must be larger than 1200px',
       name: 'screenNotSupported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get requiredField {
+    return Intl.message(
+      'This field is required',
+      name: 'requiredField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operation completed successfully!`
+  String get success {
+    return Intl.message(
+      'Operation completed successfully!',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred: `
+  String get error {
+    return Intl.message(
+      'An error occurred: ',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `m²`
+  String get m {
+    return Intl.message(
+      'm²',
+      name: 'm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video initialization error for`
+  String get videoError {
+    return Intl.message(
+      'Video initialization error for',
+      name: 'videoError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This unit does not exist`
+  String get unit_exist {
+    return Intl.message(
+      'This unit does not exist',
+      name: 'unit_exist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a user to view the chat`
+  String get select_chat {
+    return Intl.message(
+      'Select a user to view the chat',
+      name: 'select_chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ongoing Chat`
+  String get currentChat {
+    return Intl.message(
+      'Ongoing Chat',
+      name: 'currentChat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Message`
+  String get delete_massage {
+    return Intl.message(
+      'Delete Message',
+      name: 'delete_massage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this message?`
+  String get delete_massage_confirmation {
+    return Intl.message(
+      'Are you sure you want to delete this message?',
+      name: 'delete_massage_confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No messages yet`
+  String get no_message {
+    return Intl.message(
+      'No messages yet',
+      name: 'no_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Message`
+  String get user_message {
+    return Intl.message(
+      'User Message',
+      name: 'user_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Note`
+  String get editNote {
+    return Intl.message(
+      'Edit Note',
+      name: 'editNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add New Note`
+  String get addNote {
+    return Intl.message(
+      'Add New Note',
+      name: 'addNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` No notes available`
+  String get notNote {
+    return Intl.message(
+      ' No notes available',
+      name: 'notNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill in all required fields`
+  String get fillAllFields {
+    return Intl.message(
+      'Please fill in all required fields',
+      name: 'fillAllFields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification sent successfully`
+  String get notificationSentSuccessfully {
+    return Intl.message(
+      'Notification sent successfully',
+      name: 'notificationSentSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data found`
+  String get noDataFound {
+    return Intl.message(
+      'No data found',
+      name: 'noDataFound',
       desc: '',
       args: [],
     );
