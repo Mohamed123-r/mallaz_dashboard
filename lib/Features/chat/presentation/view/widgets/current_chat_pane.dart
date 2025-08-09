@@ -94,7 +94,10 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                       vertical: 9,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.darkModeText,
+                      color:
+                          widget.isDark
+                              ? AppColors.lightModeAccent
+                              : AppColors.darkModeAccent,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -114,12 +117,19 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                         const SizedBox(width: 9),
                         Text(
                           user["userName"],
-                          style: AppTextStyles.subtitle16pxRegular(context),
+                          style: AppTextStyles.subtitle16pxRegular(
+                            context,
+                          ).copyWith(
+                            fontWeight: FontWeight.w600,
+                            color:
+                                widget.isDark
+                                    ? AppColors.darkModeText
+                                    : AppColors.lightModeText,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
                   Expanded(
                     child: BlocBuilder<ChatCubit, ChatState>(
                       builder: (context, state) {
@@ -143,123 +153,154 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 8,
                                 ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      isMe
-                                          ? MainAxisAlignment.end
-                                          : MainAxisAlignment.start,
-                                  children: [
-                                    if (!isMe) const SizedBox(width: 7),
-                                    Flexible(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            isMe
-                                                ? CrossAxisAlignment.end
-                                                : CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              const SizedBox(width: 4),
-                                              Text(
-                                                msg["createdAt"] ?? "",
-                                                style: const TextStyle(
-                                                  color: Colors.black54,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4),
-                                              Text(
-                                                user["userName"] ?? "",
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            msg["content"] ?? "",
-                                            textAlign:
-                                                isMe
-                                                    ? TextAlign.right
-                                                    : TextAlign.left,
-                                            style: const TextStyle(
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    if (isMe) const SizedBox(width: 7),
-                                    if (isMe)
-                                      Row(
-                                        children: [
-                                          const CircleAvatar(
-                                            backgroundImage: null,
-                                            radius: 17,
-                                            child: Icon(Icons.person, size: 20),
-                                          ),
-                                          IconButton(
-                                            icon: const Icon(
-                                              Icons.delete,
-                                              color: Colors.red,
-                                            ),
-                                            onPressed: () async {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: Text(
-                                                      S
-                                                          .of(context)
-                                                          .delete_massage,
-                                                    ),
-                                                    content: Text(
-                                                      S
-                                                          .of(context)
-                                                          .delete_massage_confirmation,
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Navigator.of(
-                                                            context,
-                                                          ).pop();
-                                                        },
-                                                        child: Text(
-                                                          S.of(context).cancel,
-                                                        ),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () async {
-                                                          deleteMessage = true;
+                                child: Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        isMe
+                                            ? MainAxisAlignment.end
+                                            : MainAxisAlignment.start,
+                                    children: [
+                                      if (!isMe) const SizedBox(width: 7),
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              isMe
+                                                  ? CrossAxisAlignment.end
+                                                  : CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  onTap: () async {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                            S
+                                                                .of(context)
+                                                                .delete_massage,
+                                                          ),
+                                                          content: Text(
+                                                            S
+                                                                .of(context)
+                                                                .delete_massage_confirmation,
+                                                          ),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                  context,
+                                                                ).pop();
+                                                              },
+                                                              child: Text(
+                                                                S
+                                                                    .of(context)
+                                                                    .cancel,
+                                                              ),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () async {
+                                                                deleteMessage =
+                                                                    true;
 
-                                                          Navigator.of(
-                                                            context,
-                                                          ).pop();
-                                                        },
-                                                        child: Text(
-                                                          S.of(context).delete,
+                                                                Navigator.of(
+                                                                  context,
+                                                                ).pop();
+                                                              },
+                                                              child: Text(
+                                                                S
+                                                                    .of(context)
+                                                                    .delete,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                    deleteMessage
+                                                        ? await context
+                                                            .read<ChatCubit>()
+                                                            .deleteSpecificMessage(
+                                                              msg["id"],
+                                                            )
+                                                        : null;
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.delete,
+                                                    size: 20,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  user["userName"] ?? "",
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 157,
+                                                  child: Text(
+                                                    msg["createdAt"] ?? "",
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+
+                                                    style:
+                                                        AppTextStyles.subtitle16pxRegular(
+                                                          context,
+                                                        ).copyWith(
+                                                          color: Colors.grey,
                                                         ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                              deleteMessage
-                                                  ? await context
-                                                      .read<ChatCubit>()
-                                                      .deleteSpecificMessage(
-                                                        msg["id"],
-                                                      )
-                                                  : null;
-                                            },
-                                          ),
-                                        ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    msg["content"] ?? "",
+                                                    textAlign:
+                                                        isMe
+                                                            ? TextAlign.left
+                                                            : TextAlign.right,
+                                                    style: const TextStyle(
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                  ],
+                                      if (isMe) const SizedBox(width: 7),
+                                      if (isMe)
+                                        Row(
+                                          children: [
+                                            const CircleAvatar(
+                                              backgroundImage: null,
+                                              radius: 17,
+                                              child: Icon(
+                                                Icons.person,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -275,41 +316,31 @@ class _CurrentChatPaneState extends State<CurrentChatPane> {
                     ),
                   ),
                   Container(
-                    height: 52,
                     margin: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                       color:
-                          widget.isDark
-                              ? AppColors.darkModeBackground
-                              : Colors.white,
+                          widget.isDark ? AppColors.graysGray2 : Colors.white,
                       borderRadius: BorderRadius.circular(7),
                     ),
                     child: Row(
                       children: [
                         Expanded(
                           child: Container(
-                            height: 32,
                             margin: const EdgeInsets.symmetric(horizontal: 4),
                             decoration: BoxDecoration(
                               color:
                                   widget.isDark
-                                      ? AppColors.darkModeBackground
+                                      ? AppColors.graysGray2
                                       : Colors.white,
                               borderRadius: BorderRadius.circular(18),
                             ),
                             child: Row(
                               children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.emoji_emotions_outlined,
-                                    color: Colors.black54,
-                                  ),
-                                  onPressed: () {},
-                                ),
                                 Expanded(
                                   child: TextField(
                                     controller: _controller,
-                                    decoration: const InputDecoration(
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
                                       border: InputBorder.none,
                                       isDense: true,
                                       contentPadding: EdgeInsets.only(
