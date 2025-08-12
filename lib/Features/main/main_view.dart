@@ -23,6 +23,7 @@ import '../add_new_properties/presentation/cubit/property_details_cubit.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties.dart';
 import '../add_new_properties/presentation/view/requests_to_add_new_properties_deteils.dart';
 import '../admin_management/data/repo/admin_repo.dart';
+import '../admin_management/presentation/cubit/add_admin_cubit.dart';
 import '../admin_management/presentation/cubit/admin_cubit.dart';
 import '../admin_management/presentation/view/admin_management_view.dart';
 import '../chat/data/repo/chat_repo.dart';
@@ -329,10 +330,14 @@ class _MainViewState extends State<MainView> {
                                 ),
                               )
                               : activeIndex == 5
-                              ? BlocProvider(
-                                create:
-                                    (context) =>
-                                        AdminCubit(getIt.get<AdminRepo>()),
+                              ?
+                                  BlocProvider(
+                                    create:
+                                        (context) =>
+                                            AdminCubit(getIt.get<AdminRepo>()),
+
+
+
                                 child: AdminManagementView(),
                               )
                               : activeIndex == 6

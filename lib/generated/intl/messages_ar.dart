@@ -93,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmDelete": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
         "confirmDeleteMessage": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد حذف هذا العنصر؟"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "contactData": MessageLookupByLibrary.simpleMessage("بيانات التواصل"),
         "contractDuration": MessageLookupByLibrary.simpleMessage("مدة العقد"),
         "contractExpiring": m3,

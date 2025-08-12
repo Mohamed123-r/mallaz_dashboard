@@ -75,6 +75,8 @@ class UserMessageTile extends StatelessWidget {
                 ),
                 Text(
                   user["lastMessage"],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.subtitle16pxRegular(context).copyWith(
                     color:
                         user["unReaded"] > 0

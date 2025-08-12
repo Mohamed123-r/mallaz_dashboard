@@ -160,6 +160,16 @@ class S {
     );
   }
 
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Do you want to log out of the app?`
   String get logoutQua {
     return Intl.message(

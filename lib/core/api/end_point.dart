@@ -5,5 +5,6 @@ class EndPoint {
   static String getAllAdmins = '/api/User/GetAllAdmins';
   static String getDashboardStats= '/api/Dashboard/stats';
   static String appointments= '/api/Appointment?';
+  static String addAdmin= 'api/Account/Register';
   static String getRequestsToAddProperties= '/api/Property/GetRequestsToAddProperties';
 }

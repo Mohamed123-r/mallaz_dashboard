@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/helper_functions/get_it.dart';
 import '../../../../core/services/theme_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
@@ -12,9 +13,10 @@ import '../../../../core/widgets/custom_header_call.dart';
 import '../../../../core/widgets/custom_loading.dart';
 import '../../../../generated/assets.dart';
 import '../../../../generated/l10n.dart';
+import '../../data/repo/add_admin_repo.dart';
+import '../cubit/add_admin_cubit.dart';
 import '../cubit/admin_cubit.dart';
 import '../cubit/admin_state.dart';
-
 
 class AdminManagementView extends StatefulWidget {
   const AdminManagementView({super.key});
@@ -27,6 +29,11 @@ class _AdminManagementViewState extends State<AdminManagementView> {
   int currentPage = 1;
   final int rowsPerPage = 7;
 
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +44,8 @@ class _AdminManagementViewState extends State<AdminManagementView> {
     setState(() => currentPage = page);
     context.read<AdminCubit>().fetchAllAdmins();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,39 +60,148 @@ class _AdminManagementViewState extends State<AdminManagementView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              MaterialButton(
-                height: 62,
-                minWidth: 250,
-                onPressed: () {},
-                color:
-                    isDark
-                        ? AppColors.darkModeButtonsPrimary
-                        : AppColors.lightModeButtonsPrimary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color:
-                          isDark
-                              ? AppColors.darkModeText
-                              : AppColors.lightModeText,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      S.of(context).addNewAdmin,
-                      style: AppTextStyles.buttonLarge20pxRegular(
-                        context,
-                      ).copyWith(
+              BlocProvider(
+                create:
+                    (context) => AddAdminCubit(repo: getIt.get<AddAdminRepo>()),
+
+                child: MaterialButton(
+                  height: 62,
+                  minWidth: 250,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor:
+                              isDark
+                                  ? AppColors.darkModeBackground
+                                  : AppColors.lightModeBackground,
+                          title: Text(
+                            S.of(context).addNewAdmin,
+                            style: AppTextStyles.subtitleTitle20pxRegular(
+                              context,
+                            ),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField(
+                                controller: fullNameController,
+                                decoration: InputDecoration(
+
+                                  labelText: S.of(context).adminName,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              TextField(
+                                controller: phoneNumberController,
+                                decoration: InputDecoration(
+                                  labelText: S.of(context).phoneNumber,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              TextField(
+                                controller: passwordController,
+                                decoration: InputDecoration(
+                                  labelText: S.of(context).password,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                obscureText: true,
+                              ),
+                              const SizedBox(height: 16),
+                              TextField(
+                                controller: confirmPasswordController,
+                                decoration: InputDecoration(
+                                  labelText: S.of(context).confirmPassword,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                obscureText: true,
+                              ),
+
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(
+                                S.of(context).cancel,
+                                style: AppTextStyles.buttonLarge20pxRegular(
+                                  context,
+                                ).copyWith(
+                                  color:
+                                      isDark
+                                          ? AppColors.darkModeAccent
+                                          : AppColors.lightModeAccent,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.read<AddAdminCubit>().addAdmin(
+                                  fullName: fullNameController.toString().trim(),
+                                  phoneNumber: phoneNumberController.toString().trim() ,
+                                  password: passwordController.toString().trim() ,
+                                  confirmPassword: confirmPasswordController.toString().trim(),
+                                );
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                S.of(context).confirm,
+                                style: AppTextStyles.buttonLarge20pxRegular(
+                                  context,
+                                ).copyWith(
+                                  color:
+                                      isDark
+                                          ? AppColors.darkModeAccent
+                                          : AppColors.lightModeAccent,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  color:
+                      isDark
+                          ? AppColors.darkModeButtonsPrimary
+                          : AppColors.lightModeButtonsPrimary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.add,
                         color:
                             isDark
                                 ? AppColors.darkModeText
                                 : AppColors.lightModeText,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 12),
+                      Text(
+                        S.of(context).addNewAdmin,
+                        style: AppTextStyles.buttonLarge20pxRegular(
+                          context,
+                        ).copyWith(
+                          color:
+                              isDark
+                                  ? AppColors.darkModeText
+                                  : AppColors.lightModeText,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -183,58 +301,63 @@ class _AdminManagementViewState extends State<AdminManagementView> {
                                 index: 0,
 
                                 onView: () {
-                                  showDialog(context: context, builder:
-                                      (context) {
-                                    return AlertDialog(
-                                      backgroundColor: isDark
-                                          ? AppColors.darkModeBackground
-                                          : AppColors.lightModeBackground,
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        backgroundColor:
+                                            isDark
+                                                ? AppColors.darkModeBackground
+                                                : AppColors.lightModeBackground,
 
-
-                                      title: Text(
-                                                 S.of(context).adminDetails,
-                                                 style: AppTextStyles
-                                                     .subtitleTitle20pxRegular(
-                                                   context,
-                                      ),
-                                               ),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "${S.of(context).adminName}: ${admin.userName}",
-                                          ),
-                                          Text(
-                                            "${S.of(context).email}: ${admin.email}",
-                                          ),
-                                          Text(
-                                            "${S.of(context).phoneNumber}: ${admin.phoneNumber}",
-                                          ),
-                                          Text(
-                                            "${S.of(context).status}: ${admin.isBlocked ? S.of(context).inactive : S.of(context).active}",
-                                          ),
-                                        ],
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(context),
-                                          child: Text(
-                                            S.of(context).close,
-                                            style: AppTextStyles
-                                                .buttonLarge20pxRegular(
-                                              context,
-                                            ).copyWith(
-                                              color: isDark
-                                                  ? AppColors.darkModeAccent
-                                                  : AppColors.lightModeAccent,
+                                        title: Text(
+                                          S.of(context).adminDetails,
+                                          style:
+                                              AppTextStyles.subtitleTitle20pxRegular(
+                                                context,
+                                              ),
+                                        ),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${S.of(context).adminName}: ${admin.userName}",
+                                            ),
+                                            Text(
+                                              "${S.of(context).email}: ${admin.email}",
+                                            ),
+                                            Text(
+                                              "${S.of(context).phoneNumber}: ${admin.phoneNumber}",
+                                            ),
+                                            Text(
+                                              "${S.of(context).status}: ${admin.isBlocked ? S.of(context).inactive : S.of(context).active}",
+                                            ),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(context),
+                                            child: Text(
+                                              S.of(context).close,
+                                              style:
+                                                  AppTextStyles.buttonLarge20pxRegular(
+                                                    context,
+                                                  ).copyWith(
+                                                    color:
+                                                        isDark
+                                                            ? AppColors
+                                                                .darkModeAccent
+                                                            : AppColors
+                                                                .lightModeAccent,
+                                                  ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    );
-                                  }
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
                                 iDark: isDark,

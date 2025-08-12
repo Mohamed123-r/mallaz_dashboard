@@ -9,6 +9,8 @@ import 'package:book_apartment_dashboard/Features/user_management/data/repo/user
 import 'package:book_apartment_dashboard/Features/user_management/data/repo/user_repo_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import '../../Features/admin_management/data/repo/add_admin_repo.dart';
+import '../../Features/admin_management/data/repo/add_admin_repo_impl.dart';
 import '../../Features/admin_management/data/repo/admin_repo.dart';
 import '../../Features/admin_management/data/repo/admin_repo_impl.dart';
 import '../../Features/chat/data/repo/chat_repo.dart';
@@ -31,6 +33,8 @@ void setupGetIt() {
   );
   getIt.registerSingleton<AdminRepo>(
     AdminRepoImpl(dioConsumer: getIt<DioConsumer>()),
+  ); getIt.registerSingleton<AddAdminRepo>(
+    AddAdminRepoImpl(dioConsumer: getIt<DioConsumer>()),
   );
   getIt.registerSingleton<DashboardStatsRepo>(
     DashboardStatsRepoImpl(dioConsumer: getIt<DioConsumer>()),

@@ -180,6 +180,7 @@
   "notNote": " لا يوجد ملاحظات",
   "fillAllFields": "يرجى ملء جميع الحقول المطلوبة",
   "notificationSentSuccessfully": "تم إرسال النوتيفيكيشن بنجاح",
-  "noDataFound": "البيانات غير موجودة"
+  "noDataFound": "البيانات غير موجودة",
+  "confirmPassword" : "تأكيد كلمة المرور"
 }
 

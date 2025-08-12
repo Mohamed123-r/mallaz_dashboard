@@ -10,6 +10,7 @@
   "adminName": "Admin Name",
   "cancel": "Cancel",
   "searchId": "Search by unit ID...",
+  "confirmPassword" : "Confirm Password",
   "logoutQua": "Do you want to log out of the app?",
   "homeScreen": "Home Screen",
   "manageSalesUnits": "Manage Sales Units",

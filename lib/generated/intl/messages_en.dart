@@ -93,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
         "confirmDeleteMessage": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this item?"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "contactData": MessageLookupByLibrary.simpleMessage("Contact Data"),
         "contractDuration":
             MessageLookupByLibrary.simpleMessage("Contract Duration"),
