@@ -1879,6 +1879,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Passwords do not match`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordsDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin added successfully`
+  String get adminAddedSuccessfully {
+    return Intl.message(
+      'Admin added successfully',
+      name: 'adminAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while adding the admin`
+  String get errorAddingAdmin {
+    return Intl.message(
+      'An error occurred while adding the admin',
+      name: 'errorAddingAdmin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

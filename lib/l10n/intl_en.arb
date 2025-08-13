@@ -181,5 +181,8 @@
   "notNote": " No notes available",
   "fillAllFields": "Please fill in all required fields",
   "notificationSentSuccessfully": "Notification sent successfully",
-  "noDataFound": "No data found"
+  "noDataFound": "No data found",
+  "passwordsDoNotMatch" : "Passwords do not match",
+  "adminAddedSuccessfully" : "Admin added successfully",
+  "errorAddingAdmin" : "An error occurred while adding the admin"
 }

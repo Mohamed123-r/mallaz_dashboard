@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addRecuist": MessageLookupByLibrary.simpleMessage("طلبات الإضافة"),
         "addedDate": MessageLookupByLibrary.simpleMessage("تاريخ الإضافة"),
         "admin": MessageLookupByLibrary.simpleMessage("مشرف"),
+        "adminAddedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم إضافة المشرف بنجاح"),
         "adminDetails": MessageLookupByLibrary.simpleMessage("بيانات المشرف"),
         "adminManagement":
             MessageLookupByLibrary.simpleMessage("إدارة المشرفين"),
@@ -124,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterNotificationTitle":
             MessageLookupByLibrary.simpleMessage("ادخل عنوان الاشعار"),
         "error": MessageLookupByLibrary.simpleMessage("حدث خطأ: "),
+        "errorAddingAdmin":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء إضافة المشرف"),
         "errorOccurred": m5,
         "families": MessageLookupByLibrary.simpleMessage("العائلات"),
         "fillAllFields": MessageLookupByLibrary.simpleMessage(
@@ -193,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "partialRent": MessageLookupByLibrary.simpleMessage("ايجار جزئي"),
         "partialRented": MessageLookupByLibrary.simpleMessage("مؤجرة جزئيا"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "passwordsDoNotMatch":
+            MessageLookupByLibrary.simpleMessage("كلمتا المرور غير متطابقتين"),
         "pending": MessageLookupByLibrary.simpleMessage("طلبات المعاينة :"),
         "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("بانتظار الرد"),

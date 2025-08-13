@@ -181,6 +181,10 @@
   "fillAllFields": "يرجى ملء جميع الحقول المطلوبة",
   "notificationSentSuccessfully": "تم إرسال النوتيفيكيشن بنجاح",
   "noDataFound": "البيانات غير موجودة",
-  "confirmPassword" : "تأكيد كلمة المرور"
+  "confirmPassword" : "تأكيد كلمة المرور",
+  "passwordsDoNotMatch" : "كلمتا المرور غير متطابقتين",
+  "adminAddedSuccessfully" : "تم إضافة المشرف بنجاح",
+    "errorAddingAdmin" : "حدث خطأ أثناء إضافة المشرف"
+
 }
 

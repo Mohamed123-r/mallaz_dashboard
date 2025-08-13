@@ -22,7 +22,12 @@ class AddAdminCubit extends Cubit<AddAdminState> {
         password: password,
         confirmPassword: confirmPassword,
       );
+
+
+
       emit(AddAdminSuccess(response));
+
+
     } catch (e) {
       emit(
         AddAdminFailure(

@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addRecuist": MessageLookupByLibrary.simpleMessage("Add Requests"),
         "addedDate": MessageLookupByLibrary.simpleMessage("Added Date"),
         "admin": MessageLookupByLibrary.simpleMessage("Admin"),
+        "adminAddedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Admin added successfully"),
         "adminDetails": MessageLookupByLibrary.simpleMessage("Admin Details"),
         "adminManagement":
             MessageLookupByLibrary.simpleMessage("Admin Management"),
@@ -126,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterNotificationTitle":
             MessageLookupByLibrary.simpleMessage("Enter notification title"),
         "error": MessageLookupByLibrary.simpleMessage("An error occurred: "),
+        "errorAddingAdmin": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while adding the admin"),
         "errorOccurred": m5,
         "families": MessageLookupByLibrary.simpleMessage("Families"),
         "fillAllFields": MessageLookupByLibrary.simpleMessage(
@@ -196,6 +200,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "partialRented":
             MessageLookupByLibrary.simpleMessage("Partially Rented"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordsDoNotMatch":
+            MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending Requests : "),
         "pending1": m7,
         "pendingShort": MessageLookupByLibrary.simpleMessage("Pending"),

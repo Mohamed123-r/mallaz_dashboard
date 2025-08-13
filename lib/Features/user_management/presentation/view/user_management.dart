@@ -171,7 +171,7 @@ class _UserManagementViewState extends State<UserManagementView> {
         columnWidths: const {
           0: FlexColumnWidth(2.1),
           1: FlexColumnWidth(1.7),
-          2: FlexColumnWidth(2.1),
+
           3: FlexColumnWidth(1.3),
           4: FlexColumnWidth(1.9),
         },
@@ -189,7 +189,6 @@ class _UserManagementViewState extends State<UserManagementView> {
       children: [
         CustomHeaderCall(text: S.of(context).userName, context: context),
         CustomHeaderCall(text: S.of(context).mobileNumber, context: context),
-        CustomHeaderCall(text: S.of(context).email, context: context),
         CustomHeaderCall(text: S.of(context).accountStatus, context: context),
         CustomHeaderCall(text: S.of(context).actions, context: context),
       ],
@@ -221,12 +220,7 @@ class _UserManagementViewState extends State<UserManagementView> {
               (user is Map<String, dynamic> ? user['phoneNumber'] ?? '-' : '-'),
           context: context,
         ),
-        CustomDataCell(
-          text:
-              user.email ??
-              (user is Map<String, dynamic> ? user['email'] ?? '' : ''),
-          context: context,
-        ),
+
         CustomDataCell(
           text: isActive ? S.of(context).active : S.of(context).inactive,
           context: context,
