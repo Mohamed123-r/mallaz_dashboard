@@ -5,7 +5,7 @@ import '../../../../../constant.dart';
 import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
-import '../../../data/models/chat_list_model.dart';
+
 import '../../cubit/chat_cubit.dart';
 import '../../cubit/chat_state.dart';
 
@@ -18,7 +18,7 @@ class CurrentChatPane extends StatefulWidget {
   });
 
   final bool isDark;
-  final dynamic? selectedUser;
+  final dynamic selectedUser;
   final String? currentUserId;
 
   @override
