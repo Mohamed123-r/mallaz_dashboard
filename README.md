@@ -1,5 +1,8 @@
 # Mallaz Dashboard
 [![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/Mohamed123-r/mallaz)
+![5915877177893702036](https://github.com/user-attachments/assets/dbc7c61e-692a-4d8d-b064-d6811770e5af)
+for ore phote scroll down
+
 
 Mallaz Dashboard is a comprehensive administrative panel built with Flutter for managing the Mallaz real estate platform. It provides administrators with a powerful and intuitive interface to oversee properties, users, appointments, and other operational aspects of the application. The dashboard is designed for desktop platforms (Windows, macOS, and Linux) and supports both light and dark modes, as well as English and Arabic languages.
 
@@ -58,8 +61,7 @@ lib/
 ![5915877177893702029](https://github.com/user-attachments/assets/964c549d-9517-4e3c-bccf-848891d00e42)
 ![5915877177893702034](https://github.com/user-attachments/assets/e66f55f9-c08c-4764-93f2-4c59fdd220e8)
 ![5915877177893702033](https://github.com/user-attachments/assets/d022bad8-6425-4917-8ef4-c841b1418f9e)
-![5915877177893702036](https://github.com/user-attachments/assets/dbc7c61e-692a-4d8d-b064-d6811770e5af)
 ![5915877177893702035](https://github.com/user-attachments/assets/56869b91-c856-478b-a91b-bb151347468a)
-![5915877177893702028](https://github.com/user-attachments/assets/7cd6a0b0-827d-4885-9bfa-e39b90c29578)
 ![5915877177893702032](https://github.com/user-attachments/assets/af98f37d-4155-4e28-84b0-058e891f6ce4)
+
 
