@@ -51,40 +51,15 @@ lib/
 └── main.dart         # Application entry point
 ```
 
-## Getting Started
+## Some photos
 
-### Prerequisites
 
-*   Flutter SDK (version >= 3.29.0)
-*   A desktop environment (Windows, macOS, or Linux)
+![5915877177893702030](https://github.com/user-attachments/assets/9f473e10-543b-4d62-bf31-20c58fbb25ac)
+![5915877177893702029](https://github.com/user-attachments/assets/964c549d-9517-4e3c-bccf-848891d00e42)
+![5915877177893702034](https://github.com/user-attachments/assets/e66f55f9-c08c-4764-93f2-4c59fdd220e8)
+![5915877177893702033](https://github.com/user-attachments/assets/d022bad8-6425-4917-8ef4-c841b1418f9e)
+![5915877177893702036](https://github.com/user-attachments/assets/dbc7c61e-692a-4d8d-b064-d6811770e5af)
+![5915877177893702035](https://github.com/user-attachments/assets/56869b91-c856-478b-a91b-bb151347468a)
+![5915877177893702028](https://github.com/user-attachments/assets/7cd6a0b0-827d-4885-9bfa-e39b90c29578)
+![5915877177893702032](https://github.com/user-attachments/assets/af98f37d-4155-4e28-84b0-058e891f6ce4)
 
-### Installation
-
-1.  **Clone the repository:**
-    ```sh
-    git clone https://github.com/mohamed123-r/mallaz.git
-    ```
-
-2.  **Navigate to the project directory:**
-    ```sh
-    cd mallaz
-    ```
-
-3.  **Install dependencies:**
-    ```sh
-    flutter pub get
-    ```
-
-### Running the Application
-
-This application is optimized for desktop. Run it on your desired platform:
-
-```sh
-# For Windows
-flutter run -d windows
-
-# For macOS
-flutter run -d macos
-
-# For Linux
-flutter run -d linux
